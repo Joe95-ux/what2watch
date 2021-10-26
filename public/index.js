@@ -22,10 +22,6 @@ const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
 
-console.log(reviewer);
-console.log(expandReviews);
-console.log(reviewContent);
-
 // const playerWrapper = document.querySelector(".trailer-video");
 // const player = playerWrapper.getElementsByTagName("iframe");
 // const attribute = player[0].getAttribute("src");
