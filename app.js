@@ -1,7 +1,6 @@
 
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const _ = require("lodash");
 const ejs = require("ejs");
 const fetch = require("node-fetch");
@@ -16,13 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(compression());
 app.set("view engine", "ejs");
-
-mongoose.connect("mongodb://localhost:27017/movieDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-});
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
