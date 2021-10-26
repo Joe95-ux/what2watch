@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const _ = require("lodash");
 const ejs = require("ejs");
 const fetch = require("node-fetch");
+const compression = require("compression");
 const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(compression());
 app.set("view engine", "ejs");
 
 mongoose.connect("mongodb://localhost:27017/movieDB", {
