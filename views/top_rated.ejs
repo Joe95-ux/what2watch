@@ -1,0 +1,188 @@
+<%- include('partials/header') %>
+<div class="side-drawer">
+    <i class="fas fa-times"></i>
+    <div class="side-drawer-inner">
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Discover</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                    <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
+                    <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                            href="/movie/upcoming"></i>Upcoming</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="main-category movie-genres">
+            <div class="category-title">
+                <h2>Genres</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <% genres.forEach(genre=>{ %>
+                    <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                            href="/movie/genres/<%= genre.name %>"><%= genre.name %> </a></li>
+
+                    <%})%>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="main-category discover-movies appearance">
+            <div class="category-title">
+                <h2 class="discover">Appearance</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories setting">
+                    <li><i class="fas fa-moon"></i>light/dark mode</li>
+                    <div>
+                        <input type="checkbox" class="checkbox" id="checkbox">
+                        <label for="checkbox" class="label">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun"></i>
+                            <div class="ball"></div>
+                        </label>
+                    </div>
+                </ul>
+            </div>
+  
+          </div> 
+
+    </div>
+    <div class="side-drawer-btns">
+        <button class="browse-btn">Sign-Up</button>
+        <button class="browse-btn">Login</button>
+    </div>
+    <hr>
+    <div class="credits">
+        <h5>powered by</h5>
+        <img src="/moviedb-logo2.svg" alt="moviedb">
+    </div>
+</div>
+<section class="side-drawer-backdrop"></section>
+
+
+
+<section id="popular-movies" class="search-container">
+    <div class="small-screen-search search-bar" >
+        <i class="fas fa-times close-sm-search"></i>
+        <form action="/search" method="GET" class="small-search-form search-form">
+            <div class="small-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <!-- <i class="blink"></i> -->
+                <input type="submit" value="search" hidden>
+            </div>
+        </form>
+    </div>
+    <div class="wrapper-enclosure">
+        <div class="movies-container movie-search">
+            <h1 class="popular"><i class="fas fa-chart-bar"></i>Top Rated Movies</h1>
+            <div class="line-container">
+                <!-- <div class="line"></div> -->
+            </div>
+            <% if(movies.length > 0){%>
+            <div class="movie-wrapper ">
+                <% movies.forEach(function(movie){%>
+                <div class="movie-card-container search-movie-container">
+                    <% if(movie.poster_path){%>
+                    <div class="movie-card">
+                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
+                        </a>
+                        <a  href="/movie/<%= movie.id %>">
+                            <div class="movie-card-overlay">
+                                <div>
+                                    <%if(movie.title){%> 
+                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                    <%}%> 
+                                    <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %></h4>
+                                </div>
+                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
+                                <button class="swiper-btn overlay-btn">View Details</button>
+                                
+                            </div>
+                        </a>
+    
+                    </div>
+    
+                    <%}else if(movie.poster_path === null){%>
+                    <div class="movie-card" style="background-color: aliceblue;">
+                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                            <img src="/poster-alt.png" alt="movie-poster">
+                        </a>
+    
+                    </div>
+    
+                    <% } %>
+                    <div class="movie-details">
+                        <div>
+                            <a href="/movie/<%= movie.id %>">
+                                <%= movie.title %>
+                            </a>
+                        </div>
+                        <div>
+                            <span><%= movie.release_date?movie.release_date.split('-').slice(0, 1).join(''):'n/a'%></span>
+                            <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
+                            <%for(let genre of genres){%>
+                            <%if(genreId === genre.id){%>
+                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %> </span>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <%})%>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+            </div>
+            <% }else{%>
+            <div class="search-not-found">
+                <h1 class="movie-not-found">Oops! no search results for <span><%= search %></span>.</h1>
+                <img src="../../poster-alt.png" alt="search not found">
+                <div class="swiper-btns">
+                    <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <% if(page_num < totalPages) {%>
+        <div class="page-controls">
+            <% if(page_num > 1) {%>
+            <a href="/movie/top_rated/<%= page_num - 1 %>" class="prev-page swiper-btn" role="button"><i
+                    class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
+    
+            <hr class="bottom-rule">
+    
+            <% }else{%>
+            <hr class="bottom-rule" style="display: none;">
+            <% } %>
+            <% if(page_num < totalPages && totalResults > 20) {%>
+            <a href="/movie/top_rated/<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
+                title="next-page">page <%= page_num + 1 %><i class="fas fa-arrow-circle-right next-indicator"></i></a>
+            <% } %>
+    
+        </div>
+    
+    
+        <% } %>
+
+    </div>
+   
+
+</section>
+
+
+
+
+<%- include('partials/footer') %>

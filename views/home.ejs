@@ -1,0 +1,485 @@
+<%- include('partials/header') %>
+<div class="side-drawer">
+    <i class="fas fa-times"></i>
+    <div class="side-drawer-inner">
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Discover</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                    <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
+                    <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                            href="/movie/upcoming"></i>Upcoming</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="main-category movie-genres">
+            <div class="category-title">
+                <h2>Genres</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <% if(genres){%>
+                    <% genres.forEach(genre=>{ %>
+                    <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                            href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+
+                    <%})%>
+                    <%}%>
+
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="main-category discover-movies appearance">
+            <div class="category-title">
+                <h2 class="discover">Appearance</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories setting">
+                    <li><i class="fas fa-moon"></i>light/dark mode</li>
+                    <div>
+                        <input type="checkbox" class="checkbox" id="checkbox">
+                        <label for="checkbox" class="label">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun"></i>
+                            <div class="ball"></div>
+                        </label>
+                    </div>
+                </ul>
+            </div>
+  
+          </div> 
+
+    </div>
+    <div class="side-drawer-btns">
+        <button class="browse-btn">Sign-Up</button>
+        <button class="browse-btn">Login</button>
+    </div>
+    <hr>
+    <div class="credits">
+        <h5>powered by</h5>
+        <img src="/moviedb-logo2.svg" alt="moviedb">
+    </div>
+</div>
+<section class="side-drawer-backdrop"></section>
+<section id="header-container"style="background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280/<%=header.backdrop_path%>); background-size: cover;">
+    <div class="small-screen-search search-bar" >
+        <i class="fas fa-times close-sm-search"></i>
+        <form action="/search" method="GET" class="small-search-form search-form">
+            <div class="small-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <!-- <i class="blink"></i> -->
+                <input type="submit" value="search" hidden>
+            </div>
+        </form>
+    </div>
+    <div class="wrapper-enclosure-home">
+        <div class="header-note">
+            <h2>
+                Explore and Discover<br>
+                Your Favourite Movies and More. 
+            </h2>
+            <p>With thousands of movies to explore, your options are limitless. Get to know what movies to watch or stream in a hassle-free way.</p>
+        
+        </div>
+        <!-- <div class="swiper-btns">
+            <a href="#popular-movies" class="swiper-btn" role="button" style="margin: 1.2rem 0 3rem; padding: 0.8rem 1.5rem; font-size: 1rem;"><i class="fas fa-fire"></i>Discover popular</a>
+        </div> -->
+    
+        <div class="header-search-container">
+            <form action="/search" method="GET" class="header-form">
+                <div class="search-input">
+                    <i class="fas fa-search left-search-icon"></i>
+                    <input type="text" placeholder="Search for a movie..." name="query" required>
+                    <button type="submit" class="submit-btn"><span class="header-search-text">Explore</span><i class="fas fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+        <div class="featured">
+            <h1>Upcoming Movies</h1>
+            <% if(featured){%>
+                <div class="embla ">
+                    <div class="embla__viewport">
+                        <div class="embla__container">
+                            <% featured.forEach(mov=>{%>
+                                <div class="embla__slide" >
+                                    <div class="slider-inner-card featured-card embla__slide__inner">
+                                        <% if(mov.poster_path){%>
+                                            <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
+                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="movie-poster">
+                                            </a>
+                                            <%}else if(mov.poster_path === null){%>
+                                            <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
+                                                <img src="/poster-alt.png" alt="movie-poster">
+                                            </a>
+                                        <% } %>
+                                        <div class="image-drop">
+                                            <%if(mov.title){%>
+                                                <h3><%= mov.title.length>19?mov.title.substr(0, 21) + '...' : mov.title%></h4>
+                                                <%}else {%>
+                                                    <h3>n/a</h3>
+                                                <%}%> 
+                                        </div>
+                                    </div>
+                                    <!-- <h3><i
+                                        class="far fa-calendar-alt"></i><%= mov.release_date %></h3> -->
+                                </div>
+                            <%}) %>
+                            <div class="embla__slide " >
+                                <div class="embla__slide__inner see-more-upcoming ">
+                                    <a href="/movie/upcoming" >View More >></a>
+                                </div>
+                            </div>
+                            
+                        </div>
+            
+                    </div>
+                    <button class="embla__button embla__button--prev embla__upcoming__prev" type="button">
+                        <svg
+                          class="embla__button__svg"
+                          viewBox="137.718 -1.001 366.563 643.999"
+                        >
+                          <path
+                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                          ></path>
+                        </svg>
+                    </button>
+                    <button class="embla__button embla__button--next embla__upcoming__next" type="button">
+                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                          <path
+                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                          ></path>
+                        </svg>
+                    </button>
+                      
+                    
+                </div>
+            <% } %> 
+        </div>
+
+    </div>
+</section>
+
+<section id="trending">
+    <div class="wrapper-enclosure">
+        <div class="trending-header">
+            <div class="trending-headings">
+                <h1><i class="fas fa-bolt"></i>New & Trending</h1>
+                <div class="timeline">
+                    <h2 id="today" class="today active-timeline" >Today</h2>
+                    <h2 id="this-week">This Week</h2> 
+                </div>  
+            </div>
+            <div class="line-container">
+            </div>
+    
+        </div>
+
+    </div>
+
+    <div class="trending-big-wrapper">
+        <div id="trending-thisweek">
+            <div  class="embla trending__embla">
+                <div class="embla__viewport ">
+                    <div class="embla__container">
+                        <% if(trending){%>
+                        <% trending.forEach(function(movie){%>
+                            <div class="embla__slide trending__slide">
+                                <div class="movie-card-container embla__slide__inner">
+                                    <div class="movie-card">
+                                        <% if(movie.poster_path){%>
+                                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
+                                        </a>
+                                        <%}else if(movie.poster_path === null){%>
+                                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                            <img src="/poster-alt.png" alt="movie-poster">
+                                        </a>
+                    
+                                        <% } %>
+                                        <a href="/movie/<%= movie.id %>">
+                                            <div class="movie-card-overlay">
+                                                <div>
+                                                    <%if(movie.title){%>
+                                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                                    <%}%> 
+                                                        <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                    </h4>
+                                                </div>
+                                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
+                                                <button class="swiper-btn overlay-btn">View Details</button>
+                    
+                                            </div>
+                                        </a>
+                    
+                                    </div>
+                                    <div class="movie-details">
+                                        <a href="/movie/<%= movie.id %>">
+                                            <%= movie.title.length>18?movie.title.slice(0,19) + "...":movie.title%>
+                                        </a>
+                                        <div>
+                                            <span><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                            <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
+                                            <%for(let genre of genres){%>
+                                            <%if(genreId === genre.id){%>
+                                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                            </span>
+                                            <% } %>
+                                            <% } %>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        
+                        <%})%>
+                        <%}%> 
+                    </div>
+        
+                </div>
+                
+                <button class="embla__button embla__button--prev trending__prev" type="button">
+                    <svg
+                      class="embla__button__svg"
+                      viewBox="137.718 -1.001 366.563 643.999"
+                    >
+                      <path
+                        d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                      ></path>
+                    </svg>
+                </button>
+                <button class="embla__button embla__button--next trending__next" type="button">
+                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                      <path
+                        d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                      ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div id="trending-today">
+            <div  class="embla trending__embla">
+                <div class="embla__viewport ">
+                    <div class="embla__container">
+                        <% if(trendingToday){%>
+                        <% trendingToday.forEach(function(movie){%>
+                            <div class="embla__slide trending__slide">
+                                <div class="movie-card-container embla__slide__inner">
+                                    <div class="movie-card">
+                                        <% if(movie.poster_path){%>
+                                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
+                                        </a>
+                                        <%}else if(movie.poster_path === null){%>
+                                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                            <img src="/poster-alt.png" alt="movie-poster">
+                                        </a>
+                    
+                                        <% } %>
+                                        <a href="/movie/<%= movie.id %>">
+                                            <div class="movie-card-overlay">
+                                                <div>
+                                                    <%if(movie.title){%>
+                                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                                    <%}%> 
+                                                        <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                    </h4>
+                                                </div>
+                                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
+                                                <button class="swiper-btn overlay-btn">View Details</button>
+                    
+                                            </div>
+                                        </a>
+                    
+                                    </div>
+                                    <div class="movie-details">
+                                        <div>
+                                            <a href="/movie/<%= movie.id %>">
+                                                <%= movie.title.length>18?movie.title.slice(0,19) + "...":movie.title%>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <span><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                            <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
+                                            <%for(let genre of genres){%>
+                                            <%if(genreId === genre.id){%>
+                                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                            </span>
+                                            <% } %>
+                                            <% } %>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        
+                        <%})%>
+                        <%}%> 
+                    </div>
+        
+                </div>
+                
+                <button class="embla__button embla__button--prev trending__prev" type="button">
+                    <svg
+                      class="embla__button__svg"
+                      viewBox="137.718 -1.001 366.563 643.999"
+                    >
+                      <path
+                        d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                      ></path>
+                    </svg>
+                </button>
+                <button class="embla__button embla__button--next trending__next" type="button">
+                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                      <path
+                        d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                      ></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+            
+        
+    </div>
+    
+</section>
+<section id="popular-movies">
+    <div class="wrapper-enclosure">
+        <div class="movies-container">
+            <h1 class="popular"><i class="fas fa-fire"></i>Popular Movies</h1>
+            <div class="line-container">
+                <!-- <div class="line"></div> -->
+            </div>
+            <div class="embla sort-genres">
+                <div class="embla__viewport">
+                    <div class="embla__container">
+                        <% if(genres){%> 
+                            <%genres.forEach(genre=>{ %>
+                                <div class="embla__slide embla__tag">
+                                    <a  href="/movie/genres/<%= genre.name%>"><%= genre.name === "Science Fiction"? "Sci-Fi" : genre.name %></a>
+                                </div>
+                            <%}) %>
+    
+                        <% } %> 
+                    </div>
+        
+                </div>
+                <button class="embla__button embla__button--prev embla__genre__prev" type="button">
+                    <svg
+                      class="embla__button__svg"
+                      viewBox="137.718 -1.001 366.563 643.999"
+                    >
+                      <path
+                        d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                      ></path>
+                    </svg>
+                </button>
+                <button class="embla__button embla__button--next embla__genre__next" type="button">
+                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                      <path
+                        d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                      ></path>
+                    </svg>
+                </button>
+                  
+                
+            </div>
+            <div class="movie-wrapper">
+                <% if(popularMovies){%>
+                <% popularMovies.forEach(function(popularMovie){%>
+                <div class="movie-card-container">
+                    <div class="movie-card">
+                        <% if(popularMovie.poster_path){%>
+                        <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
+                            <img src="https://image.tmdb.org/t/p/w500/<%= popularMovie.poster_path %>"
+                                alt="movie-poster">
+                        </a>
+                        <%}else if(popularMovie.poster_path === null){%>
+                        <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
+                            <img src="/poster-alt.png" alt="movie-poster">
+                        </a>
+    
+                        <% } %>
+                        <a href="/movie/<%= popularMovie.id %>">
+                            <div class="movie-card-overlay">
+                                <div>
+                                    <%if(popularMovie.title){%>
+                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= popularMovie.vote_average %></span></h2>
+                                    <%}%> 
+                                    <h4><%= popularMovie.release_date?popularMovie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                    </h4>
+                                </div>
+                                <p><%= popularMovie.overview?popularMovie.overview.substr(0, 100):"n/a"%>...</p>
+                                <button class="swiper-btn overlay-btn">View Details</button>
+    
+                            </div>
+                        </a>
+    
+                    </div>
+                    <div class="movie-details">
+                        <div>
+                            <a href="/movie/<%= popularMovie.id %>">
+                                <%= popularMovie.title %>
+                            </a>
+                            
+                        </div>
+                        <div>
+                            <span><%= popularMovie.release_date?popularMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                            <%for(let genreId of popularMovie.genre_ids.slice(0, 2)){%>
+                            <%for(let genre of genres){%>
+                            <%if(genreId === genre.id){%>
+                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                            </span>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <%})%>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+    
+                <% }else{%>
+                <h1>Oops! Something went wrong. Please try again later.</h1>
+                <% } %>
+    
+            </div>
+        </div>
+        <div class="page-controls">
+            <% if(page_num > 1) {%>
+            <a href="/<%= page_num - 1 %> " class="prev-page swiper-btn" role="button"><i
+                    class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %> </a>
+    
+            <hr class="bottom-rule">
+    
+            <% }else{%>
+            <hr class="bottom-rule" style="display: none;">
+            <% } %>
+            <% if(page_num <500) {%>
+            <a href="/<%= page_num + 1 %> " class="next-page swiper-btn" role="button" value="next-page">page <%= page_num + 1 %><i
+                    class="fas fa-arrow-circle-right next-indicator"></i></a>
+    
+    
+            <% } %>
+    
+        </div>
+
+    </div>
+</section>
+
+<%- include('partials/footer') %>
