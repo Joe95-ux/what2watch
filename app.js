@@ -17,7 +17,6 @@ app.use(express.json());
 app.use(compression());
 app.use(forceDomain({
   hostname: 'www.what2watch.net',
-  port: 3000,
   protocol: 'https'
 }));
 
