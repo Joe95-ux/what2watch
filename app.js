@@ -272,6 +272,10 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
+app.all("/old/url", (req, res) => {
+  res.redirect(301, "/new/url");
+});
+
 app.use(function (req, res, next) {
   res.status(404).sendFile(__dirname + "/public/404.html");
 })
