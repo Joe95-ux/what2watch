@@ -272,8 +272,8 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
-app.all("/old/url", (req, res) => {
-  res.redirect(301, "/new/url");
+app.all("/", (req, res) => {
+  res.redirect(301, "https://what2watch.net/");
 });
 
 app.use(function (req, res, next) {
