@@ -50,6 +50,7 @@ async function getgenre() {
   }
 }
 
+
 //search movies
 app.get("/search", async (req, res) => {
   const search = req.query.query;
@@ -253,11 +254,6 @@ app.get("/:page", async (req, res) => {
   }
 });
 
-
-
-
-
-
 app.use("/movie", movieRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
@@ -272,9 +268,7 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Something broke!')
 })
 
-app.all("/", (req, res) => {
-  res.redirect(301, "https://what2watch.net");
-});
+  
 
 app.use(function (req, res, next) {
   res.status(404).sendFile(__dirname + "/public/404.html");
