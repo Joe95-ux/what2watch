@@ -266,7 +266,7 @@ app.use("/movie", movieRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
 app.listen(3000, () => {
-  console.log("server has started on port 3000");
+  console.log("server is running on port 3000");
 });
 
 
