@@ -273,7 +273,7 @@ app.use(function (err, req, res, next) {
 })
 
 app.all("/", (req, res) => {
-  res.redirect(301, "https://what2watch.net/");
+  res.redirect(301, "https://what2watch.net");
 });
 
 app.use(function (req, res, next) {
