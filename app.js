@@ -4,6 +4,7 @@ const express = require("express");
 const _ = require("lodash");
 const ejs = require("ejs");
 const fetch = require("node-fetch");
+const { forceDomain } = require('forcedomain');
 const compression = require("compression");
 const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
@@ -14,6 +15,14 @@ app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(compression());
+app.use(forceDomain({
+  hostname: 'www.what2watch.net',
+  port: 3000,
+  protocol: 'https'
+}));
+
+
+
 app.set("view engine", "ejs");
 
 const apiKey = process.env.API_KEY;
