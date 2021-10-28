@@ -20,8 +20,6 @@ app.use(compression());
 
 
 app.set("view engine", "ejs");
-
-const app_path = "https://what2watch.net";
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
 const page_num = 1;
@@ -58,7 +56,7 @@ async function getgenre() {
 
 
 //search movies
-app.get( app_path + "/search", async (req, res) => {
+app.get( "/search", async (req, res) => {
   const search = req.query.query;
   const query = encodeURIComponent(search);
   try {
@@ -90,7 +88,7 @@ app.get( app_path + "/search", async (req, res) => {
 });
 
 //search pages
-app.get(app_path + "/search/:movie/:page", async (req, res) => {
+app.get("/search/:movie/:page", async (req, res) => {
   const search = req.params.movie;
   const query = encodeURIComponent(search);
   let page_num = parseInt(req.params.page);
@@ -175,7 +173,7 @@ async function getTrendingToday(){
     console.log(e);
   }
 }
-app.get(app_path + "/about-us", async (req, res) => {
+app.get("/about-us", async (req, res) => {
   try {
     const trending = await getTrending();
     const header = trending[0];
@@ -190,7 +188,7 @@ app.get(app_path + "/about-us", async (req, res) => {
   }
 });
 
-app.get(app_path+"/privacy", async (req, res) => {
+app.get("/privacy", async (req, res) => {
   try {
     const genres = await getgenre();
 
@@ -204,7 +202,7 @@ app.get(app_path+"/privacy", async (req, res) => {
 
 
 //Get popular Movies
-app.get(app_path+"/", async (req, res) => {
+app.get("/", async (req, res) => {
 
   try {
     const popularMovies = await getPopularMovies();
@@ -228,7 +226,7 @@ app.get(app_path+"/", async (req, res) => {
   }
 });
 
-app.get(app_path+"/:page", async (req, res) => {
+app.get("/:page", async (req, res) => {
   let page_num = parseInt(req.params.page);
   try {
     const response = await fetch(
@@ -260,9 +258,9 @@ app.get(app_path+"/:page", async (req, res) => {
   }
 });
 
-app.use(app_path+"/movie", movieRouter);
-app.use(app_path+"/person", personRouter);
-app.use(app_path+"/reviews", reviewRouter);
+app.use("/movie", movieRouter);
+app.use("/person", personRouter);
+app.use("/reviews", reviewRouter);
 app.listen(3000, () => {
   console.log("server is running on port 3000");
 });
