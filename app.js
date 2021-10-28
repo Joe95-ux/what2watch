@@ -15,10 +15,7 @@ app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(compression());
-app.use(forceDomain({
-  hostname: 'www.what2watch.net',
-  protocol: 'https'
-}));
+
 
 
 
