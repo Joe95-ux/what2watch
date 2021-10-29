@@ -176,7 +176,7 @@ async function getTrendingToday(){
 app.get("/about-us", async (req, res) => {
   try {
     const trending = await getTrending();
-    const header = trending[0];
+    const header = await trending[0];
     const genres = await getgenre();
 
     res.render("about", {
