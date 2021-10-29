@@ -62,7 +62,7 @@ router.get("/:id", async (req, res) => {
     const age = getAge(birthDate);
     const totalPages = Math.ceil(allMovieCredits.length / pageLimit);
     const movieCollection = getMovieCollection(allMovieCredits, pageLimit);
-    const movies = movieCollection[page_num - 1];
+    const movies = await movieCollection[page_num - 1];
     const images = await personDetails.images.profiles;
     const genres = await getGenre();
     res.render("actor", {
@@ -101,7 +101,7 @@ router.get("/:id/movie_credits/:page_num", async (req, res) => {
     const age = getAge(birthDate);
     const totalPages = Math.ceil(allMovieCredits.length / pageLimit);
     const movieCollection = getMovieCollection(allMovieCredits, pageLimit);
-    const movies = movieCollection[page_num - 1];
+    const movies = await movieCollection[page_num - 1];
     const images = await personDetails.images.profiles;
     const genres = await getGenre();
     res.render("actor", {

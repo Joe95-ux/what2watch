@@ -32,11 +32,11 @@ router.get("/genres/:genre", async (req, res) => {
 
   try {
     const genres = await getgenre();
-    const genreId = genres.filter((genre) => {
+    const genreId = await genres.filter((genre) => {
       return genre.name === genreName
         
     });
-    const id = genreId[0].id;
+    const id = await genreId[0].id;
     const response = await fetch("https://api.themoviedb.org/3/discover/movie?api_key=" + apiKey + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres="+ id + "&with_watch_monetization_types=free");
     const data = await response.json();
     const genreMovies = await data.results;
@@ -67,12 +67,12 @@ router.get("/genres/:genre/:page", async (req, res) => {
   
     try {
       const genres = await getgenre();
-      const genreId = genres.filter((genre) => {
+      const genreId = await genres.filter((genre) => {
         if (genre.name === genreName) {
           return genre;
         }
       });
-      const id = genreId[0].id;
+      const id = await genreId[0].id;
       const response = await fetch("https://api.themoviedb.org/3/discover/movie?api_key=" + apiKey + "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +page_num+ "&with_genres="+ id + "&with_watch_monetization_types=free");
       const data = await response.json();
       const genreMovies = await data.results;
@@ -317,7 +317,7 @@ router.get('/:movie_id', async (req, res)=>{
         const totalResults = await recommendedData.total_results;
         const recommendedMovies = await recommendedData.results;
         const similarMovies = await movie.similar.results;
-        const similar = similarMovies;
+        const similar = await similarMovies;
         const watchProviders = await getWatchProviders(movieId);
         const genres = await getgenre();
 
@@ -377,7 +377,7 @@ router.get('/:title/:movie_id/:page', async (req, res)=>{
         const totalResults = await recommendedData.total_results;
         const recommendedMovies = await recommendedData.results;
         const similarMovies = await movie.similar.results;
-        const similar = similarMovies;
+        const similar = await similarMovies;
         const watchProviders = await getWatchProviders(movieId);
         const genres = await getgenre();
 
