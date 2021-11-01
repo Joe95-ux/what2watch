@@ -15,7 +15,6 @@
     "express": "^4.17.1",
     "forcedomain": "^2.2.11",
     "lodash": "^4.17.21",
-    "mongodb": "^3.6.9",
     "node-fetch": "^2.6.6",
     "nodemon": "^2.0.14",
     "to": "^0.2.9",
