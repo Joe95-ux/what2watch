@@ -3146,11 +3146,7 @@ a.learn-more {
     max-width: 1536px;
     margin: 0 auto;
 }
-@media screen and (max-width:1124px){
-    #reviews-container{
-       display: none;
-    }
-}
+
 
 .reviews-wrapper {
     color: var(--mainWhite);
@@ -3166,13 +3162,12 @@ a.learn-more {
     padding: 2rem;
 
 }
-
-@media screen and (max-width:1019px) {
-    .reviews-wrapper {
-        display: none;
+@media screen and (max-width:1124px){
+    .reviews-wrapper{
+       display: none;
     }
-
 }
+
 
 
 .reviews-container {
@@ -3366,7 +3361,6 @@ a.learn-more {
 
 /* review-slider */
 .review-slider-container {
-    margin-top: 2rem;
     width: 100%;
 }
 @media screen and (min-width:1124px){
