@@ -1786,7 +1786,7 @@ a.learn-more {
     transition: all 0.5s ease-in-out;
 }
 
-@media (hover) {
+@media (hover:hover) {
     .movie-card:hover .movie-card-overlay {
         opacity: 1;
     }
@@ -2557,7 +2557,7 @@ a.learn-more {
     background-color: rgba(7, 7, 7, 0.7);
 
 }
-@media (hover){
+@media (hover:hover){
     .image-drop{
         opacity: 0;
     }
