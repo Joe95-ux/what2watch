@@ -3180,7 +3180,10 @@ a.learn-more {
 .full-review-inner,
 .reviews-inner {
     max-height: 500px;
-    overflow-y: scroll;
+    overflow: auto;
+}
+.simplebar-track{
+    background-color: #001019;
 }
 
 .reviews-inner {
