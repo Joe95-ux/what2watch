@@ -17,6 +17,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&family=Merriweather:wght@300;400;700&family=Roboto+Slab:wght@400;500&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
@@ -26,6 +27,16 @@
     <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/Css/embla.css">
     <link rel="stylesheet" href="/Css/styles.css">
+    <noscript>
+        <style>
+          /**
+          * Reinstate scrolling for non-JS clients
+          */
+          .simplebar-content-wrapper {
+            overflow: auto;
+          }
+        </style>
+      </noscript>
 </head>
 
 <body>
@@ -43,11 +54,11 @@
                         <div class="logo-wrapper">
                             <img src="/logo.png" alt="what2watch">
                         </div>
-                        
+
                     </a>
                 </div>
                 <i class="fas fa-search small-screen-search-icon"></i>
-                <div class="search-bar big-screen-search" >
+                <div class="search-bar big-screen-search">
                     <form action="/search" method="GET" class="search-form">
                         <div class="search-field">
                             <i class="fas fa-search"></i>
@@ -58,12 +69,12 @@
                 </div>
                 <ul class="nav_links">
                     <li class="nav_link"> <a href="/movie/upcoming">Upcoming Movies</a> </li>
-        
+
                 </ul>
-    
+
             </div>
 
-        </div> 
+        </div>
 
     </nav>
     <section id="error-page">
@@ -121,7 +132,7 @@
         </div>
 
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- embla -->
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>

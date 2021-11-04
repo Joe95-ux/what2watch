@@ -599,7 +599,7 @@
                 <div class="reviews-wrapper">
                     <div class="reviews-container">
                         <h5>Reviews for <span><%= movie.title %></span></h5>
-                        <div class="reviews-inner">
+                        <div class="reviews-inner" data-simplebar>
                             <%for(let review of reviews){%> 
                             <div class="review-card">
                                 <div class="review-details">
@@ -623,7 +623,7 @@
                     
                     <div class="full-review">
                         <h5>Read Full Review <span>(The thoughts and opinions expressed here are solely those of the reviewer.)</span></h5>
-                        <div class="full-review-inner">
+                        <div class="full-review-inner " data-simplebar>
                             <h6><i class="fas fa-star"></i>A Review by <span><%= reviews[0].author %> </span></h6>
                             <p class="full-review-content"><%= reviews[0].content.substr(0, 240) %>... </p>
                         </div>
