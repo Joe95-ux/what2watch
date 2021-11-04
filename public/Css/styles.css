@@ -418,7 +418,7 @@ h6 {
     box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 10;
-    overflow: auto;
+    overflow-y: auto;
     transform: translateX(-100%);
     transition: transform 0.7s ease-in;
 }
@@ -1238,15 +1238,14 @@ a.learn-more {
 .featured h1 {
     color: var(--mainGrey);
     font-size: 1.4rem;
-    font-family: 'Noto Serif', serif;
-    font-weight: 400;
+    font-weight: 600;
     letter-spacing: 1px;
-    margin: 0.8rem 0;
+    margin: 0 0 0.4rem ;
 }
 
 @media screen and (max-width:412px) {
     .featured h1 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
 }
