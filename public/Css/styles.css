@@ -231,6 +231,7 @@ h6 {
     align-items: center;
     position: relative;
     transition: 0.5s;
+    -webkit-transition: 0.5s;
     overflow-x: hidden;
 }
 
@@ -246,6 +247,7 @@ h6 {
     width: 35px;
     color: #acacac;
     transition: 0.5s;
+    -webkit-transition: 0.5s;
     font-size: 1rem;
     cursor: pointer;
 }
@@ -265,6 +267,7 @@ h6 {
     color: #333;
     width: 0;
     transition: 0.5s;
+    -webkit-transition: 0.5s;
 }
 
 .small-search-field input {
@@ -318,6 +321,7 @@ h6 {
     margin-bottom: 0;
     color: rgb(223, 217, 217);
     transition: opacity 200ms ease-in-out;
+    -webkit-transition: opacity 200ms ease-in-out;
     overflow: hidden;
 }
 
@@ -331,17 +335,20 @@ h6 {
     border-radius: 2px;
     background: #fff;
     transition: width 200ms ease-in-out;
+    -webkit-transition: opacity 200ms ease-in-out;
 }
 
 .nav_link a:hover {
     color: var(--mainWhite);
     font-weight: 500;
     transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
 }
 
 .active {
     border-bottom: 2px solid var(--secondaryColor);
     transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
 }
 
 .nav_link a:hover::after,
@@ -421,7 +428,9 @@ h6 {
     overflow-y: auto;
     overflow-x: hidden;
     transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
     transition: transform 0.7s ease-in;
+    -webkit-transition: transform 0.7s ease-in;
 }
 
 @media screen and (max-width:400px) {
@@ -441,11 +450,14 @@ h6 {
 
 .side-drawer-active {
     transform: translateX(0%);
+    -webkit-transform: translateX(0%);
 }
 
 .side-drawer-inactive {
     transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
     transition: transform 0.7s ease-in;
+    -webkit-transition: transform 0.7s ease-in;
 }
 
 .side-drawer .fa-times {
@@ -457,6 +469,7 @@ h6 {
     /* color: var(--mainWhite); */
     color: var(--mainWhite);
     transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
 
 }
 
@@ -1237,10 +1250,10 @@ a.learn-more {
 
 /* see slider cards style for featured under single movie styles below */
 .featured h1 {
-    color: var(--mainGrey);
+    color: var(--mainWhite);
     font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 700;
+    font-family: 'Noto Serif', serif;
     margin: 0 0 0.4rem ;
 }
 
@@ -1986,7 +1999,9 @@ a.learn-more {
     justify-content: center;
     align-items: center;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
     z-index: -1;
     opacity: 0;
     background-color: rgba(82, 79, 79, 0.6);
@@ -1997,7 +2012,9 @@ a.learn-more {
     justify-content: center;
     align-items: center;
     transform: translateY(50px);
+    -webkit-transform: translateY(50px);
     transition: transform 0.5s ease-in-out;
+    -webkit-transition: transform 0.5s ease-in-out;
     position: relative;
 }
 
@@ -2025,11 +2042,13 @@ a.learn-more {
     backface-visibility: hidden;
     border-radius: 3px;
     transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
     cursor: pointer;
 }
 
 .movie-trailer .close-trailer:hover {
     transform: scale(0.9);
+    -webkit-transform: scale(0.9);
     background-color: darkgrey;
 }
 
@@ -2040,6 +2059,7 @@ a.learn-more {
 
 .active-trailer .trailer-container {
     transform: translateY(0);
+    -webkit-transform: translateY(0);
 }
 
 @media screen and (max-width:1440px) {
@@ -2567,6 +2587,10 @@ a.learn-more {
 @media screen and (max-width:1040px) {
     .image-drop{
         opacity: 1;
+        position: relative;
+        bottom: 0;
+        background-color: inherit;
+        padding: 0;
     }
 }
 
