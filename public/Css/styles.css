@@ -335,7 +335,7 @@ h6 {
     border-radius: 2px;
     background: #fff;
     transition: width 200ms ease-in-out;
-    -webkit-transition: opacity 200ms ease-in-out;
+    -webkit-transition: width 200ms ease-in-out;
 }
 
 .nav_link a:hover {
