@@ -158,11 +158,8 @@
             <a href="/movie/genres/<%= encodedGenre %>/<%= page_num - 1 %>" class="prev-page swiper-btn" role="button"><i
                     class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
     
-            <hr class="bottom-rule">
-    
-            <% }else{%>
-            <hr class="bottom-rule" style="display: none;">
-            <% } %>
+            <% }%>
+            <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
             <% if(page_num < totalPages && totalResults > 20) {%>
             <a href="/movie/genres/<%= encodedGenre %>/<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
                 value="next-page">page <%= page_num + 1 %><i class="fas fa-arrow-circle-right next-indicator"></i></a>

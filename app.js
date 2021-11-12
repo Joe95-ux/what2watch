@@ -40,6 +40,16 @@ async function getPopularMovies() {
     console.log(e);
   }
 }
+async function getAllPages(){
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const pages = await data.total_pages;
+    return pages;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 async function getgenre() {
   try {
@@ -211,6 +221,7 @@ app.get("/", async (req, res) => {
     const trendingToday = await getTrendingToday();
     const header = await trendingToday[0];
     const genres = await getgenre();
+    const pages = await getAllPages();
     res.render("home", {
       popularMovies: popularMovies,
       upcomingMovies: upcomingMovies,
@@ -220,6 +231,7 @@ app.get("/", async (req, res) => {
       trendingToday:trendingToday,
       genres: genres,
       page_num: page_num,
+      pages:pages
     });
   } catch (e) {
     console.log(e);
@@ -243,6 +255,7 @@ app.get("/:page", async (req, res) => {
     const trendingToday = await getTrendingToday();
     const header = await trendingToday[0];
     const genres = await getgenre();
+    const pages = await getAllPages();
     res.render("home", {
       popularMovies: popularMovies,
       upcomingMovies: upcomingMovies,
@@ -252,6 +265,7 @@ app.get("/:page", async (req, res) => {
       trendingToday:trendingToday,
       genres: genres,
       page_num: page_num,
+      pages:pages
     });
   } catch (e) {
     console.log(e) ;

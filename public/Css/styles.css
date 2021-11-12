@@ -1885,7 +1885,7 @@ a.learn-more {
 
 .page-controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
     margin: 25px 0 0;
@@ -1897,8 +1897,11 @@ a.learn-more {
 }
 
 .prev-page,
-.next-page {
-    border: none;
+.next-page,
+.page-count {
+    background-color: inherit;
+    border: 1px solid var(--mainWhite);
+    border-radius: 5px;
     outline: none;
     cursor: pointer;
     color: var(--mainWhite);
@@ -1910,12 +1913,12 @@ a.learn-more {
 }
 
 .next-page {
-    margin-left: auto;
+    margin-left: 5px
+}
+.prev-page {
+    margin-right: 5px
 }
 
-.prev-page {
-    margin-right: auto;
-}
 
 .bottom-rule {
     display: none;
