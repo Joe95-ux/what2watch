@@ -706,6 +706,10 @@ h6 {
 }
 
 @media screen and (max-width:768px) {
+    .swiper-btns.return-btn {
+        display: none;
+    }
+
     .back{
         display: block;
         margin-left: 2rem;
@@ -3744,11 +3748,6 @@ a.learn-more {
     .birthday p {
         font-size: 1.2rem;
     }
-
-    .return-btn {
-        display: none;
-    }
-
     .bio-container h2 {
         font-size: 1.4rem;
     }
