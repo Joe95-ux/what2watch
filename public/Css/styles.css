@@ -429,8 +429,8 @@ h6 {
     overflow-x: hidden;
     transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
-    transition: transform 0.7s ease-in;
-    -webkit-transition: transform 0.7s ease-in;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
 }
 
 @media screen and (max-width:400px) {
@@ -680,6 +680,51 @@ h6 {
     padding: 0 3rem;
 }
 
+.back {
+    display: none;
+    position: relative;
+    top: 3rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    border: none;
+    outline: none;
+    background-color: inherit;
+    color: var(--mainWhite);
+    z-index: 4;
+}
+.back-movie{
+    position: relative;
+    top: 5rem;
+    
+}
+.privacy-back{
+    position: relative;
+    top: -1rem;
+}
+.review-back{
+    top: 4rem;
+}
+
+@media screen and (max-width:768px) {
+    .back{
+        display: block;
+        margin-left: 2rem;
+    }
+    .back-movie, .privacy-back, .upcoming-back{
+        margin-left:0;
+    }
+}
+
+@media screen and (max-width:412px) {
+    .back{
+        margin-left: 1rem;
+    }
+    .about-back, .privacy-back, .person-back,.upcoming-back{
+        margin-left: 0;
+    }
+    
+}
+
 .about-header-enclosure {
     margin-top: 9rem;
     margin-bottom: 8rem;
@@ -701,7 +746,7 @@ h6 {
 .header-note p {
     line-height: 1.4;
     font-size: 1.5rem;
-    border-left: 3px solid red;
+    border-left: 3px solid var(--yellow);
     padding-left: 0.8rem;
     word-wrap: break-word;
     width: 70%;
@@ -805,13 +850,13 @@ h6 {
 
 .submit-btn {
     border-radius: 30px;
-    color: var(--mainWhite);
-    background-color: var(--primaryColor);
+    color: var(--mainBlack);
+    background-color: #FFB830;
     transition: var(--mainTransition);
     text-transform: capitalize;
     flex-basis: 15%;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     padding: 1.2rem 1.2rem;
     cursor: pointer;
     transition: var(--mainTransition);
@@ -1249,16 +1294,27 @@ a.learn-more {
 }
 
 /* see slider cards style for featured under single movie styles below */
-.featured h1 {
+.featured-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.featured-title a {
     color: var(--mainWhite);
     font-size: 1.4rem;
     font-weight: 700;
-    font-family: 'Noto Serif', serif;
-    margin: 0 0 0.4rem ;
+    text-decoration: none;
+    margin-bottom: 0.7rem;
+}
+
+.featured-title a i {
+    margin-left: 5px;
+    color: var(--yellow);
 }
 
 @media screen and (max-width:412px) {
-    .featured h1 {
+    .featured a {
         font-size: 1.3rem;
     }
 
@@ -1395,7 +1451,7 @@ a.learn-more {
 }
 
 .active-timeline {
-    border-bottom: 2px solid var(--primaryColor);
+    border-bottom: 2px solid var(--yellow);
     color: var(--mainWhite);
 
 }
@@ -1431,7 +1487,6 @@ a.learn-more {
 }
 
 @media screen and (max-width:412px) {
-
     .trending__next,
     .trending__prev {
         width: 2.4rem;
@@ -1515,7 +1570,7 @@ a.learn-more {
     display: inline-block;
     padding-bottom: 1rem;
     margin-bottom: -1px;
-    border-bottom: 1px solid var(--primaryColor);
+    border-bottom: 1px solid var(--yellow);
     position: relative;
     font-family: 'Noto Serif', serif;
 }
@@ -1533,7 +1588,7 @@ a.learn-more {
     transform: translate(-50%, -50%);
     height: 4px;
     width: 4px;
-    background: var(--primaryColor);
+    background: var(--yellow);
     border-radius: 50%;
 }
 
@@ -1915,6 +1970,7 @@ a.learn-more {
 .next-page {
     margin-left: 5px
 }
+
 .prev-page {
     margin-right: 5px
 }
@@ -2588,7 +2644,7 @@ a.learn-more {
 }
 
 @media screen and (max-width:1040px) {
-    .image-drop{
+    .image-drop {
         opacity: 1;
         position: relative;
         bottom: 0;
@@ -3521,6 +3577,10 @@ a.learn-more {
 
     }
 
+    .review-back{
+        margin-left: 1.3rem;
+    }
+
     .single-review-wrapper,
     .single-review-inner {
         padding: 0;
@@ -3577,11 +3637,6 @@ a.learn-more {
 
 }
 
-
-
-
-
-
 /* person page */
 #person-container {
     background-image: linear-gradient(to right top, #001019, #001019, #001019, #001019, #001019, #0a1821, #101f29, #162732, #233946, #314d5b, #3f6171, #4e7687);
@@ -3594,9 +3649,6 @@ a.learn-more {
     }
 
 }
-
-
-
 
 .single-person-inner {
     display: flex;
