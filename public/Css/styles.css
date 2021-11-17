@@ -690,7 +690,7 @@ h6 {
     outline: none;
     background-color: inherit;
     color: var(--mainWhite);
-    z-index: 4;
+    z-index: 5;
 }
 .back-movie{
     position: relative;
