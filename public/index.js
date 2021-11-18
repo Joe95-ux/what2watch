@@ -7,7 +7,7 @@ const closeSmallSearch = document.querySelector(".close-sm-search");
 const movieSynopsis = document.querySelector(".movie-synopsis");
 const openSynopsis = document.querySelector(".open-synopsis");
 const headerSynopsis = document.querySelector(".synopsis");
-const returnBtn = document.querySelector(".go-back");
+const returnBtns = document.querySelectorAll(".go-back");
 const trailerBtn = document.querySelector(".trailer");
 const trailerContainer = document.querySelector(".movie-trailer");
 const closeTrailer = document.querySelector(".close-trailer");
@@ -243,10 +243,13 @@ function toggleReviews() {
 toggleReviews();
 
 // go back to previous page
-if (returnBtn !== null) {
-  returnBtn.addEventListener("click", () => {
-    history.back();
-  });
+if (returnBtns !== null) {
+  for(let i = 0; i < returnBtns.length; i++){
+    returnBtns[i].addEventListener("click", () => {
+      history.back();
+    });
+
+  }
 }
 
 // scroll EVENT
