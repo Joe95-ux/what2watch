@@ -53,7 +53,7 @@ h6 {
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 5;
+    z-index: 6;
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
@@ -2862,7 +2862,7 @@ h1.genre-intro{
     }
 
     #popular-movies {
-        padding: 1.8rem 0.9rem;
+        padding: 1.8rem 1rem;
 
     }
 
@@ -3607,14 +3607,6 @@ h1.genre-intro{
 }
 
 @media screen and (max-width:567px) {
-    #single-review {
-        padding: 5rem 1.3rem 2rem;
-
-    }
-
-    .review-back{
-        margin-left: 1.3rem;
-    }
 
     .single-review-wrapper,
     .single-review-inner {
@@ -3642,6 +3634,17 @@ h1.genre-intro{
     }
 
 }
+
+@media screen and (max-width:412px) {
+    #single-review {
+        padding: 4.5rem 1rem 2rem;
+    
+    }
+    .review-back{
+        margin-left: 1rem;
+    }
+}
+
 
 @media screen and (max-width:360px) {
     .movie-info-and-poster .poster img {
