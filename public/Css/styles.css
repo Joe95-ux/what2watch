@@ -367,7 +367,7 @@ h6 {
     height: 2px;
     border-radius: 10px;
     background-color: var(--mainWhite);
-    margin: 5px;
+    margin: 5px 5px 5px 0;
     transition: all 0.3s ease;
 }
 
@@ -719,7 +719,7 @@ h6 {
     }
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     .back{
         margin-left: 1rem;
     }
@@ -2071,10 +2071,19 @@ h1.genre-intro{
 
 .search-not-found img {
     margin-top: 3rem;
-    width: 450px;
-    height: 500px;
+    width: 28.125rem;
+    height: 31.25rem;
     object-fit: cover;
 }
+
+@media screen and (max-width:765px) {
+    .search-not-found img {
+        width: 80vw;
+        height: 50vh;
+    }
+
+}
+
 
 /* movie-search-ends */
 
@@ -2211,7 +2220,7 @@ h1.genre-intro{
     }
 
     .trailer-video {
-        height: 33vh;
+        height: 35vh;
         width: 100vw;
     }
 
@@ -2256,7 +2265,7 @@ h1.genre-intro{
     display: flex;
     flex-direction: column;
     width: 90%;
-    z-index: 4;
+    z-index: 5;
     opacity: 0;
     transform: translateY(-4rem);
     transition: all 0.5s ease-in-out;
@@ -2851,7 +2860,7 @@ h1.genre-intro{
     }
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     .navigation {
         padding: 0 1rem;
     }
@@ -3635,7 +3644,7 @@ h1.genre-intro{
 
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     #single-review {
         padding: 4.5rem 1rem 2rem;
     
@@ -3681,7 +3690,7 @@ h1.genre-intro{
     padding: 3% 0;
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     #person-container {
         padding: 2rem 1rem 0;
     }
@@ -3944,7 +3953,7 @@ h1.genre-intro{
     }
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     #about {
         padding: 2rem 1rem;
     }
@@ -4046,7 +4055,7 @@ h1.genre-intro{
     justify-content: center;
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     #faq {
         padding: 2rem 1rem;
     }
@@ -4287,7 +4296,7 @@ footer {
     /* height: 10vh; */
 }
 
-@media screen and (max-width:412px) {
+@media screen and (max-width:414px) {
     footer {
         padding: 2rem 1rem;
     }
