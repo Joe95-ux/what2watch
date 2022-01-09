@@ -2911,6 +2911,9 @@ h1.genre-intro{
 .movie-cast {
     margin-bottom: 2rem;
 }
+.videos-and-photos{
+    margin-bottom: 0;
+}
 
 .movie-cast h2,
 .movie-synopsis h2,
@@ -3279,6 +3282,7 @@ h1.genre-intro{
 #reviews-container {
     max-width: 1536px;
     margin: 0 auto;
+    margin-top: 2rem;
 }
 
 
