@@ -1121,10 +1121,6 @@ h6 {
 }
 
 @media screen and (max-width:560px) {
-    .swiper-main-title .movie-title {
-        font-size: 1.4rem;
-    }
-
     .movie-rating,
     .release-date {
         font-size: 1rem;
