@@ -85,7 +85,7 @@ const navSlide = () => {
     searchField.style.width = "100%";
   });
   //close search field on document click
-  document.addEventListener("click", (event) => {
+  document.addEventListener("click", event => {
     let searchClicked = searchField.contains(event.target);
     if (!searchClicked) {
       searchField.style.backgroundColor = "inherit";
@@ -95,89 +95,79 @@ const navSlide = () => {
     }
   });
   //small screen search-bar open/close
-  if(smallSearchIcon !==null){
-    smallSearchIcon.addEventListener("click", ()=>{
+  if (smallSearchIcon !== null) {
+    smallSearchIcon.addEventListener("click", () => {
       smallSearchBar.classList.toggle("active-small-search");
       smallSearchInput.focus();
     });
   }
 
-  if(closeSmallSearch !==null){
-    closeSmallSearch.addEventListener("click", ()=>{
+  if (closeSmallSearch !== null) {
+    closeSmallSearch.addEventListener("click", () => {
       smallSearchBar.classList.remove("active-small-search");
-    })
+    });
   }
-
 };
 
 // invoke function
 navSlide();
 
 //toggle synopsis and bio container
-function openSynopsisContainer(){
+function openSynopsisContainer() {
   if (openSynopsis !== null) {
     openSynopsis.addEventListener("click", () => {
-      if(movieSynopsis.clientHeight){
+      if (movieSynopsis.clientHeight) {
         movieSynopsis.style.height = 0;
         movieSynopsis.style.marginBottom = 0;
-      }else{
-        let wrapper = document.querySelector('.measuring-wrapper');
+      } else {
+        let wrapper = document.querySelector(".measuring-wrapper");
         movieSynopsis.style.height = wrapper.clientHeight + "px";
         movieSynopsis.style.marginBottom = "1.5rem";
-        
       }
     });
   }
-
 }
 openSynopsisContainer();
 
-
 // close/open watch providers
-if(closeProviders !==null){
-  closeProviders.addEventListener("click", (e)=>{
+if (closeProviders !== null) {
+  closeProviders.addEventListener("click", e => {
     e.preventDefault();
     headerSynopsis.style.display = "block";
     watchProviders.style.display = "none";
     watchBanner.style.display = "flex";
-       
   });
 }
 // toggle synopsis for small screens: here to ease work
-function smallScreenSynopsis(){
+function smallScreenSynopsis() {
   const dots = document.querySelector(".dots");
   const readAll = document.querySelector(".read-all");
   const readLess = document.querySelector(".read-less");
   const longSynopsis = document.querySelector(".long-synopsis");
-  if(readAll !==null){
-    readAll.addEventListener("click", ()=>{
+  if (readAll !== null) {
+    readAll.addEventListener("click", () => {
       dots.style.display = "none";
       longSynopsis.classList.add("active-long-synopsis");
       readAll.style.display = "none";
-    })
+    });
   }
-  if(readLess !==null){
-    readLess.addEventListener("click", ()=>{
+  if (readLess !== null) {
+    readLess.addEventListener("click", () => {
       dots.style.display = "inline";
       longSynopsis.classList.remove("active-long-synopsis");
       readAll.style.display = "inline";
-    })
+    });
   }
 }
 
 smallScreenSynopsis();
 
-
-
-
-if(watchBanner !==null){
-  watchBanner.addEventListener("click", ()=>{
+if (watchBanner !== null) {
+  watchBanner.addEventListener("click", () => {
     headerSynopsis.style.display = "none";
-    watchProviders.style.display = "block"
+    watchProviders.style.display = "block";
     watchBanner.style.display = "none";
-       
   });
-
 }
 
 //trailer control
@@ -192,7 +182,7 @@ function trailerController() {
   if (closeTrailer !== null) {
     closeTrailer.addEventListener("click", () => {
       //stop video on close
-      Array.prototype.forEach.call(videoPlayers, function (videoPlayer) {
+      Array.prototype.forEach.call(videoPlayers, function(videoPlayer) {
         videoPlayer.contentWindow.postMessage(
           '{"event":"command","func":"stopVideo","args":""}',
           "*"
@@ -201,9 +191,9 @@ function trailerController() {
       trailerContainer.classList.remove("active-trailer");
     });
   }
-  window.onclick = (event) => {
+  window.onclick = event => {
     if (event.target === trailerContainer) {
-      Array.prototype.forEach.call(videoPlayers, function (videoPlayer) {
+      Array.prototype.forEach.call(videoPlayers, function(videoPlayer) {
         videoPlayer.contentWindow.postMessage(
           '{"event":"command","func":"stopVideo","args":""}',
           "*"
@@ -244,23 +234,19 @@ toggleReviews();
 
 // go back to previous page
 if (returnBtns !== null) {
-  for(let i = 0; i < returnBtns.length; i++){
+  for (let i = 0; i < returnBtns.length; i++) {
     returnBtns[i].addEventListener("click", () => {
       history.back();
     });
-
   }
 }
 
 // scroll EVENT
-window.addEventListener("scroll", function () {
+window.addEventListener("scroll", function() {
   let navigation = document.querySelector(".navigation");
   let windowPosition = window.scrollY > 0;
   navigation.classList.toggle("scrolling-active", windowPosition);
 });
-
-
- 
 
 //Trending togglers
 const today = document.getElementById("today");
@@ -279,10 +265,7 @@ if (today !== null || week !== null) {
     // trendingThisWeek.style.zIndex =-1;
     // trendingThisWeek.style.opacity =0;
     trendingToday.style.transform = "translateX(0)";
-    trendingThisWeek.style.transform ="translateX(100%)";
-
-
-    
+    trendingThisWeek.style.transform = "translateX(100%)";
   });
 
   week.addEventListener("click", () => {
@@ -296,9 +279,7 @@ if (today !== null || week !== null) {
     // trendingThisWeek.style.opacity =1;
 
     trendingToday.style.transform = "translateX(-100%)";
-    trendingThisWeek.style.transform ="translateX(0)";
-    
-    
+    trendingThisWeek.style.transform = "translateX(0)";
   });
 }
 
@@ -335,13 +316,85 @@ copyrightYear.innerHTML += currentYear;
 //       });
 //   });
 // });
-$(document).on("click", 'a[href^="#"]', function (event) {
+$(document).on("click", 'a[href^="#"]', function(event) {
   event.preventDefault();
 
   $("html, body").animate(
     {
-      scrollTop: $($.attr(this, "href")).offset().top,
+      scrollTop: $($.attr(this, "href")).offset().top
     },
     500
   );
 });
+
+// Handling recently clicked movie cards
+
+let recentWrapper = document.querySelector(".recents-wrapper");
+const cards = [...document.querySelectorAll(".movie-card")];
+const viewInfo = document.querySelector(".viewed-info");
+const clearViewInfo = document.querySelector(".view-info-header h3");
+console.log(cards);
+
+if (!localStorage.getItem("cardStore")) {
+  localStorage.setItem("cardStore", "[]");
+}
+
+let store = JSON.parse(localStorage.getItem("cardStore"));
+if(store.length === 0){
+  clearViewInfo.style.display = "none";
+  viewInfo.classList.add("show-view-info");
+}
+
+console.log(store);
+
+for (let i = 0; i < cards.length; i++) {
+  const title = cards[i].firstElementChild.title;
+  const image = cards[i].firstElementChild.firstElementChild.src;
+  const link = cards[i].firstElementChild.href;
+  const id = link.split("/").pop();
+  cards[i].addEventListener("click", function() {
+    let cardItem = { id: id, title, image, link };
+    store.push(cardItem);
+    store = store.reduce((pureStore, current) => {
+      let obj = pureStore.find(item => item.id === current.id);
+      if (obj) {
+        return pureStore;
+      }
+      return pureStore.concat([current]);
+    }, []);
+    localStorage.setItem("cardStore", JSON.stringify(store));
+  });
+}
+
+let div;
+
+function getRecentlyViewed() {
+  if (store.length) {
+    store.forEach(({ title, image, link }) => {
+      div = document.createElement("div");
+      div.classList.add("embla__slide");
+      div.innerHTML = `
+    <div class="embla__slide__inner cast-card">
+     <div class="movie-card recent-card">
+       <a class="image" href=${link} title=${title}>
+         <img src=${image} alt="movie-poster">
+         <h3>${title}</h3>
+       </a> 
+     </div>
+
+    </div>
+    `;
+      recentWrapper.appendChild(div);
+    });
+  }
+}
+
+getRecentlyViewed();
+
+if (clearViewInfo !== null) {
+  clearViewInfo.addEventListener("click", () => {
+    localStorage.removeItem("cardStore");
+    window.location.reload();
+    clearViewInfo.style.display = "none";
+  });
+}
