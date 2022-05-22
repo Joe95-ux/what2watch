@@ -4373,18 +4373,32 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0.45rem;
     color: var(--mainWhite);
-    border-radius: 50%;
-    border: 1px solid darkgray;
+    margin: 0 0.45rem;
+    border-radius: 5px;
     text-decoration: none;
     font-size: 1rem;
     transition: 0.3s;
 }
 
+.facebook{
+    background-color: rgb(29, 161, 242);
+}
+.ig{
+    background-color: var(--primaryColor);
+}
+.mail{
+    color: #D44638;
+    background-color: var(--mainWhite);
+}
+.yt{
+    background-color: var(--primaryColor);
+}
+
 
 .social-icon:hover {
-    border-color: red;
+    border-color: var(--mainWhite);
+    background-color: var(--mainBlack);
 }
 
 
