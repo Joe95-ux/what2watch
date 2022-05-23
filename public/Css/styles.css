@@ -692,16 +692,19 @@ h6 {
     color: var(--mainWhite);
     z-index: 5;
 }
-.back-movie{
+
+.back-movie {
     position: relative;
     top: 5rem;
-    
+
 }
-.privacy-back{
+
+.privacy-back {
     position: relative;
     top: -1rem;
 }
-.review-back{
+
+.review-back {
     top: 4rem;
 }
 
@@ -710,23 +713,30 @@ h6 {
         display: none;
     }
 
-    .back{
+    .back {
         display: block;
         margin-left: 2rem;
     }
-    .back-movie, .privacy-back, .upcoming-back{
-        margin-left:0;
+
+    .back-movie,
+    .privacy-back,
+    .upcoming-back {
+        margin-left: 0;
     }
 }
 
 @media screen and (max-width:414px) {
-    .back{
+    .back {
         margin-left: 1rem;
     }
-    .about-back, .privacy-back, .person-back,.upcoming-back{
+
+    .about-back,
+    .privacy-back,
+    .person-back,
+    .upcoming-back {
         margin-left: 0;
     }
-    
+
 }
 
 .about-header-enclosure {
@@ -1121,6 +1131,7 @@ h6 {
 }
 
 @media screen and (max-width:560px) {
+
     .movie-rating,
     .release-date {
         font-size: 1rem;
@@ -1487,6 +1498,7 @@ a.learn-more {
 }
 
 @media screen and (max-width:412px) {
+
     .trending__next,
     .trending__prev {
         width: 2.4rem;
@@ -1558,34 +1570,40 @@ a.learn-more {
     color: var(--mainWhite);
     text-align: left;
 }
-.page-intro{
+
+.page-intro {
     margin-bottom: 3rem;
 }
+
 .page-intro h1 {
-   font-size: 1.5rem;
-   margin-bottom: 10px;
-   color: var(--mainWhite);
-   font-weight: 700;
-   font-family: 'Noto serif', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--mainWhite);
+    font-weight: 700;
+    font-family: 'Noto serif', serif;
 }
-.page-intro p{
+
+.page-intro p {
     font-size: 1.4rem;
     border-left: 3px solid var(--yellow);
     padding-left: 5px;
     color: #ccc;
 }
-h1.genre-intro{
+
+h1.genre-intro {
     font-size: 2.5rem;
 }
 
 @media screen and (max-width:480px) {
     .page-intro h1 {
         font-size: 1.4rem;
-     }
-     .page-intro p{
-         font-size: 1.3rem;
-     }
-     h1.genre-intro{
+    }
+
+    .page-intro p {
+        font-size: 1.3rem;
+    }
+
+    h1.genre-intro {
         font-size: 2rem;
     }
 }
@@ -2811,7 +2829,8 @@ h1.genre-intro{
     #popular-movies {
         padding: 2rem 0;
     }
-    #more-movie-info{
+
+    #more-movie-info {
         padding: 2rem 0 0;
     }
 
@@ -2907,7 +2926,8 @@ h1.genre-intro{
 .movie-cast {
     margin-bottom: 2rem;
 }
-.videos-and-photos{
+
+.videos-and-photos {
     margin-bottom: 0;
 }
 
@@ -3649,9 +3669,10 @@ h1.genre-intro{
 @media screen and (max-width:414px) {
     #single-review {
         padding: 4.5rem 1rem 2rem;
-    
+
     }
-    .review-back{
+
+    .review-back {
         margin-left: 1rem;
     }
 }
@@ -3793,6 +3814,7 @@ h1.genre-intro{
     .birthday p {
         font-size: 1.2rem;
     }
+
     .bio-container h2 {
         font-size: 1.4rem;
     }
@@ -4291,64 +4313,73 @@ h1.genre-intro{
 
 /* footer-section */
 
-
-
-
 footer {
-    background-color: #040507;
+    background-color: #001927;
     padding: 0 0 2rem;
     color: #ccc;
     font-size: 1.2rem;
     /* height: 10vh; */
 }
 
-
-.recents-container{
+.recents-container {
     padding: 1.5rem 0 0;
 }
-.viewed-info{
+
+.recents-wrapper {
+    overflow: scroll;
+
+}
+
+.viewed-info {
     font-size: 1.2rem;
     color: var(--mainWhite);
     display: none;
 }
-.view-info-header{
+
+.view-info-header {
     display: flex;
     justify-content: space-between;
 }
-.view-info-header h3{
+
+.view-info-header a {
     color: var(--yellow);
+    text-decoration: none;
     font-size: 1.1rem;
     cursor: pointer;
     transition: var(--mainTransition);
     user-select: none;
 }
-.view-info-header h3:hover{
+
+.view-info-header a:hover {
     color: var(--mainGrey);
 }
-.show-view-info{
+
+.show-view-info {
     display: block;
     margin: 1.5rem 0;
 }
-.recents-container h2{
+
+.recents-container h2 {
     font-size: 1.5rem;
     color: var(--mainWhite);
     font-weight: 400;
     margin-bottom: 1rem;
     text-transform: capitalize;
 }
-.recent-card h3{
-   display: inline-block;
-   font-size: 1.1rem;
-   margin-top: 1rem;
-   color: var(--mainWhite);
-   overflow: hidden;
-   white-space: nowrap;
-   text-overflow: ellipsis;
-   width: 100%;
+
+.recent-card h3 {
+    display: inline-block;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: var(--mainWhite);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
-div.seperation-rule{
-    margin: 1.5rem 0 2rem;
+div.seperation-rule {
+    margin: 2rem 0 2rem;
     height: 1px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.4);
@@ -4498,6 +4529,10 @@ div.seperation-rule{
 }
 
 @media screen and (max-width:414px) {
+    .recents-container h2 {
+        font-size: 1.2rem;
+        
+    }
 
     .copyright-container,
     .important-links a {
@@ -4531,3 +4566,25 @@ div.seperation-rule{
 
 
 }
+/* Scrollbar styling */
+
+/* Works on Firefox */
+.scroll-black * {
+	scrollbar-width: thin;
+	scrollbar-color: rgb(70, 70, 70) auto;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.scroll-black *::-webkit-scrollbar {
+	width: 7px;
+}
+
+.scroll-black *::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scroll-black *::-webkit-scrollbar-thumb {
+	background-color:rgb(70, 70, 70);
+}
+
+/* End scrollbar styling*/

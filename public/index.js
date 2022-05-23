@@ -332,7 +332,8 @@ $(document).on("click", 'a[href^="#"]', function(event) {
 let recentWrapper = document.querySelector(".recents-wrapper");
 const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
-const clearViewInfo = document.querySelector(".view-info-header h3");
+const clearViewInfo = document.querySelector(".view-info-header a");
+clearViewInfo.href = window.location.href;
 console.log(cards);
 
 if (!localStorage.getItem("cardStore")) {
@@ -374,14 +375,11 @@ function getRecentlyViewed() {
       div = document.createElement("div");
       div.classList.add("embla__slide");
       div.innerHTML = `
-    <div class="embla__slide__inner cast-card">
-     <div class="movie-card recent-card">
-       <a class="image" href=${link} title=${title}>
-         <img src=${image} alt="movie-poster">
-         <h3>${title}</h3>
-       </a> 
-     </div>
-
+    <div class="embla__slide__inner cast-card recent-card">
+      <a class="image" href=${link} title=${title}>
+        <img src=${image} alt="movie-poster">
+        <h3>${title}</h3>
+      </a>
     </div>
     `;
       recentWrapper.appendChild(div);
@@ -394,7 +392,11 @@ getRecentlyViewed();
 if (clearViewInfo !== null) {
   clearViewInfo.addEventListener("click", () => {
     localStorage.removeItem("cardStore");
-    window.location.reload();
-    clearViewInfo.style.display = "none";
+    clearViewInfo.innerText ="Clearing...";
+    document.addEventListener("DOMContentLoaded", ()=>{
+      clearViewInfo.style.display = "none";
+    })
+
+    
   });
 }
