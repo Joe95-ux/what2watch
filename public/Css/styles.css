@@ -1168,7 +1168,7 @@ h6 {
 }
 
 .swiper-btns a {
-    padding: 0.5rem 1.3rem;
+    padding: 0.7rem 1.3rem;
     text-transform: uppercase;
     margin-right: 15px;
 
@@ -1180,7 +1180,6 @@ h6 {
     align-items: center;
     text-align: center;
     cursor: pointer;
-    border: none;
     outline: none;
 }
 
@@ -1205,8 +1204,9 @@ h6 {
 
 .swiper-btn,
 .embla__tag {
-    padding: 0.5rem 1.3rem;
-    background-color: var(--primaryColor);
+    padding: 0.7rem 1.3rem;
+    background-color: inherit;
+    border: 1px solid var(--yellow);
     border-radius: 55px;
 }
 
@@ -2626,7 +2626,7 @@ h1.genre-intro{
 
 .slider-inner-card img,
 .see-more-upcoming {
-    height: 150px;
+    height: 180px;
     width: 248px;
 }
 
@@ -3006,6 +3006,7 @@ h1.genre-intro{
 .watch-providers-sm h2 {
     margin-bottom: 0.68rem;
     color: var(--yellow);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     padding: 3px;
     background-color: #1b212c;
     border-radius: 5px;
