@@ -148,6 +148,22 @@ async function getUpcoming(){
     console.log(e);
   }
 }
+// Get Top rated
+
+async function getTopRated(){
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
+        apiKey +
+        "&language=en-US&page=1&region=US"
+    );
+    const data = await response.json();
+    const topRatedMovie = await data.results;
+    return topRatedMovie.slice(0, 19);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 //Get trending movies
 async function getTrending(){
@@ -216,7 +232,9 @@ app.get("/", async (req, res) => {
 
   try {
     const popularMovies = await getPopularMovies();
+    const headerMovies = await popularMovies.slice(0, 5);
     const upcomingMovies = await getUpcoming();
+    const topRated = await getTopRated();
     const trending = await getTrending();
     const trendingToday = await getTrendingToday();
     const header = await trendingToday[0];
@@ -224,6 +242,8 @@ app.get("/", async (req, res) => {
     const pages = await getAllPages();
     res.render("home", {
       popularMovies: popularMovies,
+      headerMovies,
+      topRated,
       upcomingMovies: upcomingMovies,
       featured:upcomingMovies,
       header:header,

@@ -1,3 +1,16 @@
+:root {
+    --primaryColor: #d70900;
+    --secondaryColor: #049a6d;
+    --yellow: #fbc500;
+    --mainWhite: #fff;
+    --mainBlack: #222;
+    --mainGrey: #ececec;
+    --mainSpacing: 0.1rem;
+    --sectionPadding: 3% 10%;
+    --mainTransition: all 0.3s linear;
+    --dropTransition: all 0.5s ease-in;
+}
+
 .embla {
     position: relative;
     width: 100%;
@@ -18,17 +31,20 @@
     margin: 0 0 10px;
 }
 
-.embla__viewport {
+.embla__viewport,
+.autoplay {
     overflow: hidden;
     width: 100%;
 }
 
-.embla__viewport.is-draggable {
+.embla__viewport.is-draggable,
+.autoplay.is-draggable {
     cursor: move;
     cursor: grab;
 }
 
-.embla__viewport.is-dragging {
+.embla__viewport.is-dragging,
+.autoplay.is-draggable {
     cursor: grabbing;
 }
 
@@ -74,20 +90,33 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    fill: #fff;
+    fill: #1bcacd;
     padding: 0;
 }
 
-.square__btn{
+.square__btn, .circular-btn {
     height: 3rem;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    border: 1px solid white;
-    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
 
 }
-.cast__btn{
+.circular-btn{
+    top: 40%;
+}
+.circular-btn.embla__button:disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+.circular-btn .embla__button__svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cast__btn {
     top: 35%;
     transform: translateY(-35%);
 }
@@ -128,8 +157,45 @@
     height: 20px;
 }
 
+.embla__dots {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.embla__dot {
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    display: flex;
+    align-items: center;
+}
+
+.embla__dot:after {
+    background-color: #efefef;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    content: "";
+}
+
+.embla__dot.is-selected:after {
+    background-color: #1bcacd;
+    opacity: 1;
+}
+
+
+
 @media screen and (max-width:412px) {
-    .embla__button{
+    .embla__button {
         width: 2.4rem;
     }
 
@@ -137,15 +203,15 @@
         width: 23px;
         height: 23px;
     }
+
     .embla__button--prev {
         left: -1px;
     }
-    
+
     .embla__button--next {
         right: -1px;
-    
+
     }
 
 
 }
-
