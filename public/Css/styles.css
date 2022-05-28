@@ -67,7 +67,7 @@ h6 {
 
 
 .logo-and-links {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -110,6 +110,8 @@ h6 {
     height: 4rem;
     width: 250px;
     transition: var(--mainTransition);
+    display: flex;
+    align-items: center;
 }
 
 @media screen and (max-width:1440px) {
@@ -127,9 +129,10 @@ h6 {
 }
 
 .logo img {
-    object-fit: contain;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
 }
 
 .nav_links {
@@ -375,8 +378,6 @@ h6 {
     width: 28px;
 }
 
-
-
 .scrolling-active {
     position: fixed;
     top: 0;
@@ -400,9 +401,6 @@ h6 {
     transition: var(--mainTransition);
     color: var(--mainWhite);
 }
-
-
-
 
 /* side-drawer */
 .side-drawer .fa-times,
@@ -827,15 +825,14 @@ h6 {
 
 }
 .top-rated-movie h3{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 0.8rem;
-    font-family: 'Noto serif', serif;
-    text-transform: capitalize;
+    
     font-weight: 500;
 }
 .top-rated-movie p{
-    font-size: 1.1rem;
-    line-height: 1.4;
+    font-size: 1rem;
+    line-height: 1.3;
     color: #ccc;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1454,16 +1451,18 @@ h6 {
 
 .swiper-btn:nth-child(odd):hover,
 .embla__tag:nth-child(odd):hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: var(--mainBlack);
+    background-color: #001927;
+    color: var(--mainWhite);
     transform: translate(0, -4px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .swiper-btn:nth-child(even):hover,
 .embla__tag:nth-child(even):hover {
-    background-color: var(--mainGrey);
-    color: var(--mainBlack);
+    background-color: #001927;
+    color: var(--mainWhite);
     transform: translate(0, -4px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 a.learn-more {
@@ -1511,7 +1510,7 @@ a.learn-more {
 .featured-title a {
     color: var(--mainWhite);
     font-size: 1.4rem;
-    font-weight: 700;
+    font-weight: 600;
     text-decoration: none;
     margin-bottom: 0.7rem;
 }

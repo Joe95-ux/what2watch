@@ -402,5 +402,5 @@ if (clearViewInfo !== null) {
 }
 
 // simplebar
-let myElement = document.getElementById('simple-bar');
-new SimpleBar(myElement, { autoHide: true });
+const simpleBarContainer = document.getElementById('simple-bar');
+new SimpleBar(simpleBarContainer, { autoHide: true });

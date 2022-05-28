@@ -270,6 +270,8 @@ app.get("/:page", async (req, res) => {
     );
     const data = await response.json();
     const popularMovies = await data.results;
+    const headerMovies = await popularMovies.slice(0, 5);
+    const topRated = await getTopRated();
     const upcomingMovies = await getUpcoming();
     const trending = await getTrending();
     const trendingToday = await getTrendingToday();
@@ -277,6 +279,8 @@ app.get("/:page", async (req, res) => {
     const genres = await getgenre();
     const pages = await getAllPages();
     res.render("home", {
+      headerMovies,
+      topRated,
       popularMovies: popularMovies,
       upcomingMovies: upcomingMovies,
       featured:upcomingMovies,
