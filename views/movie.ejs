@@ -65,7 +65,7 @@
     </div>
 </div>
 <section class="side-drawer-backdrop"></section>
-<section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center center;">
+<section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center center;">
     <div class="small-screen-search search-bar" >
         <i class="fas fa-times close-sm-search"></i>
         <form action="/search" method="GET" class="small-search-form search-form">
@@ -555,20 +555,20 @@
                         <div class="embla__container media-container ">
                             <% for(let video of media[0]){%>
                                 <div class="embla__slide video-gallery" >
-                                    <img src="https://i.ytimg.com/vi/<%= video.key %>/maxresdefault.jpg" alt="actor-img">
+                                    <img src="https://i.ytimg.com/vi/<%= video.key %>/maxresdefault.jpg" alt="video-bd">
                                     <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= video.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                     <div class="play-icon"><i class="play fas fa-play"></i></div>
                                 </div>
                             <%} %>
                             <% for(let backdrop of media[2]){%>
                                 <div class="embla__slide">
-                                    <img class="media-backdrop" src="https://image.tmdb.org/t/p/w500/<%= backdrop.file_path %>" alt="actor-img">
+                                    <img class="media-backdrop" src="https://image.tmdb.org/t/p/w500/<%= backdrop.file_path %>" alt="movie-bd">
                                 </div>
                                 
                             <% } %>
                             <% for(let poster of media[1]){%>
                                 <div class="embla__slide">
-                                    <img class="media-poster" src="https://image.tmdb.org/t/p/w500/<%= poster.file_path %>" alt="actor-img">
+                                    <img class="media-poster" src="https://image.tmdb.org/t/p/w500/<%= poster.file_path %>" alt="movie-poster">
                                 </div>
                             <% } %>
                         </div>

@@ -9,6 +9,7 @@ const openSynopsis = document.querySelector(".open-synopsis");
 const headerSynopsis = document.querySelector(".synopsis");
 const returnBtns = document.querySelectorAll(".go-back");
 const trailerBtn = document.querySelector(".trailer");
+const headerTrailer = [...document.querySelectorAll(".header-trailer")];
 const trailerContainer = document.querySelector(".movie-trailer");
 const closeTrailer = document.querySelector(".close-trailer");
 const videoPlayers = document.getElementsByClassName("video_player");
@@ -177,6 +178,17 @@ function trailerController() {
       video.src = trailerVideo;
       trailerContainer.classList.toggle("active-trailer");
     });
+  }
+
+  if (headerTrailer !== null) {
+    for(let trailer of headerTrailer){
+      trailer.addEventListener("click", () => {
+        video.src = trailerVideo;
+        trailerContainer.classList.toggle("active-trailer");
+      });
+
+    }
+    
   }
 
   if (closeTrailer !== null) {

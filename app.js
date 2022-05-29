@@ -30,6 +30,18 @@ const url =
   page_num +
   "&region=US";
 
+async function getMovieTrailer(id){
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`);
+    const data = await response.json();
+    const trailers = await data.results;
+    const trailer = await trailers.find(trailer=>trailer.type === "Trailer");
+    return trailer;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 async function getPopularMovies() {
   try {
     const response = await fetch(url);
@@ -270,7 +282,8 @@ app.get("/:page", async (req, res) => {
     );
     const data = await response.json();
     const popularMovies = await data.results;
-    const headerMovies = await popularMovies.slice(0, 5);
+    const allHeaderMovies = await getPopularMovies();
+    const headerMovies = await allHeaderMovies.slice(0, 5);
     const topRated = await getTopRated();
     const upcomingMovies = await getUpcoming();
     const trending = await getTrending();

@@ -852,20 +852,24 @@ h6 {
 .swiper-btns.top-rated-btn a{
     text-transform: capitalize;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.swiper-btns.top-rated-btn button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    padding: 10px ;
+    padding-left: 13px;
+    border-radius: 50%;
+    transition: var(--mainTransition);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.swiper-btns.top-rated-btn button i, .swiper-btns.new-header-btn button i{
+    color: #1bcacd;
+}
+.swiper-btns.top-rated-btn button i{
+    margin-right: 0;
+}
 
 .wrapper-enclosure-home {
     max-width: calc(1536px + 6rem);
@@ -1372,7 +1376,7 @@ h6 {
 }
 
 .swiper-btns a {
-    padding: 0.7rem 1.3rem;
+    padding: 0.6rem 1.3rem;
     text-transform: uppercase;
     margin-right: 15px;
 
@@ -1408,7 +1412,7 @@ h6 {
 
 .swiper-btn,
 .embla__tag {
-    padding: 0.7rem 1.3rem;
+    padding: 0.6rem 1.3rem;
     background-color: inherit;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 55px;
@@ -2840,13 +2844,13 @@ h1.genre-intro {
 
 .slider-inner-card {
     position: relative;
-
 }
 
 .slider-inner-card img,
 .see-more-upcoming {
-    height: 180px;
-    width: 248px;
+  height: 180px;
+  width: 248px;
+    
 }
 
 @media screen and (max-width:540px) {
@@ -2859,7 +2863,7 @@ h1.genre-intro {
 }
 
 .slider-inner-card img {
-    object-fit: cover;
+    object-fit:cover;
 }
 
 .see-more-upcoming {
