@@ -30,13 +30,20 @@ const url =
   page_num +
   "&region=US";
 
+
+function filterTrailers(videos){
+  let video =  videos.find(video=>video.type === "Trailer");
+  return video;
+}
+
 async function getMovieTrailer(id){
   try {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`);
     const data = await response.json();
     const trailers = await data.results;
-    const trailer = await trailers.find(trailer=>trailer.type === "Trailer");
+    const trailer = filterTrailers(trailers);
     return trailer;
+    
   } catch (e) {
     console.log(e);
   }
@@ -47,7 +54,12 @@ async function getPopularMovies() {
     const response = await fetch(url);
     const data = await response.json();
     const popMovies = await data.results;
-    return popMovies;
+    let trailers = await popMovies.map( async function (movie){
+      let trailer = await getMovieTrailer(movie.id);
+      return trailer
+    })
+    trailers = await Promise.all(trailers);
+    return {popMovies:popMovies, videos:trailers};
   } catch (e) {
     console.log(e);
   }
@@ -170,8 +182,14 @@ async function getTopRated(){
         "&language=en-US&page=1&region=US"
     );
     const data = await response.json();
-    const topRatedMovie = await data.results;
-    return topRatedMovie.slice(0, 19);
+    const topRatedMovie = await data.results.slice(0, 20);
+    let trailers = await topRatedMovie.map( async function (movie){
+      let trailer = await getMovieTrailer(movie.id);
+      return trailer
+    })
+    trailers = await Promise.all(trailers);
+    return {topRated:topRatedMovie, videos:trailers};
+    
   } catch (e) {
     console.log(e);
   }
@@ -243,10 +261,14 @@ app.get("/privacy", async (req, res) => {
 app.get("/", async (req, res) => {
 
   try {
-    const popularMovies = await getPopularMovies();
-    const headerMovies = await popularMovies.slice(0, 5);
+    const assets = await getPopularMovies();
+    const popularMovies = await assets.popMovies;
+    const headerMovies = await popularMovies.slice(0, 6);
+    const headerVideos = await assets.videos;
     const upcomingMovies = await getUpcoming();
-    const topRated = await getTopRated();
+    const topRatedAssets = await getTopRated();
+    const topRated = await topRatedAssets.topRated;
+    const topRatedVideos = await topRatedAssets.videos;
     const trending = await getTrending();
     const trendingToday = await getTrendingToday();
     const header = await trendingToday[0];
@@ -255,7 +277,9 @@ app.get("/", async (req, res) => {
     res.render("home", {
       popularMovies: popularMovies,
       headerMovies,
+      headerVideos,
       topRated,
+      topRatedVideos,
       upcomingMovies: upcomingMovies,
       featured:upcomingMovies,
       header:header,
@@ -282,9 +306,13 @@ app.get("/:page", async (req, res) => {
     );
     const data = await response.json();
     const popularMovies = await data.results;
-    const allHeaderMovies = await getPopularMovies();
-    const headerMovies = await allHeaderMovies.slice(0, 5);
-    const topRated = await getTopRated();
+    const assets = await getPopularMovies();
+    const allHeaderMovies = await assets.popMovies;
+    const headerMovies = await allHeaderMovies.slice(0, 6);
+    const headerVideos = await assets.videos;
+    const topRatedAssets = await getTopRated();
+    const topRated = await topRatedAssets.topRated;
+    const topRatedVideos = await topRatedAssets.videos;
     const upcomingMovies = await getUpcoming();
     const trending = await getTrending();
     const trendingToday = await getTrendingToday();
@@ -293,7 +321,9 @@ app.get("/:page", async (req, res) => {
     const pages = await getAllPages();
     res.render("home", {
       headerMovies,
+      headerVideos,
       topRated,
+      topRatedVideos,
       popularMovies: popularMovies,
       upcomingMovies: upcomingMovies,
       featured:upcomingMovies,

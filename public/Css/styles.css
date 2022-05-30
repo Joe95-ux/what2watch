@@ -680,6 +680,9 @@ h6 {
     margin-bottom: 1.5rem;
     color: var(--mainWhite);
 }
+.new-header-wrapper iframe{
+    display: none;
+}
 .new-header-wrapper h1{
     color: var(--mainWhite);
     font-size: 1.8rem;
@@ -775,15 +778,15 @@ h6 {
     position: sticky;
     top: 0;
     background-color: #001927;
+    font-size: 1.3rem;
     display: block;
 }
+
 .new-header-right  a{
     text-decoration: none;
     color: var(--mainWhite);
-    font-size: 1.3rem;
     font-weight: 400;
-    padding: 0.6rem 0.6rem 0;
-    
+    padding: 0.5rem 0;  
 }
 .new-header-right a i{
     margin-left: 1rem;
@@ -791,17 +794,11 @@ h6 {
     position: relative;
     top: 2px;
 }
-/* .new-header-right h2{
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 1.3rem;
-    padding: 0.6rem 0.6rem 0;
-} */
 
 .top-rated-wrapper{
     display: flex;
     flex-direction: column;
-    margin-top: 1.3rem;
+    margin-top: 1.2rem;
 }
 
 .top-rated-wrapper .top-rated-movie:not(:last-child){
@@ -1571,7 +1568,7 @@ a.learn-more {
     padding-bottom: 1rem;
     margin-bottom: -2px;
     word-wrap: normal;
-    font-family: 'Merriweather', serif;
+    font-family: 'Noto serif', serif;
 }
 
 .trending-headings h1 i {
@@ -4791,7 +4788,7 @@ div.seperation-rule {
 /* Works on Firefox */
 .scroll-black * {
 	scrollbar-width: thin;
-	scrollbar-color: rgb(70, 70, 70) auto;
+	scrollbar-color: rgb(70, 70, 70);
 }
 
 /* Works on Chrome, Edge, and Safari */

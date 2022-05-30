@@ -180,7 +180,7 @@
                     <div class="autoplay">
                         <div class="embla__container">
                             <% if(headerMovies){%>
-                                <% headerMovies.forEach(movie=>{%>
+                                <% headerMovies.forEach((movie, index)=>{%>
                                     <div class="embla__slide autoplay__slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: right">
                                         <div class="embla__slide__inner">
                                             <div class="new-movie-wrapper">
@@ -207,7 +207,7 @@
                                                         <a  href="/movie/<%= movie.id %>" class="swiper-btn" role="button">More info</a>
                                                         <button class="swiper-btn header-trailer"><i class="fas fa-play"></i>Trailer</button>
                                                     </div>
-    
+                                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= headerVideos[index]?.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                 </div>
 
                                             </div>
@@ -245,10 +245,10 @@
                 </div>
             </div>
             <div id="simple-bar" class="new-header-right">
-                <a class="sticky-header" href="/movie/top_rated">IMDB Top Rated Movies<i class="fas fa-chevron-right"></i></a>
+                <a class="sticky-header" href="/movie/top_rated">Top Rated Movies<i class="fas fa-chevron-right"></i></a>
                 <div class="top-rated-wrapper">
                     <% if(topRated){%>
-                        <% topRated.forEach(movie=>{%>
+                        <% topRated.forEach((movie, index)=>{%>
                             <div class="top-rated-movie">
                                 <% if(movie.poster_path){%> 
                                     <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
@@ -264,6 +264,7 @@
                                         <a  href="/movie/<%= movie.id %>" class="swiper-btn" role="button">More info</a>
                                         <button class="swiper-btn header-trailer"><i class="fas fa-play"></i></button>
                                     </div>
+                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= topRatedVideos[index]?.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                       
 
                                 </div>

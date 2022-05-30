@@ -175,7 +175,7 @@ if (watchBanner !== null) {
 function trailerController() {
   if (trailerBtn !== null) {
     trailerBtn.addEventListener("click", () => {
-      video.src = trailerVideo;
+      video.src = trailerVideo + "&autoplay=1";
       trailerContainer.classList.toggle("active-trailer");
     });
   }
@@ -183,7 +183,8 @@ function trailerController() {
   if (headerTrailer !== null) {
     for(let trailer of headerTrailer){
       trailer.addEventListener("click", () => {
-        video.src = trailerVideo;
+        const videoSource = trailer.parentElement.nextElementSibling.src;
+        video.src = videoSource + "&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
 
@@ -220,7 +221,7 @@ function trailerController() {
     for (let icon = 0; icon < playIcons.length; icon++) {
       playIcons[icon].addEventListener("click", () => {
         const videoSource = playIcons[icon].previousElementSibling.src;
-        video.src = videoSource;
+        video.src = videoSource + "&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
     }
@@ -414,5 +415,5 @@ if (clearViewInfo !== null) {
 }
 
 // simplebar
-const simpleBarContainer = document.getElementById('simple-bar');
+let simpleBarContainer = document.getElementById('simple-bar');
 new SimpleBar(simpleBarContainer, { autoHide: true });
