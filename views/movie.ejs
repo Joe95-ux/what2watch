@@ -230,7 +230,7 @@
                                                         </a>
                                                         <div class="image-drop">
                                                             <%if(mov.title){%>
-                                                                <h3><%= mov.title.length>19?mov.title.substr(0, 21) + '...' : mov.title%></h4>
+                                                                <h3><%=mov.title%></h3>
                                                                 <%}else {%>
                                                                     <h3>n/a</h3>
                                                                 <%}%> 
@@ -461,7 +461,7 @@
                                         </a>
                                         <div class="image-drop">
                                             <%if(mov.title){%>
-                                                <h3><%= mov.title.length>19?mov.title.substr(0, 21) + '...' : mov.title%></h4>
+                                                <h3><%= mov.title%></h3>
                                                 <%}else {%>
                                                     <h3>n/a</h3>
                                                 <%}%> 

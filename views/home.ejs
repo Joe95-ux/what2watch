@@ -118,7 +118,7 @@
                                         <% } %>
                                         <div class="image-drop">
                                             <%if(mov.title){%>
-                                                <h3><%= mov.title.length>19?mov.title.substr(0, 21) + '...' : mov.title%></h4>
+                                                <h3><%= mov.title%></h3>
                                                 <%}else {%>
                                                     <h3>n/a</h3>
                                                 <%}%> 
@@ -181,7 +181,7 @@
                         <div class="embla__container">
                             <% if(headerMovies){%>
                                 <% headerMovies.forEach((movie, index)=>{%>
-                                    <div class="embla__slide autoplay__slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: right">
+                                    <div class="embla__slide autoplay__slide" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
                                         <div class="embla__slide__inner">
                                             <div class="new-movie-wrapper">
                                                 <% if(movie.poster_path){%> 
@@ -300,7 +300,7 @@
                                         <% } %>
                                         <div class="image-drop">
                                             <%if(mov.title){%>
-                                                <h3><%= mov.title.length>19?mov.title.substr(0, 21) + '...' : mov.title%></h4>
+                                                <h3><%= mov.title%></h3>
                                                 <%}else {%>
                                                     <h3>n/a</h3>
                                                 <%}%> 

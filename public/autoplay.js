@@ -52,8 +52,6 @@ const selectDotBtn = (dotsArray, embla) => () => {
 
 if (autoplayWrap !== null) {
   const viewPort = Array.from(document.querySelectorAll(".autoplay"));
-  console.log(viewPort);
-
   viewPort.forEach((view) => {
     let embla = EmblaCarousel(view, {
       dragFree: true,

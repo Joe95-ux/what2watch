@@ -347,7 +347,6 @@ const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
 const clearViewInfo = document.querySelector(".view-info-header a");
 clearViewInfo.href = window.location.href;
-console.log(cards);
 
 if (!localStorage.getItem("cardStore")) {
   localStorage.setItem("cardStore", "[]");
@@ -358,8 +357,6 @@ if(store.length === 0){
   clearViewInfo.style.display = "none";
   viewInfo.classList.add("show-view-info");
 }
-
-console.log(store);
 
 for (let i = 0; i < cards.length; i++) {
   const title = cards[i].firstElementChild.title;
