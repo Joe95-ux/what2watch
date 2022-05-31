@@ -1521,11 +1521,6 @@ h6 {
     outline: none;
 }
 
-.swiper-btns a:nth-child(even),
-.embla__tag:nth-child(even) {
-    background-color: inherit;
-    border: 1px solid rgba(251, 197, 0, 0.7);
-}
 
 .swiper-btns a i,
 .swiper-btns button i {
@@ -1547,7 +1542,10 @@ h6 {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 55px;
 }
-
+.swiper-btn.red-btn{
+    background-color: var(--primaryColor);
+    border: none;
+}
 @media screen and (max-width:560px) {
 
     .swiper-btns a {
@@ -1583,20 +1581,16 @@ h6 {
     }
 }
 
-.swiper-btn:nth-child(odd):hover,
-.embla__tag:nth-child(odd):hover {
+.swiper-btn:hover {
     background-color: #001927;
     color: var(--mainWhite);
     transform: translate(0, -4px);
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
-
-.swiper-btn:nth-child(even):hover,
-.embla__tag:nth-child(even):hover {
-    background-color: #001927;
-    color: var(--mainWhite);
-    transform: translate(0, -4px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+@media screen and (max-width:1024px) {
+    .swiper-btn:hover {
+    transform: translate(0, 0);
+}
 }
 
 a.learn-more {
@@ -1745,15 +1739,16 @@ a.learn-more {
 }
 
 .timeline {
-    margin-left: 5rem;
+    margin-left: 6rem;
     font-family: 'Roboto', sans-serif;
-    color: #ccc;
+    color: darkgray;
 }
 
 .timeline h2 {
     font-weight: 400;
     text-transform: capitalize;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    padding-top: 2px;
     margin-bottom: -2px;
     cursor: pointer;
     position: relative;
@@ -1764,10 +1759,6 @@ a.learn-more {
 @media screen and (max-width:765px) {
     .trending-header h1 {
         font-size: 1.3rem;
-    }
-
-    .timeline h2 {
-        font-size: 1.1rem;
     }
 }
 
@@ -1795,8 +1786,8 @@ a.learn-more {
 }
 
 .active-timeline {
-    border-bottom: 2px solid var(--yellow);
-    color: var(--mainWhite);
+    border-bottom: 2px solid var(--primaryColor);
+    color: var(--mainGrey);
 
 }
 
@@ -1954,7 +1945,7 @@ h1.genre-intro {
     display: inline-block;
     padding-bottom: 1rem;
     margin-bottom: -1px;
-    border-bottom: 1px solid var(--yellow);
+    border-bottom: 1px solid var(--primaryColor);
     position: relative;
 }
 
@@ -1971,7 +1962,7 @@ h1.genre-intro {
     transform: translate(-50%, -50%);
     height: 4px;
     width: 4px;
-    background: var(--yellow);
+    background: var(--primaryColor);
     border-radius: 50%;
 }
 
@@ -2002,10 +1993,7 @@ h1.genre-intro {
         background-color: rgba(255, 255, 255, 0.2);
     }
 
-    .popular::before,
-    .active-timeline::before {
-        background: rgba(255, 255, 255, 0.7);
-    }
+    
 
 }
 
@@ -2031,14 +2019,26 @@ h1.genre-intro {
 
 .embla__tag {
     min-width: 8rem;
+    padding: 0.6rem 0.8rem;
     transition: var(--mainTransition);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.embla__tag:nth-child(even) {
+    background-color: var(--primaryColor);
+    border: none;
+}
+
+.embla__tag:hover {
+    background-color: #001927;
+    color: var(--mainWhite);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+
 .embla__tag a {
-    font-size: 0.9rem;
     text-transform: uppercase;
     font-weight: 400;
 }

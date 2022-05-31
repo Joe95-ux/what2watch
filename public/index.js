@@ -273,10 +273,6 @@ if (today !== null || week !== null) {
     if (week.classList.contains("active-timeline")) {
       week.classList.remove("active-timeline");
     }
-    // trendingToday.style.zIndex =1;
-    // trendingToday.style.opacity =1;
-    // trendingThisWeek.style.zIndex =-1;
-    // trendingThisWeek.style.opacity =0;
     trendingToday.style.transform = "translateX(0)";
     trendingThisWeek.style.transform = "translateX(100%)";
   });
@@ -286,11 +282,6 @@ if (today !== null || week !== null) {
     if (today.classList.contains("active-timeline")) {
       today.classList.remove("active-timeline");
     }
-    // trendingToday.style.zIndex =-1;
-    // trendingToday.style.opacity =0;
-    // trendingThisWeek.style.zIndex =1;
-    // trendingThisWeek.style.opacity =1;
-
     trendingToday.style.transform = "translateX(-100%)";
     trendingThisWeek.style.transform = "translateX(0)";
   });
