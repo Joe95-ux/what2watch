@@ -2993,6 +2993,7 @@ h1.genre-intro {
 
 .slider-inner-card {
     position: relative;
+    width: 299px;
 }
 
 .slider-inner-card img,
@@ -3003,7 +3004,9 @@ h1.genre-intro {
 }
 
 @media screen and (max-width:540px) {
-
+    .slider-inner-card {
+        width: 200px;
+    }
     .slider-inner-card img,
     .see-more-upcoming {
         height: 140px;
@@ -3041,6 +3044,7 @@ h1.genre-intro {
 .image-drop {
     width: 100%;
     margin: 0.4rem 0 0.3rem;
+    position: relative;
 
 }
 .image-drop h3 {
@@ -3048,7 +3052,7 @@ h1.genre-intro {
     color: var(--mainWhite);
     font-weight: 400;
     width: 100%;
-    display: inline-block;
+    display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
