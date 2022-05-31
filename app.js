@@ -177,7 +177,7 @@ async function getUpcoming(){
 async function getTopRated(){
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=" +
         apiKey +
         "&language=en-US&page=1&region=US"
     );
