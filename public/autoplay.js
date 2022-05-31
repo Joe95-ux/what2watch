@@ -62,7 +62,7 @@ if (autoplayWrap !== null) {
 
     const dots = view.nextElementSibling;
 
-    const autoplay = autoPlay(embla, 3000);
+    const autoplay = autoPlay(embla, 2500);
     const dotsArray = generateDotBtns(dots, embla);
     const setSelectedDotBtn = selectDotBtn(dotsArray, embla);
 

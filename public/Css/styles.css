@@ -1690,7 +1690,7 @@ a.learn-more {
 
 
 .trending-header {
-    padding: 2rem 0 0;
+    padding: 1.8rem 0 0;
 }
 
 .trending-headings h1 {
@@ -2102,6 +2102,9 @@ h1.genre-intro {
 }
 
 @media screen and (max-width:1040px) {
+    .movie-wrapper {
+        row-gap: 0;
+    }
     .movie-card {
         height: 240px;
     }
@@ -2263,6 +2266,12 @@ h1.genre-intro {
 
 }
 
+@media screen and (max-width:414px){
+    .movie-details{
+        padding: 0.6rem 0;
+    }
+}
+
 .movie-details a {
     color: var(--mainWhite);
     display: inline-block;
@@ -2398,9 +2407,7 @@ h1.genre-intro {
 }
 
 @media screen and (max-width:412px) {
-    .page-controls {
-        margin: -4rem 0 0;
-    }
+   
     .prev-page,
     .next-page,
     .page-count {
@@ -3155,7 +3162,7 @@ h1.genre-intro {
     }
 
     #popular-movies {
-        padding: 2rem 0;
+        padding: 1.8rem 0;
     }
 
     #more-movie-info {
