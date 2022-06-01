@@ -54,9 +54,6 @@ if (autoplayWrap !== null) {
   const viewPort = Array.from(document.querySelectorAll(".autoplay"));
   viewPort.forEach((view) => {
     let embla = EmblaCarousel(view, {
-      containScroll: "trimSnaps",
-      slidesToScroll: 1,
-      skipSnaps: false,
       loop:false
     });
 
