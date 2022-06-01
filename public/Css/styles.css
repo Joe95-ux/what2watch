@@ -665,10 +665,12 @@ h6 {
     background-color: #001019;
     text-align: left;
     width: 100%;
-    /* max-height: 650px;
-    height: 600px; */
     position: relative;
     padding: 2rem 0 0;
+}
+#header-container.about-header-container{
+    max-height: 650px;
+    height: 600px;
 }
 
 .new-header-wrapper{
@@ -4280,8 +4282,18 @@ h1.genre-intro {
 }
 
 .about-header .swiper-btns a {
-    padding: 0.8rem 1.5rem;
+    
     font-size: 1rem;
+}
+
+.swiper-btn.about-red{
+    background-color: var(--primaryColor);
+    padding: 0.8rem 1.5rem;
+}
+
+.swiper-btn.about-red:hover{
+    background-color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 
