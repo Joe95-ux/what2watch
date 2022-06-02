@@ -2551,6 +2551,7 @@ h1.genre-intro {
     z-index: 6;
 }
 .welcome-banner{
+    font-family: 'Poppins', sans-serif;
     max-width: 798px;
     max-height: 360px;
     margin-top: 2rem;
@@ -2568,7 +2569,7 @@ h1.genre-intro {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .banner-header h1{
-    font-size: 1.3rem;
+    font-size: 1.125rem;
     font-weight: 700;
 }
 .close-banner{
@@ -2594,12 +2595,12 @@ h1.genre-intro {
 }
 
 .banner-content h2{
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: 600;
     margin: 0 0 0.8rem;
 }
 .banner-content p{
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     margin: 0 2.5rem 0;
     line-height: 1.5;
     
@@ -2631,10 +2632,10 @@ h1.genre-intro {
     }
     
     .banner-content h2{
-        font-size: 2.4rem;
+        font-size: 2.3rem;
     }
     .banner-content p{
-        font-size: 1.22rem;
+        font-size: 1.2rem;
         margin: 0;
         max-width: 88%;
         line-height: 1.4;
@@ -2643,12 +2644,12 @@ h1.genre-intro {
 
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:418px) {
     .welcome-banner{
         max-height: 320px;
     }
     .banner-header{
-        padding: 0.8rem 1.2rem;
+        padding: 0.8rem 1rem;
     }
     .close-banner{
         height: 24px;
@@ -2656,19 +2657,21 @@ h1.genre-intro {
     }
     
     .banner-header h1{
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     .banner-content{
-        margin: 0.8rem 1.2rem 1.3rem ;
+        margin: 0.5rem 1rem 1.3rem ;
     }
     .banner-content h2{
         font-size: 1.8rem;
-        margin: 0 0 0.8rem;
+        margin: -3px 0 0.8rem;
     }
     
     .banner-content p{
         max-width: 100%;
         font-size: 1rem;
+        margin-top: -3px;
+        margin-bottom: -3px;
         
     }
 }
