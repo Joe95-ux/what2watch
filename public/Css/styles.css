@@ -106,7 +106,7 @@ h6 {
     text-decoration: none;
 }
 
-.logo-wrapper {
+.logo-wrapper, .banner-logo {
     height: 4rem;
     width: 250px;
     transition: var(--mainTransition);
@@ -128,7 +128,7 @@ h6 {
     }
 }
 
-.logo img {
+.logo img, .banner-logo img {
     max-height: 100%;
     max-width: 100%;
     height: auto;
@@ -2465,33 +2465,37 @@ h1.genre-intro {
 /* movie-trailer */
 
 
-.movie-trailer {
+.movie-trailer, .welcome-banner-modal {
+    display: flex;
+    justify-content: center;
     position: fixed;
     top: 50%;
     left: 50%;
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     transition: var(--mainTransition);
     -webkit-transition: var(--mainTransition);
+    background-color: rgba(82, 79, 79, 0.6);
     z-index: -1;
     opacity: 0;
-    background-color: rgba(82, 79, 79, 0.6);
+}
+.movie-trailer{
+    align-items: center;
 }
 
 .trailer-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.trailer-container, .welcome-banner{
     transform: translateY(50px);
     -webkit-transform: translateY(50px);
     transition: transform 0.5s ease-in-out;
     -webkit-transition: transform 0.5s ease-in-out;
-    position: relative;
 }
 
 .trailer-video {
@@ -2522,21 +2526,154 @@ h1.genre-intro {
     cursor: pointer;
 }
 
-.movie-trailer .close-trailer:hover {
+.movie-trailer .close-trailer:hover, .close-banner:hover {
     transform: scale(0.9);
     -webkit-transform: scale(0.9);
     background-color: darkgrey;
 }
 
-.active-trailer {
-    opacity: 1;
-    z-index: 6;
-}
 
 .active-trailer .trailer-container {
     transform: translateY(0);
     -webkit-transform: translateY(0);
 }
+
+/* welcome banner */
+.welcome-banner-modal{
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    z-index: -1;
+}
+.active-trailer, .active-modal{
+    opacity: 1;
+    z-index: 6;
+}
+.welcome-banner{
+    max-width: 798px;
+    max-height: 400px;
+    margin-top: 2rem;
+    background-color: #001927;
+    color: var(--mainWhite);
+}
+.active-modal .welcome-banner{
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+}
+.banner-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.banner-header h1{
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+.close-banner{
+    height: 33px;
+    width: 33px;
+    background-color: var(--mainGrey);
+    backface-visibility: hidden;
+    transition: var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
+    cursor: pointer;
+}
+.banner-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 3rem;
+    padding: 0 2rem 1rem;
+    text-align: center;
+}
+.banner-logo{
+    height: 3.5rem;
+}
+
+.banner-content h2{
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0.3rem 0 1.1rem;
+}
+.banner-content p{
+    font-size: 1.4rem;
+    margin: 0 2.5rem 0.5rem;
+    line-height: 1.5;
+    
+}
+.swiper-btn.close-banner-btn{
+    font-weight: 500;
+    font-size: 1.2rem;
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    background-color: var(--primaryColor);
+}
+
+@media screen and (max-width:765px) {
+    .welcome-banner{
+        margin-top: 0;
+    }
+    .banner-logo{
+        height: 3rem;
+        width: 200px;
+    }
+
+    .banner-header h1{
+        font-size: 1.4rem;
+    }
+    .banner-content{
+        margin: 1.3rem 3rem;
+        padding: 0;
+    }
+    
+    .banner-content h2{
+        font-size: 2.2rem;
+        margin: 0.3rem 0 1.1rem;
+    }
+    .banner-content p{
+        font-size: 1.2rem;
+        margin: 0 0 0.5rem;
+        max-width: 85%;
+        line-height: 1.4;
+        
+    }
+
+}
+
+@media screen and (max-width:414px) {
+    .welcome-banner{
+        max-height: 320px;
+    }
+    .banner-header{
+        padding: 0.8rem 1.2rem;
+    }
+    .close-banner{
+        height: 24px;
+        width: 24px;
+    }
+    
+    .banner-header h1{
+        font-size: 1.1rem;
+    }
+    .banner-content{
+        margin: 1.3rem 1.2rem;
+    }
+    .banner-content h2{
+        font-size: 1.8rem;
+        margin: 0.2rem 0 0.9rem;
+    }
+    
+    .banner-content p{
+        max-width: 100%;
+        margin-bottom: 0.2rem;
+        font-size: 1rem;
+        
+    }
+}
+
 
 @media screen and (max-width:1440px) {
     .synopsis p {

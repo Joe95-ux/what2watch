@@ -405,3 +405,21 @@ if (clearViewInfo !== null) {
 // simplebar
 let simpleBarContainer = document.getElementById('simple-bar');
 new SimpleBar(simpleBarContainer, { autoHide: true });
+
+// welcome banner
+$(document).ready(function(){
+  setTimeout(showModal, 1500);
+  function showModal(){
+    let already_show = sessionStorage.getItem("alreadyShown");
+    if(already_show != "already shown"){
+      sessionStorage.setItem("alreadyShown", "already shown");
+      $(".welcome-banner-modal").addClass("active-modal");
+    }else{
+      console.log("banner has been shown")
+    }
+
+  }
+  $(".close-up").click(function(){
+    $(".welcome-banner-modal").removeClass("active-modal");
+  })
+})
