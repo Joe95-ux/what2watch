@@ -2552,7 +2552,7 @@ h1.genre-intro {
 }
 .welcome-banner{
     max-width: 798px;
-    max-height: 400px;
+    max-height: 360px;
     margin-top: 2rem;
     background-color: #001927;
     color: var(--mainWhite);
@@ -2568,7 +2568,7 @@ h1.genre-intro {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 .banner-header h1{
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     font-weight: 700;
 }
 .close-banner{
@@ -2585,7 +2585,7 @@ h1.genre-intro {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1.5rem 3rem;
+    margin: 1rem 3rem 1.5rem;
     padding: 0 2rem 1rem;
     text-align: center;
 }
@@ -2596,11 +2596,11 @@ h1.genre-intro {
 .banner-content h2{
     font-size: 2.5rem;
     font-weight: 600;
-    margin: 0.3rem 0 1.1rem;
+    margin: 0 0 0.8rem;
 }
 .banner-content p{
     font-size: 1.4rem;
-    margin: 0 2.5rem 0.5rem;
+    margin: 0 2.5rem 0;
     line-height: 1.5;
     
 }
@@ -2609,6 +2609,7 @@ h1.genre-intro {
     font-size: 1.2rem;
     padding-left: 1.6rem;
     padding-right: 1.6rem;
+    margin-top: 0;
     background-color: var(--primaryColor);
 }
 
@@ -2616,27 +2617,26 @@ h1.genre-intro {
     .welcome-banner{
         margin-top: 0;
     }
+    .banner-header{
+        padding: 0.8rem 1.5rem;
+    }
+    .banner-content{
+        margin: 0.8rem 1.5rem 1.3rem ;
+        padding: 0;
+    }
+
     .banner-logo{
         height: 3rem;
         width: 200px;
     }
-
-    .banner-header h1{
-        font-size: 1.4rem;
-    }
-    .banner-content{
-        margin: 1.3rem 3rem;
-        padding: 0;
-    }
     
     .banner-content h2{
-        font-size: 2.2rem;
-        margin: 0.3rem 0 1.1rem;
+        font-size: 2.4rem;
     }
     .banner-content p{
-        font-size: 1.2rem;
-        margin: 0 0 0.5rem;
-        max-width: 85%;
+        font-size: 1.22rem;
+        margin: 0;
+        max-width: 88%;
         line-height: 1.4;
         
     }
@@ -2659,16 +2659,15 @@ h1.genre-intro {
         font-size: 1.1rem;
     }
     .banner-content{
-        margin: 1.3rem 1.2rem;
+        margin: 0.8rem 1.2rem 1.3rem ;
     }
     .banner-content h2{
         font-size: 1.8rem;
-        margin: 0.2rem 0 0.9rem;
+        margin: 0 0 0.8rem;
     }
     
     .banner-content p{
         max-width: 100%;
-        margin-bottom: 0.2rem;
         font-size: 1rem;
         
     }
