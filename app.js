@@ -9,6 +9,7 @@ const compression = require("compression");
 const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
+const blogRouter = require("./routes/blog");
 const app = express();
 
 app.use(express.static( __dirname + "/public"));
@@ -342,6 +343,7 @@ app.get("/:page", async (req, res) => {
 app.use("/movie", movieRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
+app.use("/blog", blogRouter);
 
 
 let port = process.env.PORT;

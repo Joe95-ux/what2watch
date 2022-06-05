@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title>What2watch | The movie Watch Guide</title>
+    <title>blog posts | what2watch</title>
     <meta name="description"
         content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
     <meta name="keywords"
@@ -94,3 +94,27 @@
 
         </div>
     </nav>
+
+    <section id="header-container" class="blog-header">
+        <div class="small-screen-search search-bar" >
+            <i class="fas fa-times close-sm-search"></i>
+            <form action="/search" method="GET" class="small-search-form search-form">
+                <div class="small-search-field">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                    <input type="submit" value="search" hidden>
+                </div>
+            </form>
+        </div>
+        <div class="wrapper-enclosure-home">
+            <div class="new-header-wrapper blog-header-wrapper">
+                <div class="blog-header-left"></div>
+                <div class="blog-header-right"></div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <%- include('partials/footer') %>

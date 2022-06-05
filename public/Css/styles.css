@@ -695,11 +695,11 @@ h6 {
     font-size: 1.3rem;
 }
 
-.new-header-left, .new-header-right{
+.new-header-left, .new-header-right, .blog-header-left, .blog-header-right{
     border-radius: 5px;
     background-color: #001927;
 }
-.new-header-left{
+.new-header-left, .blog-header-left{
     flex-basis: 63%;
     height: 100%;
     position: relative;
@@ -761,7 +761,7 @@ h6 {
 .new-header-btn a, .new-header-btn button{
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.new-header-right{
+.new-header-right, .blog-header-right{
     flex-basis: 36%;
     height: 100%;
     /* padding: 1rem 1.3rem 1.3rem; */
@@ -2077,6 +2077,7 @@ h1.genre-intro {
 }
 .movie-card {
     position: relative;
+    background-color: #001927;
     height: 322px;
     width: 100%;
     margin-top: 0;
