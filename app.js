@@ -32,7 +32,7 @@ const url =
 
 
 function filterTrailers(videos){
-  let video =  videos.find(video=>video.type === "Trailer");
+  let video =  videos.find(video=>video.type === "Trailer" || video.type === "Teaser" || video.type === "Behind the Scenes");
   return video;
 }
 
@@ -54,11 +54,10 @@ async function getPopularMovies() {
     const response = await fetch(url);
     const data = await response.json();
     const popMovies = await data.results;
-    let trailers = await popMovies.map( async function (movie){
+    let trailers = await Promise.all(popMovies.map( async function (movie){
       let trailer = await getMovieTrailer(movie.id);
-      return trailer
-    })
-    trailers = await Promise.all(trailers);
+      return trailer;
+    }));
     return {popMovies:popMovies, videos:trailers};
   } catch (e) {
     console.log(e);
@@ -183,11 +182,10 @@ async function getTopRated(){
     );
     const data = await response.json();
     const topRatedMovie = await data.results.slice(0, 20);
-    let trailers = await topRatedMovie.map( async function (movie){
+    let trailers = await Promise.all(topRatedMovie.map( async function (movie){
       let trailer = await getMovieTrailer(movie.id);
-      return trailer
-    })
-    trailers = await Promise.all(trailers);
+      return trailer;
+    }))
     return {topRated:topRatedMovie, videos:trailers};
     
   } catch (e) {

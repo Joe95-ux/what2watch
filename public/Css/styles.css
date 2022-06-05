@@ -633,23 +633,21 @@ h6 {
 }
 
 .active-backrop {
-    opacity: 1;
     z-index: 4;
 }
 
 /* skeleton-loading */
 .skeleton {
-
     animation: skeleton-loading 1s linear infinite alternate;
 }
 
 @keyframes skeleton-loading {
     0% {
-        background-color: hsl(200, 20%, 70%);
+        background-color: #001927;
     }
 
     0% {
-        background-color: hsl(200, 20%, 95%);
+        background-color: #001927;
     }
 }
 
@@ -658,6 +656,10 @@ h6 {
     height: .5rem;
     margin-bottom: .25rem;
     border-radius: .125rem;
+}
+.skeleton-text:last-child{
+    margin-bottom: 0;
+    width: 80%;
 }
 
 /* header-container */
@@ -2080,6 +2082,7 @@ h1.genre-intro {
     height: 322px;
     width: 100%;
     margin-top: 0;
+    background-color: #001927;
 }
 
 @media screen and (max-width:1620px) {
@@ -3164,7 +3167,11 @@ h1.genre-intro {
 .see-more-upcoming {
   height: 170px;
   width: 299px;
+  background-color: #001927;
     
+}
+.see-more-upcoming{
+    background-color: transparent;
 }
 
 @media screen and (max-width:540px) {
