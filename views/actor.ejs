@@ -78,11 +78,12 @@
             </div>
         </form>
     </div>
+    
     <div class="wrapper-enclosure">
         <%if(details){%>
             <div class="single-movie-wrapper" >
                     <div class="single-person-inner">
-                        <div class="single-movie-card">
+                        <div class="single-movie-card actor-profile">
                             <% if(details.profile_path){%> 
                             <img src="https://image.tmdb.org/t/p/w500/<%= details.profile_path %>" alt="actor-profile">
                             <%}else if(details.profile_path === null){%>
@@ -111,7 +112,7 @@
                             <div class="synopsis bio">
                                 <h2>Biography</h2>
                                 <p>
-                                    <%= details.biography.substr(0, 300) + "..." %>
+                                    <span class="clamp-synopsis"><%= details.biography%></span>
                                     <span class="open-synopsis" >Read more</span>
                                 </p>
                             </div>
