@@ -349,12 +349,24 @@ if(store.length === 0){
   viewInfo.classList.add("show-view-info");
 }
 
+function debounce(fn, delay){
+  let timeoutID;
+  return function (...args){
+    if(timeoutID){
+      clearTimeout(timeoutID);
+    }
+    timeoutID = setTimeout(()=>{
+      fn(...args);
+    }, delay);
+  }
+}
+
 for (let i = 0; i < cards.length; i++) {
   const title = cards[i].firstElementChild.title;
   const image = cards[i].firstElementChild.firstElementChild.src;
   const link = cards[i].firstElementChild.href;
   const id = link.split("/").pop();
-  cards[i].addEventListener("click", function() {
+  cards[i].addEventListener("click", debounce(function() {
     let cardItem = { id: id, title, image, link };
     store.push(cardItem);
     store = store.reduce((pureStore, current) => {
@@ -365,7 +377,7 @@ for (let i = 0; i < cards.length; i++) {
       return pureStore.concat([current]);
     }, []);
     localStorage.setItem("cardStore", JSON.stringify(store));
-  });
+  }, 2000));
 }
 
 let div;

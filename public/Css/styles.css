@@ -686,6 +686,12 @@ button{
     margin-bottom: 1.5rem;
     color: var(--mainWhite);
 }
+
+@media screen and (max-width:1440px) {
+    .new-header-wrapper{
+        margin-top: -2.5rem;
+    }
+}
 .new-header-wrapper iframe{
     display: none;
 }
