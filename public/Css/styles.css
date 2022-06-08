@@ -41,6 +41,10 @@ h6 {
     font-weight: normal;
 }
 
+button{
+    user-select: none;
+}
+
 /* section {
     padding: 3% 5%;
     color: white;

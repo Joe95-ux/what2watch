@@ -423,3 +423,5 @@ $(document).ready(function(){
     $(".welcome-banner-modal").removeClass("active-modal");
   })
 })
+let short = document.getElementById("short")
+console.log(short)

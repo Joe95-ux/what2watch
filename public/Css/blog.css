@@ -145,9 +145,12 @@ div.blog-header-embla .embla__dots{
     bottom: 3%;
 }
 .blog-body-wrapper{
-    margin:2rem 0 3rem;
+    margin:2rem 0 0;
+    padding-bottom: 3rem;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    position: relative;
 }
 .blog-body-wrapper a{
     text-decoration: none;
@@ -160,13 +163,18 @@ div.blog-header-embla .embla__dots{
     position: relative;
 }
 
-.cat-title{
+.cat-title, a.cat-title{
     display: inline-block;
     border-bottom: 1px solid rgba(255,255,255,0.6);
     position: relative;
     padding-bottom: 0.5rem;
     font-size: 1.5rem;
     margin-bottom: 1.8rem;
+    color: var(--mainWhite);
+    transition: var(--mainTransition);
+}
+a.cat-title:hover{
+    color: var(--yellow);
 }
 .cat-title::after{
     content: "";
@@ -177,11 +185,23 @@ div.blog-header-embla .embla__dots{
     width: 25px;
     height: 2px; 
 }
+.cat-title i{
+    position: relative;
+    font-size: 1.2rem;
+    top: 2px;
+    margin-left: 10px;
+}
 .latest-posts{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.latest-posts, div.tv-news{
     row-gap: 1.8rem;
     column-gap: 1.4rem;
+}
+div.tv-news{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .latest-posts .post img{
     height: 220px;
@@ -190,6 +210,9 @@ div.blog-header-embla .embla__dots{
     border-radius: var(--mainBorderRaduis);
     margin-bottom: 0.3rem;
 
+}
+div.tv-news .post img{
+    height: 180px;
 }
 .post h3{
     font-size: 1.1rem;
@@ -212,13 +235,17 @@ div.blog-header-embla .embla__dots{
     font-weight: 500;
     font-size: 1rem;
     text-transform: capitalize;
+    transition: var(--mainTransition);
 }
 
 .post a.read-more i, .writer-bio-content a.read-more i{
     margin-left: 5px;
     margin-top: 3px;
 }
-.older-posts, .trending-now{
+.post a.read-more:hover, .writer-bio-content a.read-more:hover{
+    color: var(--mainGrey);
+}
+.older-posts, .trending-now, .tv-shows{
     margin-top: 25px;
     width: 100%;
 }
@@ -288,7 +315,7 @@ div.blog-header-embla .embla__dots{
     text-decoration: none;
 }
 
-.blog-social, .cats, .facebook-page{
+.blog-social, .cats, .facebook-page, .instagram-page{
     margin-top: 1.8rem;
 }
 .blog-social-inner{
@@ -346,6 +373,12 @@ a.blog-social-link i{
 
 }
 
+.to-stick{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 3rem;
+}
+
 .facebook-feed, .facebook-page{
     width: 100%;
 }
@@ -353,3 +386,89 @@ a.blog-social-link i{
     width: 500px;
 }
 
+.ig-cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    column-gap: 1rem;
+    row-gap: 1rem;
+}
+.ig-cards img{
+    height: 125px;
+    width: 100%;
+}
+
+.news-letter{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.new-letter-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--mainWhite);
+    padding: 2.5rem;
+    line-height: 1.5;
+    max-width: 800px;
+    background-color:#001927;
+    border-radius: 5px;
+    margin-bottom: 3rem;
+}
+
+.new-letter-wrapper i{
+    font-size: 1.4rem;
+    margin-bottom: 7px;
+}
+.new-letter-wrapper h1{
+    font-size: 1.7rem;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+}
+.new-letter-wrapper p{
+    font-size: 1.3rem;
+    margin: 0.6rem 0 1.5rem;
+    color: darkgrey;
+}
+.new-letter-wrapper form{
+    width: 100%;
+}
+.new-letter-wrapper form div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.3rem 1rem 1.3rem 1.3rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.new-letter-wrapper form div input{
+    flex-basis: 70%;
+    width: 70%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1rem;
+    color: darkgray;
+}
+.new-letter-wrapper .send-btn{
+    margin-right: 10px;
+    flex-basis: 26%;
+    font-size: 1rem;
+    color: var(--mainWhite);
+    background-color: var(--primaryColor);
+    border-radius: 55px;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s linear;
+    -webkit-transition: background-color 0.3s linear;
+    -moz-transition: background-color 0.3s linear;
+}
+.send-btn:hover{
+    background-color: transparent;
+}
+footer.blog-footer{
+    background-color: rgba(0,0,0,0.5)
+}
