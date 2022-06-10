@@ -104,17 +104,16 @@ div.blog-header-right{
    margin-top: 5px;
    color: var(--mainGrey);
 }
-.post-title h5 span, h5.date span {
+.post-title h5 span, h5.date span, h5.cat-name span {
     position: relative;
+}
+.post-title h5 span:first-child, h5.date span:first-child, h5.cat-name span:first-child {
     margin-right: 11px;
 }
-.post-title h5 span:first-child, h5.date span:first-child {
-    margin-right: 11px;
-}
-.post-title h5 span:last-child, h5.date span:last-child {
+.post-title h5 span:last-child, h5.date span:last-child, h5.cat-name span:last-child {
     margin-left: 11px;
 }
-.post-title h5:not(:last-child) span:not(:last-child)::after{
+.post-title h5:not(:last-child) span:not(:last-child)::after, .left-span::after{
     content: "";
     display: inline-block;
     border: 1px solid;
@@ -172,6 +171,10 @@ div.blog-header-embla .embla__dots{
     margin-bottom: 1.8rem;
     color: var(--mainWhite);
     transition: var(--mainTransition);
+}
+
+.cat-title span{
+    color: var(--yellow);
 }
 a.cat-title:hover{
     color: var(--yellow);
@@ -301,8 +304,9 @@ div.tv-news .post img{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 25px;
-    height: 2px; 
+    width: 38px;
+    border-radius: 10px;
+    height: 1px; 
 }
 .writer-bio-content p{
     line-height: 1.4;
@@ -471,4 +475,12 @@ a.blog-social-link i{
 }
 footer.blog-footer{
     background-color: rgba(0,0,0,0.5)
+}
+
+/* category of post */
+h5.cat-name{
+    font-size: 1rem;
+    margin: 0 0 6px;
+    color: var(--yellow);
+    width: 100%;
 }

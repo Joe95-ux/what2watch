@@ -181,15 +181,14 @@ function trailerController() {
   }
 
   if (headerTrailer !== null) {
+    let videoSource;
     for(let trailer of headerTrailer){
       trailer.addEventListener("click", () => {
-        const videoSource = trailer.parentElement.nextElementSibling.src;
+        videoSource = trailer.parentElement.nextElementSibling.src;
         video.src = videoSource + "&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
-
     }
-    
   }
 
   if (closeTrailer !== null) {

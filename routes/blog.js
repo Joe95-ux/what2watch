@@ -8,6 +8,13 @@ router.get("/posts", async (req, res)=>{
     res.render("blogHome", {title});
 })
 
+router.get("/category", async (req,res)=>{
+    const title = "category";
+    res.render("blogCategory", {title});
+
+    
+})
+
 
 
 
