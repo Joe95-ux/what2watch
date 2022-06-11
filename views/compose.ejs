@@ -1,0 +1,126 @@
+<%- include("partials/blogheader") %>
+<section id="header-container" class="blog-header">
+    <div class="small-screen-search search-bar">
+        <i class="fas fa-times close-sm-search"></i>
+        <form action="/search" method="GET" class="small-search-form search-form">
+            <div class="small-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <input type="submit" value="search" hidden>
+            </div>
+        </form>
+    </div>
+
+    <div class="wrapper-enclosure-blog">
+        <div class="compose-form-wrapper">
+            <div class="compose-form-inner">
+                <div class="compose-form-header">
+                    <h1>
+                        Compose a blog post
+                    </h1>
+                    <p>To write a complete blog post, please fill is the fields below. To save a post as draft, set its
+                        status to <strong>Draft</strong> but if you feel like the post is complete, then set its status
+                        to <strong>public</strong> </p>
+                </div>
+                <div class="compose-form-wrapper">
+                    <form class="compose-form">
+                        <div class="names">
+                            <div class="firstname">
+                                <label for="fist-name">Author's Name</label>
+                                <input type="text" id="fName" name="firstname" required>
+                            </div>
+                            <div class="lastname">
+                                <label for="last-name">Email Address</label>
+                                <input type="text" id="lName" name="lastname" required>
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label for="email">Title</label>
+                            <input type="email" id="client-email" name="email" required>
+                        </div>
+                        <div class="names">
+                            <div class="firstname">
+                                <label for="phone">Category</label>
+                                <div class="select-box">
+                                    <div class="options-container">
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="action" name="action"/>
+                                        <label for="action movies">Action Movies</label>
+                                      </div>
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="editor-picks" name="editor-picks" />
+                                        <label for="editor's picks">Editor's picks</label>
+                                      </div>
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="latest" name="Latest-Posts" />
+                                        <label for="latest">Latest Posts</label>
+                                      </div>
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="tv-shows" name="tv-shows" />
+                                        <label for="movies">tv shows</label>
+                                      </div>
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="movies" name="Movies" />
+                                        <label for="movies">Movies</label>
+                                      </div>
+                                    </div>
+                            
+                                    <div class="selected" >
+                                      <input type="text" name="category" id="category" value="choose a category">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lastname">
+                                <label for="state">Status</label>
+                                <div class="select-box">
+                                    <div class="options-container">
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="draft" name="draft"/>
+                                        <label for="draft">Draft</label>
+                                      </div>
+                                      <div class="option">
+                                        <input type="radio" class="radio" id="public" name="public" />
+                                        <label for="public">Public</label>
+                                      </div>
+                                    </div>
+                            
+                                    <div class="selected" >
+                                      <input type="text" name="status" id="status" value="Select a status">
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="names">
+                            <div class="firstname">
+                                <label for="phone">Image</label>
+                                <input type="file" id="image" name="image" accept="image/*">
+                            </div>
+                            <div class="lastname">
+                                <label for="state">Image's Title</label>
+                                <input type="text" id="image-title" name="state/province">
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label for="state">Body</label>
+                            <textarea name="about-yourself" id="message" cols="5" rows="6"
+                                placeholder="Please, tell us a little about your home and family, so we can do our best to match you with the right puppy."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="publish-btn">Publish</button>
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+
+
+<%- include('partials/blogfooter') %>

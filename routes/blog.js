@@ -15,6 +15,14 @@ router.get("/category", async (req,res)=>{
     
 })
 
+router.get("/compose", async (req,res)=>{
+    const title = "compose";
+    res.render("compose", {title});
+
+    
+})
+
+
 
 
 

@@ -162,10 +162,12 @@ div.blog-header-embla .embla__dots{
     position: relative;
 }
 
-.cat-title, a.cat-title{
+.cat-title, a.cat-title, .compose-form-header h1{
     display: inline-block;
     border-bottom: 1px solid rgba(255,255,255,0.6);
     position: relative;
+}
+.cat-title, a.cat-title{
     padding-bottom: 0.5rem;
     font-size: 1.5rem;
     margin-bottom: 1.8rem;
@@ -179,7 +181,7 @@ div.blog-header-embla .embla__dots{
 a.cat-title:hover{
     color: var(--yellow);
 }
-.cat-title::after{
+.cat-title::after, .compose-form-header h1::after{
     content: "";
     background-color: rgba(255,255,255,0.8);
     position: absolute;
@@ -455,7 +457,7 @@ a.blog-social-link i{
     font-size: 1rem;
     color: darkgray;
 }
-.new-letter-wrapper .send-btn{
+.new-letter-wrapper .send-btn, .publish-btn{
     margin-right: 10px;
     flex-basis: 26%;
     font-size: 1rem;
@@ -484,3 +486,303 @@ h5.cat-name{
     color: var(--yellow);
     width: 100%;
 }
+
+ /* compose page */
+
+ .compose-form-wrapper{
+    align-items: center;
+    margin-bottom: 3rem;
+    width: 100%;
+    
+ }
+ .compose-form-wrapper, .compose-form-inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ .compose-form-inner{
+    color: var(--mainWhite);
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: #001927;
+    width: 1000px;
+    max-width: 100%;
+ }
+ .compose-form-header{
+    text-align: center;
+    width: 800px;
+    max-width: 100%;
+ }
+ 
+ .compose-form-header h1{
+    font-weight: 600;
+    font-size: 2rem;
+    padding-bottom: 0.3rem;
+    font-family: "Poppins", sans-serif;
+ }
+
+ .compose-form-header h1::after{
+    left: 50%;
+    width: 28px;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+}
+ .compose-form-header p{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #afafaf;
+    margin : 1.5rem 0;
+ }
+
+ .compose-form-header strong{
+    color: var(--mainWhite);
+}
+
+
+.compose-form-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 1rem;
+  }
+  
+  .compose-form-wrapper h2 {
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+  
+  
+  .compose-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .compose-form .input-field:not(:last-child) {
+    margin-bottom: 1.1rem;
+  }
+  
+  .compose-form .input-field,
+  .firstname,
+  .lastname {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .compose-form label {
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+  
+  .compose-form .input-field input,
+  .firstname input,
+  .lastname input{
+    height: 41px;
+  }
+  
+  .compose-form .input-field input,
+  .firstname input,
+  .lastname input,
+  textarea {
+    outline: none;
+    border-radius: 7px;
+    padding: 7px;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: lightgray;
+    line-height: 1.4;
+    font-size: 1rem;
+    letter-spacing: normal;
+    box-shadow: none;
+    appearance: none;
+    background-color: transparent;
+    transition: var(--mainTransition);
+    font-family: "Poppins", sans-serif;
+  }
+
+  
+  .compose-form input::placeholder {
+    color: lightgrey;
+    word-spacing: normal;
+  }
+  
+  .compose-form input:focus,
+  .compose-form textarea:focus {
+    border-color: rgba(255,255,255,0.5);
+  
+  }
+
+  .names {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1.1rem;
+    /* overflow: hidden; */
+  }
+
+  .firstname,
+  .lastname {
+    flex-basis: 48%;
+    width: 48%; 
+  }
+
+  .select-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .select-box .options-container {
+    background: #2f3640;
+    color: darkgrey;
+    margin-top: 8px;
+    max-height: 0;
+    position: absolute;
+    top: 41px;
+    left: 0;
+    width: 100%;
+    padding: 0 24px;
+    opacity: 0;
+    transition: all 0.4s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    order: 1;
+    pointer-events: none;
+  }
+  
+  .selected {
+    background: #001927;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    color: #afafaf;
+    padding: 7px;
+    position: relative;
+    order: 0;
+    font-size: 1rem;
+    max-height: 41px;
+    
+  }
+  .selected input{
+    outline: none;
+    border: none;
+    color: #afafaf;
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+  }
+  
+  .selected::after {
+    content: "";
+    background: url("/images/arrow.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 80%;
+    width: 30px;
+    right: 10px;
+    top: 5px;
+    transition: all 0.4s;
+  }
+  
+  .select-box .options-container.active-options {
+    display: block;
+    opacity: 1;
+    z-index: 9999;
+    overflow-y: auto;
+    max-height: 240px;
+  }
+  
+  .select-box .options-container.active-options + .selected::after {
+    transform: rotateX(180deg);
+    top: 5px;
+  }
+  
+  .select-box .options-container::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .select-box .options-container::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .select-box .option{
+    padding: 8px 0;
+    cursor: pointer;
+  }
+  .select-box .option:not(:last-child) {
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+  
+  .select-box .option:hover {
+    color: var(--mainWhite);
+  }
+  
+  .select-box label {
+    cursor: pointer;
+  }
+  
+  .select-box .option .radio {
+    display: none;
+  }
+  
+
+  @media screen and (max-width:520px) {
+    .compose-form .input-field input,
+    .firstname input,
+    .lastname input {
+      height: 38px;
+    }
+    .selected{
+        height: 38px;
+    }
+    .selected input{
+        height: 20px;
+    }
+    .selected::after {
+        width: 25px;
+      }
+    .names {
+      flex-direction: column;
+      
+    }
+    .firstname,
+    .lastname {
+    flex-basis:100%;
+    width: 100%;
+    }
+    .firstname {
+      margin-right: 0;
+      margin-bottom: 1.1rem;
+    }
+  
+  }
+
+  @media screen and (max-width:414px) {
+    .compose-form-wrapper h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  
+  .compose-form .publish-btn {
+    margin-top: 1.5rem;
+    max-width: 130px;
+    width: 130px;
+    min-width: 100px;
+    margin-left: auto;
+  }
+  
+  .compose-form .publish-btn:hover {
+    background-color: inherit;
+    color: var(--mainWhite);
+  }
+  
+  
+  

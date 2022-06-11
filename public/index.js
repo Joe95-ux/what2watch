@@ -182,7 +182,7 @@ function trailerController() {
 
   if (headerTrailer !== null) {
     let videoSource;
-    for(let trailer of headerTrailer){
+    for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
         videoSource = trailer.parentElement.nextElementSibling.src;
         video.src = videoSource + "&autoplay=1";
@@ -303,6 +303,30 @@ for (let i = 0; i < acc.length; i++) {
   });
 }
 
+// custom select dropdown
+const selected = [...document.querySelectorAll(".selected")];
+const optionsContainer =[...document.querySelectorAll(".options-container")] ;
+
+
+selected.forEach(select => {
+  select.addEventListener("click", () => {
+    select.previousElementSibling.classList.toggle("active-options");
+  });
+});
+
+optionsContainer.forEach(container=>{
+  const optionsList = container.querySelectorAll(".option");
+  optionsList.forEach(option => {
+    option.addEventListener("click", () => {
+      const selectedInput = container.nextElementSibling.firstElementChild;
+      selectedInput.value = option.querySelector("label").innerHTML;
+      container.classList.remove("active-options");
+    });
+  });
+
+})
+
+
 // footer
 
 const currentYear = new Date().getFullYear();
@@ -330,6 +354,8 @@ $(document).on("click", 'a[href^="#"]', function(event) {
   );
 });
 
+
+
 // Handling recently clicked movie cards
 
 let recentWrapper = document.querySelector(".recents-wrapper");
@@ -343,21 +369,21 @@ if (!localStorage.getItem("cardStore")) {
 }
 
 let store = JSON.parse(localStorage.getItem("cardStore"));
-if(store.length === 0){
+if (store.length === 0) {
   clearViewInfo.style.display = "none";
   viewInfo.classList.add("show-view-info");
 }
 
-function debounce(fn, delay){
+function debounce(fn, delay) {
   let timeoutID;
-  return function (...args){
-    if(timeoutID){
+  return function(...args) {
+    if (timeoutID) {
       clearTimeout(timeoutID);
     }
-    timeoutID = setTimeout(()=>{
+    timeoutID = setTimeout(() => {
       fn(...args);
     }, delay);
-  }
+  };
 }
 
 for (let i = 0; i < cards.length; i++) {
@@ -365,18 +391,21 @@ for (let i = 0; i < cards.length; i++) {
   const image = cards[i].firstElementChild.firstElementChild.src;
   const link = cards[i].firstElementChild.href;
   const id = link.split("/").pop();
-  cards[i].addEventListener("click", debounce(function() {
-    let cardItem = { id: id, title, image, link };
-    store.push(cardItem);
-    store = store.reduce((pureStore, current) => {
-      let obj = pureStore.find(item => item.id === current.id);
-      if (obj) {
-        return pureStore;
-      }
-      return pureStore.concat([current]);
-    }, []);
-    localStorage.setItem("cardStore", JSON.stringify(store));
-  }, 2000));
+  cards[i].addEventListener(
+    "click",
+    debounce(function() {
+      let cardItem = { id: id, title, image, link };
+      store.push(cardItem);
+      store = store.reduce((pureStore, current) => {
+        let obj = pureStore.find(item => item.id === current.id);
+        if (obj) {
+          return pureStore;
+        }
+        return pureStore.concat([current]);
+      }, []);
+      localStorage.setItem("cardStore", JSON.stringify(store));
+    }, 2000)
+  );
 }
 
 let div;
@@ -404,35 +433,32 @@ getRecentlyViewed();
 if (clearViewInfo !== null) {
   clearViewInfo.addEventListener("click", () => {
     localStorage.removeItem("cardStore");
-    clearViewInfo.innerText ="Clearing...";
-    document.addEventListener("DOMContentLoaded", ()=>{
+    clearViewInfo.innerText = "Clearing...";
+    document.addEventListener("DOMContentLoaded", () => {
       clearViewInfo.style.display = "none";
-    })
-
-    
+    });
   });
 }
 
 // simplebar
-let simpleBarContainer = document.getElementById('simple-bar');
+let simpleBarContainer = document.getElementById("simple-bar");
 new SimpleBar(simpleBarContainer, { autoHide: true });
 
 // welcome banner
-$(document).ready(function(){
-  function showModal(){
+$(document).ready(function() {
+  function showModal() {
     let already_show = sessionStorage.getItem("alreadyShown");
-    if(already_show != "already shown"){
+    if (already_show != "already shown") {
       sessionStorage.setItem("alreadyShown", "already shown");
       $(".welcome-banner-modal").addClass("active-modal");
-    }else{
-      console.log("banner has been shown")
+    } else {
+      console.log("banner has been shown");
     }
-
   }
   setTimeout(showModal, 1500);
-  $(".close-up").click(function(){
+  $(".close-up").click(function() {
     $(".welcome-banner-modal").removeClass("active-modal");
-  })
-})
-let short = document.getElementById("short")
-console.log(short)
+  });
+});
+let short = document.getElementById("short");
+console.log(short);
