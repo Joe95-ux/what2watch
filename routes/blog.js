@@ -22,6 +22,14 @@ router.get("/compose", async (req,res)=>{
     
 })
 
+router.get("/post", async (req,res)=>{
+    const title = "post";
+    res.render("post", {title});
+
+    
+})
+
+
 
 
 

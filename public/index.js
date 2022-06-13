@@ -108,10 +108,39 @@ const navSlide = () => {
       smallSearchBar.classList.remove("active-small-search");
     });
   }
+
+  // scroll EVENT
+  window.addEventListener("scroll", function() {
+    let navigation = document.querySelector(".navigation");
+    let windowPosition = window.scrollY > 0;
+    navigation.classList.toggle("scrolling-active", windowPosition);
+  });
+
+  // footer
+
+  const currentYear = new Date().getFullYear();
+  const copyrightYear = document.querySelector(".copyright");
+  copyrightYear.innerHTML += currentYear;
 };
 
 // invoke function
 navSlide();
+
+// sticky layout
+function stickLayout() {
+  const short = document.getElementById("short");
+  const long = document.getElementById("long");
+  if (short && long) {
+    let shortHeight = short.clientHeight;
+    let longHeight = long.clientHeight;
+    if (longHeight > shortHeight) {
+      short.classList.add("to-stick");
+    } else if (shortHeight > longHeight) {
+      long.classList.add("to-stick");
+    }
+  }
+}
+stickLayout();
 
 //toggle synopsis and bio container
 function openSynopsisContainer() {
@@ -253,108 +282,17 @@ if (returnBtns !== null) {
   }
 }
 
-// scroll EVENT
-window.addEventListener("scroll", function() {
-  let navigation = document.querySelector(".navigation");
-  let windowPosition = window.scrollY > 0;
-  navigation.classList.toggle("scrolling-active", windowPosition);
-});
-
-//Trending togglers
-const today = document.getElementById("today");
-const week = document.getElementById("this-week");
-const trendingToday = document.getElementById("trending-today");
-const trendingThisWeek = document.getElementById("trending-thisweek");
-
-if (today !== null || week !== null) {
-  today.addEventListener("click", () => {
-    today.classList.add("active-timeline");
-    if (week.classList.contains("active-timeline")) {
-      week.classList.remove("active-timeline");
+function debounce(fn, delay) {
+  let timeoutID;
+  return function(...args) {
+    if (timeoutID) {
+      clearTimeout(timeoutID);
     }
-    trendingToday.style.transform = "translateX(0)";
-    trendingThisWeek.style.transform = "translateX(100%)";
-  });
-
-  week.addEventListener("click", () => {
-    week.classList.add("active-timeline");
-    if (today.classList.contains("active-timeline")) {
-      today.classList.remove("active-timeline");
-    }
-    trendingToday.style.transform = "translateX(-100%)";
-    trendingThisWeek.style.transform = "translateX(0)";
-  });
+    timeoutID = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
 }
-
-//faq-toggler
-
-const acc = document.getElementsByClassName("accodion");
-const title = document.querySelector(".faq-title");
-for (let i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", () => {
-    acc[i].classList.toggle("active-drop");
-    let panel = acc[i].nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-    title.classList.toggle("active-title");
-  });
-}
-
-// custom select dropdown
-const selected = [...document.querySelectorAll(".selected")];
-const optionsContainer =[...document.querySelectorAll(".options-container")] ;
-
-
-selected.forEach(select => {
-  select.addEventListener("click", () => {
-    select.previousElementSibling.classList.toggle("active-options");
-  });
-});
-
-optionsContainer.forEach(container=>{
-  const optionsList = container.querySelectorAll(".option");
-  optionsList.forEach(option => {
-    option.addEventListener("click", () => {
-      const selectedInput = container.nextElementSibling.firstElementChild;
-      selectedInput.value = option.querySelector("label").innerHTML;
-      container.classList.remove("active-options");
-    });
-  });
-
-})
-
-
-// footer
-
-const currentYear = new Date().getFullYear();
-const copyrightYear = document.querySelector(".copyright");
-copyrightYear.innerHTML += currentYear;
-
-//smooth scroll on a tag click
-// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-//   anchor.addEventListener('click', function (e) {
-//       e.preventDefault();
-
-//       document.querySelector(this.getAttribute('href')).scrollIntoView({
-//           behavior: 'smooth'
-//       });
-//   });
-// });
-$(document).on("click", 'a[href^="#"]', function(event) {
-  event.preventDefault();
-
-  $("html, body").animate(
-    {
-      scrollTop: $($.attr(this, "href")).offset().top
-    },
-    500
-  );
-});
-
-
 
 // Handling recently clicked movie cards
 
@@ -372,18 +310,6 @@ let store = JSON.parse(localStorage.getItem("cardStore"));
 if (store.length === 0) {
   clearViewInfo.style.display = "none";
   viewInfo.classList.add("show-view-info");
-}
-
-function debounce(fn, delay) {
-  let timeoutID;
-  return function(...args) {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-    timeoutID = setTimeout(() => {
-      fn(...args);
-    }, delay);
-  };
 }
 
 for (let i = 0; i < cards.length; i++) {
@@ -441,8 +367,83 @@ if (clearViewInfo !== null) {
 }
 
 // simplebar
-let simpleBarContainer = document.getElementById("simple-bar");
+const simpleBarContainer = document.getElementById("simple-bar");
 new SimpleBar(simpleBarContainer, { autoHide: true });
+
+//Trending togglers
+const today = document.getElementById("today");
+const week = document.getElementById("this-week");
+const trendingToday = document.getElementById("trending-today");
+const trendingThisWeek = document.getElementById("trending-thisweek");
+
+if (today !== null || week !== null) {
+  today.addEventListener("click", () => {
+    today.classList.add("active-timeline");
+    if (week.classList.contains("active-timeline")) {
+      week.classList.remove("active-timeline");
+    }
+    trendingToday.style.transform = "translateX(0)";
+    trendingThisWeek.style.transform = "translateX(100%)";
+  });
+
+  week.addEventListener("click", () => {
+    week.classList.add("active-timeline");
+    if (today.classList.contains("active-timeline")) {
+      today.classList.remove("active-timeline");
+    }
+    trendingToday.style.transform = "translateX(-100%)";
+    trendingThisWeek.style.transform = "translateX(0)";
+  });
+}
+
+//faq-toggler
+
+const acc = document.getElementsByClassName("accodion");
+const title = document.querySelector(".faq-title");
+for (let i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", () => {
+    acc[i].classList.toggle("active-drop");
+    let panel = acc[i].nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+    title.classList.toggle("active-title");
+  });
+}
+
+$(document).on("click", 'a[href^="#"]', function(event) {
+  event.preventDefault();
+
+  $("html, body").animate(
+    {
+      scrollTop: $($.attr(this, "href")).offset().top
+    },
+    500
+  );
+});
+
+// custom select dropdown
+const selected = [...document.querySelectorAll(".selected")];
+const optionsContainer = [...document.querySelectorAll(".options-container")];
+
+selected.forEach(select => {
+  select.addEventListener("click", () => {
+    select.previousElementSibling.classList.toggle("active-options");
+  });
+});
+
+optionsContainer.forEach(container => {
+  const optionsList = container.querySelectorAll(".option");
+  optionsList.forEach(option => {
+    option.addEventListener("click", () => {
+      const selectedInput = container.nextElementSibling.firstElementChild;
+      selectedInput.value = option.querySelector("label").innerHTML;
+      container.classList.remove("active-options");
+    });
+  });
+});
 
 // welcome banner
 $(document).ready(function() {

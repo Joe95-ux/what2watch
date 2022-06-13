@@ -57,7 +57,7 @@ button{
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: 6;
+    z-index: 9999;
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
@@ -687,11 +687,6 @@ button{
     color: var(--mainWhite);
 }
 
-@media screen and (max-width:1440px) {
-    .new-header-wrapper{
-        margin-top: -2.5rem;
-    }
-}
 .new-header-wrapper iframe{
     display: none;
 }
@@ -779,6 +774,7 @@ button{
     position: relative;
 
 }
+
 .new-header-right .simplebar-track{
     background-color: transparent;
 }
