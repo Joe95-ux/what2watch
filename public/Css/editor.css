@@ -29,6 +29,7 @@ main .ck-editor[role='application'] .ck.ck-content,
     font-size: 1em;
     line-height: 1.6em;
     min-height: var(--ck-sample-editor-min-height);
+    height: auto;
     padding: 1.3em;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
     border-radius: 0 0 5px 5px !important;

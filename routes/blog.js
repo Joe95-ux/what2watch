@@ -29,6 +29,13 @@ router.get("/post", async (req,res)=>{
     
 })
 
+router.get("/forms", async (req,res)=>{
+    const title = "Login/Sign-up form";
+    res.render("forms", {title});
+
+    
+})
+
 
 
 
