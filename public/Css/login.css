@@ -44,7 +44,7 @@ input {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0rem 5rem;
+  padding: 0rem 1rem;
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
@@ -105,6 +105,7 @@ form.sign-in-form {
 .social-media-platform-text {
   padding: 0.7rem 0;
   font-size: 1rem;
+  text-align: center;
 }
 
 .social-media-platform {
@@ -398,3 +399,11 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+@media screen and (max-width:330px){
+    .register-container:before {
+        bottom: 67%;
+        left: 50%;
+    }
+}
+
