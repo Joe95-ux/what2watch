@@ -78,23 +78,26 @@ const navSlide = () => {
   }
 
   //seach-field animation
-  searchField.addEventListener("click", () => {
-    searchField.style.backgroundColor = "#f0f0f0";
-    searchInput.style.width = "240px";
-    searchInput.style.opacity = 1;
-    searchInput.focus();
-    searchField.style.width = "100%";
-  });
-  //close search field on document click
-  document.addEventListener("click", event => {
-    let searchClicked = searchField.contains(event.target);
-    if (!searchClicked) {
-      searchField.style.backgroundColor = "inherit";
-      searchInput.style.width = 0;
-      searchInput.style.opacity = 0;
-      searchField.style.width = "35px";
-    }
-  });
+  if (searchField) {
+    searchField.addEventListener("click", () => {
+      searchField.style.backgroundColor = "#f0f0f0";
+      searchInput.style.width = "240px";
+      searchInput.style.opacity = 1;
+      searchInput.focus();
+      searchField.style.width = "100%";
+    });
+    //close search field on document click
+    document.addEventListener("click", event => {
+      let searchClicked = searchField.contains(event.target);
+      if (!searchClicked) {
+        searchField.style.backgroundColor = "inherit";
+        searchInput.style.width = 0;
+        searchInput.style.opacity = 0;
+        searchField.style.width = "35px";
+      }
+    });
+  }
+
   //small screen search-bar open/close
   if (smallSearchIcon !== null) {
     smallSearchIcon.addEventListener("click", () => {
@@ -300,7 +303,9 @@ let recentWrapper = document.querySelector(".recents-wrapper");
 const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
 const clearViewInfo = document.querySelector(".view-info-header a");
-clearViewInfo.href = window.location.href;
+if (clearViewInfo) {
+  clearViewInfo.href = window.location.href;
+}
 
 if (!localStorage.getItem("cardStore")) {
   localStorage.setItem("cardStore", "[]");
@@ -349,7 +354,9 @@ function getRecentlyViewed() {
       </a>
     </div>
     `;
-      recentWrapper.appendChild(div);
+      if (recentWrapper) {
+        recentWrapper.appendChild(div);
+      }
     });
   }
 }
@@ -461,5 +468,3 @@ $(document).ready(function() {
     $(".welcome-banner-modal").removeClass("active-modal");
   });
 });
-let short = document.getElementById("short");
-console.log(short);

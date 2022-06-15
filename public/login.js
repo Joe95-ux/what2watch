@@ -1,11 +1,11 @@
-const sign_in_btn = document.querySelector('#sign-in-btn');
-const sign_up_btn = document.querySelector('#sign-up-btn');
-const container = document.querySelector('.register-container');
+const historyBtns = document.querySelectorAll(".history");
 
-sign_up_btn.addEventListener('click', ()=>{
-    container.classList.add('sign-up-mode');
-})
 
-sign_in_btn.addEventListener('click', ()=>{
-    container.classList.remove('sign-up-mode');
-})
+// go back to previous page
+if (historyBtns !== null) {
+    for (let i = 0; i < historyBtns.length; i++) {
+      historyBtns[i].addEventListener("click", () => {
+        history.back();
+      });
+    }
+}

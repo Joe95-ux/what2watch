@@ -426,7 +426,7 @@ button{
     backdrop-filter: blur(15px);
     box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 10;
+    z-index: 10000;
     overflow-y: auto;
     overflow-x: hidden;
     transform: translateX(-100%);
@@ -3178,8 +3178,8 @@ h1.genre-intro {
     }
     .slider-inner-card img,
     .see-more-upcoming {
-        height: 140px;
-        width: 200px;
+        height: 130px;
+        width: 220px;
     }
 }
 
@@ -4852,7 +4852,7 @@ footer {
 
 .viewed-info {
     font-size: 1.2rem;
-    color: var(--mainWhite);
+    color: lightgray;
     display: none;
 }
 
@@ -4880,7 +4880,7 @@ footer {
 }
 
 .recents-container h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--mainWhite);
     font-weight: 400;
     margin-bottom: 1rem;
