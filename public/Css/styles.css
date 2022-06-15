@@ -3272,7 +3272,7 @@ h1.genre-intro {
 /* more movie info */
 
 #more-movie-info {
-    padding: 3% 0 0;
+    padding: 3rem 0 0;
     background: #001019;
     position: relative;
     overflow-y: hidden;
@@ -3375,7 +3375,7 @@ h1.genre-intro {
     }
 
     #more-movie-info {
-        padding: 2rem 0 0;
+        padding: 0;
     }
 
     .single-movie-inner {
@@ -3414,6 +3414,13 @@ h1.genre-intro {
 
     .small-display-synopsis {
         display: block;
+    }
+}
+
+@media screen and (max-width:900px){
+    #more-movie-info {
+        padding: 2rem 0 0;
+    
     }
 }
 
@@ -4390,7 +4397,7 @@ h1.genre-intro {
     background-image: url(/404.svg);
     background-position: top;
     background-repeat: no-repeat;
-    color: rgb(11, 202, 216);
+    color: #FF6366;
     position: relative;
     padding: 2rem 0;
     height: 85vh;
@@ -4425,6 +4432,14 @@ h1.genre-intro {
     font-size: 1.8rem;
 
 }
+#error-page a.swiper-btn{
+    background-color:var(--primaryColor);
+}
+
+#error-page a.swiper-btn:hover{
+    background-color: #FF6366;
+}
+
 
 @media screen and (max-width:412px) {
     .error-message h1 {
