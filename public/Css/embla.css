@@ -18,6 +18,14 @@
     margin-right: auto;
 }
 
+.embla__container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 .embla-title,
 .embla-small-title {
     font-size: 1.4rem;
@@ -37,6 +45,13 @@
     width: 100%;
 }
 
+.autoplay div.embla__container{
+    will-change: transform;
+}
+.autoplay div.embla__slide{
+    counter-increment: embla; 
+}
+
 .embla__viewport.is-draggable,
 .autoplay.is-draggable {
     cursor: move;
@@ -48,13 +63,6 @@
     cursor: grabbing;
 }
 
-.embla__container {
-    display: flex;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -khtml-user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
 
 .embla__slide {
     position: relative;

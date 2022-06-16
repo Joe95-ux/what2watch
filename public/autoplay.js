@@ -59,7 +59,7 @@ if (autoplayWrap !== null) {
 
     const dots = view.nextElementSibling;
 
-    const autoplay = autoPlay(embla, 2500);
+    const auto = autoPlay(embla, 2000);
     const dotsArray = generateDotBtns(dots, embla);
     const setSelectedDotBtn = selectDotBtn(dotsArray, embla);
 
@@ -88,9 +88,10 @@ if (autoplayWrap !== null) {
     embla.on("select", setSelectedDotBtn);
     embla.on("select", disablePrevAndNextBtns);
     embla.on("init", setSelectedDotBtn);
+    embla.on('init', disablePrevAndNextBtns);
 
-    view.addEventListener("mouseenter", autoplay.stop, false);
-    view.addEventListener("touchstart", autoplay.stop, false);
-    autoplay.play();
+    view.addEventListener("mouseenter", auto.stop, false);
+    view.addEventListener("touchstart", auto.stop, false);
+    auto.play();
   });
 }
