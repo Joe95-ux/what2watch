@@ -14,6 +14,8 @@
   --mainGrey: #ececec;
   --darkBg: #001019;
   --darkBlueBg: #001927;
+  --lightGrey: rgb(212, 212, 212, 1);
+  --darkGrey:rgb(163, 163, 163, 1);
   --mainSpacing: 0.1rem;
   --sectionPadding: 3% 10%;
   --mainTransition: all 0.3s linear;
@@ -66,7 +68,7 @@
 }
 
 .form-title p {
-  color: darkgray;
+  color: var(--darkGrey);
   font-size: 1rem;
   font-weight: 300;
 }
@@ -83,7 +85,7 @@
   display: flex;
   flex: 1 1;
   align-items: center;
-  color: darkgray;
+  color: var(--darkGrey);
   font-size: 1.1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -106,7 +108,7 @@
   background-color: transparent;
   width: 100%;
   font-size: 1.1rem;
-  color: darkgray;
+  color: var(--darkGrey);
 }
 
 
@@ -123,7 +125,7 @@
   outline: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.65rem;
   transition: background-color 0.3s linear;
   -webkit-transition: background-color 0.3s linear;
   -moz-transition: background-color 0.3s linear;
@@ -136,7 +138,7 @@
 }
 
 .actions-wrapper p{
-  color: rgb(144, 141, 141);
+  color: var(--darkGrey);
   text-align: center;
   font-size: 14px;
   line-height: 1.4;

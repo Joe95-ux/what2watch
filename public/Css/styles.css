@@ -12,6 +12,9 @@
     --mainWhite: #fff;
     --mainBlack: #222;
     --mainGrey: #ececec;
+    --lightGrey: rgb(212, 212, 212, 1);
+    --darkGrey:rgb(163, 163, 163, 1);
+    --smallText: 1rem;
     --mainSpacing: 0.1rem;
     --sectionPadding: 3% 10%;
     --mainTransition: all 0.3s linear;
@@ -2575,6 +2578,9 @@ h1.genre-intro {
     opacity: 1;
     z-index: 6;
 }
+.active-modal{
+    z-index: 10000;
+}
 .welcome-banner{
     font-family: 'Poppins', sans-serif;
     max-width: 798px;
@@ -4836,8 +4842,9 @@ h1.genre-intro {
 footer {
     background-color: #001927;
     padding: 0 0 2rem;
-    color: #ccc;
-    font-size: 1.2rem;
+    color: var(--darkGrey);
+    font-size: var(--smallText);
+    font-family: "Roboto", sans-serif;
     /* height: 10vh; */
 }
 
@@ -4851,7 +4858,7 @@ footer {
 }
 
 .viewed-info {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: lightgray;
     display: none;
 }
@@ -4882,7 +4889,8 @@ footer {
 .recents-container h2 {
     font-size: 1.3rem;
     color: var(--mainWhite);
-    font-weight: 400;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
     margin-bottom: 1rem;
     text-transform: capitalize;
 }
@@ -4931,15 +4939,15 @@ div.seperation-rule {
 
 .copyright-container a {
     text-decoration: none;
-    color: var(--mainWhite);
+    color: var(--darkGrey);
     font-weight: 500;
     margin: 0 5px 0 5px;
 }
 
 .important-links a {
     text-decoration: none;
-    color: #ccc;
-    font-size: 1.2rem;
+    color: var(--darkGrey);
+    font-size: var(--smallText);
     font-weight: 400;
     transition: var(--mainTransition);
 }
@@ -4961,7 +4969,7 @@ div.seperation-rule {
 }
 
 .important-links a:hover {
-    color: darkgray;
+    color: var(--mainWhite);
 }
 
 
@@ -4975,8 +4983,8 @@ div.seperation-rule {
 }
 
 .social-icon {
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
