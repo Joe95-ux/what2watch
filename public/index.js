@@ -22,6 +22,7 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
+const simpleBarContainer = document.getElementById('simple-bar');
 
 // navigation bar
 const navSlide = () => {
@@ -33,6 +34,7 @@ const navSlide = () => {
 
   burger.addEventListener("click", () => {
     sideDrawerBackdrop.classList.add("active-backrop");
+    console.log(sideDrawerBackdrop)
     // toggle side-drawer
     if (sideDrawer.classList.contains("side-drawer-inactive")) {
       sideDrawer.classList.remove("side-drawer-inactive");
@@ -41,18 +43,6 @@ const navSlide = () => {
     } else {
       sideDrawer.classList.add("side-drawer-active");
     }
-
-    // animate links
-    // navLinks.forEach((link, index) => {
-    //   // + 0.3 for initial delay
-    //   if (link.style.animation) {
-    //     link.style.animation = "";
-    //   } else {
-    //     link.style.animation = `navLinkFade 0.5s ease forwards ${
-    //       index / 7 + 0.5
-    //     }s `;
-    //   }
-    // });
 
     // animate burger
     burger.classList.toggle("toggle");
@@ -403,7 +393,6 @@ if (clearViewInfo !== null) {
 }
 
 // simplebar
-let simpleBarContainer = document.getElementById('simple-bar');
 new SimpleBar(simpleBarContainer, { autoHide: true });
 
 // welcome banner
