@@ -492,14 +492,16 @@ a.blog-social-link i{
     font-size: 1rem;
     color: darkgray;
 }
-.new-letter-wrapper .send-btn, .publish-btn{
+.new-letter-wrapper .send-btn{
     margin-right: 10px;
+    border-radius: 55px;
+    background-color: var(--primaryColor);
+    padding: 0.8rem 1rem;
+}
+.new-letter-wrapper .send-btn, .publish-btn{
     flex-basis: 26%;
     font-size: 1rem;
     color: var(--mainWhite);
-    background-color: var(--primaryColor);
-    border-radius: 55px;
-    padding: 0.8rem 1rem;
     border: 1px solid rgba(255,255,255,0.2);
     outline: none;
     cursor: pointer;
@@ -805,12 +807,21 @@ h5.cat-name{
   }
   
   
-  .compose-form .publish-btn {
+  .action-btns{
     margin-top: 1.5rem;
-    max-width: 130px;
-    width: 130px;
-    min-width: 100px;
-    margin-left: auto;
+  }
+  .action-btns a{
+    text-decoration: none;
+    background-color: transparent;
+      
+  }
+  .action-btns button{
+    background-color: #3AB0FF;
+    margin-right: 4px;
+  }
+  .compose-form .publish-btn {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
   }
   
   .compose-form .publish-btn:hover {
