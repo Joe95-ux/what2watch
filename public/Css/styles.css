@@ -4988,15 +4988,17 @@ div.seperation-rule {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--mainWhite);
+    color: var(--lightGrey);
+    background-color: inherit;
     margin: 0 0.45rem;
-    border-radius: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     text-decoration: none;
     font-size: 1rem;
     transition: 0.3s;
 }
 
-.facebook{
+/* .facebook{
     background-color: rgb(29, 161, 242);
 }
 .ig{
@@ -5008,7 +5010,7 @@ div.seperation-rule {
 }
 .yt{
     background-color: var(--primaryColor);
-}
+} */
 
 
 .social-icon:hover {
