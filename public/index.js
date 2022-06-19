@@ -22,7 +22,16 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
-const simpleBarContainer = document.getElementById('simple-bar');
+const simpleBarContainer = document.getElementById("simple-bar");
+const acc = document.getElementsByClassName("accodion");
+const title = document.querySelector(".faq-title");
+const today = document.getElementById("today");
+const week = document.getElementById("this-week");
+const trendingToday = document.getElementById("trending-today");
+const trendingThisWeek = document.getElementById("trending-thisweek");
+const currentYear = new Date().getFullYear();
+const copyrightYear = document.querySelector(".copyright");
+copyrightYear.innerHTML += currentYear;
 
 // navigation bar
 const navSlide = () => {
@@ -34,7 +43,7 @@ const navSlide = () => {
 
   burger.addEventListener("click", () => {
     sideDrawerBackdrop.classList.add("active-backrop");
-    console.log(sideDrawerBackdrop)
+    console.log(sideDrawerBackdrop);
     // toggle side-drawer
     if (sideDrawer.classList.contains("side-drawer-inactive")) {
       sideDrawer.classList.remove("side-drawer-inactive");
@@ -171,15 +180,13 @@ function trailerController() {
   }
 
   if (headerTrailer !== null) {
-    for(let trailer of headerTrailer){
+    for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
         const videoSource = trailer.parentElement.nextElementSibling.src;
         video.src = videoSource + "&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
-
     }
-    
   }
 
   if (closeTrailer !== null) {
@@ -229,7 +236,7 @@ function toggleReviews() {
         ].parentElement.parentElement.previousElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.textContent;
       reviewContent.textContent =
         expandReviews[i].parentElement.nextElementSibling.innerText;
-      reviewer.style.color = "red";
+      reviewer.style.color = "#fff";
     });
   }
 }
@@ -252,53 +259,47 @@ window.addEventListener("scroll", function() {
 });
 
 //Trending togglers
-const today = document.getElementById("today");
-const week = document.getElementById("this-week");
-const trendingToday = document.getElementById("trending-today");
-const trendingThisWeek = document.getElementById("trending-thisweek");
 
-if (today !== null || week !== null) {
-  today.addEventListener("click", () => {
-    today.classList.add("active-timeline");
-    if (week.classList.contains("active-timeline")) {
-      week.classList.remove("active-timeline");
-    }
-    trendingToday.style.transform = "translateX(0)";
-    trendingThisWeek.style.transform = "translateX(100%)";
-  });
+function switchTrend() {
+  if (today !== null || week !== null) {
+    today.addEventListener("click", () => {
+      today.classList.add("active-timeline");
+      if (week.classList.contains("active-timeline")) {
+        week.classList.remove("active-timeline");
+      }
+      trendingToday.style.transform = "translateX(0)";
+      trendingThisWeek.style.transform = "translateX(100%)";
+    });
 
-  week.addEventListener("click", () => {
-    week.classList.add("active-timeline");
-    if (today.classList.contains("active-timeline")) {
-      today.classList.remove("active-timeline");
-    }
-    trendingToday.style.transform = "translateX(-100%)";
-    trendingThisWeek.style.transform = "translateX(0)";
-  });
+    week.addEventListener("click", () => {
+      week.classList.add("active-timeline");
+      if (today.classList.contains("active-timeline")) {
+        today.classList.remove("active-timeline");
+      }
+      trendingToday.style.transform = "translateX(-100%)";
+      trendingThisWeek.style.transform = "translateX(0)";
+    });
+  }
 }
+switchTrend()
 
 //faq-toggler
 
-const acc = document.getElementsByClassName("accodion");
-const title = document.querySelector(".faq-title");
-for (let i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", () => {
-    acc[i].classList.toggle("active-drop");
-    let panel = acc[i].nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    }
-    title.classList.toggle("active-title");
-  });
+function toggleFaq() {
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", () => {
+      acc[i].classList.toggle("active-drop");
+      let panel = acc[i].nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+      title.classList.toggle("active-title");
+    });
+  }
 }
-
-// footer
-
-const currentYear = new Date().getFullYear();
-const copyrightYear = document.querySelector(".copyright");
-copyrightYear.innerHTML += currentYear;
+toggleFaq();
 
 //smooth scroll on a tag click
 // document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -334,7 +335,7 @@ if (!localStorage.getItem("cardStore")) {
 }
 
 let store = JSON.parse(localStorage.getItem("cardStore"));
-if(store.length === 0){
+if (store.length === 0) {
   clearViewInfo.style.display = "none";
   viewInfo.classList.add("show-view-info");
 }
@@ -383,12 +384,10 @@ getRecentlyViewed();
 if (clearViewInfo !== null) {
   clearViewInfo.addEventListener("click", () => {
     localStorage.removeItem("cardStore");
-    clearViewInfo.innerText ="Clearing...";
-    document.addEventListener("DOMContentLoaded", ()=>{
+    clearViewInfo.innerText = "Clearing...";
+    document.addEventListener("DOMContentLoaded", () => {
       clearViewInfo.style.display = "none";
-    })
-
-    
+    });
   });
 }
 
@@ -396,19 +395,18 @@ if (clearViewInfo !== null) {
 new SimpleBar(simpleBarContainer, { autoHide: true });
 
 // welcome banner
-$(document).ready(function(){
-  function showModal(){
+$(document).ready(function() {
+  function showModal() {
     let already_show = sessionStorage.getItem("alreadyShown");
-    if(already_show != "already shown"){
+    if (already_show != "already shown") {
       sessionStorage.setItem("alreadyShown", "already shown");
       $(".welcome-banner-modal").addClass("active-modal");
-    }else{
-      console.log("banner has been shown")
+    } else {
+      console.log("banner has been shown");
     }
-
   }
   setTimeout(showModal, 1500);
-  $(".close-up").click(function(){
+  $(".close-up").click(function() {
     $(".welcome-banner-modal").removeClass("active-modal");
-  })
-})
+  });
+});
