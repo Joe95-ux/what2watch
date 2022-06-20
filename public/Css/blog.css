@@ -972,7 +972,7 @@ h3.single-post-title {
     line-height: 1.6;
     font-weight: 300;
     margin: 1.4rem 0;
-    font-family: 'Roboto', sans-serif
+    font-family: 'Roboto', sans-serif;
 }
 
 .post-content h2 {
@@ -1118,6 +1118,7 @@ tbody td a{
     text-decoration: none;
     color: var(--primaryColor);
     font-weight: 500;
+    
 }
 
 .dashboard-actions a{
@@ -1138,8 +1139,6 @@ tbody td a{
     color: var(--mainWhite);
 }
 
-
-
 .dashboard-title {
     line-height: 1.4;
     margin-bottom: 1rem;
@@ -1155,8 +1154,9 @@ tbody td a{
 
 .dashboard-title h1 {
     color: var(--yellow);
-    font-weight: 600;
-    font-size: 1.6rem;
+    font-weight: 500;
+    font-size: 1.7rem;
+    font-family: "Poppins", sans-serif;
 }
 
 .dashboard-title p,
