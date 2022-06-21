@@ -1148,12 +1148,12 @@ tbody td a{
 
 .dashboard-title h2 {
     font-size: 1.3rem;
-    color: var(--mainWhite);
+    color: var(--lightGrey);
     font-weight: 500;
 }
 
 .dashboard-title h1 {
-    color: var(--yellow);
+    color: var(--mainWhite);
     font-weight: 500;
     font-size: 1.7rem;
     font-family: "Poppins", sans-serif;
@@ -1191,7 +1191,6 @@ tbody td a{
     height: 90px;
     width: 90px;
     border-radius: 50%;
-    border: 2px solid var(--mainWhite);
     object-fit: cover;
 }
 
@@ -1245,4 +1244,19 @@ a.create-btn {
 
 .create-btn i {
     margin-right: 10px;
+}
+.edit-action i{
+    position: relative;
+    top: -3px;
+    padding-bottom: 3px;
+}
+.edit-action i::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 10px;
+    width: 15px;
+    background-color: var(--yellow);
 }
