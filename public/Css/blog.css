@@ -60,8 +60,9 @@
 
 div.blog-header-wrapper {
     height: 480px;
-    min-height: 480px;
+    min-height: 400px;
 }
+
 
 div.blog-header-left {
     flex-basis: 55%;
@@ -127,6 +128,57 @@ div.blog-header-right {
     font-size: 1rem;
     margin-top: 5px;
     color: var(--mainGrey);
+}
+.hide-date{
+    display: none;
+}
+
+@media screen and (max-width:961px) {
+    div.blog-header-wrapper {
+        height: 680px;
+        min-height: 600px;
+        flex-direction: column;
+    }
+    
+    div.blog-header-left {
+        flex-basis: 60%;
+    }
+    
+    div.blog-header-right {
+        flex-basis: 39.5%;
+        display: flex;
+        flex-direction: row;
+    }
+    .blog-header-right .right-top{
+        display: none;
+    }
+    .right-bottom {
+        flex-basis: 100%;
+    }
+    div.blog-header-right .post-title{
+        width: 75%;
+        max-width: 100%;
+    }
+
+
+
+    /* .post-title h3,
+    .post h3 {
+        font-size: 1.2rem;
+    }
+
+    .post-title h4 {
+        font-size: 16px;
+    }
+
+    .post-title h5,
+    .post h5 {
+        font-size: 15px;
+    } */
+    .hide-date{
+        display: block;
+    }
+    
 }
 
 .post-title h5 span,
@@ -928,7 +980,7 @@ textarea {
 }
 
 .action-btns button,
-.create-btn{
+.create-btn {
     background-color: #1363DF;
     margin-right: 4px;
 }
@@ -1098,36 +1150,40 @@ thead th:nth-child(4) {
     width: 20%;
 }
 
-th{
+th {
     padding: 10px 5px;
     font-size: 1.1rem;
 }
+
 td {
     padding: 14px 5px;
 }
 
-tr:not(:last-child) td, th{
+tr:not(:last-child) td,
+th {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.dashboard-actions{
+.dashboard-actions {
     display: flex;
     justify-content: space-between;
 }
-tbody td a{
+
+tbody td a {
     text-decoration: none;
     color: var(--primaryColor);
     font-weight: 500;
-    
+
 }
 
-.dashboard-actions a{
+.dashboard-actions a {
     text-decoration: none;
     color: var(--midGray);
     font-size: 14px;
     transition: var(--mainTransition);
 }
-.dashboard-actions a i{
+
+.dashboard-actions a i {
     margin-right: 5px;
 }
 
@@ -1135,7 +1191,7 @@ tbody td a{
     color: var(--primaryColor);
 }
 
-.dashboard-actions a:hover{
+.dashboard-actions a:hover {
     color: var(--mainWhite);
 }
 
@@ -1245,12 +1301,14 @@ a.create-btn {
 .create-btn i {
     margin-right: 10px;
 }
-.edit-action i{
+
+.edit-action i {
     position: relative;
     top: -3px;
     padding-bottom: 3px;
 }
-.edit-action i::after{
+
+.edit-action i::after {
     content: "";
     position: absolute;
     bottom: 0;
