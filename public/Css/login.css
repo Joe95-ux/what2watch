@@ -45,11 +45,23 @@
   border-radius: 10px;
   line-height: 1.5;
 }
+.forms-container.edit-profile-form{
+  width: 500px;
+}
 
 
 .form-title {
   margin: 0 0 2.5rem;
   text-align: left;
+}
+
+.form-title-header, .upload-profile-img{
+  display: flex;
+}
+
+.form-title-header{
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
 }
 
 .form-title h2,
@@ -58,7 +70,6 @@
 }
 
 .form-title i {
-  margin-bottom: 1.8rem;
   font-size: 1.2rem;
 }
 
@@ -67,11 +78,64 @@
   font-weight: 600;
 }
 
-.form-title p {
-  color: var(--darkGrey);
+.form-title p, .form-title h3 {
   font-size: 1rem;
   font-weight: 300;
 }
+.form-title p{
+  color: var(--darkGrey);
+}
+
+.form-title h3{
+  color: var(--mainWhite);
+  font-weight: 600;
+  transform: translateX(-10px);
+}
+
+.profile-image-enclosure{
+  position: relative;
+  height: 90px;
+  width: 90px;
+}
+
+.upload-profile-img{
+  justify-content: center;
+  width: 100%;
+}
+
+.upload-profile-img img{
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.upload-input, .upload-input input{
+  position: absolute;
+  bottom: 0;
+}
+.upload-input{
+  right: 0;
+  width: 26px;
+  height: 26px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--lightGrey);
+  border: 1px solid var(--mainWhite);
+  cursor: pointer;
+}
+.upload-input input{
+  top:0;
+  right: 0;
+  opacity: 0;
+}
+.upload-input i{
+  color: #001927;
+  font-size: 14px;
+}
+
 
 
 .actions-wrapper {
@@ -90,7 +154,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.actions-input:nth-child(3) {
+.actions-input:last-of-type{
   margin-bottom: 2rem;
 }
 
@@ -102,7 +166,7 @@
   cursor: pointer;
 }
 
-.actions-input input {
+.actions-input input, .actions-input textarea {
   outline: none;
   border: none;
   background-color: transparent;
@@ -155,7 +219,7 @@
     max-width: calc(100vw - 2rem);
     padding: 1.5rem 1rem 2rem;
   }
-  .actions-input, .actions-input input{
+  .actions-input, .actions-input input, .actions-input textarea{
     font-size: 1rem;
   }
 }

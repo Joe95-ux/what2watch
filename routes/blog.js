@@ -48,6 +48,11 @@ router.get("/register", async (req,res)=>{
     res.render("register", {title});  
 })
 
+router.get("/profile", async (req,res)=>{
+    const title = "Edit profile";
+    res.render("profile", {title});  
+})
+
 router.get("/dashboard", async (req,res)=>{
     const title = "dashboard";
     res.render("dashboard", {title});

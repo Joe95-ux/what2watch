@@ -68,11 +68,6 @@
     <nav class="navigation">
         <div class="blog-nav-enclosure">
             <div class="logo-and-links">
-                <div class="burger" style="display:none;">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
-                </div>
                 <div class="logo">
                     <a href="/">
                         <div class="logo-wrapper">
@@ -91,33 +86,52 @@
     <section id="header-container" class="blog-header">
         <div class="wrapper-enclosure-blog">
             <div class="form-container-wrapper">
-                <div class="forms-container">
+                <div class="forms-container edit-profile-form">
                     <div class="form-title">
                         <div class="form-title-header">
                             <i class="history fas fa-long-arrow-alt-left"></i>
+                            <h3>Edit Profile</h3>
+                            <h5></h5>
                         </div>
-                        
-                        <h2>Welcome Back</h2>
-                        <p>Sign in to continue</p>
+                        <div class="upload-profile-img">
+                            <div class="profile-image-enclosure">
+                                <img src="/dune.jpg" alt="">
+                                <div class="upload-input">
+                                    <input type="file" title="profile image">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
                     <div class="actions-wrapper">
                         <form action="">
                             <div class="actions-input">
                                 <i class="fas fa-user-alt"></i>
-                                <input type="text" name="clientname" id="clientname" placeholder="username or email">
+                                <input type="text" name="clientname" id="clientname" placeholder="username">
+                            </div>
+                            <div class="actions-input">
+                                <i class="fas fa-envelope"></i>
+                                <input type="text" name="email" id="email" placeholder="your email">
                             </div>
                             <div class="actions-input">
                                 <i class="fas fa-lock"></i>
                                 <input type="password" name="clientpassword" id="clientpassword" placeholder="password">
                             </div>
                             <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="confirmclientpassword" id="confirm-clientpassword" placeholder="confirm password">
+                                <i class="fas fa-user-tag"></i>
+                                <input type="text" name="role" id="role" placeholder="Role">
                             </div>
-                            <button type="submit" class="send-btn" >Sign in</button>
+                            <div class="actions-input">
+                                <i class="fas fa-address-card"></i>
+                                <textarea name="about-you" id="about-you" cols="5" rows="1"
+                                    placeholder="Describe youself..."></textarea>
+                            </div>
+                            <button type="submit" class="send-btn">Edit Profile</button>
                         </form>
-                        <p>Don't have an account? <a href="/blog/register">Sign up now.</a> </p>
-                        
+                        <p>By continuing you agree to the terms and conditions and privacy policy. </p>
+
 
                     </div>
 
