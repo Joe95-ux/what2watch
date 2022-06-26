@@ -22,6 +22,10 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
+const passInput = document.querySelector("#writer-pass");
+const eye = document.querySelector(".pass-reveal");
+const seeBio = document.querySelector(".see-bio");
+const profileBio = document.querySelector(".profile-biography");
 
 // navigation bar
 const navSlide = () => {
@@ -140,6 +144,27 @@ const navSlide = () => {
 
 // invoke function
 navSlide();
+
+// show password and author bio
+function revealPass(){
+  if(eye){
+    eye.addEventListener("click", ()=>{
+      if(passInput.type === "password"){
+        passInput.type = "text";
+      }else if(passInput.type === "text"){
+        passInput.type = "password";
+      }
+    })
+  }
+  if(seeBio){
+    seeBio.addEventListener("click", ()=>{
+      seeBio.classList.toggle("active-see-bio");
+      profileBio.classList.toggle("active-options");
+    })
+  }
+}
+
+revealPass();
 
 // sticky layout
 function stickLayout() {
