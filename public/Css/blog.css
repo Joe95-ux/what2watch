@@ -852,18 +852,19 @@ a.blog-social-link i {
 
 .new-letter-wrapper form {
     width: 100%;
+    position: relative;
 }
 
-.new-letter-wrapper form div {
+.new-letter-wrapper .news-letter-inner {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 1.3rem 1rem 1.3rem 1.3rem;
+    padding: 1rem;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.new-letter-wrapper form div input {
+.new-letter-wrapper .news-letter-inner input {
     flex-basis: 70%;
     width: 70%;
     border: none;
@@ -872,6 +873,37 @@ a.blog-social-link i {
     font-size: 1rem;
     color: darkgray;
 }
+
+small {
+    position: absolute;
+    bottom: -24px;
+    left: 1.3rem;
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px;
+    display: block;
+    visibility: hidden;
+}
+.news-letter-inner.error{
+    border: 1px solid var(--primaryColor);
+}
+.news-letter-inner.success{
+    border: 1px solid #1363DF;
+}
+.news-letter-inner.error + small{
+    visibility: visible;
+}
+
+.thanks{
+    display: none;
+}
+.thanks.activate{
+    display: block;
+    color: #1363DF;
+}
+
+
 
 .new-letter-wrapper .send-btn {
     margin-right: 10px;
@@ -894,11 +926,11 @@ a.blog-social-link i {
         font-size: 1.12rem;
     }
 
-    .new-letter-wrapper form div {
+    .new-letter-wrapper .news-letter-inner {
         padding: 1.2rem 0.8rem 1.2rem 1rem;
     }
 
-    .new-letter-wrapper form div input {
+    .new-letter-wrapper .news-letter-inner input {
         flex-basis: 60%;
         width: 60%;
     }
@@ -914,7 +946,7 @@ a.blog-social-link i {
         padding: 1.5rem 1.2rem;
     }
 
-    .new-letter-wrapper form div {
+    .new-letter-wrapper .news-letter-inner {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -925,7 +957,7 @@ a.blog-social-link i {
         border: none;
     }
 
-    .new-letter-wrapper form div input {
+    .new-letter-wrapper .news-letter-inner input {
         flex-basis: 100%;
         width: 100%;
         border: 1px solid rgba(255, 255, 255, 0.2);
@@ -1223,7 +1255,8 @@ textarea {
     transition: all 0.4s;
 }
 
-.select-box .options-container.active-options, .profile-biography.active-options {
+.select-box .options-container.active-options,
+.profile-biography.active-options {
     display: block;
     opacity: 1;
     z-index: 12;
@@ -1236,13 +1269,15 @@ textarea {
     top: 5px;
 }
 
-.select-box .options-container::-webkit-scrollbar, .profile-biography::-webkit-scrollbar {
+.select-box .options-container::-webkit-scrollbar,
+.profile-biography::-webkit-scrollbar {
     width: 8px;
     background: #0d141f;
     border-radius: 0 8px 8px 0;
 }
 
-.select-box .options-container::-webkit-scrollbar-thumb, .profile-biography::-webkit-scrollbar-thumb {
+.select-box .options-container::-webkit-scrollbar-thumb,
+.profile-biography::-webkit-scrollbar-thumb {
     background: #525861;
     border-radius: 0 8px 8px 0;
 }
@@ -1611,21 +1646,22 @@ tbody td a {
 }
 
 @media screen and (max-width:528px) {
-    .dashboard-content .dashboard-title div{
+    .dashboard-content .dashboard-title div {
         margin-bottom: 14px;
     }
-    .dashboard-title{
+
+    .dashboard-title {
         flex-direction: column;
     }
 
     .dashboard-title h2 {
         font-size: 1.15rem;
     }
-    
+
     .dashboard-title h1 {
         font-size: 1.5rem;
     }
-    
+
 }
 
 .dashboard-userbio {
@@ -1645,12 +1681,13 @@ tbody td a {
     .dashboard-wrapper {
         flex-direction: column;
     }
-    .dashboard-content{
-       max-width: 100%;
-       position: relative;
+
+    .dashboard-content {
+        max-width: 100%;
+        position: relative;
     }
 
-    .dashboard-title{
+    .dashboard-title {
         position: sticky;
         left: 0;
         top: 0;
@@ -1706,15 +1743,18 @@ tbody td a {
     padding: 0.8rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.profile-bio-wrapper div{
+
+.profile-bio-wrapper div {
     display: flex;
     align-items: center;
 }
-.profile-bio-wrapper div i{
+
+.profile-bio-wrapper div i {
     margin-right: 10px;
     order: 0;
 }
-.profile-biography{
+
+.profile-biography {
     position: absolute;
     top: 51px;
     left: 0;
@@ -1731,19 +1771,21 @@ tbody td a {
     order: 1;
     z-index: -1;
 }
-.see-bio{
+
+.see-bio {
     transition: all 0.4s;
     cursor: pointer;
 }
+
 .active-see-bio {
     transform: rotateX(180deg);
 }
 
-.pass-reveal{
+.pass-reveal {
     cursor: pointer;
 }
 
-.profile-bio-wrapper input{
+.profile-bio-wrapper input {
     outline: none;
     border: none;
     background-color: inherit;
@@ -1758,21 +1800,24 @@ tbody td a {
     order: 1;
 }
 
-.profile-bio-wrapper h3, .profile-bio-wrapper a {
+.profile-bio-wrapper h3,
+.profile-bio-wrapper a {
     font-size: 15px;
     color: var(--lightGrey);
     overflow-wrap: break-word;
 }
 
-.profile-bio-wrapper div + i{
+.profile-bio-wrapper div+i {
     align-self: center;
 }
 
-@media screen and (max-width: 1080px){
-    .profile-bio-wrapper i{
+@media screen and (max-width: 1080px) {
+    .profile-bio-wrapper i {
         font-size: 14px;
     }
-    .profile-bio-wrapper h3, .profile-bio-wrapper a{
+
+    .profile-bio-wrapper h3,
+    .profile-bio-wrapper a {
         font-size: 14px;
     }
 }
@@ -1786,10 +1831,10 @@ a.create-btn {
     margin-right: 0;
 }
 
-a.create-btn.edit-profile-btn{
+a.create-btn.edit-profile-btn {
     margin-top: 10px;
     font-size: 14px;
-    
+
     border-radius: 55px;
 }
 

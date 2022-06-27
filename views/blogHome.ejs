@@ -546,15 +546,19 @@
                             <ul>
                                 <li><a href="#">Movies</a><span>(8)</span></li>
                                 <li><a href="#">Tv Shows</a><span>(5)</span></li>
-                                <li><a href="#">Action Movies</a><span>(9)</span></li>
-                                <li><a href="#">Latest Posts</a><span>(6)</span></li>
+                                <li><a href="#">Pop Culture</a><span>(9)</span></li>
+                                <li><a href="#">Marvel Universe</a><span>(6)</span></li>
                                 <li><a href="#">Editor's picks</a><span>(4)</span></li>
-                                <li><a href="#">Older posts</a><span>(2)</span></li>
+                                <li><a href="#">DC News</a><span>(2)</span></li>
+                                <li><a href="#">Streaming</a><span>(2)</span></li>
+                                <li><a href="#">Celebrities</a><span>(2)</span></li>
+                                <li><a href="#">Comedy</a><span>(2)</span></li>
+                                <li><a href="#">Casting News</a><span>(2)</span></li>
                             </ul>
 
                         </div>
                     </div>
-                    <div >
+                    <div>
                         <div class="facebook-page">
                             <h1 class="cat-title">Facebook Feed</h1>
                             <div class="facebook-feed" style="width:100% ;">
@@ -563,7 +567,8 @@
                                     data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                                     <blockquote cite="https://www.facebook.com/what2watch.net"
                                         class="fb-xfbml-parse-ignore"><a
-                                            href="https://www.facebook.com/what2watch.net">What2Watch.Net</a></blockquote>
+                                            href="https://www.facebook.com/what2watch.net">What2Watch.Net</a>
+                                    </blockquote>
                                 </div>
                             </div>
                         </div>
@@ -590,11 +595,11 @@
                                 </a>
                             </div>
                         </div>
-    
+
 
                     </div>
-                    
-                    
+
+
 
                 </div>
             </div>
@@ -603,11 +608,16 @@
                     <i class="fas fa-paper-plane"></i>
                     <h1>News Letter Sign-up</h1>
                     <p>Subscribe to our news letter for latest on movies/tv shows. Let's stay updated!</p>
-                    <form action="">
-                        <div>
-                            <input type="text" placeholder="Enter Your Email Address">
-                            <button type="submit" class="send-btn">Subscribe Now</button>
+                    <form action="/blog/posts" method="post" id="newsletter-form">
+                        <div class="news-letter-inner">
+                            <input type="text" placeholder="Enter Your Email Address" name="subscriber" id="email" autocomplete="off">
+                            <button type="submit" class="send-btn" id="submit">Subscribe Now</button>
                         </div>
+                        <small>Error Message</small>
+                        <div class="thanks">
+                            thanks for subscribing!
+                        </div>
+
                     </form>
                 </div>
             </div>

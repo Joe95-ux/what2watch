@@ -11,6 +11,7 @@
   "author": "Joe Tabi",
   "license": "ISC",
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.75",
     "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
