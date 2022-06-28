@@ -69,6 +69,11 @@
         <div class="blog-nav-enclosure">
             <div class="logo-and-links">
                 <div class="logo">
+                    <div class="burger" style="display:none;">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
                     <a href="/">
                         <div class="logo-wrapper">
                             <img src="/logo.png" alt="what2watch">
@@ -95,23 +100,35 @@
                         <p>Sign up to continue</p>
                     </div>
                     <div class="actions-wrapper">
-                        <form action="">
-                            <div class="actions-input">
-                                <i class="fas fa-user-alt"></i>
-                                <input type="text" name="clientname" id="clientname" placeholder="username or email">
+                        <form action="" id="auth-form">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-user-alt"></i>
+                                    <input type="text" name="clientname" id="email" placeholder="email">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="clientpassword" id="clientpassword" placeholder="password">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="clientpassword" id="password" placeholder="password">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="secret-token" id="secret-token" placeholder="secret token">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="secret-token" id="secret-token"
+                                        placeholder="secret token">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <button type="submit" class="send-btn" >Sign up</button>
+
+
+                            <button type="submit" class="send-btn">Sign up</button>
                         </form>
-                        <p>By continuing you agree to the terms and conditions and privacy policy.  </p>
-                        
+                        <p>By continuing you agree to the terms and conditions and privacy policy. </p>
+
 
                     </div>
 

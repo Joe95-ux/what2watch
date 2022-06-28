@@ -74,6 +74,11 @@
                     <div class="line3"></div>
                 </div>
                 <div class="logo">
+                    <div class="burger" style="display:none;">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
                     <a href="/">
                         <div class="logo-wrapper">
                             <img src="/logo.png" alt="what2watch">
@@ -96,28 +101,38 @@
                         <div class="form-title-header">
                             <i class="history fas fa-long-arrow-alt-left"></i>
                         </div>
-                        
+
                         <h2>Welcome Back</h2>
                         <p>Sign in to continue</p>
                     </div>
                     <div class="actions-wrapper">
-                        <form action="">
-                            <div class="actions-input">
-                                <i class="fas fa-user-alt"></i>
-                                <input type="text" name="clientname" id="clientname" placeholder="username or email">
+                        <form action="" id="auth-form">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-user-alt"></i>
+                                    <input type="text" name="clientname" id="email" placeholder="email">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="clientpassword" id="clientpassword" placeholder="password">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="clientpassword" id="password" placeholder="password">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="confirmclientpassword" id="confirm-clientpassword" placeholder="confirm password">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="confirmclientpassword" id="cpassword"
+                                        placeholder="confirm password">
+                                </div>
+                                <small class="auth">Error Message</small>
                             </div>
-                            <button type="submit" class="send-btn" >Sign in</button>
+                            <button type="submit" class="send-btn">Sign in</button>
                         </form>
                         <p>Don't have an account? <a href="/blog/register">Sign up now.</a> </p>
-                        
+
 
                     </div>
 

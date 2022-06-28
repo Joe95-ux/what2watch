@@ -154,7 +154,11 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.actions-input:last-of-type{
+.actions-input-wrapper{
+  position: relative;
+}
+
+.actions-input-wrapper:last-of-type{
   margin-bottom: 2rem;
 }
 

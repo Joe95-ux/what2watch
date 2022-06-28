@@ -874,7 +874,8 @@ a.blog-social-link i {
     color: darkgray;
 }
 
-small {
+
+small.nl, small.auth {
     position: absolute;
     bottom: -24px;
     left: 1.3rem;
@@ -886,12 +887,18 @@ small {
     visibility: hidden;
 }
 .news-letter-inner.error{
-    border: 1px solid var(--primaryColor);
+    border: 1px solid rgba(215, 9, 0, 0.5);
+}
+.actions-input.error{
+    border-bottom: 1px solid rgba(215, 9, 0, 0.5);
 }
 .news-letter-inner.success{
-    border: 1px solid #1363DF;
+    border: 1px solid rgba(19, 99, 223, 0.5);
 }
-.news-letter-inner.error + small{
+.actions-input.success{
+    border-bottom: 1px solid rgba(19, 99, 223, 0.5);
+}
+.news-letter-inner.error + small, .actions-input.error + small{
     visibility: visible;
 }
 
@@ -899,6 +906,13 @@ h1.thanks{
     display: block;
     font-size: 1.4rem;
     color: var(--mainWhite);
+}
+
+small.auth{
+    left: 0;
+    width: 100%;
+    margin-top: 3px;
+    text-align: right;
 }
 
 
