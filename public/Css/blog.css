@@ -895,12 +895,10 @@ small {
     visibility: visible;
 }
 
-.thanks{
-    display: none;
-}
-.thanks.activate{
+h1.thanks{
     display: block;
-    color: #1363DF;
+    font-size: 1.4rem;
+    color: var(--mainWhite);
 }
 
 
@@ -908,7 +906,7 @@ small {
 .new-letter-wrapper .send-btn {
     margin-right: 10px;
     border-radius: 55px;
-    background-color: var(--primaryColor);
+    background-color: #1363DF;
     padding: 0.8rem 1rem;
     flex-basis: 26%;
 }

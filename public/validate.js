@@ -100,6 +100,7 @@ function checkNLEmail(input, e) {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(input.value.trim())) {
     showSuccess(input);
+    submitnlbtn.innerText = "submiting...";
   } else {
     showNewsletterError(input, "E-mail is not valid");
     return e.preventDefault();
@@ -133,7 +134,6 @@ function validateNewsletter(){
     newsletterForm.addEventListener("submit", (e)=>{
       checkNLRequired([email], e);
       checkNLEmail(email, e);
-      submitnlbtn.innerText = "submiting...";
     })
   }
 }

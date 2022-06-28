@@ -6,6 +6,9 @@ const ejs = require("ejs");
 const fetch = require("node-fetch");
 const { forceDomain } = require('forcedomain');
 const compression = require("compression");
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
@@ -16,8 +19,14 @@ app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(compression());
-
-
+app.use(cookieParser(process.env.SECRET));
+app.use(session({
+  secret: process.env.SECRET,
+  cookie: { maxAge: 60000 },
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 
 app.set("view engine", "ejs");

@@ -19,7 +19,8 @@ router.post("/posts", async (req, res) => {
   };
   try{
     await subcribeHandler(subscribingUser);
-    res.redirect("/blog/posts");
+    req.flash("user", subscribingUser.email);
+    res.redirect(req.originalUrl);
   }catch(e){
     console.log(e)
   }
@@ -29,12 +30,14 @@ router.post("/posts", async (req, res) => {
 
 router.get("/posts", async (req, res) => {
   const title = "blog posts";
-  res.render("blogHome.ejs", { title });
+  const userEmail = req.flash("user");
+  res.render("blogHome.ejs", { title , userEmail});
 });
 
 router.get("/category", async (req, res) => {
   const title = "category";
-  res.render("blogCategory", { title });
+  const userEmail = req.flash("user");
+  res.render("blogCategory", { title, userEmail });
 });
 
 router.get("/compose", async (req, res) => {
@@ -49,7 +52,8 @@ router.get("/edit", async (req, res) => {
 
 router.get("/post", async (req, res) => {
   const title = "post";
-  res.render("post", { title });
+  const userEmail = req.flash("user");
+  res.render("post", { title, userEmail });
 });
 
 router.get("/login", async (req, res) => {

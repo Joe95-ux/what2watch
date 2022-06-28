@@ -605,20 +605,26 @@
             </div>
             <div class="news-letter">
                 <div class="new-letter-wrapper">
+                    <% if(userEmail != ''){%>
+                    <h1 class="thanks">
+                        Thank you for subscribing!
+                    </h1>
+
+                    <% }else{%>
                     <i class="fas fa-paper-plane"></i>
                     <h1>News Letter Sign-up</h1>
                     <p>Subscribe to our news letter for latest on movies/tv shows. Let's stay updated!</p>
                     <form action="/blog/posts" method="post" id="newsletter-form">
                         <div class="news-letter-inner">
-                            <input type="text" placeholder="Enter Your Email Address" name="subscriber" id="email" autocomplete="off">
+                            <input type="text" placeholder="Enter Your Email Address" name="subscriber" id="email"
+                                autocomplete="off">
                             <button type="submit" class="send-btn" id="submit">Subscribe Now</button>
                         </div>
                         <small>Error Message</small>
-                        <div class="thanks">
-                            thanks for subscribing!
-                        </div>
 
                     </form>
+
+                    <% } %>
                 </div>
             </div>
 
