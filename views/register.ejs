@@ -100,25 +100,25 @@
                         <p>Sign up to continue</p>
                     </div>
                     <div class="actions-wrapper">
-                        <form action="" id="auth-form">
+                        <form action="/blog/register" id="auth-form" method="POST">
                             <div class="actions-input-wrapper">
                                 <div class="actions-input">
                                     <i class="fas fa-user-alt"></i>
-                                    <input type="text" name="clientname" id="email" placeholder="email">
+                                    <input type="text" name="username" id="email" placeholder="email">
                                 </div>
                                 <small class="auth">Error Message</small>
                             </div>
                             <div class="actions-input-wrapper">
                                 <div class="actions-input">
                                     <i class="fas fa-lock"></i>
-                                    <input type="password" name="clientpassword" id="password" placeholder="password">
+                                    <input type="password" name="password" id="password" placeholder="password">
                                 </div>
                                 <small class="auth">Error Message</small>
                             </div>
                             <div class="actions-input-wrapper">
                                 <div class="actions-input">
                                     <i class="fas fa-lock"></i>
-                                    <input type="password" name="secret-token" id="secret-token"
+                                    <input type="password" name="token" id="secret-token"
                                         placeholder="secret token">
                                 </div>
                                 <small class="auth">Error Message</small>

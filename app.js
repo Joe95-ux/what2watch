@@ -7,29 +7,66 @@ const fetch = require("node-fetch");
 const { forceDomain } = require('forcedomain');
 const compression = require("compression");
 const session = require('express-session');
+const mongoose = require("mongoose");
+const morgan = require("morgan");
+const methodOverride = require("method-override");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const MongoStore = require("connect-mongo");
+const fs = require("fs");
+const multer = require("multer");
+const path = require("path");
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
 const blogRouter = require("./routes/blog");
+const connectDB = require("./config/db");
+const User = require("./models/User");
 const app = express();
+
+// Method override
+app.use(methodOverride('_method'));
+// Passport config
+require("./config/passport")(passport);
+connectDB();
+
+// Logging
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
 app.use(express.json());
 app.use(compression());
 app.use(cookieParser(process.env.SECRET));
 app.use(session({
   secret: process.env.SECRET,
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 60000*60*24 },
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    mongoOptions: { useUnifiedTopology: true },
+  }),
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Set Global variable
+app.use(function(req, res, next){
+  res.locals.user = req.user || null
+  next();
+})
+
 app.use(flash());
 
 
-app.set("view engine", "ejs");
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
 const page_num = 1;
