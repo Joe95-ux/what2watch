@@ -26,6 +26,8 @@ const passInput = document.querySelector("#writer-pass");
 const eye = document.querySelector(".pass-reveal");
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
+const short = document.getElementById("short");
+const long = document.getElementById("long");
 
 // navigation bar
 const navSlide = () => {
@@ -168,8 +170,6 @@ revealPass();
 
 // sticky layout
 function stickLayout() {
-  const short = document.getElementById("short");
-  const long = document.getElementById("long");
   if (short && long) {
     let shortHeight = short.clientHeight;
     let longHeight = long.clientHeight;

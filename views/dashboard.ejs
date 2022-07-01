@@ -38,7 +38,38 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
+                            <td data-label="Date">December 4th 2021, 12:12:18 am</td>
+                            <td data-label="Status">public</td>
+                            <td data-label="Action">
+                                <div class="dashboard-actions">
+                                    <a href="#" class="edit-action"> <i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a href="#"><i class="fas fa-trash"></i>Remove</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <% if(stories){%>
+                        <% stories.forEach(story=>{%>
+                        <tr>
+                            <td data-label="Title"><%= story.title %> </td>
+                            <td data-label="Date"><%= story.createdAt %> </td>
+                            <td data-label="Status"><%= story.status %> </td>
+                            <td data-label="Action">
+                                <div class="dashboard-actions">
+                                    <a href="/blog/edit/<%= story._id%>" class="edit-action"> <i
+                                            class="fas fa-pencil-alt"></i> Edit</a>
+                                    <form method="POST" action="/blog/posts/<%=story._id%>?_method=DELETE"
+                                        id="delete-form">
+                                        <button type="submit"><i class="fas fa-trash"></i>Remove</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <%}) %>
+                        <% } %>
+                        <tr>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -49,7 +80,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -60,7 +91,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -71,7 +102,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -82,7 +113,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -93,7 +124,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -104,7 +135,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -115,7 +146,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -126,7 +157,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -137,18 +168,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td data-label="Title">Tabi's Story</td>
-                            <td data-label="Date">December 4th 2021, 12:12:18 am</td>
-                            <td data-label="Status">public</td>
-                            <td data-label="Action">
-                                <div class="dashboard-actions">
-                                    <a href="#" class="edit-action"> <i class="fas fa-pencil-alt"></i> Edit</a>
-                                    <a href="#"><i class="fas fa-trash"></i>Remove</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Title">Tabi's Story</td>
+                            <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
                             <td data-label="Action">
@@ -162,18 +182,19 @@
                 </table>
 
             </div>
+            <% if(user){%>
             <div class="dashboard-userbio">
                 <div class="profile-photo">
                     <img src="/dune.jpg" alt="">
                     <h2>John Doe</h2>
                     <h3>Editor in-chief </h3>
-                    <a href="/blog/profile" role="button" class="create-btn edit-profile-btn">Edit Profile</a>
+                    <a href="/blog/profile/<%= user._id%> " role="button" class="create-btn edit-profile-btn">Edit Profile</a>
                 </div>
                 <div class="profile-bio">
                     <div class="profile-bio-wrapper">
                         <div>
                             <i class="fas fa-envelope"></i>
-                            <h3>johndoe@gmail.com</h3>
+                            <h3><%= user.username %> </h3>
                         </div>
 
                     </div>
@@ -201,7 +222,17 @@
                             <i class="fas fa-book"></i>
                             <h3>Total Posts</h3>
                         </div>
-                        <h3>(18)</h3>
+                        <% if(stories){%>
+                        <h3> (<%= stories.length %>) </h3>
+                        <% } %>
+
+                    </div>
+                    <div class="profile-bio-wrapper">
+                        <div>
+                            <i class="fas fa-address-card"></i>
+                            <h3>Joined</h3>
+                        </div>
+                        <h3><%= created %> </h3>
 
                     </div>
                     <div class="profile-bio-wrapper">
@@ -213,6 +244,7 @@
                     </div>
                 </div>
             </div>
+            <% } %>
         </div>
     </div>
 

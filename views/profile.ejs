@@ -91,6 +91,7 @@
     <section id="header-container" class="blog-header">
         <div class="wrapper-enclosure-blog">
             <div class="form-container-wrapper">
+                <% if(profile){%>
                 <div class="forms-container edit-profile-form">
                     <div class="form-title">
                         <div class="form-title-header">
@@ -102,7 +103,7 @@
                             <div class="profile-image-enclosure">
                                 <img src="/dune.jpg" alt="">
                                 <div class="upload-input">
-                                    <input type="file" title="profile image">
+                                    <input type="file" title="profile image" name="profilePic">
                                     <i class="fas fa-camera"></i>
                                 </div>
                             </div>
@@ -111,27 +112,27 @@
 
                     </div>
                     <div class="actions-wrapper">
-                        <form action="">
+                        <form method="POST" action="/blog/profile/<%=profile._id%>?_method=PUT" enctype="multipart/form-data">
                             <div class="actions-input">
                                 <i class="fas fa-user-alt"></i>
-                                <input type="text" name="name" id="clientname" placeholder="username">
+                                <input type="text" name="name" id="clientname" placeholder="username" value="<%=profile.name%> ">
                             </div>
                             <div class="actions-input">
                                 <i class="fas fa-envelope"></i>
-                                <input type="text" name="username" id="email" placeholder="your email">
+                                <input type="text" name="username" id="email" placeholder="your email" value="<%= profile.username %> ">
                             </div>
                             <div class="actions-input">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" name="password" id="clientpassword" placeholder="password">
+                                <input type="password" name="password" id="clientpassword" placeholder="new password" >
                             </div>
                             <div class="actions-input">
                                 <i class="fas fa-user-tag"></i>
-                                <input type="text" name="role" id="role" placeholder="Role">
+                                <input type="text" name="role" id="role" placeholder="Role" value="<%= profile.role %>">
                             </div>
                             <div class="actions-input">
                                 <i class="fas fa-address-card"></i>
-                                <textarea name="about-you" id="about-you" cols="5" rows="1"
-                                    placeholder="Describe youself..."></textarea>
+                                <textarea name="bio" id="about-you" cols="5" rows="1"
+                                    placeholder="Describe youself..."><%= profile.bio %> </textarea>
                             </div>
                             <button type="submit" class="send-btn">Edit Profile</button>
                         </form>
@@ -141,6 +142,8 @@
                     </div>
 
                 </div>
+
+                <% } %>
             </div>
 
 

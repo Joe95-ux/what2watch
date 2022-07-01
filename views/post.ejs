@@ -14,55 +14,31 @@
     <div class="wrapper-enclosure-blog">
         <div class="blog-body-wrapper">
             <div id="long" class="blog-body-content">
+                <% if(story){%>
                 <div class="post post-header">
-                    <img src="/dune.jpg" alt="post-image">
-                    <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                    <h3 class="single-post-title">How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
+                    <img src="/uploads/images/<%= story.photo%>" alt="post-image">
+                    <h5 class="cat-name"><span class="left-span">Featured</span> <span><%= story.category %> </span>
+                    </h5>
+                    <h3 class="single-post-title"><%= story.title %> </h3>
+                    <h5 class="date"> <span>by <%= story.author %> </span> <span><%= story.createdAt %> </span> </h5>
                 </div>
                 <div class="post-content">
-                    <p>Lommodo ligula eget dolor. Aenean massa. Cum sociis que penatibus et magnis dis parturient montes
-                        lorem, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-                        sem. Nulla onsequat massa quis enim. Donec pede justo fringilla vel aliquet nec vulputate eget.
-                        Lorem ispum dolore siamet ipsum dolor.</p>
-                    <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis
-                        est eligendi optio cumquer nihil impedit quo minus id quod maxime placeat facere.</p>
-                    <h2>BE THE CHANGE YOU WANT TO SEE IN THE WORLD</h2>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-                        ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                        incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-                        nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-                        consequatur reprehenderit qui in ea voluptate velit esse quam nihil.</p>
-                    <div class="quote">
-                        <p>You will never be happy if you continue to search for what happiness consists of. You will
-                            never live if you are looking for the meaning of life.
-                        </p>
-                        <h4>Albert Camus</h4>
-                    </div>
-                    <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-                        imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
-                        tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean
-                        leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-                    </p>
-                    <h2>BE THE CHANGE YOU WANT TO SEE IN THE WORLD</h2>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed
-                        quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit.
-                        Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
-                    <p>Rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-                        Integer cidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus
-                    </p>
-
+                    <%- story.body %>
                 </div>
+
+                <% } %>
+
                 <div class="post-author-bio">
                     <img src="/dune.jpg" alt="post-author">
+                    <% if(story){%>
                     <div class="post-author-details">
-                        <h4>Jone Doe</h4>
+                        <h4><%= story.author %> </h4>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                             laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et.
                         </p>
                     </div>
+                    <% } %>
+
                 </div>
                 <div class="older-posts">
                     <h1 class="cat-title">Related Posts</h1>
@@ -291,7 +267,7 @@
                         <h1 class="cat-title">On Instagram</h1>
                         <div class="ig-cards">
                             <a href="#">
-                                <img src="/author-img.jpg" alt="">   
+                                <img src="/author-img.jpg" alt="">
                             </a>
                             <a href="#">
                                 <img src="/author-img.jpg" alt="">

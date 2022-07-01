@@ -1427,13 +1427,13 @@ h3.single-post-title {
     font-weight: 500;
 }
 
-.quote {
+blockquote {
     padding: 1rem 1.4rem;
     background-color: #001927;
     border-left: 3px solid var(--yellow);
 }
 
-div.quote p {
+blockquote p {
     font-size: 1.1rem;
     font-family: 'Source Sans Pro', sans-serif;
     font-style: italic;
@@ -1442,7 +1442,7 @@ div.quote p {
     margin-top: 0;
 }
 
-.quote h4 {
+blockquote h4 {
     color: var(--yellow);
     text-transform: uppercase;
     font-size: 1rem;
@@ -1464,17 +1464,17 @@ div.quote p {
         font-size: 15px;
     }
 
-    div.quote p {
+    blockquote p {
         font-size: 15px;
         line-height: 1.5;
     }
 
-    .quote h4 {
+    blockquote h4 {
         font-size: 14px;
     }
 }
 
-.quote h4::before {
+blockquote h4::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -1554,7 +1554,7 @@ div.quote p {
 
 table {
     width: 100%;
-    min-width: calc(945px - 3rem);
+    min-width: 800px;
     margin-top: 1rem;
     border-collapse: collapse;
     table-layout: fixed;
@@ -1566,8 +1566,8 @@ thead {
     color: var(--lightGrey);
 }
 
-thead th:nth-child(1) {
-    width: 30%;
+ thead th:nth-child(1) {
+    width: 35%;
 }
 
 thead th:nth-child(2) {
@@ -1575,12 +1575,12 @@ thead th:nth-child(2) {
 }
 
 thead th:nth-child(3) {
-    width: 17%;
+    width: 12% ;
 }
 
 thead th:nth-child(4) {
-    width: 20%;
-}
+    width: 20% ;
+} 
 
 table thead tr th {
     padding: 10px 5px;
@@ -1590,7 +1590,7 @@ table thead tr th {
 }
 
 td {
-    padding: 14px 5px;
+    padding: 14px 20px 14px 5px;
 }
 
 tr:not(:last-child) td,
@@ -1613,20 +1613,32 @@ tbody td a {
 
 .dashboard-actions a {
     text-decoration: none;
+}
+
+.dashboard-actions a, #delete-form button{
     color: var(--midGray);
     font-size: 14px;
     transition: var(--mainTransition);
 }
+#delete-form {
+    margin: 0;
+    padding: 0;
+}
+#delete-form button{
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+}
 
-.dashboard-actions a i {
+.dashboard-actions a i, #delete-form button i {
     margin-right: 5px;
 }
 
-.dashboard-actions a:nth-child(2):hover {
+#delete-form button i:hover {
     color: var(--primaryColor);
 }
 
-.dashboard-actions a:hover {
+.dashboard-actions a:hover, #delete-form button:hover {
     color: var(--mainWhite);
 }
 
