@@ -106,75 +106,109 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
   const title = "edit post";
   try {
     const story = await Story.findOne({
-      _id: req.params.id,
-    }).lean()
+      _id: req.params.id
+    }).lean();
 
     if (!story) {
-      return res.render('error/404')
+      return res.render("error/404");
     }
 
     if (story.user != req.user.id) {
-      res.status(401).json("action not authorised. you can only edit your own articles")
+      res
+        .status(401)
+        .json("action not authorised. you can only edit your own articles");
     } else {
-      res.render("editblog", { title, story});
+      res.render("editblog", { title, story });
     }
   } catch (err) {
-    console.error(err)
-    return res.render('error/500')
+    console.error(err);
+    return res.render("error/500");
   }
 });
 
 // @desc    Update story
 // @route   PUT /blog/posts/:id
-router.put("/posts/:id", ensureAuth, upload.single("photo"), async(req, res)=>{
-  try {
-    let story = await Story.findById(req.params.id).lean();
+router.put(
+  "/posts/:id",
+  ensureAuth,
+  upload.single("photo"),
+  async (req, res) => {
+    try {
+      let story = await Story.findById(req.params.id).lean();
 
-    if (!story) {
-      return res.render('error/404')
+      if (!story) {
+        return res.render("error/404");
+      }
+
+      if (story.user != req.user.id) {
+        res
+          .status(401)
+          .json("action not authorised. You can only edit your story");
+      } else {
+        if (req.body.photo) {
+          req.body.photo = req.file.filename;
+        }
+        story = await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
+          new: true,
+          runValidators: true
+        });
+
+        res.redirect("/blog/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      return res.render("error/500");
     }
-
-    if (story.user != req.user.id) {
-      res.status(401).json('action not authorised. You can only edit your story');
-    } else {
-      req.body.photo = req.file.filename;
-      story = await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true,
-        runValidators: true,
-      })
-
-      res.redirect('/blog/dashboard')
-    }
-  } catch (err) {
-    console.error(err)
-    return res.render('error/500')
   }
+);
 
-})
-
-// @desc    delet story
+// @desc    delete story
 // @route   delete /blog/posts/:id
-router.delete("/posts/:id", ensureAuth, upload.single("photo"), async(req, res)=>{
+router.delete("/posts/:id", ensureAuth, async (req, res) => {
   try {
     let story = await Story.findById(req.params.id).lean();
 
     if (!story) {
-      return res.render('error/404')
+      return res.render("error/404");
     }
 
     if (story.user != req.user.id) {
-      res.status(401).json('action not authorised. You can only delete your story');
+      res
+        .status(401)
+        .json("action not authorised. You can only delete your story");
     } else {
       await Story.remove({ _id: req.params.id });
-      res.redirect('/blog/dashboard')
+      res.redirect("/blog/dashboard");
     }
   } catch (err) {
-    console.error(err)
-    return res.render('error/500')
+    console.error(err);
+    return res.render("error/500");
   }
+});
 
-})
+// @desc    delete user
+// @route   delete /blog/profile/delete/:id
+router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id).lean();
 
+    if (!user) {
+      return res.render("error/404");
+    }
+
+    if (user._id != req.user.id) {
+      res
+        .status(401)
+        .json("action not authorised. You can only delete your acount");
+    } else {
+      await User.findByIdAndDelete(req.params.id);
+      res.redirect("/blog/register");
+    }
+  } catch (err) {
+    console.error(err);
+    return res.render("error/500");
+  }
+});
 
 router.get("/posts/:slug", async (req, res) => {
   let title;
@@ -210,43 +244,56 @@ router.get("/login", ensureGuest, async (req, res) => {
 
 router.get("/profile/:id", ensureAuth, async (req, res) => {
   const title = "Edit profile";
-  try{
+  try {
     const profile = await User.findById(req.user.id);
-    if(!profile){
+    if (!profile) {
       return res.render("/error/400");
-    }else{
+    } else {
       res.render("profile", { title, profile });
     }
-
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 });
 
-router.put("/profile/:id", ensureAuth, upload.single("photo"), async (req, res) => {
-  if(req.user.id === req.params.id){
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(10);
-      req.body.password = await bcrypt.hash(req.body.password, salt);
-    }
-    try {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
-      );
-      res.status(200).redirect("/blog/dashboard");
-    } catch (err) {
-      res.status(500).json(err);
-    }
+router.put(
+  "/profile/:id",
+  ensureAuth,
+  upload.single("photo"),
+  async (req, res) => {
+    if (req.user.id === req.params.id) {
+      let newProfile = req.user;
+      newProfile.name = req.body.name;
+      newProfile.email = req.body.email;
+      newProfile.role = req.body.role;
+      newProfile.bio = req.body.bio;
+      if (req.file) {
+        newProfile.photo = req.file.filename;
+      }
 
-  }else{
-    res.status(401).json("You can update only your account!");
+      try {
+        if (req.body.password) {
+          const user = await User.findById(req.user.id);
+          const newPass = await user.setPassword(req.body.password);
+          await user.save();
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: newProfile
+          },
+          { new: true }
+        );
+        res.status(200).redirect("/blog/dashboard");
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(401).json("You can only update your account!");
+    }
   }
-  
-});
+);
 
 router.get("/dashboard", ensureAuth, async (req, res) => {
   const title = "dashboard";
@@ -254,16 +301,22 @@ router.get("/dashboard", ensureAuth, async (req, res) => {
   try {
     let stories = await Story.find({ user: req.user.id }).lean();
     let user = await User.findById(req.user.id);
-    if(stories){
+    if (stories) {
       stories = stories.map(story => {
         story.createdAt = dateWithTime(story.createdAt, format);
         return story;
       });
     }
-    if(user){
-      created = formatDate(user.createdAt)
+    if (user) {
+      created = formatDate(user.createdAt);
     }
-    res.render("dashboard", { title, stories, name: req.user.name , created, user });
+    res.render("dashboard", {
+      title,
+      stories,
+      name: req.user.name,
+      created,
+      user
+    });
   } catch (err) {
     console.log(err);
     res.render("error/500");

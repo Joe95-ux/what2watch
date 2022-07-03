@@ -28,6 +28,10 @@ const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
 const short = document.getElementById("short");
 const long = document.getElementById("long");
+let recentWrapper = document.querySelector(".recents-wrapper");
+const cards = [...document.querySelectorAll(".movie-card")];
+const viewInfo = document.querySelector(".viewed-info");
+const clearViewInfo = document.querySelector(".view-info-header a");
 
 // navigation bar
 const navSlide = () => {
@@ -148,21 +152,21 @@ const navSlide = () => {
 navSlide();
 
 // show password and author bio
-function revealPass(){
-  if(eye){
-    eye.addEventListener("click", ()=>{
-      if(passInput.type === "password"){
+function revealPass() {
+  if (eye) {
+    eye.addEventListener("click", () => {
+      if (passInput.type === "password") {
         passInput.type = "text";
-      }else if(passInput.type === "text"){
+      } else if (passInput.type === "text") {
         passInput.type = "password";
       }
-    })
+    });
   }
-  if(seeBio){
-    seeBio.addEventListener("click", ()=>{
+  if (seeBio) {
+    seeBio.addEventListener("click", () => {
       seeBio.classList.toggle("active-see-bio");
       profileBio.classList.toggle("active-options");
-    })
+    });
   }
 }
 
@@ -340,61 +344,57 @@ function debounce(fn, delay) {
 
 // Handling recently clicked movie cards
 
-let recentWrapper = document.querySelector(".recents-wrapper");
-const cards = [...document.querySelectorAll(".movie-card")];
-const viewInfo = document.querySelector(".viewed-info");
-const clearViewInfo = document.querySelector(".view-info-header a");
-if (clearViewInfo) {
-  clearViewInfo.href = window.location.href;
+function recentlyViewedHandler() {
+  if (clearViewInfo) {
+    clearViewInfo.href = window.location.href;
+  }
+
+  if (!localStorage.getItem("cardStore")) {
+    localStorage.setItem("cardStore", "[]");
+  }
+
+  let store = JSON.parse(localStorage.getItem("cardStore"));
+  if (store.length === 0) {
+    clearViewInfo.style.display = "none";
+    viewInfo.classList.add("show-view-info");
+  }
+
+  for (let i = 0; i < cards.length; i++) {
+    const title = cards[i].firstElementChild.title;
+    const image = cards[i].firstElementChild.firstElementChild.src;
+    const link = cards[i].firstElementChild.href;
+    const id = link.split("/").pop();
+    cards[i].addEventListener(
+      "click",
+      debounce(function() {
+        let cardItem = { id: id, title, image, link };
+        store.push(cardItem);
+        store = store.reduce((pureStore, current) => {
+          let obj = pureStore.find(item => item.id === current.id);
+          if (obj) {
+            return pureStore;
+          }
+          return pureStore.concat([current]);
+        }, []);
+        localStorage.setItem("cardStore", JSON.stringify(store));
+      }, 2000)
+    );
+  }
+
+  getRecentlyViewed(store);
 }
 
-if (!localStorage.getItem("cardStore")) {
-  localStorage.setItem("cardStore", "[]");
-}
-
-let store = JSON.parse(localStorage.getItem("cardStore"));
-if (store.length === 0) {
-  clearViewInfo.style.display = "none";
-  viewInfo.classList.add("show-view-info");
-}
-
-for (let i = 0; i < cards.length; i++) {
-  const title = cards[i].firstElementChild.title;
-  const image = cards[i].firstElementChild.firstElementChild.src;
-  const link = cards[i].firstElementChild.href;
-  const id = link.split("/").pop();
-  cards[i].addEventListener(
-    "click",
-    debounce(function() {
-      let cardItem = { id: id, title, image, link };
-      store.push(cardItem);
-      store = store.reduce((pureStore, current) => {
-        let obj = pureStore.find(item => item.id === current.id);
-        if (obj) {
-          return pureStore;
-        }
-        return pureStore.concat([current]);
-      }, []);
-      localStorage.setItem("cardStore", JSON.stringify(store));
-    }, 2000)
-  );
-}
-
-let div;
-
-function getRecentlyViewed() {
+function getRecentlyViewed(store) {
   if (store.length) {
     store.forEach(({ title, image, link }) => {
-      div = document.createElement("div");
-      div.classList.add("embla__slide");
+      let div = document.createElement("div");
+      div.className = "cast-card recent-card";
       div.innerHTML = `
-    <div class="embla__slide__inner cast-card recent-card">
       <a class="image" href=${link} title=${title}>
         <img src=${image} alt="movie-poster">
-        <h3>${title}</h3>
+        <h3> ${title} </h3>
       </a>
-    </div>
-    `;
+    `
       if (recentWrapper) {
         recentWrapper.appendChild(div);
       }
@@ -402,7 +402,7 @@ function getRecentlyViewed() {
   }
 }
 
-getRecentlyViewed();
+recentlyViewedHandler();
 
 // custom select dropdown
 function dropDown() {

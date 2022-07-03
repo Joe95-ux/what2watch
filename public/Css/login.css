@@ -44,6 +44,7 @@
   max-width: calc(100vw - 3rem);
   border-radius: 10px;
   line-height: 1.5;
+  position: relative;
 }
 .forms-container.edit-profile-form{
   width: 450px;
@@ -175,8 +176,12 @@
   border: none;
   background-color: transparent;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--darkGrey);
+}
+
+.actions-input textarea{
+  font-size: 14px;
 }
 
 

@@ -24,14 +24,14 @@
                         <h2>Welcome John Doe!</h2>
                         <p>Here are your stories</p>
                     </div>
-                    <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>Create Post</a>
+                    <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>New Post</a>
 
                 </div>
                 <table>
                     <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Date</th>
+                            <th>Created on</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -183,66 +183,86 @@
 
             </div>
             <% if(user){%>
-            <div class="dashboard-userbio">
-                <div class="profile-photo">
-                    <img src="/dune.jpg" alt="">
-                    <h2>John Doe</h2>
-                    <h3>Editor in-chief </h3>
-                    <a href="/blog/profile/<%= user._id%> " role="button" class="create-btn edit-profile-btn">Edit Profile</a>
-                </div>
-                <div class="profile-bio">
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <i class="fas fa-envelope"></i>
-                            <h3><%= user.username %> </h3>
-                        </div>
-
-                    </div>
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <i class="fas fa-lock"></i>
-                            <input type="password" id="writer-pass" value="12345678" title="password">
-                        </div>
-                        <i class="fas fa-eye pass-reveal"></i>
-                    </div>
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <div>
-                                <i class="fas fa-user"></i>
-                                <h3>About you</h3>
-                            </div>
-                            <p class="profile-biography">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                veritatis et. </p>
-                        </div>
-                        <i class="see-bio fas fa-chevron-up"></i>
-                    </div>
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <i class="fas fa-book"></i>
-                            <h3>Total Posts</h3>
-                        </div>
-                        <% if(stories){%>
-                        <h3> (<%= stories.length %>) </h3>
+            <div class="dashboard-userbio-wrapper">
+                <div class="dashboard-userbio">
+                    <div class="profile-photo">
+                        <% if(user.photo){%>
+                        <img src="/uploads/images/<%= user.photo%>" alt="prifile photo">
+                        <% }else{%>
+                            <img src="/profile-pic.png" alt="prifile photo">
                         <% } %>
-
+                        <h2><%= user.name ? user.name:user.username%> </h2>
+                        <h3>Editor in-chief </h3>
+                        <a href="/blog/profile/<%= user._id%> " role="button" class="create-btn edit-profile-btn">Edit
+                            Profile</a>
                     </div>
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <i class="fas fa-address-card"></i>
-                            <h3>Joined</h3>
+                    <div class="profile-bio">
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <i class="fas fa-envelope"></i>
+                                <h3><%= user.username %> </h3>
+                            </div>
+    
                         </div>
-                        <h3><%= created %> </h3>
-
-                    </div>
-                    <div class="profile-bio-wrapper">
-                        <div>
-                            <i class="fas fa-sign-out-alt"></i>
-                            <a href="/blog/logout">sign-out</a>
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="writer-pass" value="its confidential" title="your password is hidden">
+                            </div>
+                            <i class="fas fa-eye pass-reveal"></i>
                         </div>
-                        <a href="/blog/logout"><i class="fas fa-chevron-right"></i></a>
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <div>
+                                    <i class="fas fa-user"></i>
+                                    <h3>About you</h3>
+                                </div>
+                                <% if(user.bio){%>
+                                <p class="profile-biography"><%= user.bio%></p>
+                                <% }else{%>
+                                <p class="profile-biography">Tell us about yourself in not more than 26 words. </p>
+                                <% } %>
+                            </div>
+                            <i class="see-bio fas fa-chevron-up"></i>
+                        </div>
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <i class="fas fa-book"></i>
+                                <h3>Total Posts</h3>
+                            </div>
+                            <% if(stories){%>
+                            <h3> (<%= stories.length %>) </h3>
+                            <% } %>
+    
+                        </div>
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <i class="fas fa-address-card"></i>
+                                <h3>Joined</h3>
+                            </div>
+                            <h3><%= created %> </h3>
+    
+                        </div>
+                        <div class="profile-bio-wrapper">
+                            <div>
+                                <i class="fas fa-sign-out-alt"></i>
+                                <a href="/blog/logout">sign-out</a>
+                            </div>
+                            <a href="/blog/logout"><i class="fas fa-chevron-right"></i></a>
+                        </div>
                     </div>
+                    
                 </div>
+                <div class="delete-account">
+                    <div class="delete-heading">
+                        <h2>Delete Account</h2>
+                    </div>
+                    <p>You will loose access to your what2watch.net blog account once your deletion request has been submitted</p>
+                    <form method="POST" action="/blog/profile/delete/<%=user._id%>?_method=DELETE">
+                        <button type="submit" class="create-btn edit-profile-btn">Delete Account</button>
+                    </form>
+                </div>
+
             </div>
             <% } %>
         </div>

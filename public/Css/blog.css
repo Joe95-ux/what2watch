@@ -1688,17 +1688,20 @@ tbody td a {
 
 }
 
-.dashboard-userbio {
+.dashboard-userbio-wrapper{
     position: sticky;
     position: -webkit-sticky;
     top: 3.7rem;
     flex-basis: 23%;
     max-width: 23%;
     height: max-content;
+    font-family: "Poppins", sans-serif;
+}
+
+.dashboard-userbio {
     padding-bottom: 1.5rem;
     background-color: #001927;
     border-radius: 5px;
-    font-family: "Poppins", sans-serif;
 }
 
 @media screen and (max-width:1042px) {
@@ -1717,7 +1720,7 @@ tbody td a {
         top: 0;
     }
 
-    .dashboard-userbio {
+    .dashboard-userbio-wrapper {
         max-width: 300px;
         margin-top: 2rem;
     }
@@ -1834,6 +1837,48 @@ tbody td a {
 .profile-bio-wrapper div+i {
     align-self: center;
 }
+
+.delete-account{
+    margin-top: 1.2rem;
+    padding: 0.8rem 1.5rem 1.8rem;
+    background-color: #001927;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.delete-heading{
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.delete-heading h2{
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--mainWhite);
+}
+.delete-account p{
+    font-size:14px;
+    font-weight: 400;
+    color: var(--midGray);
+    line-height: 1.5;
+    margin-bottom: 1.55rem;
+    margin-top: 13px;
+}
+
+.delete-account .edit-profile-btn{
+    background-color: var(--primaryColor);
+    border-radius: 55px;
+}
+
+.delete-account .edit-profile-btn:hover{
+    background-color: transparent;
+}
+
+
+
+
+
+
+
 
 @media screen and (max-width: 1080px) {
     .profile-bio-wrapper i {

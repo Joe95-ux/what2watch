@@ -3168,24 +3168,24 @@ h1.genre-intro {
 
 .slider-inner-card {
     position: relative;
-    width: 299px;
+    width: 300px;
 }
 
 .slider-inner-card img,
 .see-more-upcoming {
   height: 170px;
-  width: 299px;
+  width: 300px;
     
 }
 
 @media screen and (max-width:540px) {
     .slider-inner-card {
-        width: 200px;
+        width: 230px;
     }
     .slider-inner-card img,
     .see-more-upcoming {
         height: 130px;
-        width: 220px;
+        width: 230px;
     }
 }
 
@@ -3641,7 +3641,7 @@ h1.genre-intro {
     /* border-radius: 5px 5px 0 0; */
     border-radius: 5px;
     height: 230px;
-    width: 100%;
+    width: 160px;
     object-fit: cover;
 }
 
@@ -3666,7 +3666,7 @@ h1.genre-intro {
 
     .cast-card img {
         height: 180px;
-        width: 100%;
+        width: 130px;
     }
 }
 
@@ -4854,6 +4854,7 @@ footer {
 
 .recents-wrapper {
     overflow: scroll;
+    display: flex;
 
 }
 
@@ -4904,6 +4905,12 @@ footer {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 100%;
+}
+div.recent-card:not(:last-child){
+    margin-right: 14px;
+}
+div.recent-card:last-child{
+    margin-right: 0;
 }
 
 div.seperation-rule {
