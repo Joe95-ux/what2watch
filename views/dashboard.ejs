@@ -27,6 +27,7 @@
                     <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>New Post</a>
 
                 </div>
+                <% if(stories.length){%>
                 <table>
                     <thead>
                         <tr>
@@ -48,10 +49,13 @@
                                 </div>
                             </td>
                         </tr>
-                        <% if(stories){%>
                         <% stories.forEach(story=>{%>
                         <tr>
-                            <td data-label="Title"><%= story.title %> </td>
+                            <td data-label="Title">
+                                <div class="clamp-dashboard">
+                                    <a href="/blog/posts/<%= story.slug%>" title="<%= story.title %> "><%= story.title %></a>
+                                </div>
+                            </td>
                             <td data-label="Date"><%= story.createdAt %> </td>
                             <td data-label="Status"><%= story.status %> </td>
                             <td data-label="Action">
@@ -67,7 +71,6 @@
                         </tr>
 
                         <%}) %>
-                        <% } %>
                         <tr>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
@@ -180,6 +183,13 @@
                         </tr>
                     </tbody>
                 </table>
+                <%}else{%>
+                <div class="dashboard-title">
+                    <div>
+                        <p>You Have no stories yet.</p>
+                    </div>
+                </div>
+                <% } %>
 
             </div>
             <% if(user){%>
@@ -189,7 +199,7 @@
                         <% if(user.photo){%>
                         <img src="/uploads/images/<%= user.photo%>" alt="prifile photo">
                         <% }else{%>
-                            <img src="/profile-pic.png" alt="prifile photo">
+                        <img src="/profile-pic.png" alt="prifile photo">
                         <% } %>
                         <h2><%= user.name ? user.name:user.username%> </h2>
                         <h3>Editor in-chief </h3>
@@ -202,12 +212,13 @@
                                 <i class="fas fa-envelope"></i>
                                 <h3><%= user.username %> </h3>
                             </div>
-    
+
                         </div>
                         <div class="profile-bio-wrapper">
                             <div>
                                 <i class="fas fa-lock"></i>
-                                <input type="password" id="writer-pass" value="its confidential" title="your password is hidden">
+                                <input type="password" id="writer-pass" value="its confidential"
+                                    title="your password is hidden">
                             </div>
                             <i class="fas fa-eye pass-reveal"></i>
                         </div>
@@ -233,7 +244,7 @@
                             <% if(stories){%>
                             <h3> (<%= stories.length %>) </h3>
                             <% } %>
-    
+
                         </div>
                         <div class="profile-bio-wrapper">
                             <div>
@@ -241,7 +252,7 @@
                                 <h3>Joined</h3>
                             </div>
                             <h3><%= created %> </h3>
-    
+
                         </div>
                         <div class="profile-bio-wrapper">
                             <div>
@@ -251,13 +262,14 @@
                             <a href="/blog/logout"><i class="fas fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="delete-account">
                     <div class="delete-heading">
                         <h2>Delete Account</h2>
                     </div>
-                    <p>You will loose access to your what2watch.net blog account once your deletion request has been submitted</p>
+                    <p>You will loose access to your what2watch.net blog account once your deletion request has been
+                        submitted</p>
                     <form method="POST" action="/blog/profile/delete/<%=user._id%>?_method=DELETE">
                         <button type="submit" class="create-btn edit-profile-btn">Delete Account</button>
                     </form>

@@ -23,7 +23,11 @@ const UserSchema = new mongoose.Schema(
     bio:{
       type: String,
       default: ""
+    },
+    privilege:{
+      type: String
     }
+
 
   },
   { timestamps: true }

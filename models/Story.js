@@ -30,11 +30,13 @@ const StorySchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "Public"
+    default: "Public",
+    trim: true,
   },
   category: {
     type: String,
     required: true,
+    trim: true,
   },
   slug: {
     type: String,

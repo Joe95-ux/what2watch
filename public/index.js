@@ -174,7 +174,7 @@ revealPass();
 
 // sticky layout
 function stickLayout() {
-  if (short && long) {
+  if (short || long) {
     let shortHeight = short.clientHeight;
     let longHeight = long.clientHeight;
     if (longHeight > shortHeight) {

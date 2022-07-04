@@ -12,6 +12,17 @@
         </form>
     </div>
     <div class="wrapper-enclosure-blog">
+        <% if(story){%>
+        <div class="blog-nav">
+            <span><a href="/blog/posts">Home</a></span>
+            <i class="fas fa-chevron-right"></i>
+            <span><a href="/blog/<%= story.category %> "><%= story.category %> </a></span>
+            <i class="fas fa-chevron-right"></i>
+            <span title="<%= story.title %> "><%= story.title %></span>
+        </div>
+
+        <% } %>
+
         <div class="blog-body-wrapper">
             <div id="long" class="blog-body-content">
                 <% if(story){%>
@@ -33,9 +44,11 @@
                     <% if(story){%>
                     <div class="post-author-details">
                         <h4><%= story.author %> </h4>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et.
-                        </p>
+                        <% if(story?.user?.bio){%>
+                        <p><%= user?.bio %></p>
+                        <% }else{%>
+                        <p>No Info about writer to display.</p>
+                        <% } %>
                     </div>
                     <% } %>
 

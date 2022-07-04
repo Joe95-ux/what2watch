@@ -9,7 +9,7 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
 const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
-const { formatDate, dateWithTime } = require("../helpers/helper");
+const { formatDate, dateWithTime, sortCats, getCats } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
 const format = "MMMM Do YYYY, h:mm:ss a";
@@ -95,6 +95,12 @@ router.get("/posts", async (req, res) => {
         story.createdAt = formatDate(story.createdAt);
         return story;
       });
+      let categories = getCats(stories);
+      if(categories.length){
+        let sortedCats = sortCats(categories);
+        console.log(sortedCats)
+      }
+      
     }
     res.render("blogHome.ejs", { title, userEmail, stories });
   } catch (err) {
@@ -153,7 +159,7 @@ router.put(
           runValidators: true
         });
 
-        res.redirect("/blog/dashboard");
+        res.redirect("/blog/dashboard/" + story.user);
       }
     } catch (err) {
       console.error(err);
@@ -178,7 +184,7 @@ router.delete("/posts/:id", ensureAuth, async (req, res) => {
         .json("action not authorised. You can only delete your story");
     } else {
       await Story.remove({ _id: req.params.id });
-      res.redirect("/blog/dashboard");
+      res.redirect("/blog/dashboard/" + story.user);
     }
   } catch (err) {
     console.error(err);
@@ -285,7 +291,7 @@ router.put(
           },
           { new: true }
         );
-        res.status(200).redirect("/blog/dashboard");
+        res.status(200).redirect("/blog/dashboard/" + req.params.id);
       } catch (err) {
         res.status(500).json(err);
       }
@@ -295,12 +301,12 @@ router.put(
   }
 );
 
-router.get("/dashboard", ensureAuth, async (req, res) => {
+router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
   let created;
   try {
-    let stories = await Story.find({ user: req.user.id }).lean();
-    let user = await User.findById(req.user.id);
+    let stories = await Story.find({ user: req.params.id }).lean();
+    let user = await User.findById(req.params.id);
     if (stories) {
       stories = stories.map(story => {
         story.createdAt = dateWithTime(story.createdAt, format);
@@ -333,7 +339,7 @@ router.post("/register", ensureToken, function(req, res) {
       return res.render("register");
     } else {
       passport.authenticate("local")(req, res, function() {
-        res.redirect("/blog/dashboard");
+        res.redirect("/blog/dashboard/" + user._id);
       });
     }
   });
@@ -349,7 +355,7 @@ router.post("/login", function(req, res) {
       console.log(err);
     } else {
       passport.authenticate("local")(req, res, () => {
-        res.redirect("/blog/dashboard");
+        res.redirect("/blog/dashboard/" + req.user.id);
       });
     }
   });

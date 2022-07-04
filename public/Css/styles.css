@@ -321,26 +321,29 @@ button{
 .nav_links li {
     /* margin: 0 auto; */
     list-style: none;
-}
-
-.nav_links a {
     position: relative;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 1.3rem;
-    margin-bottom: 0;
-    color: rgb(223, 217, 217);
     transition: opacity 200ms ease-in-out;
     -webkit-transition: opacity 200ms ease-in-out;
     overflow: hidden;
 }
+.nav_links li:not(:last-child){
+    margin-right: 15px;
+}
 
-.nav_links a::after,
+.nav_links a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    color: rgb(223, 217, 217);
+}
+
+.nav_links li::after,
 .important-links a::after {
     content: "";
     display: block;
     width: 0;
-    height: 2.5px;
+    height: 2px;
     margin-top: 2px;
     border-radius: 2px;
     background: #fff;
@@ -351,8 +354,6 @@ button{
 .nav_link a:hover {
     color: var(--mainWhite);
     font-weight: 500;
-    transition: var(--mainTransition);
-    -webkit-transition: var(--mainTransition);
 }
 
 .active {
@@ -361,7 +362,7 @@ button{
     -webkit-transition: var(--mainTransition);
 }
 
-.nav_link a:hover::after,
+.nav_links li:hover::after,
 .important-links a:hover::after {
     width: 100%;
 
@@ -4873,6 +4874,7 @@ footer {
     color: var(--yellow);
     text-decoration: none;
     font-size: 1.1rem;
+    margin-top: 5px;
     cursor: pointer;
     transition: var(--mainTransition);
     user-select: none;
@@ -5081,8 +5083,11 @@ div.seperation-rule {
 
 @media screen and (max-width:414px) {
     .recents-container h2 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         
+    }
+    .view-info-header a {
+        font-size: 15px;
     }
 
     .copyright-container,
