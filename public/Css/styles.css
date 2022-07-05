@@ -1005,23 +1005,12 @@ button {
     .autoplay__slide img {
         display: none;
     }
-<<<<<<< HEAD
     .new-header-wrapper .movie-title{
         font-size: 1.4rem;
         font-family: 'Source Sans Pro', sans-serif;
     }
     .new-header-wrapper p{
         font-size: 1.1rem;
-=======
-
-    .new-header-wrapper .movie-title {
-        font-size: 1.5rem;
-        font-family: 'Source Sans Pro', sans-serif;
-    }
-
-    .new-header-wrapper p {
-        font-size: 1.2rem;
->>>>>>> blog
         color: #ccc;
     }
 }
