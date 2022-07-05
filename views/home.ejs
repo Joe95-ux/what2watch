@@ -291,11 +291,11 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner">
                                         <% if(mov.poster_path){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %> poster">
+                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="movie-poster">
                                             </a>
                                             <%}else if(mov.poster_path === null){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
-                                                <img src="/poster-alt.png" alt="<%= mov.title %> poster">
+                                                <img src="/poster-alt.png" alt="movie-poster">
                                             </a>
                                         <% } %>
                                         <div class="image-drop">
@@ -338,7 +338,7 @@
                       
                     
                 </div>
-            <% }%>
+            <% } %> 
         </div>
     </div>
     
@@ -402,11 +402,11 @@
                                     <div class="movie-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title%> poster ">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="<%= movie.title%> poster " >
+                                            <img src="/poster-alt.png" alt="movie-poster">
                                         </a>
                     
                                         <% } %>
@@ -483,11 +483,11 @@
                                     <div class="movie-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title%> poster">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="<%= movie.title%> poster">
+                                            <img src="/poster-alt.png" alt="movie-poster">
                                         </a>
                     
                                         <% } %>
@@ -608,11 +608,11 @@
                         <% if(popularMovie.poster_path){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
                             <img src="https://image.tmdb.org/t/p/w500/<%= popularMovie.poster_path %>"
-                                alt="<%= popularMovie.title%> poster">
+                                alt="movie-poster">
                         </a>
                         <%}else if(popularMovie.poster_path === null){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
-                            <img src="/poster-alt.png" alt="<%= popularMovie.title%> poster">
+                            <img src="/poster-alt.png" alt="movie-poster">
                         </a>
     
                         <% } %>
