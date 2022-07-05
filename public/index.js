@@ -22,18 +22,16 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
-const simpleBarContainer = document.getElementById("simple-bar");
-// simplebar
-new SimpleBar(simpleBarContainer, { autoHide: true });
-const acc = document.getElementsByClassName("accodion");
-const title = document.querySelector(".faq-title");
-const today = document.getElementById("today");
-const week = document.getElementById("this-week");
-const trendingToday = document.getElementById("trending-today");
-const trendingThisWeek = document.getElementById("trending-thisweek");
-const currentYear = new Date().getFullYear();
-const copyrightYear = document.querySelector(".copyright");
-copyrightYear.innerHTML += currentYear;
+const passInput = document.querySelector("#writer-pass");
+const eye = document.querySelector(".pass-reveal");
+const seeBio = document.querySelector(".see-bio");
+const profileBio = document.querySelector(".profile-biography");
+const short = document.getElementById("short");
+const long = document.getElementById("long");
+let recentWrapper = document.querySelector(".recents-wrapper");
+const cards = [...document.querySelectorAll(".movie-card")];
+const viewInfo = document.querySelector(".viewed-info");
+const clearViewInfo = document.querySelector(".view-info-header a");
 
 // navigation bar
 const navSlide = () => {
@@ -45,7 +43,6 @@ const navSlide = () => {
 
   burger.addEventListener("click", () => {
     sideDrawerBackdrop.classList.add("active-backrop");
-    console.log(sideDrawerBackdrop);
     // toggle side-drawer
     if (sideDrawer.classList.contains("side-drawer-inactive")) {
       sideDrawer.classList.remove("side-drawer-inactive");
@@ -54,6 +51,18 @@ const navSlide = () => {
     } else {
       sideDrawer.classList.add("side-drawer-active");
     }
+
+    // animate links
+    // navLinks.forEach((link, index) => {
+    //   // + 0.3 for initial delay
+    //   if (link.style.animation) {
+    //     link.style.animation = "";
+    //   } else {
+    //     link.style.animation = `navLinkFade 0.5s ease forwards ${
+    //       index / 7 + 0.5
+    //     }s `;
+    //   }
+    // });
 
     // animate burger
     burger.classList.toggle("toggle");
@@ -120,6 +129,11 @@ const navSlide = () => {
     navigation.classList.toggle("scrolling-active", windowPosition);
   });
 
+  // footer
+
+  const currentYear = new Date().getFullYear();
+  const copyrightYear = document.querySelector(".copyright");
+  copyrightYear.innerHTML += currentYear;
 
   $(document).on("click", 'a[href^="#"]', function(event) {
     event.preventDefault();
@@ -139,7 +153,7 @@ navSlide();
 
 // show password and author bio
 function revealPass() {
-  if (eye != null) {
+  if (eye) {
     eye.addEventListener("click", () => {
       if (passInput.type === "password") {
         passInput.type = "text";
@@ -244,6 +258,7 @@ function trailerController() {
   }
 
   if (headerTrailer !== null) {
+    let videoSource;
     for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
         videoSource = trailer.parentElement.nextElementSibling.src;
@@ -300,7 +315,7 @@ function toggleReviews() {
         ].parentElement.parentElement.previousElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.textContent;
       reviewContent.textContent =
         expandReviews[i].parentElement.nextElementSibling.innerText;
-      reviewer.style.color = "#fff";
+      reviewer.style.color = "red";
     });
   }
 
@@ -430,34 +445,40 @@ function clearViewed() {
 }
 clearViewed();
 
+// simplebar
+const simpleBarContainer = document.getElementById("simple-bar");
+new SimpleBar(simpleBarContainer, { autoHide: true });
+
 //Trending togglers
+const today = document.getElementById("today");
+const week = document.getElementById("this-week");
+const trendingToday = document.getElementById("trending-today");
+const trendingThisWeek = document.getElementById("trending-thisweek");
 
-function switchTrend() {
-  if (today !== null || week !== null) {
-    today.addEventListener("click", () => {
-      today.classList.add("active-timeline");
-      if (week.classList.contains("active-timeline")) {
-        week.classList.remove("active-timeline");
-      }
-      trendingToday.style.transform = "translateX(0)";
-      trendingThisWeek.style.transform = "translateX(100%)";
-    });
+if (today !== null || week !== null) {
+  today.addEventListener("click", () => {
+    today.classList.add("active-timeline");
+    if (week.classList.contains("active-timeline")) {
+      week.classList.remove("active-timeline");
+    }
+    trendingToday.style.transform = "translateX(0)";
+    trendingThisWeek.style.transform = "translateX(100%)";
+  });
 
-    week.addEventListener("click", () => {
-      week.classList.add("active-timeline");
-      if (today.classList.contains("active-timeline")) {
-        today.classList.remove("active-timeline");
-      }
-      trendingToday.style.transform = "translateX(-100%)";
-      trendingThisWeek.style.transform = "translateX(0)";
-    });
-  }
+  week.addEventListener("click", () => {
+    week.classList.add("active-timeline");
+    if (today.classList.contains("active-timeline")) {
+      today.classList.remove("active-timeline");
+    }
+    trendingToday.style.transform = "translateX(-100%)";
+    trendingThisWeek.style.transform = "translateX(0)";
+  });
 }
-switchTrend()
 
 //faq-toggler
-
-function toggleFaq() {
+function accToggler() {
+  const acc = document.getElementsByClassName("accodion");
+  const title = document.querySelector(".faq-title");
   for (let i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", () => {
       acc[i].classList.toggle("active-drop");
@@ -471,29 +492,7 @@ function toggleFaq() {
     });
   }
 }
-toggleFaq();
-
-//smooth scroll on a tag click
-// document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-//   anchor.addEventListener('click', function (e) {
-//       e.preventDefault();
-
-//       document.querySelector(this.getAttribute('href')).scrollIntoView({
-//           behavior: 'smooth'
-//       });
-//   });
-// });
-$(document).on("click", 'a[href^="#"]', function(event) {
-  event.preventDefault();
-
-  $("html, body").animate(
-    {
-      scrollTop: $($.attr(this, "href")).offset().top
-    },
-    500
-  );
-});
-
+accToggler();
 
 // welcome banner
 $(document).ready(function() {
