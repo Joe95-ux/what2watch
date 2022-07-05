@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title>What2watch | The movie Watch Guide</title>
+    <title><%= title %> | what2watch</title>
     <meta name="description"
         content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
     <meta name="keywords"
@@ -31,7 +31,10 @@
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
     <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
+    <link rel="stylesheet" href="/Css/ckstyles.css">
+    <link rel="stylesheet" href="/Css/editor.css">
     <link rel="stylesheet" href="/Css/embla.css">
     <link rel="stylesheet" href="/Css/blog.css">
     <link rel="stylesheet" href="/Css/styles.css">
@@ -60,12 +63,15 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0"
+        nonce="VfUlIJaT"></script>
 
     <nav class="navigation">
-        <div class="wrapper-enclosure nav-enclosure">
+        <div class="blog-nav-enclosure">
             <div class="logo-and-links">
                 <div class="logo">
-                    <div class="burger">
+                    <div class="burger" style="display:none;">
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
@@ -88,7 +94,10 @@
                     </form>
                 </div>
                 <ul class="nav_links">
-                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
+                    <% if(user){%>
+                        <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>  
                 </ul>
 
             </div>

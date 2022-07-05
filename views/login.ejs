@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title>404 page | What2watch.net</title>
+    <title><%= title %> | what2watch</title>
     <meta name="description"
         content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
     <meta name="keywords"
@@ -23,19 +23,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&family=Merriweather:wght@300;400;700&family=Roboto+Slab:wght@400;500&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@400;500&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
     <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
     <link rel="stylesheet" href="/Css/embla.css">
     <link rel="stylesheet" href="/Css/blog.css">
+    <link rel="stylesheet" href="/Css/login.css">
     <link rel="stylesheet" href="/Css/styles.css">
     <noscript>
         <style>
@@ -62,12 +62,20 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0"
+        nonce="VfUlIJaT"></script>
 
     <nav class="navigation">
-        <div class="wrapper-enclosure nav-enclosure">
+        <div class="blog-nav-enclosure">
             <div class="logo-and-links">
+                <div class="burger" style="display:none;">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
                 <div class="logo">
-                    <div class="burger">
+                    <div class="burger" style="display:none;">
                         <div class="line1"></div>
                         <div class="line2"></div>
                         <div class="line3"></div>
@@ -79,52 +87,71 @@
 
                     </a>
                 </div>
-                <i class="fas search small-screen-search-icon"></i>
-                <div class="search-bar big-screen-search">
-                    <form action="/search" method="GET" class="search-form">
-                        <div class="search-field">
-                            <i class="fas fa-search"></i>
-                            <input type="text" class="search" placeholder="search for a movie..." name="query">
-                            <input type="submit" value="search" hidden>
-                        </div>
-                    </form>
-                </div>
                 <ul class="nav_links">
-                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
-
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
                 </ul>
 
+
             </div>
 
         </div>
-
     </nav>
-    <section id="error-page">
-        <div class="small-screen-search search-bar">
-            <i class="fas fa-times close-sm-search"></i>
-            <form action="/search" method="GET" class="small-search-form search-form">
-                <div class="small-search-field">
-                    <i class="fas fa-search"></i>
-                    <input type="text" class="small-search" placeholder="search for a movie..." name="query">
-                    <!-- <i class="blink"></i> -->
-                    <input type="submit" value="search" hidden>
+
+    <section id="header-container" class="blog-header">
+        <div class="wrapper-enclosure-blog">
+            <div class="form-container-wrapper">
+                <div class="forms-container">
+                    <div class="form-title">
+                        <div class="form-title-header">
+                            <i class="history fas fa-long-arrow-alt-left"></i>
+                        </div>
+
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to continue</p>
+                    </div>
+                    <div class="actions-wrapper">
+                        <form action="/blog/login" id="auth-form" method="POST">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-user-alt"></i>
+                                    <input type="text" name="username" id="email" placeholder="email">
+                                </div>
+                                <small class="auth">Error Message</small>
+                            </div>
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="password" id="password" placeholder="password">
+                                </div>
+                                <small class="auth">Error Message</small>
+                            </div>
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="confirmclientpassword" id="cpassword"
+                                        placeholder="confirm password">
+                                </div>
+                                <small class="auth">Error Message</small>
+                            </div>
+                            <button type="submit" class="send-btn">Sign in</button>
+                        </form>
+                        <p>Don't have an account? <a href="/blog/register">Sign up now.</a> </p>
+
+
+                    </div>
+
                 </div>
-            </form>
-        </div>
-        <div class="error-message">
-            <h1>404</h1>
-            <h2>Page not found</h2>
-            <p>Sorry, the link you requested for may be broken or the page may have been removed or
-                renamed!</p>
-            <div class="swiper-btns">
-                <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Take Me Home</a>
             </div>
+
+
+
         </div>
+
+
 
     </section>
-
-    <footer id="footer">
-        <div class="wrapper-enclosure">
+    <footer id="footer" class="blog-footer" style="padding-top:2rem ;">
+        <div class="blog-nav-enclosure">
             <div class="footer-content">
                 <div class="copyright-container">
                     <a href="/">
@@ -151,6 +178,7 @@
                             class="fas fa-envelope"></i></a>
                     <a href="https://youtube.com/channel/UCR5dmDeBAwWdh-IC6dol1gA" target="_blank"
                         class="social-icon yt"><i class="fab fa-youtube"></i></a>
+
                 </div>
 
             </div>
@@ -162,7 +190,8 @@
         </div>
 
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.6/dist/simplebar.min.js"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- embla -->
     <script src="/embla.js"></script>

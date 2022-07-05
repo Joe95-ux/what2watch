@@ -1,12 +1,13 @@
-<footer id="footer">
-    <div class="wrapper-enclosure">
+<footer id="footer" class="blog-footer">
+    <div class="blog-nav-enclosure">
         <div class="recents-container">
             <div class="view-info-header">
                 <h2>Recently viewed</h2>
                 <a href="">Clear all</a>
             </div>
             <p class="viewed-info">You have no recently viewed pages</p>
-            <div class="recents-wrapper scroll-black">
+
+            <div class=" recents-wrapper scroll-black">
                 <!-- recently viewed go here -->
             </div>
         </div>
@@ -52,6 +53,14 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    if (document.querySelector("#editor")) {
+        ClassicEditor.create(document.querySelector("#editor"))
+            .catch(error => {
+                console.error(error);
+            });
+    }
+</script>
 <!-- embla -->
 <script src="/embla.js"></script>
 <script src="/autoplay.js"></script>

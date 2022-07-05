@@ -22,6 +22,7 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
+<<<<<<< HEAD
 const simpleBarContainer = document.getElementById("simple-bar");
 const acc = document.getElementsByClassName("accodion");
 const title = document.querySelector(".faq-title");
@@ -32,6 +33,18 @@ const trendingThisWeek = document.getElementById("trending-thisweek");
 const currentYear = new Date().getFullYear();
 const copyrightYear = document.querySelector(".copyright");
 copyrightYear.innerHTML += currentYear;
+=======
+const passInput = document.querySelector("#writer-pass");
+const eye = document.querySelector(".pass-reveal");
+const seeBio = document.querySelector(".see-bio");
+const profileBio = document.querySelector(".profile-biography");
+const short = document.getElementById("short");
+const long = document.getElementById("long");
+let recentWrapper = document.querySelector(".recents-wrapper");
+const cards = [...document.querySelectorAll(".movie-card")];
+const viewInfo = document.querySelector(".viewed-info");
+const clearViewInfo = document.querySelector(".view-info-header a");
+>>>>>>> blog
 
 // navigation bar
 const navSlide = () => {
@@ -77,23 +90,26 @@ const navSlide = () => {
   }
 
   //seach-field animation
-  searchField.addEventListener("click", () => {
-    searchField.style.backgroundColor = "#f0f0f0";
-    searchInput.style.width = "240px";
-    searchInput.style.opacity = 1;
-    searchInput.focus();
-    searchField.style.width = "100%";
-  });
-  //close search field on document click
-  document.addEventListener("click", event => {
-    let searchClicked = searchField.contains(event.target);
-    if (!searchClicked) {
-      searchField.style.backgroundColor = "inherit";
-      searchInput.style.width = 0;
-      searchInput.style.opacity = 0;
-      searchField.style.width = "35px";
-    }
-  });
+  if (searchField) {
+    searchField.addEventListener("click", () => {
+      searchField.style.backgroundColor = "#f0f0f0";
+      searchInput.style.width = "240px";
+      searchInput.style.opacity = 1;
+      searchInput.focus();
+      searchField.style.width = "100%";
+    });
+    //close search field on document click
+    document.addEventListener("click", event => {
+      let searchClicked = searchField.contains(event.target);
+      if (!searchClicked) {
+        searchField.style.backgroundColor = "inherit";
+        searchInput.style.width = 0;
+        searchInput.style.opacity = 0;
+        searchField.style.width = "35px";
+      }
+    });
+  }
+
   //small screen search-bar open/close
   if (smallSearchIcon !== null) {
     smallSearchIcon.addEventListener("click", () => {
@@ -107,10 +123,70 @@ const navSlide = () => {
       smallSearchBar.classList.remove("active-small-search");
     });
   }
+
+  // scroll EVENT
+  window.addEventListener("scroll", function() {
+    let navigation = document.querySelector(".navigation");
+    let windowPosition = window.scrollY > 0;
+    navigation.classList.toggle("scrolling-active", windowPosition);
+  });
+
+  // footer
+
+  const currentYear = new Date().getFullYear();
+  const copyrightYear = document.querySelector(".copyright");
+  copyrightYear.innerHTML += currentYear;
+
+  $(document).on("click", 'a[href^="#"]', function(event) {
+    event.preventDefault();
+    console.log("clicked");
+
+    $("html, body").animate(
+      {
+        scrollTop: $($.attr(this, "href")).offset().top
+      },
+      500
+    );
+  });
 };
 
 // invoke function
 navSlide();
+
+// show password and author bio
+function revealPass() {
+  if (eye) {
+    eye.addEventListener("click", () => {
+      if (passInput.type === "password") {
+        passInput.type = "text";
+      } else if (passInput.type === "text") {
+        passInput.type = "password";
+      }
+    });
+  }
+  if (seeBio) {
+    seeBio.addEventListener("click", () => {
+      seeBio.classList.toggle("active-see-bio");
+      profileBio.classList.toggle("active-options");
+    });
+  }
+}
+
+revealPass();
+
+// sticky layout
+function stickLayout() {
+  if (short || long) {
+    let shortHeight = short.clientHeight + 444.5;
+    let longHeight = long.clientHeight;
+    if (longHeight > shortHeight) {
+      short.classList.add("to-stick");
+    } else {
+      long.classList.add("to-stick");
+    }
+  }
+}
+stickLayout();
 
 //toggle synopsis and bio container
 function openSynopsisContainer() {
@@ -130,14 +206,18 @@ function openSynopsisContainer() {
 openSynopsisContainer();
 
 // close/open watch providers
-if (closeProviders !== null) {
-  closeProviders.addEventListener("click", e => {
-    e.preventDefault();
-    headerSynopsis.style.display = "block";
-    watchProviders.style.display = "none";
-    watchBanner.style.display = "flex";
-  });
+function revealWatchProviders() {
+  if (closeProviders !== null) {
+    closeProviders.addEventListener("click", e => {
+      e.preventDefault();
+      headerSynopsis.style.display = "block";
+      watchProviders.style.display = "none";
+      watchBanner.style.display = "flex";
+    });
+  }
 }
+revealWatchProviders();
+
 // toggle synopsis for small screens: here to ease work
 function smallScreenSynopsis() {
   const dots = document.querySelector(".dots");
@@ -180,9 +260,13 @@ function trailerController() {
   }
 
   if (headerTrailer !== null) {
+<<<<<<< HEAD
+=======
+    let videoSource;
+>>>>>>> blog
     for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
-        const videoSource = trailer.parentElement.nextElementSibling.src;
+        videoSource = trailer.parentElement.nextElementSibling.src;
         video.src = videoSource + "&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
@@ -239,24 +323,136 @@ function toggleReviews() {
       reviewer.style.color = "#fff";
     });
   }
+
+  // go back to previous page
+  if (returnBtns !== null) {
+    for (let i = 0; i < returnBtns.length; i++) {
+      returnBtns[i].addEventListener("click", () => {
+        history.back();
+      });
+    }
+  }
 }
 toggleReviews();
 
-// go back to previous page
-if (returnBtns !== null) {
-  for (let i = 0; i < returnBtns.length; i++) {
-    returnBtns[i].addEventListener("click", () => {
-      history.back();
+function debounce(fn, delay) {
+  let timeoutID;
+  return function(...args) {
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+    }
+    timeoutID = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
+
+// Handling recently clicked movie cards
+
+function recentlyViewedHandler() {
+  if (clearViewInfo) {
+    clearViewInfo.href = window.location.href;
+  }
+
+  if (!localStorage.getItem("cardStore")) {
+    localStorage.setItem("cardStore", "[]");
+  }
+
+  let store = JSON.parse(localStorage.getItem("cardStore"));
+  if (store.length === 0) {
+    clearViewInfo.style.display = "none";
+    viewInfo.classList.add("show-view-info");
+  }
+
+  for (let i = 0; i < cards.length; i++) {
+    const title = cards[i].firstElementChild.title;
+    const image = cards[i].firstElementChild.firstElementChild.src;
+    const link = cards[i].firstElementChild.href;
+    const id = link.split("/").pop();
+    cards[i].addEventListener(
+      "click",
+      debounce(function() {
+        let cardItem = { id: id, title, image, link };
+        store.push(cardItem);
+        store = store.reduce((pureStore, current) => {
+          let obj = pureStore.find(item => item.id === current.id);
+          if (obj) {
+            return pureStore;
+          }
+          return pureStore.concat([current]);
+        }, []);
+        localStorage.setItem("cardStore", JSON.stringify(store));
+      }, 2000)
+    );
+  }
+
+  getRecentlyViewed(store);
+}
+
+function getRecentlyViewed(store) {
+  if (store.length) {
+    store.forEach(({ title, image, link }) => {
+      let div = document.createElement("div");
+      div.className = "cast-card recent-card";
+      div.innerHTML = `
+      <a class="image" href=${link} title=${title}>
+        <img src=${image} alt="movie-poster">
+        <h3> ${title} </h3>
+      </a>
+    `
+      if (recentWrapper) {
+        recentWrapper.appendChild(div);
+      }
     });
   }
 }
 
-// scroll EVENT
-window.addEventListener("scroll", function() {
-  let navigation = document.querySelector(".navigation");
-  let windowPosition = window.scrollY > 0;
-  navigation.classList.toggle("scrolling-active", windowPosition);
-});
+recentlyViewedHandler();
+
+// custom select dropdown
+function dropDown() {
+  const selected = [...document.querySelectorAll(".selected")];
+  const optionsContainer = [...document.querySelectorAll(".options-container")];
+  if (selected) {
+    selected.forEach(select => {
+      select.addEventListener("click", () => {
+        select.previousElementSibling.classList.toggle("active-options");
+      });
+    });
+  }
+
+  if (optionsContainer) {
+    optionsContainer.forEach(container => {
+      const optionsList = container.querySelectorAll(".option");
+      optionsList.forEach(option => {
+        option.addEventListener("click", () => {
+          const selectedInput = container.nextElementSibling.firstElementChild;
+          selectedInput.value = option.querySelector("label").innerHTML;
+          container.classList.remove("active-options");
+        });
+      });
+    });
+  }
+}
+
+dropDown();
+
+function clearViewed() {
+  if (clearViewInfo !== null) {
+    clearViewInfo.addEventListener("click", () => {
+      localStorage.removeItem("cardStore");
+      clearViewInfo.innerText = "Clearing...";
+      document.addEventListener("DOMContentLoaded", () => {
+        clearViewInfo.style.display = "none";
+      });
+    });
+  }
+}
+clearViewed();
+
+// simplebar
+const simpleBarContainer = document.getElementById("simple-bar");
+new SimpleBar(simpleBarContainer, { autoHide: true });
 
 //Trending togglers
 
@@ -284,8 +480,14 @@ function switchTrend() {
 switchTrend()
 
 //faq-toggler
+<<<<<<< HEAD
 
 function toggleFaq() {
+=======
+function accToggler() {
+  const acc = document.getElementsByClassName("accodion");
+  const title = document.querySelector(".faq-title");
+>>>>>>> blog
   for (let i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", () => {
       acc[i].classList.toggle("active-drop");
@@ -294,6 +496,7 @@ function toggleFaq() {
         panel.style.maxHeight = null;
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
+<<<<<<< HEAD
       }
       title.classList.toggle("active-title");
     });
@@ -352,32 +555,14 @@ for (let i = 0; i < cards.length; i++) {
       let obj = pureStore.find(item => item.id === current.id);
       if (obj) {
         return pureStore;
+=======
+>>>>>>> blog
       }
-      return pureStore.concat([current]);
-    }, []);
-    localStorage.setItem("cardStore", JSON.stringify(store));
-  });
-}
-
-let div;
-
-function getRecentlyViewed() {
-  if (store.length) {
-    store.forEach(({ title, image, link }) => {
-      div = document.createElement("div");
-      div.classList.add("embla__slide");
-      div.innerHTML = `
-    <div class="embla__slide__inner cast-card recent-card">
-      <a class="image" href=${link} title=${title}>
-        <img src=${image} alt="movie-poster">
-        <h3>${title}</h3>
-      </a>
-    </div>
-    `;
-      recentWrapper.appendChild(div);
+      title.classList.toggle("active-title");
     });
   }
 }
+<<<<<<< HEAD
 
 getRecentlyViewed();
 
@@ -393,6 +578,9 @@ if (clearViewInfo !== null) {
 
 // simplebar
 new SimpleBar(simpleBarContainer, { autoHide: true });
+=======
+accToggler();
+>>>>>>> blog
 
 // welcome banner
 $(document).ready(function() {
