@@ -60,11 +60,7 @@ button {
     position: absolute;
     top: 0;
     width: 100%;
-<<<<<<< HEAD
     z-index: 999;
-=======
-    z-index: 9999;
->>>>>>> blog
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
@@ -435,12 +431,6 @@ button {
     margin: 0;
     /* background-color: darkgrey; */
     background-color: black;
-<<<<<<< HEAD
-=======
-    backdrop-filter: blur(15px);
-    box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
->>>>>>> blog
     z-index: 10000;
     overflow-y: auto;
     overflow-x: hidden;
@@ -1416,13 +1406,8 @@ button {
     font-size: 1rem;
 }
 
-<<<<<<< HEAD
 .swiper-main-title .movie-title{
     font-size: 2.4rem;
-=======
-.swiper-main-title .movie-title {
-    font-size: 2.5rem;
->>>>>>> blog
     font-weight: 700;
     line-height: 1.4;
     margin: 8px 0;
@@ -3356,16 +3341,10 @@ h1.genre-intro {
 
 .slider-inner-card img,
 .see-more-upcoming {
-<<<<<<< HEAD
   height: 170px;
   width: 299px;
   background-color: #001927;
     
-=======
-    height: 170px;
-    width: 300px;
-
->>>>>>> blog
 }
 .see-more-upcoming{
     background-color: transparent;

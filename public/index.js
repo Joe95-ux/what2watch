@@ -462,14 +462,8 @@ function switchTrend() {
 switchTrend()
 
 //faq-toggler
-<<<<<<< HEAD
 
 function toggleFaq() {
-=======
-function accToggler() {
-  const acc = document.getElementsByClassName("accodion");
-  const title = document.querySelector(".faq-title");
->>>>>>> blog
   for (let i = 0; i < acc.length; i++) {
     acc[i].addEventListener("click", () => {
       acc[i].classList.toggle("active-drop");
@@ -478,7 +472,6 @@ function accToggler() {
         panel.style.maxHeight = null;
       } else {
         panel.style.maxHeight = panel.scrollHeight + "px";
-<<<<<<< HEAD
       }
       title.classList.toggle("active-title");
     });
@@ -537,14 +530,11 @@ for (let i = 0; i < cards.length; i++) {
       let obj = pureStore.find(item => item.id === current.id);
       if (obj) {
         return pureStore;
-=======
->>>>>>> blog
       }
       title.classList.toggle("active-title");
     });
-  }
+  })
 }
-<<<<<<< HEAD
 
 getRecentlyViewed();
 
@@ -560,9 +550,6 @@ if (clearViewInfo !== null) {
 
 // simplebar
 new SimpleBar(simpleBarContainer, { autoHide: true });
-=======
-accToggler();
->>>>>>> blog
 
 // welcome banner
 $(document).ready(function() {
