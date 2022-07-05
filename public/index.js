@@ -23,6 +23,8 @@ const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
 const simpleBarContainer = document.getElementById("simple-bar");
+// simplebar
+new SimpleBar(simpleBarContainer, { autoHide: true });
 const acc = document.getElementsByClassName("accodion");
 const title = document.querySelector(".faq-title");
 const today = document.getElementById("today");
@@ -118,11 +120,6 @@ const navSlide = () => {
     navigation.classList.toggle("scrolling-active", windowPosition);
   });
 
-  // footer
-
-  const currentYear = new Date().getFullYear();
-  const copyrightYear = document.querySelector(".copyright");
-  copyrightYear.innerHTML += currentYear;
 
   $(document).on("click", 'a[href^="#"]', function(event) {
     event.preventDefault();
@@ -142,7 +139,7 @@ navSlide();
 
 // show password and author bio
 function revealPass() {
-  if (eye) {
+  if (eye != null) {
     eye.addEventListener("click", () => {
       if (passInput.type === "password") {
         passInput.type = "text";
@@ -433,9 +430,6 @@ function clearViewed() {
 }
 clearViewed();
 
-// simplebar
-new SimpleBar(simpleBarContainer, { autoHide: true });
-
 //Trending togglers
 
 function switchTrend() {
@@ -500,56 +494,6 @@ $(document).on("click", 'a[href^="#"]', function(event) {
   );
 });
 
-// Handling recently clicked movie cards
-
-let recentWrapper = document.querySelector(".recents-wrapper");
-const cards = [...document.querySelectorAll(".movie-card")];
-const viewInfo = document.querySelector(".viewed-info");
-const clearViewInfo = document.querySelector(".view-info-header a");
-clearViewInfo.href = window.location.href;
-
-if (!localStorage.getItem("cardStore")) {
-  localStorage.setItem("cardStore", "[]");
-}
-
-let store = JSON.parse(localStorage.getItem("cardStore"));
-if (store.length === 0) {
-  clearViewInfo.style.display = "none";
-  viewInfo.classList.add("show-view-info");
-}
-
-for (let i = 0; i < cards.length; i++) {
-  const title = cards[i].firstElementChild.title;
-  const image = cards[i].firstElementChild.firstElementChild.src;
-  const link = cards[i].firstElementChild.href;
-  const id = link.split("/").pop();
-  cards[i].addEventListener("click", function() {
-    let cardItem = { id: id, title, image, link };
-    store.push(cardItem);
-    store = store.reduce((pureStore, current) => {
-      let obj = pureStore.find(item => item.id === current.id);
-      if (obj) {
-        return pureStore;
-      }
-      title.classList.toggle("active-title");
-    });
-  })
-}
-
-getRecentlyViewed();
-
-if (clearViewInfo !== null) {
-  clearViewInfo.addEventListener("click", () => {
-    localStorage.removeItem("cardStore");
-    clearViewInfo.innerText = "Clearing...";
-    document.addEventListener("DOMContentLoaded", () => {
-      clearViewInfo.style.display = "none";
-    });
-  });
-}
-
-// simplebar
-new SimpleBar(simpleBarContainer, { autoHide: true });
 
 // welcome banner
 $(document).ready(function() {
