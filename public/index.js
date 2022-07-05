@@ -175,11 +175,11 @@ revealPass();
 // sticky layout
 function stickLayout() {
   if (short || long) {
-    let shortHeight = short.clientHeight;
+    let shortHeight = short.clientHeight + 444.5;
     let longHeight = long.clientHeight;
     if (longHeight > shortHeight) {
       short.classList.add("to-stick");
-    } else if (shortHeight > longHeight) {
+    } else {
       long.classList.add("to-stick");
     }
   }

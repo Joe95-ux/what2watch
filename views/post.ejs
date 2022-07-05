@@ -16,7 +16,7 @@
         <div class="blog-nav">
             <span><a href="/blog/posts">Home</a></span>
             <i class="fas fa-chevron-right"></i>
-            <span><a href="/blog/<%= story.category %> "><%= story.category %> </a></span>
+            <span><a href="/blog/category/<%=story.category %>"><%= story.category %> </a></span>
             <i class="fas fa-chevron-right"></i>
             <span title="<%= story.title %> "><%= story.title %></span>
         </div>
@@ -44,8 +44,8 @@
                     <% if(story){%>
                     <div class="post-author-details">
                         <h4><%= story.author %> </h4>
-                        <% if(story?.user?.bio){%>
-                        <p><%= user?.bio %></p>
+                        <% if(story.user?.bio){%>
+                        <p><%= story.user?.bio %></p>
                         <% }else{%>
                         <p>No Info about writer to display.</p>
                         <% } %>
@@ -200,12 +200,12 @@
                     <h1 class="cat-title">Categories</h1>
                     <div class="post-cat-container">
                         <ul>
-                            <li><a href="#">Movies</a><span>(8)</span></li>
-                            <li><a href="#">Tv Shows</a><span>(5)</span></li>
-                            <li><a href="#">Action Movies</a><span>(9)</span></li>
-                            <li><a href="#">Latest Posts</a><span>(6)</span></li>
-                            <li><a href="#">Editor's picks</a><span>(4)</span></li>
-                            <li><a href="#">Older posts</a><span>(2)</span></li>
+                            <% if(sortedCats){%>
+                            <% for(let cat in sortedCats){%>
+                            <li><a href="/blog/category/<%=cat%>"><%= cat %> </a><span>(<%= sortedCats[cat] %>)</span>
+                            </li>
+                            <% } %>
+                            <% } %>
                         </ul>
 
                     </div>

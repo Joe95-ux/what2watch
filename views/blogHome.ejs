@@ -92,8 +92,8 @@
                 <ul class="nav_links">
                     <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
                     <% if(user){%>
-                        <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% } %>  
+                    <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
                 </ul>
 
             </div>
@@ -248,17 +248,19 @@
                                 <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
                             </div>
                             <% if(stories){%>
-                                <%stories.forEach(story=>{  %> 
-                                    <div class="post">
-                                        <img src="/uploads/images/<%= story.photo %> " alt="post image">
-                                        <h3><%= story.title %> </h3>
-                                        <h5 class="date"> <span>by <%= story.author %> </span> <span><%= story.createdAt %> </span> </h5>
-                                        <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i class="fas fa-angle-double-right"></i></a>
-                                    </div>
+                            <%stories.forEach(story=>{  %>
+                            <div class="post">
+                                <img src="/uploads/images/<%= story.photo %> " alt="post image">
+                                <h3><%= story.title %> </h3>
+                                <h5 class="date"> <span>by <%= story.author %> </span> <span><%= story.createdAt %>
+                                    </span> </h5>
+                                <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
+                                        class="fas fa-angle-double-right"></i></a>
+                            </div>
 
-                                <% }) %> 
+                            <% }) %>
 
-                            <%} %> 
+                            <%} %>
                         </div>
                         <div class="page-controls">
                             <a href="#" class="prev-page swiper-btn" role="button"><i
@@ -273,62 +275,33 @@
                             <div class="embla autoplay__embla blog-trending-movies">
                                 <div class="autoplay">
                                     <div class="embla__container">
-                                        <div class="embla__slide autoplay__slide"
-                                            style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="embla__slide__inner">
-                                                <div class="post-title">
-                                                    <h5><span>Editors's picks</span> <span>category</span> </h5>
-                                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                                    <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                            2021</span> </h5>
+                                        <% if(trending){%>
+                                            <% trending.forEach((movie, index)=>{%>
+                                                <div class="embla__slide autoplay__slide" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0, 25, 39, 0.5)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
+                                                    <div class="embla__slide__inner">
+                                                        <div class="new-movie-wrapper blog-trending-movie-wrapper">
+                                                            <div class="new-header-movie blog-trending-movie">
+                                                                <h1 class="movie-title"><%= movie.title %></h1>
+                                                                <% if(movie.overview.length > 60){%> 
+                                                                    <p class="clamp-synopsis">
+                                                                        <%= movie.overview%> 
+                                                                    </p>
+                                                                <% }else{%>
+                                                                    <p class="no-clamp"><%= movie.overview%></p>
+                                                                <% } %>  
+                                                                <div class="swiper-btns new-header-btn blog-movie-btn">
+                                                                    <a  href="/movie/<%= movie.id %>" class="swiper-btn" role="button">Learn more</a>
+                                                                </div>
+                                                            </div>
+            
+                                                        </div> 
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="embla__slide autoplay__slide"
-                                            style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="embla__slide__inner">
-                                                <div class="post-title">
-                                                    <h5><span>Editors's picks</span> <span>category</span> </h5>
-                                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                                    <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                            2021</span> </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="embla__slide autoplay__slide"
-                                            style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="embla__slide__inner">
-                                                <div class="post-title">
-                                                    <h5><span>Editors's picks</span> <span>category</span> </h5>
-                                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                                    <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                            2021</span> </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="embla__slide autoplay__slide"
-                                            style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="embla__slide__inner">
-                                                <div class="post-title">
-                                                    <h5><span>Editors's picks</span> <span>category</span> </h5>
-                                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                                    <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                            2021</span> </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="embla__slide autoplay__slide"
-                                            style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="embla__slide__inner">
-                                                <div class="post-title">
-                                                    <h5><span>Editors's picks</span> <span>category</span> </h5>
-                                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                                    <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                            2021</span> </h5>
-                                                </div>
-                                            </div>
-                                        </div>
-
+            
+                                           <% }) %> 
+                                            
+                                        <% } %> 
+    
                                     </div>
                                 </div>
                                 <!-- Dots -->
@@ -548,18 +521,12 @@
                         <h1 class="cat-title">Categories</h1>
                         <div class="post-cat-container">
                             <ul>
-                                <li><a href="#">Movies</a><span>(8)</span></li>
-                                <li><a href="#">Tv Shows</a><span>(5)</span></li>
-                                <li><a href="#">Pop Culture</a><span>(9)</span></li>
-                                <li><a href="#">Marvel Universe</a><span>(6)</span></li>
-                                <li><a href="#">Editor's picks</a><span>(4)</span></li>
-                                <li><a href="#">DC News</a><span>(2)</span></li>
-                                <li><a href="#">Streaming</a><span>(2)</span></li>
-                                <li><a href="#">Celebrities</a><span>(2)</span></li>
-                                <li><a href="#">Comedy</a><span>(2)</span></li>
-                                <li><a href="#">Casting News</a><span>(2)</span></li>
+                                <% if(sortedCats){%>
+                                <% for(let cat in sortedCats){%>
+                                <li><a href="/blog/category/<%=cat%>"><%= cat %> </a><span>(<%= sortedCats[cat] %>)</span></li>
+                                <% } %>
+                                <% } %>
                             </ul>
-
                         </div>
                     </div>
                     <div>

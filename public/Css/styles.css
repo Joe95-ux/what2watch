@@ -825,6 +825,9 @@ button{
     .new-header-movie{
         max-width: 70%;
     }
+    .new-header-movie.blog-trending-movie{
+        max-width: 78%;
+    }
     .autoplay__slide img{
         max-width: 190px;
     }
@@ -848,7 +851,7 @@ button{
     .new-movie-wrapper{
         padding: 0 0.7rem 2rem 0.7rem;
     }
-    .new-header-movie{
+    .new-header-movie, .new-header-movie.blog-trending-movie{
         max-width: 100%;
         align-self: flex-end;
     }

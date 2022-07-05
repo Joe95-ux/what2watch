@@ -9,7 +9,7 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
 const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
-const { formatDate, dateWithTime, sortCats, getCats } = require("../helpers/helper");
+const { formatDate, dateWithTime, sortCats, getCats, trendingMovies } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
 const format = "MMMM Do YYYY, h:mm:ss a";
@@ -54,10 +54,35 @@ router.post("/posts", async (req, res) => {
   }
 });
 
-router.get("/category", async (req, res) => {
-  const title = "category";
+router.get("/category/:catName", async (req, res) => {
+  const title = req.params.catName;
   const userEmail = req.flash("user");
-  res.render("blogCategory", { title, userEmail });
+  const cat = req.params.catName;
+  let sortedCats;
+  try {
+    let allStories = await Story.find({ status:"Public"});
+    const allTrending = await trendingMovies();
+    const trending = await allTrending.slice(0, 5);
+    let stories = await Story.find({ category: cat, status:"Public"})
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      let categories = getCats(allStories);
+      if(categories.length){
+        sortedCats = sortCats(categories);
+      }
+      
+    }
+    res.render("blogCategory", { title, userEmail, stories, sortedCats, cat, trending });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.get("/compose", ensureAuth, async (req, res) => {
@@ -84,7 +109,10 @@ router.post(
 router.get("/posts", async (req, res) => {
   const title = "blog posts";
   const userEmail = req.flash("user");
+  let sortedCats;
   try {
+    const allTrending = await trendingMovies();
+    const trending = await allTrending.slice(0, 5);
     let stories = await Story.find({ status: "Public" })
       .populate("user")
       .sort({ createdAt: "desc" })
@@ -97,12 +125,11 @@ router.get("/posts", async (req, res) => {
       });
       let categories = getCats(stories);
       if(categories.length){
-        let sortedCats = sortCats(categories);
-        console.log(sortedCats)
+        sortedCats = sortCats(categories);
       }
       
     }
-    res.render("blogHome.ejs", { title, userEmail, stories });
+    res.render("blogHome", { title, userEmail, stories, sortedCats, trending });
   } catch (err) {
     console.log(err);
   }
@@ -219,7 +246,9 @@ router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
 router.get("/posts/:slug", async (req, res) => {
   let title;
   const userEmail = req.flash("user");
+  let sortedCats;
   try {
+    let stories = await Story.find({ status: "Public" });
     let story = await Story.findOne({ slug: req.params.slug })
       .populate("user")
       .lean()
@@ -230,7 +259,14 @@ router.get("/posts/:slug", async (req, res) => {
     } else {
       story.createdAt = formatDate(story.createdAt);
       title = story.title;
-      res.render("post", { title, userEmail, story });
+      if (stories) {
+        let categories = getCats(stories);
+        if(categories.length){
+          sortedCats = sortCats(categories);
+        }
+        
+      }
+      res.render("post", { title, userEmail, story, sortedCats });
     }
   } catch (err) {
     console.error(err);
