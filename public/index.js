@@ -22,7 +22,6 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
-<<<<<<< HEAD
 const simpleBarContainer = document.getElementById("simple-bar");
 const acc = document.getElementsByClassName("accodion");
 const title = document.querySelector(".faq-title");
@@ -33,18 +32,6 @@ const trendingThisWeek = document.getElementById("trending-thisweek");
 const currentYear = new Date().getFullYear();
 const copyrightYear = document.querySelector(".copyright");
 copyrightYear.innerHTML += currentYear;
-=======
-const passInput = document.querySelector("#writer-pass");
-const eye = document.querySelector(".pass-reveal");
-const seeBio = document.querySelector(".see-bio");
-const profileBio = document.querySelector(".profile-biography");
-const short = document.getElementById("short");
-const long = document.getElementById("long");
-let recentWrapper = document.querySelector(".recents-wrapper");
-const cards = [...document.querySelectorAll(".movie-card")];
-const viewInfo = document.querySelector(".viewed-info");
-const clearViewInfo = document.querySelector(".view-info-header a");
->>>>>>> blog
 
 // navigation bar
 const navSlide = () => {
@@ -260,10 +247,6 @@ function trailerController() {
   }
 
   if (headerTrailer !== null) {
-<<<<<<< HEAD
-=======
-    let videoSource;
->>>>>>> blog
     for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
         videoSource = trailer.parentElement.nextElementSibling.src;
@@ -451,7 +434,6 @@ function clearViewed() {
 clearViewed();
 
 // simplebar
-const simpleBarContainer = document.getElementById("simple-bar");
 new SimpleBar(simpleBarContainer, { autoHide: true });
 
 //Trending togglers
