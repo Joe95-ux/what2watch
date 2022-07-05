@@ -62,7 +62,7 @@ router.get("/category/:catName", async (req, res) => {
   try {
     let allStories = await Story.find({ status:"Public"});
     const allTrending = await trendingMovies();
-    const trending = await allTrending.slice(0, 5);
+    const trending = await allTrending.slice(0, 6);
     let stories = await Story.find({ category: cat, status:"Public"})
       .populate("user")
       .sort({ createdAt: "desc" })
@@ -112,7 +112,7 @@ router.get("/posts", async (req, res) => {
   let sortedCats;
   try {
     const allTrending = await trendingMovies();
-    const trending = await allTrending.slice(0, 5);
+    const trending = await allTrending.slice(0, 6);
     let stories = await Story.find({ status: "Public" })
       .populate("user")
       .sort({ createdAt: "desc" })

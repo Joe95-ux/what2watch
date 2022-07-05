@@ -28,7 +28,7 @@
                             <img src="/uploads/images/<%= story.photo %> " alt="post image">
                             <h5 class="cat-name"><span class="left-span">Featured</span> <span><%= story.category %> </span></h5>
                             <h3 title="<%= story.title %> "><%= story.title %> </h3>
-                            <h5 class="date"> <span>by <%= story.author %> </span> <span><%= story.createdAt %>
+                            <h5 class="date"> <span>by <strong><%= story.author %></strong></span> <span><%= story.createdAt %>
                                 </span> </h5>
                             <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
                                     class="fas fa-angle-double-right"></i></a>
@@ -99,7 +99,7 @@
                                 <div class="embla__container">
                                     <% if(trending){%>
                                         <% trending.forEach((movie, index)=>{%>
-                                            <div class="embla__slide autoplay__slide" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0, 25, 39, 0.5)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
+                                            <div class="embla__slide autoplay__slide" style="background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
                                                 <div class="embla__slide__inner">
                                                     <div class="new-movie-wrapper blog-trending-movie-wrapper">
                                                         <div class="new-header-movie blog-trending-movie">
@@ -154,7 +154,7 @@
                                 <img src="/dune.jpg" alt="post image">
                                 <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
                                 <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
+                                <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11, 2021</span> </h5>
                                 <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
                             </div>
                             <div class="post">
