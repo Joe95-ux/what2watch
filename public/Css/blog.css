@@ -70,26 +70,29 @@ div.blog-header-wrapper {
     min-height: 400px;
 }
 
-.blog-nav{
+.blog-nav {
     color: var(--midGray);
     font-size: 1rem;
     font-weight: 400;
     text-transform: capitalize;
     margin-bottom: 2rem;
-    overflow: hidden; 
-    white-space:nowrap; 
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 788px
 }
-.blog-nav a{
+
+.blog-nav a {
     color: var(--midGray);
     text-decoration: none;
     transition: var(--mainTransition);
 }
-.blog-nav a:hover{
+
+.blog-nav a:hover {
     color: var(--mainWhite);
 }
-.blog-nav i{
+
+.blog-nav i {
     margin: 0 13px;
     font-size: 13px;
     margin-top: 4px;
@@ -145,14 +148,15 @@ div.blog-header-right {
 
 .post-title h3,
 .post h3 {
-    font-size: 1.3rem;
+    font-size: 20px;
     font-weight: 500;
 }
-.post strong{
+
+.post strong {
     color: var(--mainWhite);
 }
 
-.post h3{
+.post h3 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -162,6 +166,10 @@ div.blog-header-right {
 .post-title h4 {
     font-size: 17px;
     font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .post-title h5,
@@ -174,6 +182,10 @@ div.blog-header-right {
 
 .hide-date {
     display: none;
+}
+
+div.blog-header-right .post-title {
+    margin-right: 10px;
 }
 
 @media screen and (max-width:961px) {
@@ -298,10 +310,6 @@ div.blog-header-right {
     }
 
     .post-title h4 {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
         font-size: 13px;
     }
 
@@ -472,12 +480,13 @@ div.tv-news {
     margin-bottom: 0.3rem;
 
 }
-@media screen and (max-width:420px){
+
+@media screen and (max-width:420px) {
     .latest-posts .post img {
         height: auto;
         min-height: 135px;
         max-height: 200px;
-    
+
     }
 }
 
@@ -548,26 +557,28 @@ div.tv-news {
     border-radius: var(--mainBorderRaduis);
 }
 
-.new-header-movie.blog-trending-movie{
+.new-header-movie.blog-trending-movie {
     max-width: 70%;
 }
 
-.new-header-movie.blog-trending-movie h1{
+.new-header-movie.blog-trending-movie h1 {
     font-size: 1.3rem;
     color: var(--mainWhite);
 }
-.new-header-movie.blog-trending-movie P{
+
+.new-header-movie.blog-trending-movie P {
     color: var(--lightGrey);
     font-size: 17px;
     line-height: 1.4;
 }
-.new-header-btn.blog-movie-btn a{
+
+.new-header-btn.blog-movie-btn a {
     background-color: var(--primaryColor);
     text-transform: capitalize;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.new-header-btn.blog-movie-btn a:hover{
+.new-header-btn.blog-movie-btn a:hover {
     background-color: transparent;
 }
 
@@ -942,7 +953,8 @@ a.blog-social-link i {
 }
 
 
-small.nl, small.auth {
+small.nl,
+small.auth {
     position: absolute;
     bottom: -24px;
     left: 1.3rem;
@@ -953,29 +965,35 @@ small.nl, small.auth {
     display: block;
     visibility: hidden;
 }
-.news-letter-inner.error{
+
+.news-letter-inner.error {
     border: 1px solid rgba(215, 9, 0, 0.5);
 }
-.actions-input.error{
+
+.actions-input.error {
     border-bottom: 1px solid rgba(215, 9, 0, 0.5);
 }
-.news-letter-inner.success{
+
+.news-letter-inner.success {
     border: 1px solid rgba(19, 99, 223, 0.5);
 }
-.actions-input.success{
+
+.actions-input.success {
     border-bottom: 1px solid rgba(19, 99, 223, 0.5);
 }
-.news-letter-inner.error + small, .actions-input.error + small{
+
+.news-letter-inner.error+small,
+.actions-input.error+small {
     visibility: visible;
 }
 
-h1.thanks{
+h1.thanks {
     display: block;
     font-size: 1.4rem;
     color: var(--mainWhite);
 }
 
-small.auth{
+small.auth {
     left: 0;
     width: 100%;
     margin-top: 3px;
@@ -1581,7 +1599,8 @@ blockquote h4::before {
     .post-author-bio {
         flex-direction: column;
     }
-    .post-author-bio img{
+
+    .post-author-bio img {
         margin-right: 0;
     }
 
@@ -1636,22 +1655,25 @@ table {
 thead {
     color: var(--lightGrey);
 }
-.clamp-dashboard{
+
+.clamp-dashboard {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-.clamp-dashboard a{
-    color:#C4DDFF;
+
+.clamp-dashboard a {
+    color: #C4DDFF;
     transition: var(--mainTransition);
     -webkit-transition: var(--mainTransition);
 }
-.clamp-dashboard a:hover{
-    color:var(--midGray);
+
+.clamp-dashboard a:hover {
+    color: var(--midGray);
 }
 
- thead th:nth-child(1) {
+thead th:nth-child(1) {
     width: 35%;
 }
 
@@ -1660,12 +1682,12 @@ thead th:nth-child(2) {
 }
 
 thead th:nth-child(3) {
-    width: 12% ;
+    width: 12%;
 }
 
 thead th:nth-child(4) {
-    width: 20% ;
-} 
+    width: 20%;
+}
 
 table thead tr th {
     padding: 10px 5px;
@@ -1700,22 +1722,26 @@ tbody td a {
     text-decoration: none;
 }
 
-.dashboard-actions a, #delete-form button{
+.dashboard-actions a,
+#delete-form button {
     color: var(--midGray);
     font-size: 14px;
     transition: var(--mainTransition);
 }
+
 #delete-form {
     margin: 0;
     padding: 0;
 }
-#delete-form button{
+
+#delete-form button {
     background-color: inherit;
     border: none;
     cursor: pointer;
 }
 
-.dashboard-actions a i, #delete-form button i {
+.dashboard-actions a i,
+#delete-form button i {
     margin-right: 5px;
 }
 
@@ -1723,7 +1749,8 @@ tbody td a {
     color: var(--primaryColor);
 }
 
-.dashboard-actions a:hover, #delete-form button:hover {
+.dashboard-actions a:hover,
+#delete-form button:hover {
     color: var(--mainWhite);
 }
 
@@ -1773,7 +1800,7 @@ tbody td a {
 
 }
 
-.dashboard-userbio-wrapper{
+.dashboard-userbio-wrapper {
     position: sticky;
     position: -webkit-sticky;
     top: 3.7rem;
@@ -1923,7 +1950,7 @@ tbody td a {
     align-self: center;
 }
 
-.delete-account{
+.delete-account {
     margin-top: 1.2rem;
     padding: 0.8rem 1.5rem 1.8rem;
     background-color: #001927;
@@ -1931,17 +1958,19 @@ tbody td a {
     border-radius: 5px;
 }
 
-.delete-heading{
+.delete-heading {
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-.delete-heading h2{
+
+.delete-heading h2 {
     font-size: 1.3rem;
     font-weight: 500;
     color: var(--mainWhite);
 }
-.delete-account p{
-    font-size:14px;
+
+.delete-account p {
+    font-size: 14px;
     font-weight: 400;
     color: var(--midGray);
     line-height: 1.5;
@@ -1949,12 +1978,12 @@ tbody td a {
     margin-top: 13px;
 }
 
-.delete-account .edit-profile-btn{
+.delete-account .edit-profile-btn {
     background-color: var(--primaryColor);
     border-radius: 55px;
 }
 
-.delete-account .edit-profile-btn:hover{
+.delete-account .edit-profile-btn:hover {
     background-color: transparent;
 }
 
