@@ -54,7 +54,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
-    if (document.querySelector("#editor")) {
+    if (document.querySelector("#editor") != null) {
         ClassicEditor.create(document.querySelector("#editor"))
             .catch(error => {
                 console.error(error);

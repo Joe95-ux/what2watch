@@ -865,6 +865,7 @@ button {
 
     .new-header-movie.blog-trending-movie {
         max-width: 78%;
+        margin: 0 0.5rem 0 1rem;
     }
 
     .autoplay__slide img {

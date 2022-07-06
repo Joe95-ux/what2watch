@@ -10,7 +10,7 @@ module.exports = {
     },
     ensureGuest: function(req, res, next){
         if(req.isAuthenticated()){
-            res.redirect('/blog/dashboard');
+            res.redirect('/blog/dashboard/' + req.user.id);
         }else{
             return next();
         }

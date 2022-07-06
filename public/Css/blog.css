@@ -464,12 +464,21 @@ div.tv-news {
 
 .latest-posts .post img {
     height: auto;
+    min-height: 135px;
     max-height: 230px;
     width: 100%;
     object-fit: cover;
     border-radius: var(--mainBorderRaduis);
     margin-bottom: 0.3rem;
 
+}
+@media screen and (max-width:420px){
+    .latest-posts .post img {
+        height: auto;
+        min-height: 135px;
+        max-height: 200px;
+    
+    }
 }
 
 .post h3 {
