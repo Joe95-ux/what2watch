@@ -155,9 +155,14 @@ div.blog-header-right {
 .post strong {
     color: var(--mainWhite);
 }
-.post a{
+.post-content a{
     text-decoration: none;
     color: var(--mainWhite);
+    transition:var(--mainTransition);
+    -webkit-transition: var(--mainTransition);
+}
+.post-content a:hover{
+    text-decoration: underline;
 }
 
 .post h3 {
