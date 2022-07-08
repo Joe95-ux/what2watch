@@ -155,6 +155,10 @@ div.blog-header-right {
 .post strong {
     color: var(--mainWhite);
 }
+.post a{
+    text-decoration: none;
+    color: var(--mainWhite);
+}
 
 .post h3 {
     display: -webkit-box;
