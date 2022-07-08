@@ -18,7 +18,7 @@
             <i class="fas fa-chevron-right"></i>
             <span><a href="/blog/category/<%=story.category %>"><%= story.category %> </a></span>
             <i class="fas fa-chevron-right"></i>
-            <span title="<%= story.title %> "><%= story.title %></span>
+            <span title="<%= story.title %> " class="focus-nav"><%= story.title %></span>
         </div>
 
         <% } %>
@@ -28,7 +28,7 @@
                 <% if(story){%>
                 <div class="post post-header">
                     <img src="/uploads/images/<%= story.photo%>" alt="post-image">
-                    <h5><%= story.photoTitle %> </h5>
+                    <h5 class="image-caption"><%= story.photoTitle %> </h5>
                     </h5>
                     <h3 class="single-post-title"><%= story.title %> </h3>
                     <h5 class="date"> <span>by <strong><%= story.author %></strong></span> <span><%= story.createdAt %> </span> </h5>
