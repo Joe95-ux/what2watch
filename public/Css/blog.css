@@ -1546,16 +1546,16 @@ blockquote h4 {
     }
 
     .post-content p {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     blockquote p {
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.5;
     }
 
     blockquote h4 {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 

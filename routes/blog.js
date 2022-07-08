@@ -143,7 +143,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
     }).lean();
 
     if (!story) {
-      return res.render("error/404");
+      return res.render("error/400");
     }
 
     if (story.user != req.user.id) {
@@ -161,16 +161,13 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
 
 // @desc    Update story
 // @route   PUT /blog/posts/:id
-router.put(
-  "/posts/:id",
-  ensureAuth,
-  upload.single("photo"),
-  async (req, res) => {
+router.put("/posts/:id", upload.single("photo"), ensureAuth, async (req, res) => {
     try {
       let story = await Story.findById(req.params.id).lean();
+      let newStory = req.body;
 
       if (!story) {
-        return res.render("error/404");
+        return res.render("error/400");
       }
 
       if (story.user != req.user.id) {
@@ -178,13 +175,16 @@ router.put(
           .status(401)
           .json("action not authorised. You can only edit your story");
       } else {
-        if (req.body.photo) {
-          req.body.photo = req.file.filename;
+        if (req.file) {
+          newStory.photo = req.file.filename;
         }
-        story = await Story.findOneAndUpdate({ _id: req.params.id }, req.body, {
-          new: true,
-          runValidators: true
-        });
+        story = await Story.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: newStory
+          },
+          { new: true }
+        );
 
         res.redirect("/blog/dashboard/" + story.user);
       }
@@ -202,7 +202,7 @@ router.delete("/posts/:id", ensureAuth, async (req, res) => {
     let story = await Story.findById(req.params.id).lean();
 
     if (!story) {
-      return res.render("error/404");
+      return res.render("error/400");
     }
 
     if (story.user != req.user.id) {
@@ -226,7 +226,7 @@ router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
     let user = await User.findById(req.params.id).lean();
 
     if (!user) {
-      return res.render("error/404");
+      return res.render("error/400");
     }
 
     if (user._id != req.user.id) {

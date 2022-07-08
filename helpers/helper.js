@@ -40,5 +40,12 @@ module.exports = {
     } catch (e) {
       console.log(e);
     }
+  },
+  relatedPosts: function (stories, cat){
+    const related = stories.filter((story)=>{
+      return story.category === cat;
+    })
+    return related;
+
   }
 };
