@@ -21,7 +21,11 @@
             <div class="dashboard-content">
                 <div class="dashboard-title">
                     <div>
-                        <h2>Welcome John Doe!</h2>
+                        <%if(user.name !== ""){%>
+                        <h2>Welcome <span><%=user.name%>!</span></h2>
+                        <% }else{%>
+                        <h2>Welcome <%=user.username%>!</h2>
+                        <% } %>
                         <p>Here are your stories</p>
                     </div>
                     <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>New Post</a>
@@ -53,7 +57,8 @@
                         <tr>
                             <td data-label="Title">
                                 <div class="clamp-dashboard">
-                                    <a href="/blog/posts/<%= story.slug%>" title="<%= story.title %> "><%= story.title %></a>
+                                    <a href="/blog/posts/<%= story.slug%>"
+                                        title="<%= story.title %> "><%= story.title %></a>
                                 </div>
                             </td>
                             <td data-label="Date"><%= story.createdAt %> </td>

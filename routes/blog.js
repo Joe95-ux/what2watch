@@ -341,7 +341,7 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
   let created;
   try {
-    let stories = await Story.find({ user: req.params.id }).lean();
+    let stories = await Story.find({ user: req.params.id }).sort({ createdAt: "desc" }).lean();
     let user = await User.findById(req.params.id);
     if (stories) {
       stories = stories.map(story => {

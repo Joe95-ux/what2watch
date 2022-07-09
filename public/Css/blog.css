@@ -578,6 +578,18 @@ div.tv-news {
     margin-top: 25px;
     width: 100%;
 }
+.latest-stories{
+    padding-bottom: 32px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.page-controls.blog-page-controls{
+    margin: 3rem 0;
+}
+.swiper-btn.blog-control-btn{
+    padding: 5px 1.3rem;
+}
 
 .square__btn.old-embla-btn {
     top: 35%;
@@ -1801,11 +1813,14 @@ tbody td a {
     display: flex;
     justify-content: space-between;
 }
+.dashboard-title span{
+    color: var(--mainWhite);
+}
 
 
 .dashboard-title h2 {
     font-size: 1.3rem;
-    color: var(--lightGrey);
+    color: var(--midGrey);
     font-weight: 500;
 }
 
