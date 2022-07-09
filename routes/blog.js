@@ -90,15 +90,14 @@ router.get("/compose", ensureAuth, async (req, res) => {
   res.render("compose", { title });
 });
 
-router.post(
-  "/compose",
-  upload.single("photo"),
-  ensureAuth,
-  async (req, res) => {
+router.post("/compose", upload.single("photo"), ensureAuth, async (req, res) => {
+    const host = req.hostname;
+    let post;
     try {
       req.body.user = req.user.id;
-      req.body.photo = req.file.filename;
-      await Story.create(req.body);
+      post = req.body
+      post.photo = req.file.path;
+      await Story.create(post);
       res.redirect("/blog/posts");
     } catch (err) {
       console.error(err);
