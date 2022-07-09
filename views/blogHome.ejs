@@ -250,7 +250,7 @@
                             <% if(stories){%>
                             <%stories.forEach(story=>{  %>
                             <div class="post">
-                                <img src="/<%= story.photo %> " alt="post image">
+                                <img src="/uploads/images/<%= story.photo %> " alt="post image">
                                 <h5 class="cat-name"><%= story.category %> </h5>
                                 <h3><%= story.title %> </h3>
                                 <h5 class="date"> <span>by <strong><%= story.author %> </strong></span> <span><%= story.createdAt %>

@@ -96,7 +96,7 @@ router.post("/compose", upload.single("photo"), ensureAuth, async (req, res) => 
     try {
       req.body.user = req.user.id;
       post = req.body
-      post.photo = req.file.path;
+      post.photo = req.file.filename;
       await Story.create(post);
       res.redirect("/blog/posts");
     } catch (err) {
