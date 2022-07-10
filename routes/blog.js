@@ -6,6 +6,8 @@ const passport = require("passport");
 const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
+const { S3Client, AbortMultipartUploadCommand } = require("@aws-sdk/client-s3");
+const multerS3 = require("multer-s3");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
 const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
@@ -18,6 +20,18 @@ mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
   server: process.env.MAILCHIMP_SERVER_PREFIX
 });
+
+//s3 config
+
+const s3 = new S3Client({
+  region:process.env.S3_BUCKET_REGION,
+  credentials:{
+    accessKeyId:process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey:process.env.S3_SECRET_ACCESS_KEY,
+  }
+  
+})
+
 
 // Passport config
 require("../config/passport")(passport);
@@ -36,7 +50,16 @@ const storage = multer.diskStorage({
 
 //upload parameters for multer
 const upload = multer({
-  storage: storage
+  storage: multerS3({
+    s3,
+    bucket:"what2watch-uploads",
+    metadata: function(req, file, cb){
+      cb(null, {fieldName: file.fieldname})
+    },
+    key:function(req, file, callback) {
+      callback(null, Date.now() + file.originalname);
+    }
+  })
 });
 
 router.post("/posts", async (req, res) => {
@@ -91,12 +114,12 @@ router.get("/compose", ensureAuth, async (req, res) => {
 });
 
 router.post("/compose", upload.single("photo"), ensureAuth, async (req, res) => {
-    const host = req.hostname;
     let post;
+    console.log(req.file)
     try {
       req.body.user = req.user.id;
       post = req.body
-      post.photo = req.file.filename;
+      post.photo = req.file.location;
       await Story.create(post);
       res.redirect("/blog/posts");
     } catch (err) {
@@ -175,7 +198,7 @@ router.put("/posts/:id", upload.single("photo"), ensureAuth, async (req, res) =>
           .json("action not authorised. You can only edit your story");
       } else {
         if (req.file) {
-          newStory.photo = req.file.filename;
+          newStory.photo = req.file.location;
         }
         story = await Story.findByIdAndUpdate(
           req.params.id,
@@ -209,7 +232,7 @@ router.delete("/posts/:id", ensureAuth, async (req, res) => {
         .status(401)
         .json("action not authorised. You can only delete your story");
     } else {
-      await Story.remove({ _id: req.params.id });
+      await Story.deleteOne({ _id: req.params.id });
       res.redirect("/blog/dashboard/" + story.user);
     }
   } catch (err) {
@@ -309,7 +332,7 @@ router.put(
       newProfile.role = req.body.role;
       newProfile.bio = req.body.bio;
       if (req.file) {
-        newProfile.photo = req.file.filename;
+        newProfile.photo = req.file.location;
       }
 
       try {
