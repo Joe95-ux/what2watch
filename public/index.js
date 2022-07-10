@@ -26,8 +26,6 @@ const passInput = document.querySelector("#writer-pass");
 const eye = document.querySelector(".pass-reveal");
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
-const short = document.getElementById("short");
-const long = document.getElementById("long");
 let recentWrapper = document.querySelector(".recents-wrapper");
 const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
@@ -129,6 +127,7 @@ const navSlide = () => {
     navigation.classList.toggle("scrolling-active", windowPosition);
   });
 
+
   // footer
 
   const currentYear = new Date().getFullYear();
@@ -137,8 +136,6 @@ const navSlide = () => {
 
   $(document).on("click", 'a[href^="#"]', function(event) {
     event.preventDefault();
-    console.log("clicked");
-
     $("html, body").animate(
       {
         scrollTop: $($.attr(this, "href")).offset().top
@@ -150,6 +147,25 @@ const navSlide = () => {
 
 // invoke function
 navSlide();
+
+// sticky layout
+$(document).ready(function(){
+  $.fn.stickLayout = function() {
+    if ($("#short") !== null || $("#long") !== null) {
+      let shortHeight = $("#short").outerHeight;
+      let longHeight = $("#long").outerHeight;
+      if (longHeight > shortHeight) {
+        // short.classList.add("to-stick");
+        $("#short").addClass("to-stick")
+      } else {
+        $("#long").addClass("to-stick")
+      }
+    }
+  }
+  $.fn.stickLayout();
+
+})
+
 
 // show password and author bio
 function revealPass() {
@@ -172,19 +188,7 @@ function revealPass() {
 
 revealPass();
 
-// sticky layout
-function stickLayout() {
-  if (short || long) {
-    let shortHeight = short.clientHeight + 444.5;
-    let longHeight = long.clientHeight;
-    if (longHeight > shortHeight) {
-      short.classList.add("to-stick");
-    } else {
-      long.classList.add("to-stick");
-    }
-  }
-}
-stickLayout();
+
 
 //toggle synopsis and bio container
 function openSynopsisContainer() {
