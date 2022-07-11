@@ -23,6 +23,8 @@ const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
 const passInput = document.querySelector("#writer-pass");
+const short = document.querySelector("#short");
+const long = document.querySelector("#long");
 const eye = document.querySelector(".pass-reveal");
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
@@ -149,22 +151,24 @@ const navSlide = () => {
 navSlide();
 
 // sticky layout
-$(document).ready(function(){
-  $.fn.stickLayout = function() {
-    if ($("#short") !== null || $("#long") !== null) {
-      let shortHeight = $("#short").outerHeight;
-      let longHeight = $("#long").outerHeight;
-      if (longHeight > shortHeight) {
-        // short.classList.add("to-stick");
-        $("#short").addClass("to-stick")
-      } else {
-        $("#long").addClass("to-stick")
+const stickLayout = function() {
+  if (short != null || long != null) {
+    let shortHeight = short.clientHeight;
+    let longHeight = long.clientHeight;
+    if (longHeight > shortHeight) {
+      if(long.classList.contains("to-stick")){
+        long.classList.remove("to-stick");
       }
+      short.classList.add("to-stick");
+    } else {
+      if(short.classList.contains("to-stick")){
+        short.classList.remove("to-stick");
+      }
+      long.classList.add("to-stick");
     }
   }
-  $.fn.stickLayout();
-
-})
+}
+stickLayout();
 
 
 // show password and author bio
