@@ -1543,14 +1543,15 @@ h3.single-post-title {
 }
 
 .post-content {
-    margin: 0.8rem 0;
+    margin: 0.8rem 0 0;
     color: darkgrey;
     text-align: left;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .post-content p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     font-weight: 300;
     margin: 1.4rem 0;
@@ -1589,6 +1590,18 @@ blockquote h4 {
     padding-left: 30px;
 }
 
+.post-content ol, .post-content ul{
+    list-style-type: decimal;
+    line-height: 1.9;
+}
+
+.post-content ol li, .post-content ul li{
+    padding-left: 0.5rem;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
 @media screen and (max-width:420px) {
     h3.single-post-title {
         font-size: 1.25rem;
@@ -1600,6 +1613,9 @@ blockquote h4 {
 
     .post-content p {
         font-size: 16px;
+    }
+    .post-content ol li, .post-content ul li{
+        font-size: 1rem;
     }
 
     blockquote p {
@@ -2026,11 +2042,11 @@ tbody td a {
 }
 
 .delete-account p {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--midGray);
-    line-height: 1.5;
-    margin-bottom: 1.55rem;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--lightGrey);
+    line-height: 1.6;
+    margin-bottom: 1.4rem;
     margin-top: 13px;
 }
 
@@ -2042,13 +2058,6 @@ tbody td a {
 .delete-account .edit-profile-btn:hover {
     background-color: transparent;
 }
-
-
-
-
-
-
-
 
 @media screen and (max-width: 1080px) {
     .profile-bio-wrapper i {

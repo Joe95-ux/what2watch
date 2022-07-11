@@ -115,7 +115,6 @@ router.get("/compose", ensureAuth, async (req, res) => {
 
 router.post("/compose", upload.single("photo"), ensureAuth, async (req, res) => {
     let post;
-    console.log(req.file)
     try {
       req.body.user = req.user.id;
       post = req.body
