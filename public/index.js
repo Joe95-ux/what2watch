@@ -155,20 +155,16 @@ const stickLayout = function() {
   if (short != null || long != null) {
     let shortHeight = short.clientHeight;
     let longHeight = long.clientHeight;
+    console.log(longHeight, shortHeight)
     if (longHeight > shortHeight) {
-      if(long.classList.contains("to-stick")){
-        long.classList.remove("to-stick");
-      }
       short.classList.add("to-stick");
     } else {
-      if(short.classList.contains("to-stick")){
-        short.classList.remove("to-stick");
-      }
       long.classList.add("to-stick");
     }
   }
 }
 stickLayout();
+
 
 
 // show password and author bio

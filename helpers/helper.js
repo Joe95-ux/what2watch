@@ -51,6 +51,26 @@ module.exports = {
   latestPosts: function (stories){
     const posts =  stories.slice(0, 8);
     return posts;
+  },
+  editorsPicks: function(stories){
+    const picks = stories.reduce((pureStore, currentStory)=>{
+      let story = pureStore.find(story => story.category === currentStory.category);
+      if(story){
+        return pureStore;
+      }
+      return pureStore.concat([currentStory]);
+
+    }, [])
+    return picks;
+  },
+  paginate: function(stories, len){
+    let newStore = [];
+    let index = 0;
+    while(index < stories.length){
+      newStore.push(stories.slice(index, index + len));
+      index += len;
+    }
+    return newStore;
   }
 
 };

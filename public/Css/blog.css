@@ -1722,7 +1722,7 @@ table {
 }
 
 thead {
-    color: var(--lightGrey);
+    color: #C4DDFF;
 }
 
 .clamp-dashboard {
@@ -1733,7 +1733,7 @@ thead {
 }
 
 .clamp-dashboard a {
-    color: #C4DDFF;
+    color: var(--mainWhite);
     transition: var(--mainTransition);
     -webkit-transition: var(--mainTransition);
 }
