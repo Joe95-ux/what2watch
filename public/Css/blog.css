@@ -526,9 +526,9 @@ div.tv-news {
 }
 
 .latest-posts .post img {
-    height: auto;
-    min-height: 135px;
-    max-height: 230px;
+    height: 230px;
+    /* min-height: 230px;
+    max-height: 230px; */
     width: 100%;
     object-fit: cover;
     border-radius: var(--mainBorderRaduis);
@@ -536,7 +536,54 @@ div.tv-news {
 
 }
 
-@media screen and (max-width:420px) {
+@media screen and (max-width:1232px) {
+    .latest-posts .post img{
+        height: 210px;
+    }
+}
+
+@media screen and (max-width:1134px) {
+    .latest-posts .post img{
+        height: 190px;
+    }
+}
+
+@media screen and (max-width:1022px) {
+    .latest-posts .post img{
+        height: 170px;
+    }
+}
+
+@media screen and (max-width:922px) {
+    .latest-posts .post img{
+        height: 150px;
+    }
+}
+
+@media screen and (max-width:799px) {
+    .latest-posts .post img{
+        height: auto;
+        min-height: 170px;
+        max-height: 220px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .latest-posts .post img{
+        height: 160px;
+        min-height: 160px;
+    }
+}
+
+@media screen and (max-width:598px) {
+    .latest-posts .post img{
+        height: 135px;
+        min-height: 135px;
+    }
+}
+
+
+@media screen and (max-width:440px) {
     .latest-posts .post img {
         height: auto;
         min-height: 135px;
