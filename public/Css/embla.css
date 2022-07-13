@@ -26,6 +26,10 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+.embla__container a{
+    text-decoration: none;
+}
+
 .embla-title,
 .embla-small-title {
     font-size: 1.4rem;

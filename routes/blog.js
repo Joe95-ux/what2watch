@@ -11,7 +11,7 @@ const multerS3 = require("multer-s3");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
 const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
-const { formatDate, dateWithTime, sortCats, getCats, trendingMovies } = require("../helpers/helper");
+const { formatDate, dateWithTime, sortCats, getCats, trendingMovies, editorsPicks } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
 const format = "MMMM Do YYYY, h:mm:ss a";
@@ -131,6 +131,7 @@ router.get("/posts", async (req, res) => {
   const title = "blog posts";
   const userEmail = req.flash("user");
   let sortedCats;
+  let picks;
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
@@ -148,9 +149,11 @@ router.get("/posts", async (req, res) => {
       if(categories.length){
         sortedCats = sortCats(categories);
       }
+      picks = editorsPicks(stories);
+      picks = picks.slice(0, 9);
       
     }
-    res.render("blogHome", { title, userEmail, stories, sortedCats, trending });
+    res.render("blogHome", { title, userEmail, stories, sortedCats, trending, picks });
   } catch (err) {
     console.log(err);
   }
