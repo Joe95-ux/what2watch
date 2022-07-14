@@ -536,15 +536,34 @@ div.tv-news {
 
 }
 
+.tv-shows .post img{
+    height: 170px;
+    min-height: 170px;
+}
+
 @media screen and (max-width:1232px) {
     .latest-posts .post img{
         height: 210px;
+    }
+    .tv-shows .post img{
+        height: 147px;
+        min-height: 147px;
     }
 }
 
 @media screen and (max-width:1134px) {
     .latest-posts .post img{
-        height: 190px;
+        height: 175px;
+    }
+    .tv-shows .post img{
+        height: 140px;
+        min-height: 140px;
+    }
+}
+
+@media screen and (max-width:1064px) {
+    .tv-shows .post img{
+        height: 175px;
     }
 }
 
@@ -556,7 +575,8 @@ div.tv-news {
 
 @media screen and (max-width:922px) {
     .latest-posts .post img{
-        height: 150px;
+        height: 145px;
+        min-height: 145px;
     }
 }
 
