@@ -710,6 +710,7 @@ div.tv-news {
     background-color: var(--primaryColor);
     text-transform: capitalize;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.5px;
 }
 
 .new-header-btn.blog-movie-btn a:hover {

@@ -32,6 +32,7 @@ let recentWrapper = document.querySelector(".recents-wrapper");
 const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
 const clearViewInfo = document.querySelector(".view-info-header a");
+const profileInput = document.getElementById("profile-pic");
 
 // navigation bar
 const navSlide = () => {
@@ -165,7 +166,18 @@ const stickLayout = function() {
 }
 stickLayout();
 
-
+function previewPic(){
+  if(profileInput !== null){
+    profileInput.addEventListener("input", (e)=>{
+      if(e.target.files.length > 0){
+        let src = URL.createObjectURL(e.target.files[0]);
+        let avatar = document.querySelector(".profile-avatar");
+        avatar.src = src
+      }
+    })
+  }
+}
+previewPic();
 
 // show password and author bio
 function revealPass() {

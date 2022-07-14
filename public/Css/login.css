@@ -109,6 +109,7 @@
   width: 90px;
   border-radius: 50%;
   object-fit: cover;
+  background-color: #001927;
 }
 .upload-input, .upload-input input{
   position: absolute;

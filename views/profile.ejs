@@ -113,9 +113,9 @@
                                 <div class="upload-profile-img">
                                     <div class="profile-image-enclosure">
                                         <% if(profile.photo){%>
-                                        <img src="<%= profile.photo%>" alt="prifile photo">
+                                        <img src="<%= profile.photo%>" alt="" class="profile-avatar">
                                         <% }else{%>
-                                        <img src="/profile-pic.png" alt="prifile photo">
+                                        <img src="/profile-pic.png" alt="" class="profile-avatar">
                                         <% } %>
                                         <div class="upload-input">
                                             <input type="file" title="profile image" name="photo" id="profile-pic">
