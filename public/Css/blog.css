@@ -750,7 +750,7 @@ div.tv-news {
 
 .writer-bio-wrapper img {
     height: auto;
-    max-height: 225px;
+    max-height: 400px;
     width: 100%;
     object-fit: cover;
     margin-bottom: 1rem;
@@ -836,7 +836,7 @@ div.tv-news {
 }
 
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:960px) {
 
     .blog-body-wrapper {
         display: block;
@@ -977,16 +977,22 @@ a.blog-social-link i {
     object-fit: cover;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width: 960px){
     .ig-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        
     }
-
     .ig-cards img {
         height: auto;
         max-height: 200px;
         object-fit: cover;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .ig-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 
 }
