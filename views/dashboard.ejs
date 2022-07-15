@@ -203,9 +203,9 @@
                     <div class="profile-photo">
                         <div>
                             <% if(user.photo){%>
-                                <img src="<%= user.photo%>" alt="">
-                                <% }else{%>
-                                <img src="/profile-pic.png" alt="">
+                            <img src="<%= user.photo%>" alt="">
+                            <% }else{%>
+                            <img src="/profile-pic.png" alt="">
                             <% }%>
 
                         </div>
@@ -223,12 +223,14 @@
 
                         </div>
                         <div class="profile-bio-wrapper">
-                            <div>
-                                <i class="fas fa-lock"></i>
-                                <input type="password" id="writer-pass" value="its confidential"
-                                    title="your password is hidden">
+                            <i class="fas fa-lock profile-fas-lock"></i>
+                            <input type="password" id="writer-pass" value="its confidential"
+                                title="your password is hidden" class="pass-input">
+                            <div class="pass-reveal">
+                                <i class="fas fa-eye open-eye"></i>
+                                <i class="fas fa-eye-slash black-eye"></i>
                             </div>
-                            <i class="fas fa-eye pass-reveal"></i>
+
                         </div>
                         <div class="profile-bio-wrapper">
                             <div>

@@ -2042,9 +2042,13 @@ tbody td a {
     align-items: center;
 }
 
-.profile-bio-wrapper div i {
+.profile-bio-wrapper div i, .profile-fas-lock {
     margin-right: 10px;
     order: 0;
+}
+
+div.pass-reveal i {
+    margin-right: 0;
 }
 
 .profile-biography {
@@ -2090,9 +2094,11 @@ tbody td a {
 .profile-bio-wrapper i {
     color: var(--yellow);
     font-size: 1rem;
-    order: 1;
+    
 }
-
+.open-eye{
+    display: none;
+}
 .profile-bio-wrapper h3,
 .profile-bio-wrapper a {
     font-size: 15px;

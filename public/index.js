@@ -22,10 +22,9 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
-const passInput = document.querySelector("#writer-pass");
 const short = document.querySelector("#short");
 const long = document.querySelector("#long");
-const eye = document.querySelector(".pass-reveal");
+const eyes = [...document.querySelectorAll(".pass-reveal")];
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
 let recentWrapper = document.querySelector(".recents-wrapper");
@@ -130,7 +129,6 @@ const navSlide = () => {
     navigation.classList.toggle("scrolling-active", windowPosition);
   });
 
-
   // footer
 
   const currentYear = new Date().getFullYear();
@@ -152,11 +150,11 @@ const navSlide = () => {
 navSlide();
 
 // sticky layout
-const stickLayout = function() {
+function stickLayout() {
   if (short != null || long != null) {
     let shortHeight = short.clientHeight;
     let longHeight = long.clientHeight;
-    console.log(longHeight, shortHeight)
+    console.log(longHeight, shortHeight);
     if (longHeight > shortHeight) {
       short.classList.add("to-stick");
     } else {
@@ -166,28 +164,37 @@ const stickLayout = function() {
 }
 stickLayout();
 
-function previewPic(){
-  if(profileInput !== null){
-    profileInput.addEventListener("input", (e)=>{
-      if(e.target.files.length > 0){
+function previewPic() {
+  if (profileInput !== null) {
+    profileInput.addEventListener("input", e => {
+      if (e.target.files.length > 0) {
         let src = URL.createObjectURL(e.target.files[0]);
         let avatar = document.querySelector(".profile-avatar");
-        avatar.src = src
+        avatar.src = src;
       }
-    })
+    });
   }
 }
 previewPic();
 
 // show password and author bio
 function revealPass() {
-  if (eye) {
-    eye.addEventListener("click", () => {
-      if (passInput.type === "password") {
-        passInput.type = "text";
-      } else if (passInput.type === "text") {
-        passInput.type = "password";
-      }
+  if (eyes.length) {
+    eyes.forEach(eye => {
+      const blackeye = eye.querySelector(".black-eye");
+      const openEye = eye.querySelector(".open-eye");
+      const passInput = eye.previousElementSibling;
+      eye.addEventListener("click", () => {
+        if (passInput.type === "password") {
+          passInput.type = "text";
+          blackeye.style.display = "none";
+          openEye.style.display = "inline-block";
+        } else if (passInput.type === "text") {
+          passInput.type = "password";
+          blackeye.style.display = "inline-block";
+          openEye.style.display = "none";
+        }
+      });
     });
   }
   if (seeBio) {
@@ -199,8 +206,6 @@ function revealPass() {
 }
 
 revealPass();
-
-
 
 //toggle synopsis and bio container
 function openSynopsisContainer() {
@@ -410,7 +415,7 @@ function getRecentlyViewed(store) {
         <img src=${image} alt="movie-poster">
         <h3> ${title} </h3>
       </a>
-    `
+    `;
       if (recentWrapper) {
         recentWrapper.appendChild(div);
       }
