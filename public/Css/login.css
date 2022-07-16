@@ -47,7 +47,8 @@
   position: relative;
 }
 .forms-container.edit-profile-form{
-  width: 450px;
+  width: 500px;
+  max-width: calc(100vw - 2rem);
 }
 
 

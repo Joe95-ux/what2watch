@@ -328,11 +328,14 @@ router.put(
   upload.single("photo"),
   async (req, res) => {
     if (req.user.id === req.params.id) {
-      let newProfile = req.user;
+      let newProfile = {};
       newProfile.name = req.body.name;
       newProfile.email = req.body.email;
       newProfile.role = req.body.role;
       newProfile.bio = req.body.bio;
+      newProfile.facebook = req.body.facebook;
+      newProfile.instagram = req.body.instagram;
+      newProfile.twitter = req.body.twitter;
       if (req.file) {
         newProfile.photo = req.file.location;
       }

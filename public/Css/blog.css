@@ -1752,6 +1752,33 @@ blockquote h4::before {
     color: lightgrey;
 }
 
+
+.post-author-details p {
+    line-height: 1.4;
+    font-size: 1rem;
+    font-weight: 300;
+    min-width: 85%;
+    max-width: 100%;
+}
+
+.post-author-socials{
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+.post-author-socials a{
+    text-decoration: none;
+}
+.post-author-socials a:not(:last-child){
+    margin-right: 10px;
+}
+.post-author-socials img{
+    height: 30px;
+    width: 30px;
+    margin-right: 0;
+    border-radius: 100%;
+}
+
 @media screen and (max-width:560px) {
     .post-author-bio {
         flex-direction: column;
@@ -1765,17 +1792,11 @@ blockquote h4::before {
         text-align: center;
         margin-top: 1rem;
     }
+    .post-author-socials{
+        justify-content: center;
+    }
 }
 
-
-
-.post-author-details p {
-    line-height: 1.4;
-    font-size: 1rem;
-    font-weight: 300;
-    min-width: 85%;
-    max-width: 100%;
-}
 
 /* Dashboard */
 
@@ -2086,6 +2107,10 @@ div.pass-reveal i {
 
 .pass-reveal {
     cursor: pointer;
+}
+
+.pass-reveal i{
+    font-size: 16px;
 }
 
 .profile-bio-wrapper input {

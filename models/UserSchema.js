@@ -26,6 +26,15 @@ const UserSchema = new mongoose.Schema(
     },
     privilege:{
       type: String
+    },
+    facebook:{
+      type: String
+    },
+    instagram:{
+      type: String
+    },
+    twitter:{
+      type: String
     }
 
 

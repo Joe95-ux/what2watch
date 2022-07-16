@@ -54,6 +54,17 @@
                         <% }else{%>
                         <p>No Info about writer to display.</p>
                         <% } %>
+                        <div class="post-author-socials">
+                            <% if(story.user?.facebook){%>
+                            <a href="<%= story.user.facebook%>" target="_blank"><img src="/Facebook_logo.png" alt="Fb logo"></a>
+                            <% } %>
+                            <% if(story.user?.instagram){%>
+                            <a href="<%= story.user.instagram %>" target="_blank"><img src="/ig-logo.png" alt="Ig logo"></a>
+                            <% } %>
+                            <% if(story.user?.twitter){%>
+                            <a href="<%= story.user.twitter%>" target="_blank"><img src="/twitter-logo.png" alt="tw logo"></a>
+                            <% } %>
+                        </div>
                     </div>
                     <% } %>
 
