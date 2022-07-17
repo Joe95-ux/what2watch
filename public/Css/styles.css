@@ -5172,9 +5172,6 @@ div.seperation-rule {
         justify-content: space-between;
     }
 
-    .important-links a {
-        font-size: 1.2rem;
-    }
 
     .important-links {
         align-self: center;
@@ -5213,15 +5210,11 @@ div.seperation-rule {
 
     .copyright-container,
     .important-links a {
-        font-size: 13px;
+        font-size: 15px;
 
     }
 
-    .social-icon {
-        height: 26px;
-        width: 26px;
-        font-size: 0.8rem;
-    }
+    
 
     .attribution img,
     .footer-logo {
@@ -5233,11 +5226,25 @@ div.seperation-rule {
 
 }
 
+@media screen and (max-width:340px) {
+
+    .copyright-container,
+    .important-links a {
+        font-size: 13px;
+
+    }
+    .important-links{
+        justify-content: center;
+    }
+
+
+}
+
 @media screen and (max-width:290px) {
 
     .copyright-container,
     .important-links a {
-        font-size: 11px;
+        font-size: 12px;
 
     }
 

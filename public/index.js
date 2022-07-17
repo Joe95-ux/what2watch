@@ -22,8 +22,8 @@ const reviewContent = document.querySelector(".full-review-content");
 const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
-const short = document.querySelector("#short");
-const long = document.querySelector("#long");
+const short = document.getElementById("short");
+const long = document.getElementById("long");
 const eyes = [...document.querySelectorAll(".pass-reveal")];
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
@@ -152,7 +152,7 @@ navSlide();
 // sticky layout
 function stickLayout() {
   if (short != null || long != null) {
-    let shortHeight = short.clientHeight;
+    let shortHeight = short.clientHeight + 497;
     let longHeight = long.clientHeight;
     console.log(longHeight, shortHeight);
     if (longHeight > shortHeight) {
