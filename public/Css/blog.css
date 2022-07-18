@@ -1604,7 +1604,7 @@ textarea {
 }
 
 .compose-form .publish-btn,
-.create-btn {
+.create-btn, .dashboard-search{
     border-radius: 5px;
     padding: 0.5rem 1rem;
 }
@@ -1962,14 +1962,48 @@ tbody td a {
     font-size: 1rem;
 }
 
-@media screen and (max-width:528px) {
-    .dashboard-content .dashboard-title div {
-        margin-bottom: 14px;
-    }
+.dashboard-search-create{
+    display: flex;
+}
+.dashboard-search{
+    margin-right: 14px;
+    height: 42.6px;
+    width: 280px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    background-color:#022e47;
+    border-radius: 5px;
+    color: var(--midGray);
+}
 
-    .dashboard-title {
-        flex-direction: column;
+.dashboard-search i{
+    margin-right: 10px;
+}
+.dashboard-search input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--midGray);
+    font-weight: 400;
+    width: 100%;
+}
+.dashboard-search input::placeholder{
+    color: var(--midGray);
+    font-size: 15px;
+}
+
+@media screen and (max-width:900px) {
+    .min-dash-title{
+        min-width: 900px;
     }
+    .dashboard-search{
+        width: 250px;
+    }
+    
+}
+
+@media screen and (max-width:528px) {
 
     .dashboard-title h2 {
         font-size: 1.15rem;
@@ -2190,7 +2224,7 @@ div.pass-reveal i {
 }
 
 a.create-btn {
-    height: fit-content;
+    height: 42.6px;
     flex-basis: auto;
     text-decoration: none;
     font-size: 1.1rem;
@@ -2201,7 +2235,6 @@ a.create-btn {
 a.create-btn.edit-profile-btn {
     margin-top: 10px;
     font-size: 14px;
-
     border-radius: 55px;
 }
 

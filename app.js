@@ -58,13 +58,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.use(flash());
+
 // Set Global variable
 app.use(function(req, res, next){
-  res.locals.user = req.user || null
+  res.locals.user = req.user || null;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  res.locals.info = req.flash("info");
   next();
 })
-
-app.use(flash());
 
 
 const apiKey = process.env.API_KEY;

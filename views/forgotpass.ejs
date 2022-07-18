@@ -69,6 +69,11 @@
     <nav class="navigation">
         <div class="blog-nav-enclosure">
             <div class="logo-and-links">
+                <div class="burger" style="display:none;">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
                 <div class="logo">
                     <div class="burger" style="display:none;">
                         <div class="line1"></div>
@@ -84,9 +89,6 @@
                 </div>
                 <ul class="nav_links">
                     <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
-                    <% if(user){%>
-                        <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% } %>  
                 </ul>
 
 
@@ -98,87 +100,32 @@
     <section id="header-container" class="blog-header">
         <div class="wrapper-enclosure-blog">
             <div class="form-container-wrapper">
-                <% if(profile){%>
-                <div class="forms-container edit-profile-form">
+                <div class="forms-container">
+                    <div class="form-title">
+                        <div class="form-title-header">
+                            <i class="history fas fa-long-arrow-alt-left"></i>
+                        </div>
 
+                        <h2>Forgot Password</h2>
+                        <p>Provide your email address</p>
+                    </div>
                     <div class="actions-wrapper">
-                        <form method="POST" action="/blog/profile/<%=profile._id%>?_method=PUT"
-                            enctype="multipart/form-data">
-                            <div class="form-title float">
-                                <div class="form-title-header">
-                                    <i class="history fas fa-long-arrow-alt-left"></i>
-                                    <h3>Edit Profile</h3>
-                                    <h5></h5>
+                        <form action="/blog/reset-password" id="auth-form" method="POST">
+                            <div class="actions-input-wrapper">
+                                <div class="actions-input">
+                                    <i class="fas fa-user-alt"></i>
+                                    <input type="text" name="username" id="email" placeholder="email">
                                 </div>
-                                <div class="upload-profile-img">
-                                    <div class="profile-image-enclosure">
-                                        <% if(profile.photo){%>
-                                        <img src="<%= profile.photo%>" alt="" class="profile-avatar">
-                                        <% }else{%>
-                                        <img src="/profile-pic.png" alt="" class="profile-avatar">
-                                        <% } %>
-                                        <div class="upload-input">
-                                            <input type="file" title="profile image" name="photo" id="profile-pic">
-                                            <i class="fas fa-camera"></i>
-                                        </div>
-                                    </div>
-
-                                </div>
-
+                                <small class="auth">Error Message</small>
                             </div>
-                            <div class="actions-input">
-                                <i class="fas fa-user-alt"></i>
-                                <% if(profile.name){%>
-                                <input type="text" name="name" id="clientname" placeholder="username"
-                                    value="<%=profile.name%>">
-                                <%} else{%>
-                                <input type="text" name="name" id="clientname" placeholder="username">
-                                <% } %>
-                            </div>
-                            <div class="actions-input">
-                                <i class="fas fa-envelope"></i>
-                                <input type="text" name="username" id="email" placeholder="your email"
-                                    value="<%= profile.username %> ">
-                            </div>
-                            <div class="actions-input">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="password" id="clientpassword" placeholder="new password?" class="pass-input">
-                                <div class="pass-reveal">
-                                    <i class="fas fa-eye open-eye"></i>
-                                    <i class="fas fa-eye-slash black-eye"></i>    
-                                </div>
-                            </div>
-                            <div class="actions-input">
-                                <i class="fas fa-user-tag"></i>
-                                <input type="text" name="role" id="role" placeholder="Role" value="<%= profile.role %>">
-                            </div>
-                            <div class="actions-input">
-                                <i class="fab fa-facebook-f"></i>
-                                <input type="text" name="facebook" id="facebook" placeholder="facebook" value="<%= profile.facebook%>">
-                            </div>
-                            <div class="actions-input">
-                                <i class="fab fa-instagram"></i>
-                                <input type="text" name="instagram" id="insta" placeholder="instagram" value="<%= profile.instagram%>">
-                            </div>
-                            <div class="actions-input">
-                                <i class="fab fa-twitter"></i>
-                                <input type="text" name="twitter" id="twitter" placeholder="twitter" value="<%= profile.twitter%>">
-                            </div>
-                            <div class="actions-input" style="margin-bottom: 1.5rem;">
-                                <i class="fas fa-address-card"></i>
-                                <textarea class="textarea" name="bio" id="about-you" cols="5" rows="2"
-                                    placeholder="Describe youself..."><%= profile.bio %> </textarea>
-                            </div>
-                            <button type="submit" class="send-btn">Edit Profile</button>
+                            <button type="submit" class="send-btn">Reset Password</button>
                         </form>
-                        <p>By continuing you agree to the terms and conditions and privacy policy. </p>
+                        <p>Don't have an account? <a href="/blog/register">Sign up now.</a> </p>
 
 
                     </div>
 
                 </div>
-
-                <% } %>
             </div>
 
 

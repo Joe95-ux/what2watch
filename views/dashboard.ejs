@@ -19,8 +19,8 @@
         </div>
         <div class="dashboard-wrapper">
             <div class="dashboard-content">
-                <div class="dashboard-title">
-                    <div>
+                <div class="dashboard-title min-dash-title">
+                    <div class="dashboard-title-header">
                         <%if(user.name !== ""){%>
                         <h2>Welcome <span><%=user.name%>!</span></h2>
                         <% }else{%>
@@ -28,11 +28,17 @@
                         <% } %>
                         <p>Here are your stories</p>
                     </div>
-                    <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>New Post</a>
-
+                    <div class="dashboard-search-create">
+                        <div class="dashboard-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="dashboard-input" placeholder="search story..." autocomplete="off">
+                        </div>
+                        <a href="/blog/compose" role="button" class="create-btn"><i class="fas fa-plus"></i>New Post</a>
+                    </div>
+                    
                 </div>
                 <% if(stories.length){%>
-                <table>
+                <table id="dashboard-table" data-filter-control="true" data-show-search-clear-button="true">
                     <thead>
                         <tr>
                             <th>Title</th>

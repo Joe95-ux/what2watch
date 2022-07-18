@@ -15,6 +15,9 @@ const { formatDate, dateWithTime, sortCats, getCats, trendingMovies, editorsPick
 const User = require("../models/User");
 const Story = require("../models/Story");
 const format = "MMMM Do YYYY, h:mm:ss a";
+const crypto = require('crypto');
+const async = require("async");
+const nodemailer = require('nodemailer');
 
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
@@ -308,6 +311,11 @@ router.get("/login", ensureGuest, async (req, res) => {
   res.render("login", { title });
 });
 
+router.get("/reset-password", ensureGuest, async (req, res) => {
+  const title = "Reset password";
+  res.render("forgotpass", { title });
+});
+
 router.get("/profile/:id", ensureAuth, async (req, res) => {
   const title = "Edit profile";
   try {
@@ -432,5 +440,67 @@ router.get("/logout", function(req, res, next) {
     res.redirect("/blog/login");
   });
 });
+
+// Reset user password
+router.post("/reset-password", function (req,res, next){
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        let token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          error =  'No account with that email address exists.';
+          return res.redirect('/reset-password');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      let smtpTransport = nodemailer.createTransport('SMTP', {
+        service: 'SendGrid',
+        auth: {
+          user: '!!! YOUR SENDGRID USERNAME !!!',
+          pass: '!!! YOUR SENDGRID PASSWORD !!!'
+        }
+      });
+      let mailOptions = {
+        to: user.email,
+        from: 'what2watch4real@gmail.com',
+        subject: 'what2watch.net Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        info = 'info', 'An e-mail has been sent to ' + user.email + ' with further instructions.';
+        done(err, 'done');
+      });
+    }
+  ], 
+  function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
+
+});
+
+
+
+
+
+
+
+
+
 
 module.exports = router;
