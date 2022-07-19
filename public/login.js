@@ -31,22 +31,26 @@ handleTextArea();
 
 function tableSearch() {
   let filter, tr, td, txtValue;
-  tr = table.getElementsByTagName("tr");
+  if (table !== null) {
+    tr = table.getElementsByTagName("tr");
+  }
 
-  dashboardInput.addEventListener("keyup", () => {
-    filter = dashboardInput.value.toUpperCase();
-    for (let i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+  if (dashboardInput !== null) {
+    dashboardInput.addEventListener("keyup", () => {
+      filter = dashboardInput.value.toUpperCase();
+      for (let i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
         }
       }
-    }
-  });
+    });
+  }
 }
 
 tableSearch();

@@ -36,13 +36,8 @@ const UserSchema = new mongoose.Schema(
     twitter:{
       type: String
     },
-    resetPasswordToken:{
-      data: String,
-      default: ""
-    },
-    resetPasswordExpires: {
-      type: Date
-    }
+    resetPasswordToken:String,
+    resetPasswordExpires: Date
 
 
   },

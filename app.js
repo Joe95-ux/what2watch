@@ -63,9 +63,7 @@ app.use(flash());
 // Set Global variable
 app.use(function(req, res, next){
   res.locals.user = req.user || null;
-  res.locals.error = req.flash("error");
-  res.locals.success = req.flash("success");
-  res.locals.info = req.flash("info");
+  res.locals.messages = req.flash();
   next();
 })
 

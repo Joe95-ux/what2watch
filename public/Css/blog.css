@@ -751,6 +751,7 @@ div.tv-news {
 .writer-bio-wrapper img {
     height: auto;
     max-height: 400px;
+    min-height: 220px;
     width: 100%;
     object-fit: cover;
     margin-bottom: 1rem;
@@ -2224,12 +2225,14 @@ div.pass-reveal i {
 }
 
 a.create-btn {
-    height: 42.6px;
     flex-basis: auto;
     text-decoration: none;
     font-size: 1.1rem;
     text-align: center;
     margin-right: 0;
+}
+a.create-btn.table-btn{
+    height: 42.6px;
 }
 
 a.create-btn.edit-profile-btn {

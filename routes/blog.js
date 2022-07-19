@@ -11,13 +11,20 @@ const multerS3 = require("multer-s3");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
 const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
-const { formatDate, dateWithTime, sortCats, getCats, trendingMovies, editorsPicks } = require("../helpers/helper");
+const {
+  formatDate,
+  dateWithTime,
+  sortCats,
+  getCats,
+  trendingMovies,
+  editorsPicks
+} = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
 const format = "MMMM Do YYYY, h:mm:ss a";
-const crypto = require('crypto');
+const crypto = require("crypto");
 const async = require("async");
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,
@@ -27,14 +34,12 @@ mailchimp.setConfig({
 //s3 config
 
 const s3 = new S3Client({
-  region:process.env.S3_BUCKET_REGION,
-  credentials:{
-    accessKeyId:process.env.S3_ACCESS_KEY_ID,
-    secretAccessKey:process.env.S3_SECRET_ACCESS_KEY,
+  region: process.env.S3_BUCKET_REGION,
+  credentials: {
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY
   }
-  
-})
-
+});
 
 // Passport config
 require("../config/passport")(passport);
@@ -55,11 +60,11 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket:"what2watch-uploads",
-    metadata: function(req, file, cb){
-      cb(null, {fieldName: file.fieldname})
+    bucket: "what2watch-uploads",
+    metadata: function(req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
     },
-    key:function(req, file, callback) {
+    key: function(req, file, callback) {
       callback(null, Date.now() + file.originalname);
     }
   })
@@ -86,10 +91,10 @@ router.get("/category/:catName", async (req, res) => {
   const cat = req.params.catName;
   let sortedCats;
   try {
-    let allStories = await Story.find({ status:"Public"});
+    let allStories = await Story.find({ status: "Public" });
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
-    let stories = await Story.find({ category: cat, status:"Public"})
+    let stories = await Story.find({ category: cat, status: "Public" })
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean()
@@ -100,12 +105,18 @@ router.get("/category/:catName", async (req, res) => {
         return story;
       });
       let categories = getCats(allStories);
-      if(categories.length){
+      if (categories.length) {
         sortedCats = sortCats(categories);
       }
-      
     }
-    res.render("blogCategory", { title, userEmail, stories, sortedCats, cat, trending });
+    res.render("blogCategory", {
+      title,
+      userEmail,
+      stories,
+      sortedCats,
+      cat,
+      trending
+    });
   } catch (err) {
     console.log(err);
   }
@@ -116,11 +127,15 @@ router.get("/compose", ensureAuth, async (req, res) => {
   res.render("compose", { title });
 });
 
-router.post("/compose", upload.single("photo"), ensureAuth, async (req, res) => {
+router.post(
+  "/compose",
+  upload.single("photo"),
+  ensureAuth,
+  async (req, res) => {
     let post;
     try {
       req.body.user = req.user.id;
-      post = req.body
+      post = req.body;
       post.photo = req.file.location;
       await Story.create(post);
       res.redirect("/blog/posts");
@@ -149,14 +164,20 @@ router.get("/posts", async (req, res) => {
         return story;
       });
       let categories = getCats(stories);
-      if(categories.length){
+      if (categories.length) {
         sortedCats = sortCats(categories);
       }
       picks = editorsPicks(stories);
       picks = picks.slice(0, 9);
-      
     }
-    res.render("blogHome", { title, userEmail, stories, sortedCats, trending, picks });
+    res.render("blogHome", {
+      title,
+      userEmail,
+      stories,
+      sortedCats,
+      trending,
+      picks
+    });
   } catch (err) {
     console.log(err);
   }
@@ -188,7 +209,11 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
 
 // @desc    Update story
 // @route   PUT /blog/posts/:id
-router.put("/posts/:id", upload.single("photo"), ensureAuth, async (req, res) => {
+router.put(
+  "/posts/:id",
+  upload.single("photo"),
+  ensureAuth,
+  async (req, res) => {
     try {
       let story = await Story.findById(req.params.id).lean();
       let newStory = req.body;
@@ -288,10 +313,9 @@ router.get("/posts/:slug", async (req, res) => {
       title = story.title;
       if (stories) {
         let categories = getCats(stories);
-        if(categories.length){
+        if (categories.length) {
           sortedCats = sortCats(categories);
         }
-        
       }
       res.render("post", { title, userEmail, story, sortedCats });
     }
@@ -308,12 +332,8 @@ router.get("/register", ensureGuest, async (req, res) => {
 
 router.get("/login", ensureGuest, async (req, res) => {
   const title = "Login";
+  console.log(res.locals.messages)
   res.render("login", { title });
-});
-
-router.get("/reset-password", ensureGuest, async (req, res) => {
-  const title = "Reset password";
-  res.render("forgotpass", { title });
 });
 
 router.get("/profile/:id", ensureAuth, async (req, res) => {
@@ -376,7 +396,9 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
   let created;
   try {
-    let stories = await Story.find({ user: req.params.id }).sort({ createdAt: "desc" }).lean();
+    let stories = await Story.find({ user: req.params.id })
+      .sort({ createdAt: "desc" })
+      .lean();
     let user = await User.findById(req.params.id);
     if (stories) {
       stories = stories.map(story => {
@@ -441,66 +463,178 @@ router.get("/logout", function(req, res, next) {
   });
 });
 
-// Reset user password
-router.post("/reset-password", function (req,res, next){
-  async.waterfall([
-    function(done) {
-      crypto.randomBytes(20, function(err, buf) {
-        let token = buf.toString('hex');
-        done(err, token);
-      });
-    },
-    function(token, done) {
-      User.findOne({ email: req.body.email }, function(err, user) {
-        if (!user) {
-          error =  'No account with that email address exists.';
-          return res.redirect('/reset-password');
-        }
-
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-        user.save(function(err) {
-          done(err, token, user);
-        });
-      });
-    },
-    function(token, user, done) {
-      let smtpTransport = nodemailer.createTransport('SMTP', {
-        service: 'SendGrid',
-        auth: {
-          user: '!!! YOUR SENDGRID USERNAME !!!',
-          pass: '!!! YOUR SENDGRID PASSWORD !!!'
-        }
-      });
-      let mailOptions = {
-        to: user.email,
-        from: 'what2watch4real@gmail.com',
-        subject: 'what2watch.net Password Reset',
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-      };
-      smtpTransport.sendMail(mailOptions, function(err) {
-        info = 'info', 'An e-mail has been sent to ' + user.email + ' with further instructions.';
-        done(err, 'done');
-      });
-    }
-  ], 
-  function(err) {
-    if (err) return next(err);
-    res.redirect('/forgot');
-  });
-
+// request to reset password
+router.get("/reset-password", ensureGuest, async (req, res) => {
+  const title = "Reset password";
+  req.flash("error");
+  res.render("forgotpass", { title });
 });
 
+// Reset user password : get token and password link
+router.post("/reset-password", function(req, res, next) {
+  async.waterfall(
+    [
+      function(done) {
+        crypto.randomBytes(20, function(err, buf) {
+          let token = buf.toString("hex");
+          done(err, token);
+        });
+      },
+      function(token, done) {
+        User.findOne({ username: req.body.username }, function(err, user) {
+          if (!user) {
+            req.flash(
+              "error",
+              "Sorry, No account with that email address exists."
+            );
+            return res.redirect("/blog/reset-password");
+          }
 
+          user.resetPasswordToken = token;
+          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        });
+      },
+      function(token, user, done) {
+        let smtpTransport = nodemailer.createTransport({
+          pool: true,
+          host: "smtp.zoho.com",
+          port: 465,
+          secure: true, // use SSL
+          auth: {
+            user: process.env.ZOHO_USER,
+            pass: process.env.ZOHO_PASS
+          }
+        });
+        let mailOptions = {
+          to: user.username,
+          from: "what2watch@what2watch.net",
+          subject: "what2watch.net Password Reset",
+          text:
+            "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
+            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+            "http://" +
+            req.headers.host +
+            "/blog/reset/" +
+            token +
+            "\n\n" +
+            "If you did not request this, please ignore this email and your password will remain unchanged.\n"
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+          req.flash(
+            "info",
+            "An e-mail has been sent to " +
+              user.username +
+              " with further instructions."
+          );
+          done(err, "done");
+        });
+      }
+    ],
+    function(err) {
+      if (err) return next(err);
+      res.redirect("/blog/reset-password");
+    }
+  );
+});
 
+// password reset link
 
+router.get("/reset/:token", ensureGuest, (req, res) => {
+  const title = "Reset password";
+  console.log(res.locals.messages)
+  User.findOne(
+    {
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() }
+    },
+    function(err, user) {
+      if (!user) {
+        req.flash("error", "Password reset token is invalid or has expired.");
+        return res.redirect("/blog/reset-password");
+      }
+      res.render("reset", {
+        user,
+        title
+      });
+    }
+  );
+});
 
+router.put("/reset/:token", function(req, res, next) {
+  async.waterfall(
+    [
+      function(done) {
+        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+          if (!user) {
+            req.flash('error', 'Password reset token is invalid or has expired.');
+            return res.redirect("/blog/reset/" + req.params.token);
+          }
 
-
-
-
+          if (req.body.password) {
+            user.setPassword(req.body.password, (err, user)=>{
+              if(err){
+                console.log(err)
+              }
+              user.save(function(err){
+                if(err){
+                  console.log(err)
+                }
+              })
+            });
+          }
+          user.resetPasswordToken = undefined;
+          user.resetPasswordExpires = undefined;
+  
+          User.findOneAndUpdate(
+            {resetPasswordToken: req.params.token},
+            {
+              $set: user
+            },
+            { new: true },
+            function(err, user){
+              if(err){
+                console.log(err)
+              }
+              res.status(200).redirect("/blog/login")
+            }
+          );
+        });
+      },
+      function(user, done) {
+        const smtpTransport = nodemailer.createTransport({
+          pool: true,
+          host: "smtp.zoho.com",
+          port: 465,
+          secure: true, // use SSL
+          auth: {
+            user: process.env.ZOHO_USER,
+            pass: process.env.ZOHO_PASS
+          }
+        });
+        var mailOptions = {
+          to: user.username,
+          from: "what2watch@what2watch.net",
+          subject: "Your password has been changed",
+          text:
+            "Hello,\n\n" +
+            "This is a confirmation that the password for your account " +
+            user.username +
+            " has just been changed.\n"
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+          req.flash("success", "Success! Your password has been changed. You may now Login.");
+          done(err, "done");
+        });
+      }
+    ],
+    function(err) {
+      if (err) return next(err);
+      res.redirect("/blog/login");
+    }
+  );
+});
 
 module.exports = router;
