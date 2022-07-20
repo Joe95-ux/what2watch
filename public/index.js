@@ -371,11 +371,11 @@ function recentlyViewedHandler() {
     clearViewInfo.href = window.location.href;
   }
 
-  if (!localStorage.getItem("cardStore")) {
-    localStorage.setItem("cardStore", "[]");
+  if (!sessionStorage.getItem("cardStore")) {
+    sessionStorage.setItem("cardStore", "[]");
   }
 
-  let store = JSON.parse(localStorage.getItem("cardStore"));
+  let store = JSON.parse(sessionStorage.getItem("cardStore"));
   if (store.length === 0) {
     clearViewInfo.style.display = "none";
     viewInfo.classList.add("show-view-info");
@@ -398,7 +398,7 @@ function recentlyViewedHandler() {
           }
           return pureStore.concat([current]);
         }, []);
-        localStorage.setItem("cardStore", JSON.stringify(store));
+        sessionStorage.setItem("cardStore", JSON.stringify(store));
       }, 2000)
     );
   }
@@ -457,7 +457,7 @@ dropDown();
 function clearViewed() {
   if (clearViewInfo !== null) {
     clearViewInfo.addEventListener("click", () => {
-      localStorage.removeItem("cardStore");
+      sessionStorage.removeItem("cardStore");
       clearViewInfo.innerText = "Clearing...";
       document.addEventListener("DOMContentLoaded", () => {
         clearViewInfo.style.display = "none";
