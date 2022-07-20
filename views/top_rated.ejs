@@ -92,7 +92,7 @@
                     <% if(movie.poster_path){%>
                     <div class="movie-card">
                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
+                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
                         </a>
                         <a  href="/movie/<%= movie.id %>">
                             <div class="movie-card-overlay">
@@ -113,7 +113,7 @@
                     <%}else if(movie.poster_path === null){%>
                     <div class="movie-card" style="background-color: aliceblue;">
                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                            <img src="/poster-alt.png" alt="movie-poster">
+                            <img src="/poster-alt.png" alt="">
                         </a>
     
                     </div>

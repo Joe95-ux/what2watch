@@ -2373,14 +2373,14 @@ h1.genre-intro {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
-    border: none;
     color: var(--mainWhite);
     background-color: var(--primaryColor);
     cursor: pointer;
     transform: translateY(130%);
     transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
-
 
 .movie-card:hover .movie-card-overlay {
     opacity: 1;
@@ -3769,6 +3769,10 @@ h1.genre-intro {
     height: 230px;
     width: 160px;
     object-fit: cover;
+}
+
+.cast-card img, .person-card img{
+    background-color: #001927;
 }
 
 @media screen and (max-width:500px) {

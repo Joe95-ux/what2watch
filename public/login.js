@@ -1,6 +1,7 @@
 const historyBtns = document.querySelectorAll(".history");
 const table = document.getElementById("dashboard-table");
 const dashboardInput = document.getElementById("dashboard-input");
+let filter, tr, td, txtValue;
 
 // go back to previous page
 if (historyBtns !== null) {
@@ -30,7 +31,6 @@ handleTextArea();
 // dashboard table filter
 
 function tableSearch() {
-  let filter, tr, td, txtValue;
   if (table !== null) {
     tr = table.getElementsByTagName("tr");
   }

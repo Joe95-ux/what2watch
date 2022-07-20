@@ -85,7 +85,7 @@
                             <% if(details.profile_path){%> 
                             <img src="https://image.tmdb.org/t/p/w500/<%= details.profile_path %>" alt="actor-profile">
                             <%}else if(details.profile_path === null){%>
-                                <img src="/poster-alt.png" alt="movie-poster">
+                                <img src="/poster-alt.png" alt="actor-img">
                             <% } %> 
                         </div>
         
@@ -156,9 +156,9 @@
                             <%for(let profile of images){%>
                                 <div class="embla__slide person-card">
                                     <% if(profile.file_path){%>
-                                    <img src="https://image.tmdb.org/t/p/w500/<%= profile.file_path %>" alt="actor-img">
+                                    <img src="https://image.tmdb.org/t/p/w500/<%= profile.file_path %>" alt="">
                                     <%}else if(profile.file_path === null){%>
-                                        <img src="/poster-alt.png" alt="movie-poster">
+                                        <img src="/poster-alt.png" alt="">
                                     <% } %> 
                                 </div>
                             <% } %>
@@ -199,9 +199,9 @@
                             title="<%= movie.title %> ">
                             <% if(movie.poster_path){%> 
                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
-                                alt="movie-poster">
+                                alt="">
                             <%}else if(movie.poster_path === null){%>
-                                <img src="/poster-alt.png" alt="movie-poster">
+                                <img src="/poster-alt.png" alt="">
                             <% } %>  
                         </a>
                         <a  href="/movie/<%= movie.id %>">
