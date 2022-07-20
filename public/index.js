@@ -32,6 +32,7 @@ const cards = [...document.querySelectorAll(".movie-card")];
 const viewInfo = document.querySelector(".viewed-info");
 const clearViewInfo = document.querySelector(".view-info-header a");
 const profileInput = document.getElementById("profile-pic");
+const simpleBarContainer = document.getElementById("simple-bar");
 
 // navigation bar
 const navSlide = () => {
@@ -466,9 +467,6 @@ function clearViewed() {
 }
 clearViewed();
 
-// simplebar
-const simpleBarContainer = document.getElementById("simple-bar");
-new SimpleBar(simpleBarContainer, { autoHide: true });
 
 //Trending togglers
 const today = document.getElementById("today");
@@ -531,3 +529,6 @@ $(document).ready(function() {
     $(".welcome-banner-modal").removeClass("active-modal");
   });
 });
+
+
+new SimpleBar(simpleBarContainer, { autoHide: true });

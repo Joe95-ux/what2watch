@@ -549,6 +549,11 @@ button {
     align-items: center;
 }
 
+.side-drawer-btns{
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
 .categories li:hover {
     /* color: black; */
     background-color: #74c0fc;
@@ -593,12 +598,11 @@ button {
     font-size: 1rem;
     color: #fff;
     font-weight: 600;
-    border: 1px solid #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 55px;
     transition: var(--mainTransition);
     cursor: pointer;
     text-align: center;
-    margin-bottom: 1.5rem;
 }
 
 .browse-btn:hover {
@@ -612,12 +616,12 @@ button {
 }
 
 .credits {
-    margin-top: 10px;
+    margin-top: 5px;
     /* border: 2px solid var(--mainBlack); */
     position: relative;
-    padding: 10px;
-    width: 135px;
-    border-radius: 5px;
+    padding: 16px 10px 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .credits h5 {
@@ -628,6 +632,9 @@ button {
 .credits h4 {
     font-weight: 900;
     color: var(--mainWhite);
+}
+.credits img {
+    max-width: 135px;
 }
 
 .side-drawer-backdrop {
