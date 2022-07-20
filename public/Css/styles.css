@@ -4979,7 +4979,7 @@ footer {
 }
 
 .recents-wrapper {
-    overflow: scroll;
+    overflow: auto;
     display: flex;
 
 }

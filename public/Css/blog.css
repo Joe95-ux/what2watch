@@ -1818,7 +1818,7 @@ blockquote h4::before {
     border-radius: 5px;
     padding: 1rem 1.5rem;
     font-size: 1rem;
-    overflow: scroll;
+    overflow: auto;
 }
 
 table {
