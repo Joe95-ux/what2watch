@@ -222,8 +222,8 @@
                                         <div class="embla__container">
                                             <% similar.forEach(mov=>{%>
                                                 <div class="embla__slide" >
-                                                    <div class="slider-inner-card embla__slide__inner">
-                                                        <a  href="/movie/<%= mov.id %>">
+                                                    <div class="slider-inner-card embla__slide__inner viewed-card">
+                                                        <a  href="/movie/<%= mov.id %>" title="<%=mov.title%>">
                                                             <img class="slider-image" src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="" />
                                                         </a>
                                                         <div class="image-drop">
@@ -453,8 +453,8 @@
                         <div class="embla__container">
                             <% similar.forEach(mov=>{%>
                                 <div class="embla__slide" >
-                                    <div class="slider-inner-card embla__slide__inner">
-                                        <a  href="/movie/<%= mov.id %>">
+                                    <div class="slider-inner-card embla__slide__inner viewed-card">
+                                        <a  href="/movie/<%= mov.id %>" title="<%= mov.title %>">
                                             <img class="slider-image" src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="" />
                                         </a>
                                         <div class="image-drop">
@@ -689,7 +689,7 @@
             <div class="movie-wrapper">
                 <% recommendedMovies.forEach(function(recommendedMovie){%>
                 <div class="movie-card-container">
-                    <div class="movie-card">
+                    <div class="movie-card viewed-card">
                         <a class="image" href="/movie/<%= recommendedMovie.id %>"
                             title="<%= recommendedMovie.title %> ">
                             <% if(recommendedMovie.poster_path){%> 
@@ -756,7 +756,7 @@
                 <div class="movie-wrapper">
                     <% similarMovies.forEach(function(similarMovie){%>
                     <div class="movie-card-container">
-                        <div class="movie-card">
+                        <div class="movie-card viewed-card">
                             <a class="image" href="/movie/<%= similarMovie.id %>"
                                 title="<%= similarMovie.title %> ">
                                 <% if(similarMovie.poster_path){%> 

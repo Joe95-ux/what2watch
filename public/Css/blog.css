@@ -1902,34 +1902,34 @@ tbody td a {
 }
 
 .dashboard-actions a,
-#delete-form button {
+.delete-form button {
     color: var(--midGray);
     font-size: 14px;
     transition: var(--mainTransition);
 }
 
-#delete-form {
+.delete-form {
     margin: 0;
     padding: 0;
 }
 
-#delete-form button {
+.delete-form button {
     background-color: inherit;
     border: none;
     cursor: pointer;
 }
 
 .dashboard-actions a i,
-#delete-form button i {
+.delete-form button i {
     margin-right: 5px;
 }
 
-#delete-form button i:hover {
+.delete-form button i:hover {
     color: var(--primaryColor);
 }
 
 .dashboard-actions a:hover,
-#delete-form button:hover {
+.delete-form button:hover {
     color: var(--mainWhite);
 }
 

@@ -288,7 +288,7 @@
                         <div class="embla__container">
                             <% featured.forEach(mov=>{%>
                                 <div class="embla__slide" >
-                                    <div class="slider-inner-card featured-card embla__slide__inner">
+                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.poster_path){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
                                                 <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="">
@@ -399,7 +399,7 @@
                         <% trending.forEach(function(movie){%>
                             <div class="embla__slide trending__slide">
                                 <div class="movie-card-container embla__slide__inner">
-                                    <div class="movie-card">
+                                    <div class="movie-card viewed-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
                                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
@@ -480,7 +480,7 @@
                         <% trendingToday.forEach(function(movie){%>
                             <div class="embla__slide trending__slide">
                                 <div class="movie-card-container embla__slide__inner">
-                                    <div class="movie-card">
+                                    <div class="movie-card viewed-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
                                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
@@ -604,7 +604,7 @@
                 <% if(popularMovies){%>
                 <% popularMovies.forEach(function(popularMovie){%>
                 <div class="movie-card-container">
-                    <div class="movie-card">
+                    <div class="movie-card viewed-card">
                         <% if(popularMovie.poster_path){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
                             <img src="https://image.tmdb.org/t/p/w500/<%= popularMovie.poster_path %>"

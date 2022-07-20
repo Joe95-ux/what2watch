@@ -194,7 +194,7 @@
             <div class="movie-wrapper">
                 <% movies.forEach(function(movie){%>
                 <div class="movie-card-container">
-                    <div class="movie-card">
+                    <div class="movie-card viewed-card">
                         <a class="image" href="/movie/<%= movie.id %>"
                             title="<%= movie.title %> ">
                             <% if(movie.poster_path){%> 

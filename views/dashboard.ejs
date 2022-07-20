@@ -74,7 +74,7 @@
                                     <a href="/blog/edit/<%= story._id%>" class="edit-action"> <i
                                             class="fas fa-pencil-alt"></i> Edit</a>
                                     <form method="POST" action="/blog/posts/<%=story._id%>?_method=DELETE"
-                                        id="delete-form">
+                                        class="delete-form">
                                         <button type="submit"><i class="fas fa-trash"></i>Remove</button>
                                     </form>
                                 </div>

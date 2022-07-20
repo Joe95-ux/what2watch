@@ -90,7 +90,7 @@
                 <% movies.forEach(function(movie){%>
                 <div class="movie-card-container">
                     <% if(movie.poster_path){%>
-                    <div class="movie-card">
+                    <div class="movie-card viewed-card">
                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
                         </a>
@@ -111,8 +111,8 @@
                     </div>
     
                     <%}else if(movie.poster_path === null){%>
-                    <div class="movie-card">
-                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                    <div class="movie-card viewed-card">
+                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %>">
                             <img src="/poster-alt.png" alt="">
                         </a>
     

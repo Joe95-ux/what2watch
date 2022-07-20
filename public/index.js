@@ -28,7 +28,7 @@ const eyes = [...document.querySelectorAll(".pass-reveal")];
 const seeBio = document.querySelector(".see-bio");
 const profileBio = document.querySelector(".profile-biography");
 let recentWrapper = document.querySelector(".recents-wrapper");
-const cards = [...document.querySelectorAll(".movie-card")];
+const cards = [...document.querySelectorAll(".viewed-card")];
 const viewInfo = document.querySelector(".viewed-info");
 const clearViewInfo = document.querySelector(".view-info-header a");
 const profileInput = document.getElementById("profile-pic");
@@ -155,7 +155,6 @@ function stickLayout() {
   if (short != null || long != null) {
     let shortHeight = short.clientHeight + 497;
     let longHeight = long.clientHeight;
-    console.log(longHeight, shortHeight);
     if (longHeight > shortHeight) {
       short.classList.add("to-stick");
     } else {
