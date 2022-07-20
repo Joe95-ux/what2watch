@@ -352,17 +352,17 @@ function toggleReviews() {
 }
 toggleReviews();
 
-function debounce(fn, delay) {
-  let timeoutID;
-  return function(...args) {
-    if (timeoutID) {
-      clearTimeout(timeoutID);
-    }
-    timeoutID = setTimeout(() => {
-      fn(...args);
-    }, delay);
-  };
-}
+// function debounce(fn, delay) {
+//   let timeoutID;
+//   return function(...args) {
+//     if (timeoutID) {
+//       clearTimeout(timeoutID);
+//     }
+//     timeoutID = setTimeout(() => {
+//       fn(...args);
+//     }, delay);
+//   };
+// }
 
 // Handling recently clicked movie cards
 
@@ -371,11 +371,11 @@ function recentlyViewedHandler() {
     clearViewInfo.href = window.location.href;
   }
 
-  if (!sessionStorage.getItem("cardStore")) {
-    sessionStorage.setItem("cardStore", "[]");
+  if (!localStorage.getItem("cardStore")) {
+    localStorage.setItem("cardStore", "[]");
   }
 
-  let store = JSON.parse(sessionStorage.getItem("cardStore"));
+  let store = JSON.parse(localStorage.getItem("cardStore"));
   if (store.length === 0) {
     clearViewInfo.style.display = "none";
     viewInfo.classList.add("show-view-info");
@@ -388,7 +388,7 @@ function recentlyViewedHandler() {
     const id = link.split("/").pop();
     cards[i].addEventListener(
       "click",
-      debounce(function() {
+      function() {
         let cardItem = { id: id, title, image, link };
         store.push(cardItem);
         store = store.reduce((pureStore, current) => {
@@ -398,8 +398,8 @@ function recentlyViewedHandler() {
           }
           return pureStore.concat([current]);
         }, []);
-        sessionStorage.setItem("cardStore", JSON.stringify(store));
-      }, 2000)
+        localStorage.setItem("cardStore", JSON.stringify(store));
+      }
     );
   }
 
@@ -457,7 +457,7 @@ dropDown();
 function clearViewed() {
   if (clearViewInfo !== null) {
     clearViewInfo.addEventListener("click", () => {
-      sessionStorage.removeItem("cardStore");
+      localStorage.removeItem("cardStore");
       clearViewInfo.innerText = "Clearing...";
       document.addEventListener("DOMContentLoaded", () => {
         clearViewInfo.style.display = "none";
