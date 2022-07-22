@@ -6,7 +6,6 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const secretToken = document.getElementById("secret-token");
 const cpassword = document.getElementById("cpassword");
-
 // show error message
 
 function showError(input, message) {
@@ -123,15 +122,26 @@ function checkPasswordMatch(input1, input2, e) {
 function validateAuth() {
   if (form !== null) {
     form.addEventListener("submit", e => {
-      if(secretToken != null){
+      if(secretToken !== null){
         checkRequired([email, password, secretToken], e);
+        checkLength(password, 8, 25, e);
       }
-      if(cpassword != null){
+      if(cpassword !== null && email !== null){
         checkRequired([email, password, cpassword], e);
         checkPasswordMatch(password, cpassword, e);
+        checkLength(password, 8, 25, e);
       }
-      checkLength(password, 8, 25, e);
-      checkEmail(email, e);
+      if(cpassword !== null && email === null){
+        checkRequired([password, cpassword], e);
+        checkPasswordMatch(password, cpassword, e);
+        checkLength(password, 8, 25, e);
+      }
+      if(email !== null){
+        checkRequired([email], e);
+        checkEmail(email, e);
+      }
+      console.log("submitting")
+      
     });
   }
 }

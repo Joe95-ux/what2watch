@@ -272,6 +272,14 @@
   max-width: fit-content;
   color: var(--mainWhite);
 }
+
+.flash-wrapper.home-flash{
+  margin: -1rem 0 3rem;
+}
+
+.flash-wrapper.home-flash .flash-message{
+  margin: 0;
+}
 .flash-message.warning{
   border: 1px solid var(--primaryColor);
 }

@@ -153,7 +153,7 @@ router.get("/posts", async (req, res) => {
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
-    let stories = await Story.find({ status: "Public" })
+    let stories = await Story.find({ status: "Public"})
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean()
@@ -176,7 +176,7 @@ router.get("/posts", async (req, res) => {
       stories,
       sortedCats,
       trending,
-      picks
+      picks,
     });
   } catch (err) {
     console.log(err);
@@ -332,7 +332,6 @@ router.get("/register", ensureGuest, async (req, res) => {
 
 router.get("/login", ensureGuest, async (req, res) => {
   const title = "Login";
-  console.log(res.locals.messages);
   res.render("login", { title });
 });
 
@@ -466,7 +465,6 @@ router.get("/logout", function(req, res, next) {
 // request to reset password
 router.get("/reset-password", ensureGuest, async (req, res) => {
   const title = "Reset password";
-  req.flash("error");
   res.render("forgotpass", { title });
 });
 
@@ -627,7 +625,7 @@ router.post("/reset/:token", function(req, res, next) {
         smtpTransport.sendMail(mailOptions, function(err) {
           req.flash(
             "success",
-            "Success! Your password has been changed."
+            "Success! Your password was changed successfully."
           );
           done(err);
         });

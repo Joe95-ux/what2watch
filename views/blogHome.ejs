@@ -33,6 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
     <link rel="stylesheet" href="/Css/embla.css">
+    <link rel="stylesheet" href="/Css/login.css">
     <link rel="stylesheet" href="/Css/blog.css">
     <link rel="stylesheet" href="/Css/styles.css">
     <noscript>
@@ -58,7 +59,7 @@
         gtag('config', 'G-NN3S8E3V6Q');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -114,23 +115,26 @@
                 </div>
             </form>
         </div>
+
         <div class="wrapper-enclosure-blog">
-            <% if(locals.messages){%>
-                <% if(messages.error){%>
-                <div class="flash-wrapper">
-                    <div class="flash-message warning">
-                        <h2 class="flash-error"><%= messages.error %> </h2>
-                    </div>
+            <% if(messages){%>
+            <% if(messages.error){%>
+            <div class="flash-wrapper home-flash">
+                <div class="flash-message warning">
+                    <h2 class="flash-error"><%= messages.error[0] %> </h2>
                 </div>
-    
-                <% }else if(messages.success){ %>
-                <div class="flash-wrapper">
-                    <div class="flash-message success-info">
-                        <h2 class="flash-success"><%=messages.success%></h2>
-                    </div>
+            </div>
+
+            <%}%>
+                <%if(messages.success){ %>
+            <div class="flash-wrapper home-flash">
+                <div class="flash-message success-info">
+                    <h2 class="flash-success"><%=messages.success[0]%></h2>
                 </div>
-                <% } %>
-                <% } %>
+            </div>
+
+            <% } %>
+            <% } %>
             <div class="new-header-wrapper blog-header-wrapper">
                 <div class="blog-header-left">
                     <div class="embla autoplay__embla blog-header-embla">
