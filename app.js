@@ -39,7 +39,6 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.static( __dirname + "/public"));
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
 app.use(express.json());
 app.use(compression());
 app.use(cookieParser(process.env.SECRET));
@@ -67,6 +66,7 @@ app.use(function(req, res, next){
   next();
 })
 
+app.set("view engine", "ejs");
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;

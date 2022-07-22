@@ -115,6 +115,22 @@
             </form>
         </div>
         <div class="wrapper-enclosure-blog">
+            <% if(locals.messages){%>
+                <% if(messages.error){%>
+                <div class="flash-wrapper">
+                    <div class="flash-message warning">
+                        <h2 class="flash-error"><%= messages.error %> </h2>
+                    </div>
+                </div>
+    
+                <% }else if(messages.success){ %>
+                <div class="flash-wrapper">
+                    <div class="flash-message success-info">
+                        <h2 class="flash-success"><%=messages.success%></h2>
+                    </div>
+                </div>
+                <% } %>
+                <% } %>
             <div class="new-header-wrapper blog-header-wrapper">
                 <div class="blog-header-left">
                     <div class="embla autoplay__embla blog-header-embla">

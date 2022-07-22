@@ -332,7 +332,7 @@ router.get("/register", ensureGuest, async (req, res) => {
 
 router.get("/login", ensureGuest, async (req, res) => {
   const title = "Login";
-  console.log(res.locals.messages)
+  console.log(res.locals.messages);
   res.render("login", { title });
 });
 
@@ -544,7 +544,6 @@ router.post("/reset-password", function(req, res, next) {
 
 router.get("/reset/:token", ensureGuest, (req, res) => {
   const title = "Reset password";
-  console.log(res.locals.messages)
   User.findOne(
     {
       resetPasswordToken: req.params.token,
@@ -563,45 +562,46 @@ router.get("/reset/:token", ensureGuest, (req, res) => {
   );
 });
 
-router.put("/reset/:token", function(req, res, next) {
+router.post("/reset/:token", function(req, res, next) {
   async.waterfall(
     [
       function(done) {
-        User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
-          if (!user) {
-            req.flash('error', 'Password reset token is invalid or has expired.');
-            return res.redirect("/blog/reset/" + req.params.token);
-          }
-
-          if (req.body.password) {
-            user.setPassword(req.body.password, (err, user)=>{
-              if(err){
-                console.log(err)
-              }
-              user.save(function(err){
-                if(err){
-                  console.log(err)
-                }
-              })
-            });
-          }
-          user.resetPasswordToken = undefined;
-          user.resetPasswordExpires = undefined;
-  
-          User.findOneAndUpdate(
-            {resetPasswordToken: req.params.token},
-            {
-              $set: user
-            },
-            { new: true },
-            function(err, user){
-              if(err){
-                console.log(err)
-              }
-              res.status(200).redirect("/blog/login")
+        User.findOneAndUpdate(
+          {
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: { $gt: Date.now() }
+          },
+          {
+            $unset: {
+              resetPasswordToken: 1,
+              resetPasswordExpires: 1
             }
-          );
-        });
+          },
+          {
+            new: true
+          },
+          function(err, user) {
+            if (!user) {
+              req.flash(
+                "error",
+                "Password reset token is invalid or has expired."
+              );
+              return res.redirect("/blog/reset-password");
+            }
+            if (req.body.password) {
+              user.setPassword(req.body.password, (err, user) => {
+                if (err) {
+                  console.log(err);
+                }
+                user.save(function(err) {
+                  req.logIn(user, function(err) {
+                    done(err, user);
+                  });
+                });
+              });
+            }
+          }
+        );
       },
       function(user, done) {
         const smtpTransport = nodemailer.createTransport({
@@ -625,14 +625,17 @@ router.put("/reset/:token", function(req, res, next) {
             " has just been changed.\n"
         };
         smtpTransport.sendMail(mailOptions, function(err) {
-          req.flash("success", "Success! Your password has been changed. You may now Login.");
-          done(err, "done");
+          req.flash(
+            "success",
+            "Success! Your password has been changed."
+          );
+          done(err);
         });
       }
     ],
     function(err) {
       if (err) return next(err);
-      res.redirect("/blog/login");
+      res.redirect("/blog/posts");
     }
   );
 });
