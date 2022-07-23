@@ -43,10 +43,6 @@ const StorySchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  catSlug:{
-    type: String,
-    unique: true
-  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
@@ -60,9 +56,6 @@ const StorySchema = new mongoose.Schema({
 StorySchema.pre('validate', function(next) {
   if (this.title) {
     this.slug = slugify(this.title, { lower: true, strict: true })
-  }
-  if (this.category) {
-    this.catSlug = slugify(this.category, { lower: true, strict: true })
   }
   next()
 })
