@@ -22,7 +22,6 @@ const StorySchema = new mongoose.Schema({
   },
   photo: {
     type: String,
-    required: true,
   },
   photoTitle: {
     type: String,

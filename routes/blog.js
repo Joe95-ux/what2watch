@@ -136,7 +136,9 @@ router.post(
     try {
       req.body.user = req.user.id;
       post = req.body;
-      post.photo = req.file.location;
+      if(req.file){
+        post.photo = req.file.location;
+      }
       await Story.create(post);
       res.redirect("/blog/posts");
     } catch (err) {
