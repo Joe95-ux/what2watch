@@ -170,7 +170,7 @@ router.get("/posts", async (req, res) => {
         sortedCats = sortCats(categories);
       }
       picks = editorsPicks(stories);
-      picks = picks.slice(0, 9);
+      picks = picks.slice(0, 6);
     }
     res.render("blogHome", {
       title,
