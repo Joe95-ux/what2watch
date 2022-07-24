@@ -1759,11 +1759,9 @@ blockquote h4::before {
 
 div.embedly-card-hug{
     max-width: 100%;
-    width: 840px;
 }
 
 div.embedly-card-hug iframe{
-   width: 840px;
    max-width: 100%;
 }
 
