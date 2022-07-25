@@ -278,14 +278,8 @@
                                 <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
                                 <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
                             </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <% if(stories){%>
-                            <%stories.forEach(story=>{  %>
+                            <% if(latest){%>
+                            <%latest.forEach(story=>{  %>
                             <div class="post">
                                 <img src="<%= story.photo %>" alt="post image">
                                 <h5 class="cat-name"><%= story.category %> </h5>

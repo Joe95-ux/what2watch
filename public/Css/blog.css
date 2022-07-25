@@ -1641,6 +1641,8 @@ h3.single-post-title {
 
 .post-content img{
     max-width: 100%;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 .post-content p {
@@ -1686,6 +1688,7 @@ blockquote h4 {
 .post-content ol, .post-content ul{
     list-style-type: decimal;
     line-height: 1.9;
+    margin-bottom: 1rem;
 }
 
 .post-content ol li, .post-content ul li{

@@ -17,7 +17,8 @@ const {
   sortCats,
   getCats,
   trendingMovies,
-  editorsPicks
+  editorsPicks,
+  latestPosts
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -152,6 +153,7 @@ router.get("/posts", async (req, res) => {
   const userEmail = req.flash("user");
   let sortedCats;
   let picks;
+  let latest;
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
@@ -171,6 +173,8 @@ router.get("/posts", async (req, res) => {
       }
       picks = editorsPicks(stories);
       picks = picks.slice(0, 6);
+      latest = latestPosts(stories);
+
     }
     res.render("blogHome", {
       title,
@@ -179,6 +183,7 @@ router.get("/posts", async (req, res) => {
       sortedCats,
       trending,
       picks,
+      latest
     });
   } catch (err) {
     console.log(err);
