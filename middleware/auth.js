@@ -1,4 +1,5 @@
 // protecting routes
+const User = require("../models/User");
 
 module.exports = {
     ensureAuth: function(req, res, next){
@@ -20,6 +21,20 @@ module.exports = {
             return next();
         }else{
             res.render("error")
+        }
+    },
+    ensureAdminToken:  function(req, res, next){
+        if(req.body.token === process.env.GIT_TOKN){
+            return  next()
+        }else{
+            res.render("error")
+        }
+    },
+    ensureAdmin: function(req, res, next){
+        if(req.isAuthenticated() && req.user.privilege === "admin"){
+            return next();
+        }else{
+            res.status(401).json("Unauthorised")
         }
     }
 }

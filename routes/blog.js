@@ -10,7 +10,7 @@ const { S3Client, AbortMultipartUploadCommand } = require("@aws-sdk/client-s3");
 const multerS3 = require("multer-s3");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
-const { ensureAuth, ensureGuest, ensureToken } = require("../middleware/auth");
+const { ensureAuth, ensureGuest, ensureToken, ensureAdminToken, ensureAdmin } = require("../middleware/auth");
 const {
   formatDate,
   dateWithTime,
@@ -342,6 +342,13 @@ router.get("/login", ensureGuest, async (req, res) => {
   res.render("login", { title });
 });
 
+//get admin login
+
+router.get("/admin/login", ensureGuest, async (req, res) => {
+  const title = "Login as admin";
+  res.render("adminlogin", { title });
+});
+
 router.get("/profile/:id", ensureAuth, async (req, res) => {
   const title = "Edit profile";
   try {
@@ -445,6 +452,23 @@ router.post("/register", ensureToken, function(req, res) {
 });
 
 router.post("/login", function(req, res) {
+  const user = new User({
+    username: req.body.username,
+    passsword: req.body.password
+  });
+  req.login(user, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      passport.authenticate("local")(req, res, () => {
+        res.redirect("/blog/dashboard/" + req.user.id);
+      });
+    }
+  });
+});
+
+// post to admin login
+router.post("/admin/login", ensureAdminToken, function(req, res) {
   const user = new User({
     username: req.body.username,
     passsword: req.body.password
