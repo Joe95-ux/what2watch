@@ -195,18 +195,20 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
   try {
     const story = await Story.findOne({
       _id: req.params.id
-    }).lean();
+    })
+    .populate("user")
+    .lean();
 
     if (!story) {
       return res.render("error/400");
     }
-
-    if (story.user != req.user.id) {
+    
+    if(story.user._id.equals(req.user._id ) || req.user.privilege === "admin"){
+      res.render("editblog", { title, story });
+    }else {
       res
         .status(401)
         .json("action not authorised. you can only edit your own articles");
-    } else {
-      res.render("editblog", { title, story });
     }
   } catch (err) {
     console.error(err);
@@ -223,13 +225,14 @@ router.put(
   async (req, res) => {
     try {
       let story = await Story.findById(req.params.id).lean();
+      let user = await User.findById(req.user.id);
       let newStory = req.body;
 
       if (!story) {
         return res.render("error/400");
       }
 
-      if (story.user != req.user.id) {
+      if (story.user !== req.user.id || user?.privilege !== "admin") {
         res
           .status(401)
           .json("action not authorised. You can only edit your story");
@@ -259,12 +262,13 @@ router.put(
 router.delete("/posts/:id", ensureAuth, async (req, res) => {
   try {
     let story = await Story.findById(req.params.id).lean();
+    let user = await User.findById(req.user.id);
 
     if (!story) {
       return res.render("error/400");
     }
 
-    if (story.user != req.user.id) {
+    if (story.user != req.user.id || user?.privilege !== "admin") {
       res
         .status(401)
         .json("action not authorised. You can only delete your story");
@@ -344,8 +348,8 @@ router.get("/login", ensureGuest, async (req, res) => {
 
 //get admin login
 
-router.get("/admin/login", ensureGuest, async (req, res) => {
-  const title = "Login as admin";
+router.get("/admin/register", ensureGuest, async (req, res) => {
+  const title = "Register as admin";
   res.render("adminlogin", { title });
 });
 
@@ -405,6 +409,8 @@ router.put(
   }
 );
 
+
+// user dashboard
 router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
   let created;
@@ -435,6 +441,49 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   }
 });
 
+// admin dashboard
+
+router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => {
+  const title = "dashboard";
+  let created;
+  try {
+    let stories = await Story.find({ status: "Public"})
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    let users = await User.find({});
+    let user = await User.findOne({privilege:"admin"});
+    if(user){
+      created = formatDate(user.createdAt);
+    }
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = dateWithTime(story.createdAt, format);
+        return story;
+      });
+    }
+    if (users) {
+      users.map(user=>{
+        user.createdAt = formatDate(user.createdAt);
+        return user;
+      })
+      
+    }
+    res.render("dashboard", {
+      title,
+      stories,
+      name: req.user.name,
+      created,
+      users,
+      user
+    });
+  } catch (err) {
+    console.log(err);
+    res.render("error/500");
+  }
+});
+
 router.post("/register", ensureToken, function(req, res) {
   User.register({ username: req.body.username }, req.body.password, function(
     err,
@@ -456,29 +505,35 @@ router.post("/login", function(req, res) {
     username: req.body.username,
     passsword: req.body.password
   });
-  req.login(user, function(err) {
+  req.login(user, function(err, user) {
     if (err) {
       console.log(err);
     } else {
       passport.authenticate("local")(req, res, () => {
-        res.redirect("/blog/dashboard/" + req.user.id);
+        if(req.user.privilege === "admin"){
+          res.redirect("/blog/admin/dashboard/" + req.user.id);
+        }else{
+          res.redirect("/blog/dashboard/" + req.user.id);
+        }
+        
       });
     }
   });
 });
 
 // post to admin login
-router.post("/admin/login", ensureAdminToken, function(req, res) {
-  const user = new User({
-    username: req.body.username,
-    passsword: req.body.password
-  });
-  req.login(user, function(err) {
+router.post("/admin/register", ensureAdminToken, function(req, res) {
+  req.body.privilege = "admin";
+  User.register({ username: req.body.username, privilege:req.body.privilege }, req.body.password, function(
+    err,
+    user
+  ) {
     if (err) {
       console.log(err);
+      return res.render("register");
     } else {
-      passport.authenticate("local")(req, res, () => {
-        res.redirect("/blog/dashboard/" + req.user.id);
+      passport.authenticate("local")(req, res, function() {
+        res.redirect("/blog/admin/dashboard/" + user._id);
       });
     }
   });

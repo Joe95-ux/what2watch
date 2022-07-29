@@ -95,7 +95,11 @@
                 <ul class="nav_links">
                     <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
                     <% if(user){%>
+                    <% if(user.privilege === "admin"){%>
+                    <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
                     <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
                     <% } %>
                 </ul>
 

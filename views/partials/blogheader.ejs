@@ -32,7 +32,7 @@
     <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.min.js"></script>
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
     <link rel="stylesheet" href="/Css/ckstyles.css">
     <link rel="stylesheet" href="/Css/editor.css">
     <link rel="stylesheet" href="/Css/embla.css">
@@ -62,7 +62,7 @@
         gtag('config', 'G-NN3S8E3V6Q');
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -99,8 +99,12 @@
                 <ul class="nav_links">
                     <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
                     <% if(user){%>
+                    <% if(user.privilege === "admin"){%>
+                    <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
                         <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% } %>  
+                    <% } %>
+                    <% } %> 
                 </ul>
 
             </div>
