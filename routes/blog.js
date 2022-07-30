@@ -224,19 +224,16 @@ router.put(
   ensureAuth,
   async (req, res) => {
     try {
-      let story = await Story.findById(req.params.id).lean();
-      let user = await User.findById(req.user.id);
+      let story = await Story.findById(req.params.id)
+      .populate("user")
+      .lean();
       let newStory = req.body;
 
       if (!story) {
         return res.render("error/400");
       }
 
-      if (story.user !== req.user.id || user?.privilege !== "admin") {
-        res
-          .status(401)
-          .json("action not authorised. You can only edit your story");
-      } else {
+      if (story.user._id.equals(req.user._id ) || req.user.privilege === "admin") {
         if (req.file) {
           newStory.photo = req.file.location;
         }
@@ -249,6 +246,12 @@ router.put(
         );
 
         res.redirect("/blog/dashboard/" + story.user);
+        
+      } else {
+        res
+          .status(401)
+          .json("action not authorised. You can only edit your story");
+        
       }
     } catch (err) {
       console.error(err);
@@ -261,20 +264,23 @@ router.put(
 // @route   delete /blog/posts/:id
 router.delete("/posts/:id", ensureAuth, async (req, res) => {
   try {
-    let story = await Story.findById(req.params.id).lean();
+    let story = await Story.findById(req.params.id).populate("user")
+    .lean();
     let user = await User.findById(req.user.id);
 
     if (!story) {
       return res.render("error/400");
     }
 
-    if (story.user != req.user.id || user?.privilege !== "admin") {
+    if (story.user._id.equals(req.user._id ) || req.user.privilege === "admin") {
+      await Story.deleteOne({ _id: req.params.id });
+      res.redirect("/blog/dashboard/" + story.user);
+      
+    } else {
       res
         .status(401)
         .json("action not authorised. You can only delete your story");
-    } else {
-      await Story.deleteOne({ _id: req.params.id });
-      res.redirect("/blog/dashboard/" + story.user);
+      
     }
   } catch (err) {
     console.error(err);
