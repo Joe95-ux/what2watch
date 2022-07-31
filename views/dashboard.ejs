@@ -41,6 +41,7 @@
                 <table id="dashboard-table" data-filter-control="true" data-show-search-clear-button="true">
                     <thead>
                         <tr>
+                            <th>Writers</th>
                             <th>Title</th>
                             <th>Created on</th>
                             <th>Status</th>
@@ -49,6 +50,17 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -61,6 +73,22 @@
                         </tr>
                         <% stories.forEach(story=>{%>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <% if(story.user.photo){%>
+                                        <img src="<%= story.user.photo%>" alt="">
+                                        <% }else{%>
+                                        <img src="/profile-pic.png" alt="">
+                                        <% }%>
+                                    <div>
+                                        <h3><%= story.user.name%></h3>
+                                        <h4><%= story.user.role %></h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
+                            
                             <td data-label="Title">
                                 <div class="clamp-dashboard">
                                     <a href="/blog/posts/<%= story.slug%>"
@@ -83,6 +111,17 @@
 
                         <%}) %>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -94,6 +133,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -105,6 +155,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -116,6 +177,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -127,6 +199,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -138,6 +221,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -149,6 +243,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -160,6 +265,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -171,6 +287,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>
@@ -182,6 +309,17 @@
                             </td>
                         </tr>
                         <tr>
+                            <td data-label="name">
+                                <div class="table-story-writer">
+                                    <img src="/profile-pic.png" alt="">
+                                    <div>
+                                        <h3>Jane Doe</h3>
+                                        <h4>Editor</h4>
+                                    </div>
+
+                                </div>
+
+                            </td>
                             <td data-label="Title">The Dune remake that everyone was waiting for</td>
                             <td data-label="Date">December 4th 2021, 12:12:18 am</td>
                             <td data-label="Status">public</td>

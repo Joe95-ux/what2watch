@@ -422,6 +422,7 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   let created;
   try {
     let stories = await Story.find({ user: req.params.id })
+      .populate("user")
       .sort({ createdAt: "desc" })
       .lean();
     let user = await User.findById(req.params.id);
