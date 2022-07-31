@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="dashboard-wrapper">
-            <div class="dashboard-content">
+            <div class="dashboard-content scroll-black">
                 <div class="dashboard-title min-dash-title">
                     <div class="dashboard-title-header">
                         <%if(user.name !== ""){%>
@@ -37,11 +37,12 @@
                     </div>
                     
                 </div>
+                
                 <% if(stories.length){%>
                 <table id="dashboard-table" data-filter-control="true" data-show-search-clear-button="true">
                     <thead>
                         <tr>
-                            <th>Writers</th>
+                            <th>Writer</th>
                             <th>Title</th>
                             <th>Created on</th>
                             <th>Status</th>

@@ -1836,14 +1836,14 @@ div.embedly-card-hug iframe{
     overflow: auto;
 }
 
+
 table {
-    width: 100%;
-    min-width: 800px;
+    width: 120%;
+    min-width: 1077px;
     margin-top: 1rem;
     border-collapse: collapse;
-    table-layout: fixed;
     text-align: left;
-    overflow: auto;
+    table-layout: fixed;
 }
 
 thead {
