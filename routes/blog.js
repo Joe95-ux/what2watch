@@ -595,6 +595,7 @@ router.post("/reset-password", function(req, res, next) {
           port: 465,
           secure: true, // use SSL
           auth: {
+            type:login,
             user: process.env.ZOHO_USER,
             pass: process.env.ZOHO_PASS
           }
@@ -701,6 +702,7 @@ router.post("/reset/:token", function(req, res, next) {
           port: 465,
           secure: true, // use SSL
           auth: {
+            type:"login",
             user: process.env.ZOHO_USER,
             pass: process.env.ZOHO_PASS
           }
