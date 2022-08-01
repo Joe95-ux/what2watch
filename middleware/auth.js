@@ -24,7 +24,7 @@ module.exports = {
         }
     },
     ensureAdminToken:  function(req, res, next){
-        if(req.body.token === process.env.GIT_TOKN){
+        if(req.body.token == process.env.S3_ACCESS_KEY_ID){
             return  next()
         }else{
             res.render("error")

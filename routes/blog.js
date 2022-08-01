@@ -460,7 +460,7 @@ router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => 
       .lean()
       .exec();
     let users = await User.find({});
-    let user = await User.findOne({privilege:"admin"});
+    let user = await User.findOne({_id:req.params.id});
     if(user){
       created = formatDate(user.createdAt);
     }

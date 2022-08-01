@@ -1986,13 +1986,16 @@ tbody td a {
     display: flex;
     justify-content: space-between;
 }
+.dash-title-inner{
+    margin-bottom: 2rem;
+}
 .dashboard-title span{
     color: var(--mainWhite);
 }
 
 
 .dashboard-title h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--midGrey);
     font-weight: 500;
 }
@@ -2118,7 +2121,7 @@ tbody td a {
 }
 
 .profile-photo h2 {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: 500px;
     margin-top: 0.4rem;
     color: var(--mainWhite);
