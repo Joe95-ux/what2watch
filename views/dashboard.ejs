@@ -14,7 +14,13 @@
     <div class="wrapper-enclosure-blog">
         <div class="dashboard-title">
             <div>
-                <h1>Dashboard</h1>
+                <% if(user.privilege === "admin"){%> 
+                    <h1>Admin Dashboard</h1>
+                    <% }else{%>
+                        <h1>Dashboard</h1>
+
+                    <% } %>  
+                
             </div>
         </div>
         <div class="dashboard-wrapper">
