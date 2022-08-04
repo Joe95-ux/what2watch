@@ -14,13 +14,13 @@
     <div class="wrapper-enclosure-blog">
         <div class="dashboard-title">
             <div>
-                <% if(user.privilege === "admin"){%> 
-                    <h1>Admin Dashboard</h1>
-                    <% }else{%>
-                        <h1>Dashboard</h1>
+                <% if(user.privilege === "admin"){%>
+                <h1>Admin Dashboard</h1>
+                <% }else{%>
+                <h1>Dashboard</h1>
 
-                    <% } %>  
-                
+                <% } %>
+
             </div>
         </div>
         <div class="dashboard-wrapper">
@@ -39,11 +39,12 @@
                             <i class="fas fa-search"></i>
                             <input type="text" id="dashboard-input" placeholder="search story..." autocomplete="off">
                         </div>
-                        <a href="/blog/compose" role="button" class="create-btn table-btn"><i class="fas fa-plus"></i>New Post</a>
+                        <a href="/blog/compose" role="button" class="create-btn table-btn"><i
+                                class="fas fa-plus"></i>New Post</a>
                     </div>
-                    
+
                 </div>
-                
+
                 <% if(stories.length){%>
                 <table id="dashboard-table" data-filter-control="true" data-show-search-clear-button="true">
                     <thead>
@@ -83,10 +84,10 @@
                             <td data-label="name">
                                 <div class="table-story-writer">
                                     <% if(story.user.photo){%>
-                                        <img src="<%= story.user.photo%>" alt="">
-                                        <% }else{%>
-                                        <img src="/profile-pic.png" alt="">
-                                        <% }%>
+                                    <img src="<%= story.user.photo%>" alt="">
+                                    <% }else{%>
+                                    <img src="/profile-pic.png" alt="">
+                                    <% }%>
                                     <div>
                                         <h3><%= story.user.name%></h3>
                                         <h4><%= story.user.role %></h4>
@@ -95,12 +96,20 @@
                                 </div>
 
                             </td>
-                            
+
                             <td data-label="Title">
+                                <% if(story.status === "Draft"){%>
+                                <div class="clamp-dashboard">
+                                    <a href="/blog/posts/<%= story.slug%>" title="<%= story.title %> "
+                                        style="cursor:not-allowed;"><%= story.title %></a>
+                                </div>
+                                <% }else{%>
                                 <div class="clamp-dashboard">
                                     <a href="/blog/posts/<%= story.slug%>"
                                         title="<%= story.title %> "><%= story.title %></a>
                                 </div>
+                                <% } %>
+
                             </td>
                             <td data-label="Date"><%= story.createdAt %> </td>
                             <td data-label="Status"><%= story.status %> </td>

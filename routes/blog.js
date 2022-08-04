@@ -245,7 +245,7 @@ router.put(
           { new: true }
         );
 
-        res.redirect("/blog/posts/" + story.slug);
+        res.redirect("/blog/posts/");
         
       } else {
         res
@@ -457,7 +457,7 @@ router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => 
   const title = "dashboard";
   let created;
   try {
-    let stories = await Story.find({ status: "Public"})
+    let stories = await Story.find({})
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean()
