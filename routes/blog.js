@@ -245,7 +245,7 @@ router.put(
           { new: true }
         );
 
-        res.redirect("/blog/dashboard/" + story.user);
+        res.redirect("/blog/posts/" + story.slug);
         
       } else {
         res
@@ -274,8 +274,11 @@ router.delete("/posts/:id", ensureAuth, async (req, res) => {
 
     if (story.user._id.equals(req.user._id ) || req.user.privilege === "admin") {
       await Story.deleteOne({ _id: req.params.id });
-      res.redirect("/blog/dashboard/" + story.user);
-      
+      if(req.user.privilege === "admin"){
+        res.redirect("/blog/admin/dashboard/" + story.user._id);
+      }else{
+        res.redirect("/blog/dashboard/" + story.user._id);
+      }
     } else {
       res
         .status(401)
