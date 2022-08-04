@@ -99,22 +99,25 @@
 
     <section id="header-container" class="blog-header">
         <div class="wrapper-enclosure-blog">
-            <% if(locals.messages){%>
-            <% if(messages.error){%>
-            <div class="flash-wrapper">
-                <div class="flash-message warning">
-                    <h2 class="flash-error"><%= messages.error %> </h2>
+            <% if(messages){%>
+                <% if(messages.error){%>
+                <div class="flash-wrapper">
+                    <div class="flash-message warning">
+                        <h2 class="flash-error"><%= messages.error[0]%> </h2>
+                    </div>
                 </div>
-            </div>
-
-            <% }else if(messages.success){ %>
-            <div class="flash-wrapper">
-                <div class="flash-message success-info">
-                    <h2 class="flash-success"><%=messages.success%></h2>
+    
+                <%}%>
+                <%if(messages.info){ %>
+                <div class="flash-wrapper">
+                    <div class="flash-message success-info">
+                        <h2 class="flash-success"><%= messages.info[0]%></h2>
+                    </div>
                 </div>
-            </div>
-            <% } %>
-            <% } %>
+                <% } %>
+    
+    
+                <% } %>
             <div class="form-container-wrapper">
                 <div class="forms-container">
                     <div class="form-title">

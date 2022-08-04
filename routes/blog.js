@@ -495,13 +495,18 @@ router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => 
 });
 
 router.post("/register", ensureToken, function(req, res) {
+  const title = "register"
   User.register({ username: req.body.username }, req.body.password, function(
     err,
     user
   ) {
     if (err) {
       console.log(err);
-      return res.render("register");
+      req.flash(
+        "info",
+        "Sorry! A user with this email already exists."
+      );
+      return res.render("register", {title});
     } else {
       passport.authenticate("local")(req, res, function() {
         res.redirect("/blog/dashboard/" + user._id);
@@ -540,7 +545,11 @@ router.post("/admin/register", ensureAdminToken, function(req, res) {
   ) {
     if (err) {
       console.log(err);
-      return res.render("register");
+      req.flash(
+        "info",
+        "Sorry! A user with this email already exists."
+      );
+      res.redirect("/blog/admin/register");
     } else {
       passport.authenticate("local")(req, res, function() {
         res.redirect("/blog/admin/dashboard/" + user._id);
