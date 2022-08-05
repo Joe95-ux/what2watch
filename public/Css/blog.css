@@ -234,6 +234,47 @@ div.blog-header-right .post-title {
     margin-right: 10px;
 }
 
+.share-story{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.2rem;
+    color: var(--lightGrey);
+}
+.share-story a{
+    text-align: none;
+    color:var(--lightGrey)
+}
+.share-story a:not(:first-child){
+    margin-left: 12px;
+}
+.share-story a.social-icon{
+    margin-bottom: 0;
+}
+.share-title{
+    text-transform: uppercase;
+    margin-right: 2rem;
+    font-weight: 500;
+
+}
+.top-share{
+    display: none;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: 0;
+    text-transform: uppercase;
+}
+.share-title i, .top-share i{
+    margin-right: 5px;
+
+}
+.share-links{
+    display: flex;
+}
+
 @media screen and (max-width:1124px) {
     .post-title.blog-header-post-title {
         padding-right: 3.5rem;
@@ -376,6 +417,18 @@ div.blog-header-right .post-title {
     .post h5 {
         font-size: 15px;
     }
+    .share-story{
+        padding: 0.6rem 0;
+        font-size: 1rem;
+    }
+    .share-story a:not(:first-child){
+        margin-left: 8px;
+    }
+    .share-title{
+        margin-right: 16px;
+        font-weight: 400;
+    
+    }
 }
 
 @media screen and (max-width:320px) {
@@ -387,6 +440,13 @@ div.blog-header-right .post-title {
     div.blog-header-right .post-title {
         width: calc(98% - 14px);
         max-width: calc(98% - 14px);
+    }
+    .share-title{
+        display: none;
+    
+    }
+    .top-share{
+        display: block;
     }
 }
 
@@ -1647,7 +1707,6 @@ h3.single-post-title {
     color: darkgrey;
     text-align: left;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .post-content img {
