@@ -422,8 +422,13 @@ router.put(
 // user dashboard
 router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
+  let sortedCats;
   let created;
   try {
+    let allStories = await Story.find({})
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
     let stories = await Story.find({ user: req.params.id })
       .populate("user")
       .sort({ createdAt: "desc" })
@@ -435,6 +440,12 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
         return story;
       });
     }
+    if(allStories){
+      let categories = getCats(stories);
+      if (categories.length) {
+        sortedCats = sortCats(categories);
+      }
+    }
     if (user) {
       created = formatDate(user.createdAt);
     }
@@ -443,7 +454,8 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
       stories,
       name: req.user.name,
       created,
-      user
+      user,
+      sortedCats
     });
   } catch (err) {
     console.log(err);
@@ -455,6 +467,7 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
 
 router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => {
   const title = "dashboard";
+  let sortedCats;
   let created;
   try {
     let stories = await Story.find({})
@@ -472,6 +485,10 @@ router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => 
         story.createdAt = dateWithTime(story.createdAt, format);
         return story;
       });
+      let categories = getCats(stories);
+      if (categories.length) {
+        sortedCats = sortCats(categories);
+      }
     }
     if (users) {
       users.map(user=>{
@@ -486,7 +503,8 @@ router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => 
       name: req.user.name,
       created,
       users,
-      user
+      user,
+      sortedCats
     });
   } catch (err) {
     console.log(err);

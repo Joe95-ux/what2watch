@@ -678,10 +678,10 @@ div.tv-news {
 
     }
 }
-@media screen and (max-width:414px) {
+@media screen and (max-width:418px) {
     .latest-posts .post img {
         height: auto;
-        min-height: 135px;
+        min-height: 220px;
         max-height: 220px;
 
     }
@@ -964,7 +964,13 @@ div.tv-news {
     }
 }
 
-@media screen and (max-width:414px) {
+@media screen and (max-width:418px) {
+    .post h3 {
+        font-size: 20px;
+    }
+    .featured-card .post h3{
+        font-size: 17px;
+    }
 
     .latest-posts,
     div.tv-news {
