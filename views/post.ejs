@@ -1,5 +1,46 @@
 <%- include("partials/blogheader") %>
+<div class="side-drawer" data-simplebar>
+    <i class="fas fa-times"></i>
+    <div class="side-drawer-inner">
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Menu</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                    <% if(user){%>
+                        <% if(user.privilege === "admin"){%>
+                        <li ><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                            <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %> 
+                </ul>
+            </div>
 
+        </div>
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Categories</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <% if(sortedCats){%>
+                    <% for(let cat in sortedCats){%>
+                    <li><i class="fas fa-dot-circle"></i><a class="active-cat" href="/blog/category/<%=cat%>"><%= cat %>
+                        </a><span>(<%= sortedCats[cat] %>)</span></li>
+                    <% } %>
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
+<section class="side-drawer-backdrop"></section>
 <section id="header-container" class="blog-header">
     <div class="small-screen-search search-bar">
         <i class="fas fa-times close-sm-search"></i>

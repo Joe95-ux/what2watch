@@ -150,10 +150,16 @@ button {
     align-items: center;
     color: var(--mainWhite);
 }
+.burger.blog-burger{
+    display: none;
+}
 
 @media screen and (max-width:765px) {
     .nav_links {
         display: none;
+    }
+    .burger.blog-burger{
+        display: inline-block;
     }
 }
 

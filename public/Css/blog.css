@@ -353,7 +353,7 @@ div.blog-header-right .post-title {
 
     .post-title h3,
     .post h3 {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .post-title h4 {
@@ -651,7 +651,7 @@ div.tv-news {
     .latest-posts .post img {
         height: auto;
         min-height: 170px;
-        max-height: 220px;
+        max-height: 170px;
     }
 }
 
@@ -674,11 +674,18 @@ div.tv-news {
     .latest-posts .post img {
         height: auto;
         min-height: 135px;
-        max-height: 200px;
+        max-height: 135px;
 
     }
 }
+@media screen and (max-width:414px) {
+    .latest-posts .post img {
+        height: auto;
+        min-height: 135px;
+        max-height: 220px;
 
+    }
+}
 .post h3 {
     font-size: 1.1rem;
     font-weight: 400;
@@ -957,7 +964,7 @@ div.tv-news {
     }
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:414px) {
 
     .latest-posts,
     div.tv-news {
@@ -1718,7 +1725,7 @@ h3.single-post-title {
 }
 
 .post-content p {
-    font-size: 1.1rem;
+    font-size: 18px;
     line-height: 1.6;
     font-weight: 300;
     margin: 1.4rem 0;
@@ -1781,9 +1788,6 @@ blockquote h4 {
         font-size: 1.2rem;
     }
 
-    .post-content p {
-        font-size: 16px;
-    }
 
     .post-content ol li,
     .post-content ul li {
