@@ -172,7 +172,9 @@ div.blog-header-right {
 .post-title h3,
 .post h3 {
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
+    font-family: "PT Serif", serif;
+    text-transform: uppercase;
 }
 
 .post strong {
