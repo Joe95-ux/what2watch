@@ -513,15 +513,14 @@ button {
 }
 
 .category-title {
-    background-color: #dddddd;
-    border-bottom: 1px solid var(--mainGrey);
-    padding: 0 10px;
+    background-color: rgba(71, 98, 130, .2);
+    padding: 5px 10px;
     border-radius: 10px 10px 0 0;
 }
 
 .category-title h2 {
     font-size: 1.2rem;
-    color: var(--mainBlack);
+    color:var(--mainWhite);
     font-weight: 600;
     margin: 0;
 }
@@ -559,12 +558,20 @@ button {
     padding: 10px 0;
     margin-bottom: 10px;
 }
+.categories li:not(:last-child){
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px 0;
+}
+
+.categories li:last-child{
+    padding-top: 5px;
+}
 
 .categories li:hover {
     /* color: black; */
     background-color: #74c0fc;
     margin: 0 -10px;
-    padding: 0 10px;
+    padding: 5px 10px;
 
 }
 
