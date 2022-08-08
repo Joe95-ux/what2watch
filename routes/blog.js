@@ -408,7 +408,11 @@ router.put(
           },
           { new: true }
         );
-        res.status(200).redirect("/blog/dashboard/" + req.params.id);
+        if (req.user.privilege === "admin") {
+          res.status(200).redirect("/blog/admin/dashboard/" + req.user.id);
+        } else {
+          res.status(200).redirect("/blog/dashboard/" + req.user.id);
+        }
       } catch (err) {
         res.status(500).json(err);
       }
