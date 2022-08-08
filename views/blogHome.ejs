@@ -118,15 +118,15 @@
                     <ul class="categories">
                         <li><a class="active-cat" href="/blog/posts">Blog</a></li>
                         <% if(user){%>
-                            <% if(user.privilege === "admin"){%>
-                            <li ><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
-                            <% }else{%>
-                                <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                            <% } %>
-                            <% } %> 
+                        <% if(user.privilege === "admin"){%>
+                        <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                        <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %>
                     </ul>
                 </div>
-    
+
             </div>
             <div class="main-category discover-movies">
                 <div class="category-title">
@@ -136,16 +136,17 @@
                     <ul class="categories">
                         <% if(sortedCats){%>
                         <% for(let cat in sortedCats){%>
-                        <li><i class="fas fa-dot-circle"></i><a class="active-cat" href="/blog/category/<%=cat%>"><%= cat %></a></li>
+                        <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                                href="/blog/category/<%=cat%>"><%= cat %></a></li>
                         <% } %>
                         <% } %>
                     </ul>
                 </div>
-    
+
             </div>
-    
+
         </div>
-        
+
     </div>
     <section class="side-drawer-backdrop"></section>
 
@@ -285,12 +286,15 @@
                             <% if(latest){%>
                             <%latest.forEach(story=>{  %>
                             <div class="post">
-                                <img src="<%= story.photo %>" alt="post image">
-                                <h5 class="cat-name"><%= story.category %> </h5>
-                                <h3><%= story.title %> </h3>
-                                <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
-                                    <span><%= story.createdAt %>
-                                    </span> </h5>
+                                <a href="/blog/posts/<%= story.slug %>">
+                                    <img src="<%= story.photo %>" alt="post image">
+                                    <h5 class="cat-name"><%= story.category %> </h5>
+                                    <h3><%= story.title %> </h3>
+                                    <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
+                                        <span><%= story.createdAt %>
+                                        </span> </h5>
+
+                                </a>
                                 <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
                                         class="fas fa-angle-double-right"></i></a>
                             </div>

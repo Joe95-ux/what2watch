@@ -168,13 +168,16 @@ div.blog-header-right {
         bottom: 2rem;
     }
 }
-
+.post a{
+    text-decoration: none;
+}
 .post-title h3,
 .post h3 {
     font-size: 20px;
     font-weight: 600;
     font-family: "PT Serif", serif;
     text-transform: uppercase;
+    color: var(--mainWhite);
 }
 
 .post strong {
@@ -364,7 +367,7 @@ div.blog-header-right .post-title {
 
     .post-title h5,
     .post h5 {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -713,7 +716,7 @@ div.tv-news {
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 18px;
     text-transform: capitalize;
     transition: var(--mainTransition);
 }
