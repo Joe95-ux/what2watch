@@ -225,7 +225,7 @@ div.post-header h3 {
 
 .post-title h5,
 .post h5 {
-    font-weight: lighter;
+    font-weight: 300;
     font-size: 1rem;
     margin-top: 5px;
     color: var(--mainGrey);
@@ -418,10 +418,6 @@ div.blog-header-right .post-title {
 
 @media screen and (max-width:400px) {
 
-    .post-title h5,
-    .post h5 {
-        font-size: 15px;
-    }
     .share-story{
         padding: 0.6rem 0;
         font-size: 1rem;
@@ -501,6 +497,16 @@ h5.date span:not(:last-child)::after {
     transform: translateY(-50%);
     width: 1px;
     height: 13px;
+}
+
+@media screen and (max-width: 500px){
+    .date{
+        display: none;
+    }
+    h5.post-timestamp{
+        display: block;
+    }
+
 }
 
 div.blog-header-embla .embla__dots {
