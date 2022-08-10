@@ -10,7 +10,13 @@ const { S3Client, AbortMultipartUploadCommand } = require("@aws-sdk/client-s3");
 const multerS3 = require("multer-s3");
 const bcrypt = require("bcrypt");
 const { subcribeHandler } = require("../utils/mailchimp");
-const { ensureAuth, ensureGuest, ensureToken, ensureAdminToken, ensureAdmin } = require("../middleware/auth");
+const {
+  ensureAuth,
+  ensureGuest,
+  ensureToken,
+  ensureAdminToken,
+  ensureAdmin
+} = require("../middleware/auth");
 const {
   formatDate,
   dateWithTime,
@@ -18,7 +24,8 @@ const {
   getCats,
   trendingMovies,
   editorsPicks,
-  latestPosts
+  latestPosts,
+  relatedPosts
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -137,7 +144,7 @@ router.post(
     try {
       req.body.user = req.user.id;
       post = req.body;
-      if(req.file){
+      if (req.file) {
         post.photo = req.file.location;
       }
       await Story.create(post);
@@ -157,7 +164,7 @@ router.get("/posts", async (req, res) => {
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
-    let stories = await Story.find({ status: "Public"})
+    let stories = await Story.find({ status: "Public" })
       .populate("user")
       .sort({ createdAt: "desc" })
       .lean()
@@ -174,7 +181,6 @@ router.get("/posts", async (req, res) => {
       picks = editorsPicks(stories);
       picks = picks.slice(0, 6);
       latest = latestPosts(stories);
-
     }
     res.render("blogHome", {
       title,
@@ -196,16 +202,16 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
     const story = await Story.findOne({
       _id: req.params.id
     })
-    .populate("user")
-    .lean();
+      .populate("user")
+      .lean();
 
     if (!story) {
       return res.render("error/400");
     }
-    
-    if(story.user._id.equals(req.user._id ) || req.user.privilege === "admin"){
+
+    if (story.user._id.equals(req.user._id) || req.user.privilege === "admin") {
       res.render("editblog", { title, story });
-    }else {
+    } else {
       res
         .status(401)
         .json("action not authorised. you can only edit your own articles");
@@ -224,16 +230,17 @@ router.put(
   ensureAuth,
   async (req, res) => {
     try {
-      let story = await Story.findById(req.params.id)
-      .populate("user")
-      .lean();
+      let story = await Story.findById(req.params.id).populate("user").lean();
       let newStory = req.body;
 
       if (!story) {
         return res.render("error/400");
       }
 
-      if (story.user._id.equals(req.user._id ) || req.user.privilege === "admin") {
+      if (
+        story.user._id.equals(req.user._id) ||
+        req.user.privilege === "admin"
+      ) {
         if (req.file) {
           newStory.photo = req.file.location;
         }
@@ -246,12 +253,10 @@ router.put(
         );
 
         res.redirect("/blog/posts/");
-        
       } else {
         res
           .status(401)
           .json("action not authorised. You can only edit your story");
-        
       }
     } catch (err) {
       console.error(err);
@@ -264,26 +269,24 @@ router.put(
 // @route   delete /blog/posts/:id
 router.delete("/posts/:id", ensureAuth, async (req, res) => {
   try {
-    let story = await Story.findById(req.params.id).populate("user")
-    .lean();
+    let story = await Story.findById(req.params.id).populate("user").lean();
     let user = await User.findById(req.user.id);
 
     if (!story) {
       return res.render("error/400");
     }
 
-    if (story.user._id.equals(req.user._id ) || req.user.privilege === "admin") {
+    if (story.user._id.equals(req.user._id) || req.user.privilege === "admin") {
       await Story.deleteOne({ _id: req.params.id });
-      if(req.user.privilege === "admin"){
+      if (req.user.privilege === "admin") {
         res.redirect("/blog/admin/dashboard/" + story.user._id);
-      }else{
+      } else {
         res.redirect("/blog/dashboard/" + story.user._id);
       }
     } else {
       res
         .status(401)
         .json("action not authorised. You can only delete your story");
-      
     }
   } catch (err) {
     console.error(err);
@@ -315,12 +318,17 @@ router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
   }
 });
 
+// get a single post
 router.get("/posts/:slug", async (req, res) => {
   let title;
   const userEmail = req.flash("user");
   let sortedCats;
   try {
-    let stories = await Story.find({ status: "Public" });
+    let stories = await Story.find({ status: "Public" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
     let story = await Story.findOne({ slug: req.params.slug })
       .populate("user")
       .lean()
@@ -331,13 +339,18 @@ router.get("/posts/:slug", async (req, res) => {
     } else {
       story.createdAt = formatDate(story.createdAt);
       title = story.title;
-      if (stories) {
+      if (stories.length) {
+        stories = stories.map(story => {
+          story.createdAt = formatDate(story.createdAt);
+          return story;
+        });
+        related = relatedPosts(stories, story.category, story._id);
         let categories = getCats(stories);
         if (categories.length) {
           sortedCats = sortCats(categories);
         }
       }
-      res.render("post", { title, userEmail, story, sortedCats });
+      res.render("post", { title, userEmail, story, sortedCats, related });
     }
   } catch (err) {
     console.error(err);
@@ -422,7 +435,6 @@ router.put(
   }
 );
 
-
 // user dashboard
 router.get("/dashboard/:id", ensureAuth, async (req, res) => {
   const title = "dashboard";
@@ -444,7 +456,7 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
         return story;
       });
     }
-    if(allStories){
+    if (allStories) {
       let categories = getCats(stories);
       if (categories.length) {
         sortedCats = sortCats(categories);
@@ -469,66 +481,67 @@ router.get("/dashboard/:id", ensureAuth, async (req, res) => {
 
 // admin dashboard
 
-router.get("/admin/dashboard/:id", ensureAuth, ensureAdmin, async (req, res) => {
-  const title = "dashboard";
-  let sortedCats;
-  let created;
-  try {
-    let stories = await Story.find({})
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean()
-      .exec();
-    let users = await User.find({});
-    let user = await User.findOne({_id:req.params.id});
-    if(user){
-      created = formatDate(user.createdAt);
-    }
-    if (stories) {
-      stories = stories.map(story => {
-        story.createdAt = dateWithTime(story.createdAt, format);
-        return story;
-      });
-      let categories = getCats(stories);
-      if (categories.length) {
-        sortedCats = sortCats(categories);
+router.get(
+  "/admin/dashboard/:id",
+  ensureAuth,
+  ensureAdmin,
+  async (req, res) => {
+    const title = "dashboard";
+    let sortedCats;
+    let created;
+    try {
+      let stories = await Story.find({})
+        .populate("user")
+        .sort({ createdAt: "desc" })
+        .lean()
+        .exec();
+      let users = await User.find({});
+      let user = await User.findOne({ _id: req.params.id });
+      if (user) {
+        created = formatDate(user.createdAt);
       }
+      if (stories) {
+        stories = stories.map(story => {
+          story.createdAt = dateWithTime(story.createdAt, format);
+          return story;
+        });
+        let categories = getCats(stories);
+        if (categories.length) {
+          sortedCats = sortCats(categories);
+        }
+      }
+      if (users) {
+        users.map(user => {
+          user.createdAt = formatDate(user.createdAt);
+          return user;
+        });
+      }
+      res.render("dashboard", {
+        title,
+        stories,
+        name: req.user.name,
+        created,
+        users,
+        user,
+        sortedCats
+      });
+    } catch (err) {
+      console.log(err);
+      res.render("error/500");
     }
-    if (users) {
-      users.map(user=>{
-        user.createdAt = formatDate(user.createdAt);
-        return user;
-      })
-      
-    }
-    res.render("dashboard", {
-      title,
-      stories,
-      name: req.user.name,
-      created,
-      users,
-      user,
-      sortedCats
-    });
-  } catch (err) {
-    console.log(err);
-    res.render("error/500");
   }
-});
+);
 
 router.post("/register", ensureToken, function(req, res) {
-  const title = "register"
+  const title = "register";
   User.register({ username: req.body.username }, req.body.password, function(
     err,
     user
   ) {
     if (err) {
       console.log(err);
-      req.flash(
-        "info",
-        "Sorry! A user with this email already exists."
-      );
-      return res.render("register", {title});
+      req.flash("info", "Sorry! A user with this email already exists.");
+      return res.render("register", { title });
     } else {
       passport.authenticate("local")(req, res, function() {
         res.redirect("/blog/dashboard/" + user._id);
@@ -547,12 +560,11 @@ router.post("/login", function(req, res) {
       console.log(err);
     } else {
       passport.authenticate("local")(req, res, () => {
-        if(req.user.privilege === "admin"){
+        if (req.user.privilege === "admin") {
           res.redirect("/blog/admin/dashboard/" + req.user.id);
-        }else{
+        } else {
           res.redirect("/blog/dashboard/" + req.user.id);
         }
-        
       });
     }
   });
@@ -561,23 +573,21 @@ router.post("/login", function(req, res) {
 // post to admin login
 router.post("/admin/register", ensureAdminToken, function(req, res) {
   req.body.privilege = "admin";
-  User.register({ username: req.body.username, privilege:req.body.privilege }, req.body.password, function(
-    err,
-    user
-  ) {
-    if (err) {
-      console.log(err);
-      req.flash(
-        "info",
-        "Sorry! A user with this email already exists."
-      );
-      res.redirect("/blog/admin/register");
-    } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/blog/admin/dashboard/" + user._id);
-      });
+  User.register(
+    { username: req.body.username, privilege: req.body.privilege },
+    req.body.password,
+    function(err, user) {
+      if (err) {
+        console.log(err);
+        req.flash("info", "Sorry! A user with this email already exists.");
+        res.redirect("/blog/admin/register");
+      } else {
+        passport.authenticate("local")(req, res, function() {
+          res.redirect("/blog/admin/dashboard/" + user._id);
+        });
+      }
     }
-  });
+  );
 });
 
 router.get("/logout", function(req, res, next) {
@@ -629,7 +639,7 @@ router.post("/reset-password", function(req, res, next) {
           port: 465,
           secure: true, // use SSL
           auth: {
-            type:"login",
+            type: "login",
             user: process.env.ZOHO_USER,
             pass: process.env.ZOHO_PASS
           }
@@ -736,7 +746,7 @@ router.post("/reset/:token", function(req, res, next) {
           port: 465,
           secure: true, // use SSL
           auth: {
-            type:"login",
+            type: "login",
             user: process.env.ZOHO_USER,
             pass: process.env.ZOHO_PASS
           }
