@@ -133,7 +133,7 @@
                     <% } %>
 
                 </div>
-                <% if(related){%>
+                <% if(related.length){%>
                 <div class="older-posts">
                     <h1 class="cat-title">Related Posts</h1>
                     <div class="older-posts-inner">
@@ -141,9 +141,9 @@
                             <div class="embla__viewport">
                                 <div class="embla__container">
                                     <% related.forEach((story) =>{%>
-                                    <a href="/blog/posts/<%= story.slug%>">
-                                        <div class="embla__slide">
-                                            <div class="embla__slide__inner slider-inner-card featured-card">
+                                    <div class="embla__slide">
+                                        <div class="embla__slide__inner slider-inner-card featured-card">
+                                            <a href="/blog/posts/<%= story.slug%>">
                                                 <div class="post">
                                                     <img src="<%= story.photo%>" alt="post image">
                                                     <h5 class="cat-name"><%= story.category%></h5>
@@ -152,10 +152,10 @@
                                                             <strong><%= story.author%></strong></span>
                                                         <span><%=story.createdAt%></span></h5>
                                                 </div>
-
-                                            </div>
+                                            </a>
                                         </div>
-                                    </a>
+                                    </div>
+
                                     <% }) %>
 
                                 </div>
