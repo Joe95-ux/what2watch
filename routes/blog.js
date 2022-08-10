@@ -25,7 +25,8 @@ const {
   trendingMovies,
   editorsPicks,
   latestPosts,
-  relatedPosts
+  relatedPosts,
+  recentPosts
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -323,6 +324,8 @@ router.get("/posts/:slug", async (req, res) => {
   let title;
   const userEmail = req.flash("user");
   let sortedCats;
+  let related;
+  let recent;
   try {
     let stories = await Story.find({ status: "Public" })
       .populate("user")
@@ -345,12 +348,14 @@ router.get("/posts/:slug", async (req, res) => {
           return story;
         });
         related = relatedPosts(stories, story.category, story._id);
+        recent = recentPosts(stories, story._id);
+
         let categories = getCats(stories);
         if (categories.length) {
           sortedCats = sortCats(categories);
         }
       }
-      res.render("post", { title, userEmail, story, sortedCats, related });
+      res.render("post", { title, userEmail, story, sortedCats, related, recent });
     }
   } catch (err) {
     console.error(err);

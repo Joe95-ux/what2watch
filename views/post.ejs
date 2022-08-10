@@ -228,56 +228,23 @@
                 <div>
                     <div class="instagram-page">
                         <h1 class="cat-title">Recent Posts</h1>
-                        <div class="ig-cards recent-posts-cards">
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11,
-                                            2021</span> </h5>
+                        <div class="single-cards-lo">
+                            <% if(recent){%>
+                            <% recent.forEach(story=>{%>
+                            <a href="/blog/posts/<%= story.slug %>">
+                                <div class="single-card post">
+                                    <img src="<%= story.photo%>" alt="">
+                                    <div>
+                                        <h3><%= story.title %>
+                                        </h3>
+                                        <h5><%= story.createdAt %> </h5>
+                                    </div>
                                 </div>
                             </a>
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="post">
-                                    <img src="/dune.jpg" alt="">
-                                    <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                    </h3>
-                                    <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                </div>
-                            </a>
+
+
+                            <%}) %>
+                            <% } %>
                         </div>
                     </div>
                     <div class="facebook-page">

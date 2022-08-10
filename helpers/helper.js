@@ -50,6 +50,16 @@ module.exports = {
     return related;
 
   },
+  recentPosts: function(stories, storyId){
+    storyId = storyId.toString()
+    let newStories = stories.filter(story=>story._id.toString() !== storyId);
+    if(newStories.length){
+      newStories = newStories.slice(0,6);
+    }
+    return newStories;
+
+
+  },
   latestPosts: function (stories){
     const posts =  stories.slice(0, 8);
     return posts;
