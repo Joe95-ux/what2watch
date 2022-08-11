@@ -428,13 +428,12 @@ button {
 .side-drawer {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -340px;
     display: flex;
     flex-direction: column;
     width: 300px;
     height: 100vh;
     padding: 2% 20px;
-    /* background-color: darkgrey; */
     background-color: black;
     backdrop-filter: blur(15px);
     box-shadow: 0 -10px 10px rgba(0, 0, 0, 0.1);
@@ -442,8 +441,6 @@ button {
     z-index: 10000;
     overflow-y: auto;
     overflow-x: hidden;
-    transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
     transition: .5s ease-in-out;
     -webkit-transition: .5s ease-in-out;
 }
@@ -464,8 +461,7 @@ button {
 
 
 .side-drawer-active {
-    transform: translateX(0%);
-    -webkit-transform: translateX(0%);
+    left: 0;
 }
 
 .side-drawer-inactive {
