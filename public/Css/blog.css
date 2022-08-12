@@ -2071,6 +2071,80 @@ div.embedly-card-hug iframe {
     overflow: auto;
 }
 
+/* user-cards start*/
+.user-list{
+    margin-bottom: 1.5rem;
+}
+.user-list h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.user-list .embla__button{
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.user-list-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.3rem;
+    border-radius: var(--mainBorderRaduis);
+    background-color:#001927;
+    box-shadow: var(--boxShadow);
+    font-size: 18px;
+    width: calc(200px + 50px );
+    height: 300px;
+}
+
+.user-list-card .profile-photo{
+    padding: 0;
+}
+
+.dash-user-pic-wrapper{
+    position: relative;
+}
+.dash-user-pic-wrapper i{
+    position: absolute;
+    top: 0;
+    right: -3px;
+    font-size: 14px;
+    color: var(--yellow);
+}
+.admin-actions{
+    display: flex;
+    font-size: 16px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+
+.admin-actions .create-btn{
+    font-size: 15px;
+    background-color: inherit;
+    color: var(--mainWhite);
+}
+.admin-actions .create-btn.delete{
+    background-color: var(--primaryColor);
+}
+.admin-actions .create-btn i{
+    margin-right: 0;
+    font-size: 14px;
+}
+
+.admin-actions .create-btn:hover{
+    border: 1px solid var(--primaryColor);
+    background-color: transparent;
+}
+.admin-actions:nth-child(1){
+    margin-right: 5px;
+}
+
+/* user-cards ends */
+
 
 table {
     width: 120%;
@@ -2359,8 +2433,8 @@ tbody td a {
 }
 
 .profile-photo img {
-    height: 90px;
-    width: 90px;
+    height: 75px;
+    width: 75px;
     border-radius: 50%;
     object-fit: cover;
 }

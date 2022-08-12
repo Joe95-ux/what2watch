@@ -26,7 +26,8 @@ const {
   editorsPicks,
   latestPosts,
   relatedPosts,
-  recentPosts
+  recentPosts,
+  storyMap
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -305,13 +306,20 @@ router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
       return res.render("error/400");
     }
 
-    if (user._id != req.user.id) {
+    if (user._id.equals(req.user.id )|| req.user.privilege === "admin") {
+      await User.findByIdAndDelete(req.params.id);
+      req.flash("info", user.username + "'s account was successfully deleted")
+      if(req.user.privilege === "admin"){
+        res.redirect("/blog/admin/dashboard/" + req.user.id)
+      }else{
+        res.redirect("/blog/register");
+      }
+      
+    } else {
       res
         .status(401)
         .json("action not authorised. You can only delete your acount");
-    } else {
-      await User.findByIdAndDelete(req.params.id);
-      res.redirect("/blog/register");
+      
     }
   } catch (err) {
     console.error(err);
@@ -514,6 +522,7 @@ router.get(
         if (categories.length) {
           sortedCats = sortCats(categories);
         }
+        users = storyMap(stories, users);
       }
       if (users) {
         users.map(user => {
@@ -536,6 +545,38 @@ router.get(
     }
   }
 );
+
+// change user's privilege
+router.put("/admin-action/edit-role/:id", ensureAuth, ensureAdmin, async (req, res) => {
+  const user = await User.findOne({_id:req.params.id});
+  let newRole;
+  let name;
+  if(user.name){
+    name = user.name;
+  }else{
+    name = user.username;
+  }
+  if (user.privilege === "admin"){
+    newRole = "";
+    req.flash("info", name + "'s admin privilege was removed.")
+    
+  }else{
+    newRole = "admin";
+    req.flash("info", name + " has been made admin ")
+  }
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set:{privilege:newRole}
+      },
+      { new: true }
+    );
+    res.status(200).redirect("/blog/admin/dashboard/" + req.user.id);
+  }catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.post("/register", ensureToken, function(req, res) {
   const title = "register";
