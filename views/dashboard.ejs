@@ -106,7 +106,8 @@
                                     <h3><%= user.role ? user.role : "no role yet" %> </h3>
                                     <h2>Total stories : <strong><%=user.stories.length%> </strong></h2>
                                     <div class="admin-actions">
-                                        <form method="POST" action="/blog/admin-action/edit-role/<%=user._id%>?_method=PUT">
+                                        <form method="POST"
+                                            action="/blog/admin-action/edit-role/<%=user._id%>?_method=PUT">
                                             <button type="submit" class="create-btn edit-profile-btn"><i
                                                     class="fas fa-user-edit"></i>
                                                 assign</button>
@@ -492,7 +493,12 @@
 
                         </div>
                         <h2><%= user.name ? user.name:user.username%> </h2>
-                        <h3>Editor in-chief </h3>
+                        <% if(user.privilege === "admin"){%>
+                        <h3>Super Admin</h3>
+                        <% }else{%>
+                        <h3><%= user.role %> </h3>
+                        <% } %>
+
                         <a href="/blog/profile/<%= user._id%> " role="button" class="create-btn edit-profile-btn">Edit
                             Profile</a>
                     </div>
