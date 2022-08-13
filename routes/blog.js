@@ -88,7 +88,7 @@ router.post("/posts", async (req, res) => {
   };
   try {
     await subcribeHandler(subscribingUser);
-    req.flash("user", subscribingUser.email);
+    req.flash("user", "Thank You for Subscribing!");
     res.redirect(req.originalUrl);
   } catch (e) {
     console.log(e);
@@ -97,7 +97,6 @@ router.post("/posts", async (req, res) => {
 
 router.get("/category/:catName", async (req, res) => {
   const title = req.params.catName;
-  const userEmail = req.flash("user");
   const cat = req.params.catName;
   let sortedCats;
   try {
@@ -121,7 +120,6 @@ router.get("/category/:catName", async (req, res) => {
     }
     res.render("blogCategory", {
       title,
-      userEmail,
       stories,
       sortedCats,
       cat,
@@ -159,7 +157,6 @@ router.post(
 
 router.get("/posts", async (req, res) => {
   const title = "blog posts";
-  const userEmail = req.flash("user");
   let sortedCats;
   let picks;
   let latest;
@@ -186,7 +183,6 @@ router.get("/posts", async (req, res) => {
     }
     res.render("blogHome", {
       title,
-      userEmail,
       stories,
       sortedCats,
       trending,
@@ -330,7 +326,6 @@ router.delete("/profile/delete/:id", ensureAuth, async (req, res) => {
 // get a single post
 router.get("/posts/:slug", async (req, res) => {
   let title;
-  const userEmail = req.flash("user");
   let sortedCats;
   let related;
   let recent;
@@ -363,7 +358,7 @@ router.get("/posts/:slug", async (req, res) => {
           sortedCats = sortCats(categories);
         }
       }
-      res.render("post", { title, userEmail, story, sortedCats, related, recent });
+      res.render("post", { title, story, sortedCats, related, recent });
     }
   } catch (err) {
     console.error(err);
