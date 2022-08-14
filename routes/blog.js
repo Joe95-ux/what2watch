@@ -27,7 +27,8 @@ const {
   latestPosts,
   relatedPosts,
   recentPosts,
-  storyMap
+  storyMap,
+  paginate
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -95,10 +96,16 @@ router.post("/posts", async (req, res) => {
   }
 });
 
+
+// Get a post by its category
+
 router.get("/category/:catName", async (req, res) => {
   const title = req.params.catName;
   const cat = req.params.catName;
+  const category = encodeURI(cat);
   let sortedCats;
+  let pages;
+  let pageNum = 1;
   try {
     let allStories = await Story.find({ status: "Public" });
     const allTrending = await trendingMovies();
@@ -113,6 +120,9 @@ router.get("/category/:catName", async (req, res) => {
         story.createdAt = formatDate(story.createdAt);
         return story;
       });
+      const paginated = paginate(stories, 8);
+      currentPage = paginated[pageNum - 1];
+      pages = paginated.length;
       let categories = getCats(allStories);
       if (categories.length) {
         sortedCats = sortCats(categories);
@@ -120,15 +130,68 @@ router.get("/category/:catName", async (req, res) => {
     }
     res.render("blogCategory", {
       title,
-      stories,
+      stories:currentPage,
+      pages,
+      pageNum,
       sortedCats,
       cat,
+      category,
       trending
     });
   } catch (err) {
     console.log(err);
   }
 });
+
+// category next page
+
+router.get("/category/:catName/:num", async (req, res) => {
+  const title = req.params.catName;
+  const cat = req.params.catName;
+  const category = encodeURI(cat);
+  let sortedCats;
+  let pages;
+  let pageNum = parseInt(req.params.num);
+  try {
+    let allStories = await Story.find({ status: "Public" });
+    const allTrending = await trendingMovies();
+    const trending = await allTrending.slice(0, 6);
+    let stories = await Story.find({ category: cat, status: "Public" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      const paginated = paginate(stories, 8);
+      currentPage = paginated[pageNum - 1];
+      pages = paginated.length;
+      let categories = getCats(allStories);
+      if (categories.length) {
+        sortedCats = sortCats(categories);
+      }
+    }
+    res.render("blogCategory", {
+      title,
+      stories:currentPage,
+      pages,
+      pageNum,
+      sortedCats,
+      cat,
+      category,
+      trending
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+
+
 
 router.get("/compose", ensureAuth, async (req, res) => {
   const title = "compose";
@@ -155,11 +218,17 @@ router.post(
   }
 );
 
+// Get all blog posts
+
 router.get("/posts", async (req, res) => {
   const title = "blog posts";
   let sortedCats;
   let picks;
   let latest;
+  let allStories;
+  let pages;
+  let pageNum = 1;
+  let currentPage;
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
@@ -173,12 +242,18 @@ router.get("/posts", async (req, res) => {
         story.createdAt = formatDate(story.createdAt);
         return story;
       });
+      allStories = paginate(stories, 6);
+      currentPage = allStories[pageNum - 1];
+      pages = allStories.length;
+
       let categories = getCats(stories);
       if (categories.length) {
         sortedCats = sortCats(categories);
       }
       picks = editorsPicks(stories);
-      picks = picks.slice(0, 6);
+      if(picks.length){
+         picks = picks.slice(0, 6);
+      }
       latest = latestPosts(stories);
     }
     res.render("blogHome", {
@@ -187,12 +262,69 @@ router.get("/posts", async (req, res) => {
       sortedCats,
       trending,
       picks,
-      latest
+      latest,
+      currentPage,
+      pages,
+      pageNum
     });
   } catch (err) {
     console.log(err);
   }
 });
+
+// next page: bloghome
+router.get("/posts/page=:num", async (req, res) => {
+  const title = "blog posts";
+  let sortedCats;
+  let picks;
+  let latest;
+  let allStories;
+  let pages;
+  let pageNum = parseInt(req.params.num);
+  let currentPage;
+  try {
+    const allTrending = await trendingMovies();
+    const trending = await allTrending.slice(0, 6);
+    let stories = await Story.find({ status: "Public" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      allStories = paginate(stories, 6);
+      currentPage = allStories[pageNum - 1];
+      pages = allStories.length;
+
+      let categories = getCats(stories);
+      if (categories.length) {
+        sortedCats = sortCats(categories);
+      }
+      picks = editorsPicks(stories);
+      if(picks.length){
+         picks = picks.slice(0, 6);
+      }
+      latest = latestPosts(stories);
+    }
+    res.render("blogHome", {
+      title,
+      stories,
+      sortedCats,
+      trending,
+      picks,
+      latest,
+      currentPage,
+      pages,
+      pageNum
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 
 router.get("/edit/:id", ensureAuth, async (req, res) => {
   const title = "edit post";

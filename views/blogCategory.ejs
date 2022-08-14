@@ -10,12 +10,12 @@
                 <ul class="categories">
                     <li><a class="active-cat" href="/blog/posts">Blog</a></li>
                     <% if(user){%>
-                        <% if(user.privilege === "admin"){%>
-                        <li ><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% }else{%>
-                            <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% } %>
-                        <% } %> 
+                    <% if(user.privilege === "admin"){%>
+                    <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
+                    <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
+                    <% } %>
                 </ul>
             </div>
 
@@ -28,7 +28,8 @@
                 <ul class="categories">
                     <% if(sortedCats){%>
                     <% for(let cat in sortedCats){%>
-                    <li><i class="fas fa-dot-circle"></i><a class="active-cat" href="/blog/category/<%=cat%>"><%= cat %></a></li>
+                    <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                            href="/blog/category/<%=cat%>"><%= cat %></a></li>
                     <% } %>
                     <% } %>
                 </ul>
@@ -37,7 +38,7 @@
         </div>
 
     </div>
-    
+
 </div>
 <section class="side-drawer-backdrop"></section>
 <section id="header-container" class="blog-header">
@@ -64,74 +65,43 @@
                     <h1 class="cat-title">Category : <span><%= cat %> </span></h1>
                     <div class="latest-posts">
                         <% stories.forEach(story =>{%>
-                            <div class="post">
-                                <a href="/blog/posts/<%= story.slug %>">
-                                    <img src="<%= story.photo %>" alt="post image">
-                                    <h5 class="cat-name"><%= story.category %> </h5>
-                                    <h3><%= story.title %> </h3>
-                                    <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
-                                        <span><%= story.createdAt %>
-                                        </span> </h5>
-                                </a>
-                                <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
-                                        class="fas fa-angle-double-right"></i></a>
-                            </div>
+                        <div class="post">
+                            <a href="/blog/posts/<%= story.slug %>">
+                                <img src="<%= story.photo %>" alt="post image">
+                                <h5 class="cat-name"><%= story.category %> </h5>
+                                <h3><%= story.title %> </h3>
+                                <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
+                                    <span><%= story.createdAt %>
+                                    </span> </h5>
+                            </a>
+                            <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
+                                    class="fas fa-angle-double-right"></i></a>
+                        </div>
                         <%}) %>
 
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2. How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
-                        <div class="post">
-                            <img src="/dune.jpg" alt="post image">
-                            <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                            <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                        </div>
                     </div>
                     <div class="page-controls blog-page-controls">
-                        <a href="#" class="prev-page swiper-btn blog-control-btn" role="button"><i class="fas fa-arrow-left prev-indicator"></i> </a>
-                        <a href="#" class="next-page swiper-btn blog-control-btn" role="button" value="next-page"><i class="fas fa-arrow-right next-indicator"></i></a>
+                        <% if(pages>1){%>
+                        <% if(pageNum === 2){%>
+                        <a href="/blog/category/<%=category%>" class="prev-page swiper-btn blog-control-btn"
+                            role="button"><i class="fas fa-arrow-left prev-indicator"></i> </a>
+                        <% }%>
+                        <% if(pageNum > 2){%>
+                        <a href="/blog/category/<%=category%>/<%= pageNum - 1 %>"
+                            class="prev-page swiper-btn blog-control-btn" role="button"><i
+                                class="fas fa-arrow-left prev-indicator"></i> </a>
+
+                        <% } %>
+                        <% if(pageNum < pages){%>
+                        <a href="/blog/category/<%=category%>/<%= pageNum + 1 %> "
+                            class="next-page swiper-btn blog-control-btn" role="button" value="next-page"><i
+                                class="fas fa-arrow-right next-indicator"></i></a>
+                        <% } %>
+
+                        <% } %>
+
                     </div>
+
 
                     <div class="trending-now">
                         <a href="/#trending" class="cat-title">Trending Movies<i class="fas fa-chevron-right"></i></a>
@@ -139,31 +109,33 @@
                             <div class="autoplay">
                                 <div class="embla__container">
                                     <% if(trending){%>
-                                        <% trending.forEach((movie, index)=>{%>
-                                            <div class="embla__slide autoplay__slide" style="background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
-                                                <div class="embla__slide__inner">
-                                                    <div class="new-movie-wrapper blog-trending-movie-wrapper">
-                                                        <div class="new-header-movie blog-trending-movie">
-                                                            <h1 class="movie-title"><%= movie.title %></h1>
-                                                            <% if(movie.overview.length > 60){%> 
-                                                                <p class="clamp-synopsis">
-                                                                    <%= movie.overview%> 
-                                                                </p>
-                                                            <% }else{%>
-                                                                <p class="no-clamp"><%= movie.overview%></p>
-                                                            <% } %>  
-                                                            <div class="swiper-btns new-header-btn blog-movie-btn">
-                                                                <a  href="/movie/<%= movie.id %>" class="swiper-btn" role="button">Learn more</a>
-                                                            </div>
-                                                        </div>
-        
-                                                    </div> 
+                                    <% trending.forEach((movie, index)=>{%>
+                                    <div class="embla__slide autoplay__slide"
+                                        style="background: linear-gradient( rgba(0,0,0,0.5), rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center">
+                                        <div class="embla__slide__inner">
+                                            <div class="new-movie-wrapper blog-trending-movie-wrapper">
+                                                <div class="new-header-movie blog-trending-movie">
+                                                    <h1 class="movie-title"><%= movie.title %></h1>
+                                                    <% if(movie.overview.length > 60){%>
+                                                    <p class="clamp-synopsis">
+                                                        <%= movie.overview%>
+                                                    </p>
+                                                    <% }else{%>
+                                                    <p class="no-clamp"><%= movie.overview%></p>
+                                                    <% } %>
+                                                    <div class="swiper-btns new-header-btn blog-movie-btn">
+                                                        <a href="/movie/<%= movie.id %>" class="swiper-btn"
+                                                            role="button">Learn more</a>
+                                                    </div>
                                                 </div>
+
                                             </div>
-        
-                                       <% }) %> 
-                                        
-                                    <% } %> 
+                                        </div>
+                                    </div>
+
+                                    <% }) %>
+
+                                    <% } %>
 
                                 </div>
                             </div>
@@ -195,7 +167,8 @@
                                 <img src="/dune.jpg" alt="post image">
                                 <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
                                 <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11, 2021</span> </h5>
+                                <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11, 2021</span>
+                                </h5>
                                 <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
                             </div>
                             <div class="post">
@@ -273,7 +246,8 @@
                         <ul>
                             <% if(sortedCats){%>
                             <% for(let cat in sortedCats){%>
-                            <li><a href="/blog/category/<%=cat%>"><%= cat %> </a><span>(<%= sortedCats[cat] %>)</span></li>
+                            <li><a href="/blog/category/<%=cat%>"><%= cat %> </a><span>(<%= sortedCats[cat] %>)</span>
+                            </li>
                             <% } %>
                             <% } %>
                         </ul>
