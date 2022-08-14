@@ -339,7 +339,7 @@ router.get("/edit/:id", ensureAuth, async (req, res) => {
       return res.render("error/400");
     }
 
-    if (story.user._id.equals(req.user._id) || req.user.privilege === "admin") {
+    if (story?.user?._id.equals(req.user._id) || req.user.privilege === "admin") {
       res.render("editblog", { title, story });
     } else {
       res
@@ -368,7 +368,7 @@ router.put(
       }
 
       if (
-        story.user._id.equals(req.user._id) ||
+        story?.user?._id.equals(req.user._id) ||
         req.user.privilege === "admin"
       ) {
         if (req.file) {
@@ -406,12 +406,12 @@ router.delete("/posts/:id", ensureAuth, async (req, res) => {
       return res.render("error/400");
     }
 
-    if (story.user._id.equals(req.user._id) || req.user.privilege === "admin") {
+    if (story?.user?._id.equals(req.user._id) || req.user.privilege === "admin") {
       await Story.deleteOne({ _id: req.params.id });
       if (req.user.privilege === "admin") {
-        res.redirect("/blog/admin/dashboard/" + story.user._id);
+        res.redirect("/blog/admin/dashboard/" + req.user._id);
       } else {
-        res.redirect("/blog/dashboard/" + story.user._id);
+        res.redirect("/blog/dashboard/" + req.user._id);
       }
     } else {
       res
