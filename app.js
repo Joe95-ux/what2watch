@@ -22,6 +22,7 @@ const movieRouter = require("./routes/movie");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
 const blogRouter = require("./routes/blog");
+const ckeditorRouter = require("./routes/ckeditorulr");
 const connectDB = require("./config/db");
 const User = require("./models/User");
 const app = express();
@@ -65,6 +66,13 @@ app.use(function(req, res, next){
   res.locals.messages = req.flash();
   next();
 })
+
+app.use( ( req, res, next ) => {
+  res.setHeader( 'Access-Control-Allow-Origin', '*' );
+  res.setHeader( 'Access-Control-Allow-Methods', 'GET' );
+
+  next();
+} );
 
 app.set("view engine", "ejs");
 
@@ -389,6 +397,7 @@ app.use("/movie", movieRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
 app.use("/blog", blogRouter);
+app.use("/editor", ckeditorRouter);
 
 
 let port = process.env.PORT;

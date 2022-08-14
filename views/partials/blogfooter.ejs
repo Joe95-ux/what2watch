@@ -59,11 +59,12 @@
 <script src="https://cdn.ckbox.io/CKBox/1.1.0/ckbox.js"></script>
 
 <script>
+    const headers = window.location.origin
     if (document.querySelector("#editor") != null){
         ClassicEditor
         .create(document.querySelector('#editor'), {
             ckbox: {
-                tokenUrl: 'https://90950.cke-cs.com/token/dev/7d0c930d3782ab2c1eccdc0696a682261bff0c5da671a67528b46cabd04c?limit=10',
+                tokenUrl: headers+ '/editor/ckeditor',
             },
             toolbar: [
                 'ckbox', 'imageUpload', '|', 'heading', '|', 'undo', 'redo', '|', 'bold', 'italic', '|',
