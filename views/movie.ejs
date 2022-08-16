@@ -1,38 +1,124 @@
-<%- include('partials/header') %>
-<div class="side-drawer" data-simplebar>
-    <i class="fas fa-times"></i>
-    <div class="side-drawer-inner">
-      <div class="main-category discover-movies">
-        <div class="category-title">
-            <h2 class="discover">Discover</h2>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#001019">
+    <title>What2watch | The movie Watch Guide</title>
+    <meta name="description"
+        content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
+    <meta name="keywords"
+        content="what to watch, Trending movies, upcoming movies, action, thriller, movie guide, actors, actresses, synopsis, trailers, reviews">
+    <!--favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@400;500&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
+    <link rel="stylesheet" href="/Css/embla.css">
+    <link rel="stylesheet" href="/Css/blog.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+    <noscript>
+        <style>
+            /**
+          * Reinstate scrolling for non-JS clients
+          */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3S8E3V6Q"></script>
+</head>
+
+<body>
+
+    <nav class="navigation">
+        <div class="wrapper-enclosure nav-enclosure">
+            <div class="logo-and-links">
+                <div class="logo">
+                    <div class="burger">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
+                    <a href="/">
+                        <div class="logo-wrapper">
+                            <img src="/logo.png" alt="what2watch">
+                        </div>
+
+                    </a>
+                </div>
+                <i class="fas fa-search small-screen-search-icon"></i>
+                <div class="search-bar big-screen-search">
+                    <form action="/search" method="GET" class="search-form">
+                        <div class="search-field">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="search" placeholder="search for a movie..." name="query">
+                            <input type="submit" value="search" hidden>
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav_links ld-nav_links">
+                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                </ul>
+
+            </div>
+
         </div>
-        <div class="category-types">
-            <ul class="categories">
-                <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
-                <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
-                <li><i class="fas fa-calendar-week"></i><a class="active-cat"
-                        href="/movie/upcoming"></i>Upcoming</a></li>
-            </ul>
-        </div>
+    </nav>
+
+    <div class="side-drawer" data-simplebar>
+        <i class="fas fa-times"></i>
+        <div class="side-drawer-inner">
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Discover</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                        <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a>
+                        </li>
+                        <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                                href="/movie/upcoming"></i>Upcoming</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="main-category movie-genres">
+                <div class="category-title">
+                    <h2>Genres</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <% if(genres){%>
+                        <% genres.forEach(genre=>{ %>
+                        <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                                href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+
+                        <%})%>
+                        <%}%>
   
-      </div>
-      <div class="main-category movie-genres">
-        <div class="category-title">
-            <h2>Genres</h2>
-        </div>
-        <div class="category-types">
-            <ul class="categories">
-                <% if(genres){%>
-                <% genres.forEach(genre=>{ %>
-                <li><i class="fas fa-dot-circle"></i><a class="active-cat"
-                        href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
-  
-                <%})%>
-                <%}%>
-  
-            </ul>
-        </div>
-      </div>
+                    </ul>
+                </div>
+            </div>
       <div class="main-category discover-movies appearance">
         <div class="category-title">
             <h2 class="discover">Appearance</h2>
@@ -63,788 +149,901 @@
     </div>
 </div>
 <section class="side-drawer-backdrop"></section>
-<section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-size: cover; background-position: center center;">
-    <div class="small-screen-search search-bar" >
-        <i class="fas fa-times close-sm-search"></i>
-        <form action="/search" method="GET" class="small-search-form search-form">
-            <div class="small-search-field">
-                <i class="fas fa-search"></i>
-                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
-                <!-- <i class="blink"></i> -->
-                <input type="submit" value="search" hidden>
-            </div>
-        </form>
-    </div>
-    <%if(movie){%>
-        <div class="single-movie-wrapper">
-                <div class="wrapper-enclosure">
-                    <button class="back back-movie"><i class="fas fa-arrow-left go-back go-back-nav" ></i></button>
-                    <div class="single-movie-inner">
-                        <div class="single-movie-content">
-                            <div class="single-movie-card">
-                                <% if(movie.poster_path){%> 
-                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
-                                <%}else if(movie.poster_path === null){%>
-                                    <img src="/poster-alt.png" alt="movie-poster">
-                                <% } %>
-                                <%if(watch){%>
-                                    <div class="watch-banner">
-                                        <h2>see watch providers</h2>
-                                    </div> 
-                                <% } %>  
-                            </div>
-            
-                            <div class="main-content">
-                                <div class="swiper-main-title">
-                                    <h1 class="movie-title"><%= movie.title %></h1>
-                                    </span></p>
-                                    <div class="language-container top-lang">
-                                        <% if(movie.spoken_languages){%> 
-                                        <% for(let language of movie.spoken_languages.slice(0, 3)){%>
-                                            <span class="language"><%= language.name %><i class="fas fa-dot-circle"></i></span>
-            
-                                        <% } %>
-                                        <% } %> 
-                                        <p class="run-time"><%= runTime %></p>
-                                        <p class="release-date">
-                                            <span>|</span>
-                                            <%= movie.release_date?movie.release_date:"n/a" %>
-                                        </p>
-                                    </div>
-            
+<section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>);
+                        background-size: cover; background-position: center center;">
+                        <div class="small-screen-search search-bar">
+                            <i class="fas fa-times close-sm-search"></i>
+                            <form action="/search" method="GET" class="small-search-form search-form">
+                                <div class="small-search-field">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" class="small-search" placeholder="search for a movie..."
+                                        name="query">
+                                    <!-- <i class="blink"></i> -->
+                                    <input type="submit" value="search" hidden>
                                 </div>
-                                <div class="genres-and-director top-genres" >
-                                    <div class="genres">
-                                        <%for(let genre of movie.genres.slice(0, 3)){%>
-                                        <span class="genre1"><i class="fas fa-dot-circle"></i><a href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
-                                        <% } %>
-                                        <p class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></p>
-                                    </div> 
-                                </div>
-                                
-                                <div class="synopsis">
-                                    <% if(movie.tagline){%>
-                                        <p class="tagline">"<%= movie.tagline%>"</p>
-                                    <% }%> 
-                                    <% if(movie.overview.length > 100){%> 
-                                        <p class="clamp-synopsis">
-                                            <%= movie.overview%> 
-                                        </p>
-                                        <h5 class="open-synopsis synopsis-read-more" >...Read more</h5>
-                                    <% }else{%>
-                                        <p class="no-clamp"><%= movie.overview%></p>
-                                    <% } %>  
-                                    <%if(crews){%>
-                                        <div class="crews crews-top">
-                                            <% for(let person of crews){%>
-                                                <div class="director" >
-                                                    <a class="crew-name" href="#"><%= person.name %></a>
-                                                    <h5 ><%= person.job %> </h5>
-                                                </div>
-                                            
-                                            <% } %> 
-    
-                                        </div>
-                                    <%} %> 
-                                </div>
-                                <% if(watch){%> 
-                                    <div class="watch-providers">
-                                        <div class="watch-title">
-                                            <h2>Where to Watch</h2>
-                                            <div class="just-watch">
-                                                <p>Powered by</p>
-                                                <img src="/justwatch-logo.png" alt="just-watch">
+                            </form>
+                        </div>
+                        <%if(movie){%>
+                        <div class="single-movie-wrapper">
+                            <div class="wrapper-enclosure">
+                                <button class="back back-movie"><i
+                                        class="fas fa-arrow-left go-back go-back-nav"></i></button>
+                                <div class="single-movie-inner">
+                                    <div class="single-movie-content">
+                                        <div class="single-movie-card">
+                                            <% if(movie.poster_path){%>
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
+                                            <%}else if(movie.poster_path === null){%>
+                                            <img src="/poster-alt.png" alt="movie-poster">
+                                            <% } %>
+                                            <%if(watch){%>
+                                            <div class="watch-banner">
+                                                <h2>see watch providers</h2>
                                             </div>
+                                            <% } %>
                                         </div>
-                                        <a href="<%= watch.link%>" target="_blank" >
-                                            <div class="watch-providers-inner">
-                                                <% if(watch.rent) {%>
-                                                    <% for(let provider of watch.rent){%>
+
+                                        <div class="main-content">
+                                            <div class="swiper-main-title">
+                                                <h1 class="movie-title"><%= movie.title %></h1>
+                                                </span></p>
+                                                <div class="language-container top-lang">
+                                                    <% if(movie.spoken_languages){%>
+                                                    <% for(let language of movie.spoken_languages.slice(0, 3)){%>
+                                                    <span class="language"><%= language.name %><i
+                                                            class="fas fa-dot-circle"></i></span>
+
+                                                    <% } %>
+                                                    <% } %>
+                                                    <p class="run-time"><%= runTime %></p>
+                                                    <p class="release-date">
+                                                        <span>|</span>
+                                                        <%= movie.release_date?movie.release_date:"n/a" %>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="genres-and-director top-genres">
+                                                <div class="genres">
+                                                    <%for(let genre of movie.genres.slice(0, 3)){%>
+                                                    <span class="genre1"><i class="fas fa-dot-circle"></i><a
+                                                            href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
+                                                    <% } %>
+                                                    <p class="movie-rating"><i
+                                                            class="fas fa-star"></i><span><%= movie.vote_average %></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="synopsis">
+                                                <% if(movie.tagline){%>
+                                                <p class="tagline">"<%= movie.tagline%>"</p>
+                                                <% }%>
+                                                <% if(movie.overview.length > 100){%>
+                                                <p class="clamp-synopsis">
+                                                    <%= movie.overview%>
+                                                </p>
+                                                <h5 class="open-synopsis synopsis-read-more">...Read more</h5>
+                                                <% }else{%>
+                                                <p class="no-clamp"><%= movie.overview%></p>
+                                                <% } %>
+                                                <%if(crews){%>
+                                                <div class="crews crews-top">
+                                                    <% for(let person of crews){%>
+                                                    <div class="director">
+                                                        <a class="crew-name" href="#"><%= person.name %></a>
+                                                        <h5><%= person.job %> </h5>
+                                                    </div>
+
+                                                    <% } %>
+
+                                                </div>
+                                                <%} %>
+                                            </div>
+                                            <% if(watch){%>
+                                            <div class="watch-providers">
+                                                <div class="watch-title">
+                                                    <h2>Where to Watch</h2>
+                                                    <div class="just-watch">
+                                                        <p>Powered by</p>
+                                                        <img src="/justwatch-logo.png" alt="just-watch">
+                                                    </div>
+                                                </div>
+                                                <a href="<%= watch.link%>" target="_blank">
+                                                    <div class="watch-providers-inner">
+                                                        <% if(watch.rent) {%>
+                                                        <% for(let provider of watch.rent){%>
                                                         <div class="provider">
                                                             <h4>Rent</h4>
-                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Rent <%= movie.title %> on <%= provider.provider_name %>">
-                                                        </div> 
-                                                    <% } %>
-                                                <% } %>
-                                                <% if(watch.buy){%>
-                                                    <% for(let provider of watch.buy){%>
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                alt="watch-provider-logo"
+                                                                title="Rent <%= movie.title %> on <%= provider.provider_name %>">
+                                                        </div>
+                                                        <% } %>
+                                                        <% } %>
+                                                        <% if(watch.buy){%>
+                                                        <% for(let provider of watch.buy){%>
                                                         <div class="provider">
                                                             <h4>Buy</h4>
-                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Buy <%= movie.title %> on <%= provider.provider_name %>">
-                                                        </div> 
-                                                    <% } %> 
-        
-                                                <% } %> 
-                                                <% if(watch.flatrate) {%>
-                                                    <% for(let provider of watch.flatrate){%>
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                alt="watch-provider-logo"
+                                                                title="Buy <%= movie.title %> on <%= provider.provider_name %>">
+                                                        </div>
+                                                        <% } %>
+
+                                                        <% } %>
+                                                        <% if(watch.flatrate) {%>
+                                                        <% for(let provider of watch.flatrate){%>
                                                         <div class="provider">
                                                             <h4>Stream</h4>
-                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                                        </div> 
-                                                    <% } %> 
-        
-                                                <% } %>
-                                                <% if(watch.ads) {%>
-                                                    <% for(let provider of watch.ads){%>
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                alt="watch-provider-logo"
+                                                                title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                        </div>
+                                                        <% } %>
+
+                                                        <% } %>
+                                                        <% if(watch.ads) {%>
+                                                        <% for(let provider of watch.ads){%>
                                                         <div class="provider">
                                                             <h4>Ads</h4>
-                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                                        </div> 
-                                                    <% } %> 
-        
-                                                <% } %>
-                                                <div class="close-providers" title="close"><i class="fas fa-times"></i></div>
-                                                   
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                alt="watch-provider-logo"
+                                                                title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                        </div>
+                                                        <% } %>
+
+                                                        <% } %>
+                                                        <div class="close-providers" title="close"><i
+                                                                class="fas fa-times"></i></div>
+
+                                                    </div>
+
+                                                </a>
+
+
                                             </div>
-                                            
-                                        </a>
-                                        
-                                        
+                                            <% } %>
+                                            <div class="swiper-btns">
+                                                <% if(movie.homepage !== "" && movie.homepage !== null){%>
+                                                <a href="<%= movie.homepage %> " target="_blank" class="swiper-btn"
+                                                    role="button"><i class="fas fa-link"></i>Website</a>
+                                                <% } %>
+                                                <a href="https://www.imdb.com/title/<%= movie.imdb_id %>/"
+                                                    target="_blank" class="swiper-btn" role="button"><i
+                                                        class="fab fa-imdb"></i>IMDB</a>
+                                                <% if(movie.videos.results.length > 0){%>
+                                                <button class="swiper-btn trailer red-btn"><i
+                                                        class="fas fa-play"></i>Trailer</button>
+                                                <% } %>
+                                            </div>
+                                        </div>
                                     </div>
-                                <% } %> 
-                                <div class="swiper-btns">
-                                    <% if(movie.homepage !== "" && movie.homepage !== null){%> 
-                                    <a href="<%= movie.homepage %> " target="_blank" class="swiper-btn" role="button"><i
-                                            class="fas fa-link"></i>Website</a>
-                                    <% } %> 
-                                    <a  href="https://www.imdb.com/title/<%= movie.imdb_id %>/" target="_blank" class="swiper-btn" role="button"><i class="fab fa-imdb"></i>IMDB</a>
-                                    <% if(movie.videos.results.length > 0){%>
-                                    <button class="swiper-btn trailer red-btn"><i class="fas fa-play"></i>Trailer</button>
-                                    <% } %> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="similarmovies-container">
-                            <% if(similar.length){%>
-                                <h1 class="embla-title">Similar movies</h1>
-                                <div class="embla" style="margin-top: 1.2rem;">
-                                    <div class="embla__viewport">
-                                        <div class="embla__container">
-                                            <% similar.forEach(mov=>{%>
-                                                <div class="embla__slide" >
-                                                    <div class="slider-inner-card embla__slide__inner viewed-card">
-                                                        <a  href="/movie/<%= mov.id %>" title="<%=mov.title%>">
-                                                            <img class="slider-image" src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="" />
-                                                        </a>
-                                                        <div class="image-drop">
-                                                            <%if(mov.title){%>
+                                    <div class="similarmovies-container">
+                                        <% if(similar.length){%>
+                                        <h1 class="embla-title">Similar movies</h1>
+                                        <div class="embla" style="margin-top: 1.2rem;">
+                                            <div class="embla__viewport">
+                                                <div class="embla__container">
+                                                    <% similar.forEach(mov=>{%>
+                                                    <div class="embla__slide">
+                                                        <div class="slider-inner-card embla__slide__inner viewed-card">
+                                                            <a href="/movie/<%= mov.id %>" title="<%=mov.title%>">
+                                                                <img class="slider-image"
+                                                                    src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
+                                                                    alt="" />
+                                                            </a>
+                                                            <div class="image-drop">
+                                                                <%if(mov.title){%>
                                                                 <h3><%=mov.title%></h3>
                                                                 <%}else {%>
-                                                                    <h3>n/a</h3>
+                                                                <h3>n/a</h3>
                                                                 <%}%> 
                                                         </div>
                                                     </div>
                                                     <!-- <h3><i
-                                                        class="far fa-calendar-alt"></i><%= mov.release_date %></h3> -->
+                                                        class="far fa-calendar-alt"></i><%= mov.release_date %></h3>
+                                                                -->
+                                                            </div>
+                                                            <%}) %>
+                                                        </div>
+
+                                                    </div>
+                                                    <button class="embla__button embla__button--prev square__btn"
+                                                        type="button">
+                                                        <svg class="embla__button__svg"
+                                                            viewBox="137.718 -1.001 366.563 643.999">
+                                                            <path
+                                                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                    <button class="embla__button embla__button--next square__btn"
+                                                        type="button">
+                                                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                                                            <path
+                                                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+
+
                                                 </div>
-                                                <%}) %>
+
+                                                <% } %>
+                                            </div>
                                         </div>
-                            
                                     </div>
-                                    <button class="embla__button embla__button--prev square__btn" type="button">
-                                        <svg
-                                          class="embla__button__svg"
-                                          viewBox="137.718 -1.001 366.563 643.999"
-                                        >
-                                          <path
-                                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                                          ></path>
-                                        </svg>
-                                    </button>
-                                    <button class="embla__button embla__button--next square__btn" type="button">
-                                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                                          <path
-                                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                                          ></path>
-                                        </svg>
-                                    </button>
-                                      
-                                    
+
                                 </div>
-                        
-                            <% } %>
-                        </div>
-                    </div>
-                </div>
-                
-        </div>
-            
-    <% }%>
-    
-</section>
+
+                                <% }%>
+
+                                </section>
 
 
 
-<div class="movie-trailer">
-    <div class="trailer-container">
-        <% if(trailer){%>
-            <div class="trailer-video">
-                <iframe class="video_player" width="100%" height="100%" src="https://www.youtube.com/embed/<%= trailer.key %>?enablejsapi=1&version=3&playerapiid=ytplayer" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div> 
-            <img class="close-trailer" src="/multiply.png" alt="close">
-        <% } %>  
-    </div>
-</div>
-        
-        
-    
-
-<section id="more-movie-info">
-    <div class="wrapper-enclosure">
-        <div class="movie-synopsis movie-storyline">
-            <div class="measuring-wrapper">
-                <h2>Synopsis</h2>
-                <p class="large-display-synopsis ">
-                    <%= movie.overview %>
-                </p>
-                <div class="small-display-synopsis">
-                    <% if(movie.overview.length > 200){%>
-                        <p class="short-synopsis"><%= overview.short %> <span class="dots">...</span> <span class="read-all">Read all</span> </p>
-                        <p class="long-synopsis"><%= overview.long %> <span class="read-less">Read less</span></p>
-                    <% }else{%>
-                        <p><%= movie.overview %> </p>
-                    <% } %> 
-    
-                </div>
-                 
-            </div>    
-        </div>
-        <div class="small-display-details">
-            <div>
-                <div class="sub-detail">
-                    <h4>Taglines</h4>
-                    <p><%= movie.tagline %> </p>
-                </div>
-                <div class="sub-detail">
-                    <h4>Genres</h4>
-                    <% if(genres){%>
-                        <p class="sub-detail-genre">
-                            <%for(let genre of movie.genres.slice(0, 4)){%>
-                                <span><a href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
-                            <% } %> 
-                        </p>
-                    <% } %> 
-                </div>
-                <div class="sub-detail">
-                    <h4>Rating(tmdb)</h4>
-                    <p class="rating"><i class="fas fa-star"></i><%= movie.vote_average %></p>
-                    
-                </div>
-                <div class="sub-detail">
-                    <h4>Runtime</h4>
-                    <p><%= runTime %></p>
-                </div>
-                <div class="sub-detail">
-                    <h4>Languages</h4>
-                    <p><%= spokenLanguages%> </p>
-                </div>
-                <div class="sub-detail">
-                    <h4>Watch Guide</h4>
-                    <div class="just-watch">
-                        <span><a href="https://www.justwatch.com/"><img src="/justwatch-logo.png" alt="just-watch"></a></span>
-                    </div>
-                </div>
-                <%if(crews){%>
-                    <div class="crews-bottom-wrapper">
-                        <h4>Crew</h4>
-                        <div class="crews crews-bottom">
-                            <% for(let person of crews){%>
-                                <div class="director" >
-                                    <a class="crew-name" href="#"><%= person.name %></a>
-                                    <h5 ><%= person.job %> </h5>
-                                </div>
-                            
-                            <% } %> 
-        
-                        </div>
-    
-                    </div>
-                    
-                <%} %>
-            </div>    
-        </div>
-        <% if(watch){%>
-            <div class="watch-providers-sm">
-                <h2>Where to watch</h2>
-                <a href="<%= watch.link%>" target="_blank" >
-                    <div class="embla cast-container">
-                        <div class="embla__viewport">
-                            <div class="embla__container">
-                                <% if(watch.rent) {%>
-                                    <% for(let provider of watch.rent){%>
-                                        <div class="embla__slide">
-                                            <div class="provider embla__slide__inner">
-                                                <h4>Rent</h4>
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Rent <%= movie.title %> on <%= provider.provider_name %>">
-                                            </div> 
-                                        </div> 
-                                    <% } %>
-                                <% } %>
-                                <% if(watch.buy){%>
-                                    <% for(let provider of watch.buy){%>
-                                        <div class="embla__slide">
-                                            <div class="provider embla__slide__inner">
-                                                <h4>Buy</h4>
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Buy <%= movie.title %> on <%= provider.provider_name %>">
-                                            </div> 
-            
+                                <div class="movie-trailer">
+                                    <div class="trailer-container">
+                                        <% if(trailer){%>
+                                        <div class="trailer-video">
+                                            <iframe class="video_player" width="100%" height="100%"
+                                                src="https://www.youtube.com/embed/<%= trailer.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                title="YouTube video player" frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen></iframe>
                                         </div>
-                                    <% } %> 
-            
-                                <% } %> 
-                                <% if(watch.flatrate) {%>
-                                    <% for(let provider of watch.flatrate){%>
-                                        <div class="embla__slide">
-                                            <div class="provider embla__slide__inner">
-                                                <h4>Stream</h4>
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                        <img class="close-trailer" src="/multiply.png" alt="close">
+                                        <% } %>
+                                    </div>
+                                </div>
+
+
+
+
+                                <section id="more-movie-info">
+                                    <div class="wrapper-enclosure">
+                                        <div class="movie-synopsis movie-storyline">
+                                            <div class="measuring-wrapper">
+                                                <h2>Synopsis</h2>
+                                                <p class="large-display-synopsis ">
+                                                    <%= movie.overview %>
+                                                </p>
+                                                <div class="small-display-synopsis">
+                                                    <% if(movie.overview.length > 200){%>
+                                                    <p class="short-synopsis"><%= overview.short %> <span
+                                                            class="dots">...</span> <span class="read-all">Read
+                                                            all</span> </p>
+                                                    <p class="long-synopsis"><%= overview.long %> <span
+                                                            class="read-less">Read less</span></p>
+                                                    <% }else{%>
+                                                    <p><%= movie.overview %> </p>
+                                                    <% } %>
+
+                                                </div>
+
                                             </div>
-                                        </div> 
-                                    <% } %> 
-            
-                                <% } %>
-                                <% if(watch.ads) {%>
-                                    <% for(let provider of watch.ads){%>
-                                        <div class="embla__slide">
-                                            <div class="provider embla__slide__inner">
-                                                <h4>Ads</h4>
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>" alt="watch-provider-logo" title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                        </div>
+                                        <div class="small-display-details">
+                                            <div>
+                                                <div class="sub-detail">
+                                                    <h4>Taglines</h4>
+                                                    <p><%= movie.tagline %> </p>
+                                                </div>
+                                                <div class="sub-detail">
+                                                    <h4>Genres</h4>
+                                                    <% if(genres){%>
+                                                    <p class="sub-detail-genre">
+                                                        <%for(let genre of movie.genres.slice(0, 4)){%>
+                                                        <span><a
+                                                                href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
+                                                        <% } %>
+                                                    </p>
+                                                    <% } %>
+                                                </div>
+                                                <div class="sub-detail">
+                                                    <h4>Rating(tmdb)</h4>
+                                                    <p class="rating"><i
+                                                            class="fas fa-star"></i><%= movie.vote_average %></p>
+
+                                                </div>
+                                                <div class="sub-detail">
+                                                    <h4>Runtime</h4>
+                                                    <p><%= runTime %></p>
+                                                </div>
+                                                <div class="sub-detail">
+                                                    <h4>Languages</h4>
+                                                    <p><%= spokenLanguages%> </p>
+                                                </div>
+                                                <div class="sub-detail">
+                                                    <h4>Watch Guide</h4>
+                                                    <div class="just-watch">
+                                                        <span><a href="https://www.justwatch.com/"><img
+                                                                    src="/justwatch-logo.png"
+                                                                    alt="just-watch"></a></span>
+                                                    </div>
+                                                </div>
+                                                <%if(crews){%>
+                                                <div class="crews-bottom-wrapper">
+                                                    <h4>Crew</h4>
+                                                    <div class="crews crews-bottom">
+                                                        <% for(let person of crews){%>
+                                                        <div class="director">
+                                                            <a class="crew-name" href="#"><%= person.name %></a>
+                                                            <h5><%= person.job %> </h5>
+                                                        </div>
+
+                                                        <% } %>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <%} %>
                                             </div>
-            
-                                        </div> 
-                                    <% } %> 
-            
-                                <% } %>
-                                
-                                
-                            </div>
-                
-                        </div>
-                        <button class="embla__button embla__button--prev" type="button" style="display: none;">
-                            <svg
-                              class="embla__button__svg"
-                              viewBox="137.718 -1.001 366.563 643.999"
-                            >
-                              <path
-                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                              ></path>
-                            </svg>
-                        </button>
-                        <button class="embla__button embla__button--next" type="button" style="display: none;">
-                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                              <path
-                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                              ></path>
-                            </svg>
-                        </button>
-                        
-                    </div>
-    
-                </a>
-                
-            </div>    
-        <% } %>  
-        
-        <div class="similarmovies-container-fluid">
-            <% if(similar.length){%>
-                <h1 class="embla-small-title">similar movies</h1>
-                <div class="embla ">
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            <% similar.forEach(mov=>{%>
-                                <div class="embla__slide" >
-                                    <div class="slider-inner-card embla__slide__inner viewed-card">
-                                        <a  href="/movie/<%= mov.id %>" title="<%= mov.title %>">
-                                            <img class="slider-image" src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="" />
-                                        </a>
-                                        <div class="image-drop">
-                                            <%if(mov.title){%>
-                                                <h3><%= mov.title%></h3>
-                                                <%}else {%>
-                                                    <h3>n/a</h3>
-                                                <%}%> 
+                                        </div>
+                                        <% if(watch){%>
+                                        <div class="watch-providers-sm">
+                                            <h2>Where to watch</h2>
+                                            <a href="<%= watch.link%>" target="_blank">
+                                                <div class="embla cast-container">
+                                                    <div class="embla__viewport">
+                                                        <div class="embla__container">
+                                                            <% if(watch.rent) {%>
+                                                            <% for(let provider of watch.rent){%>
+                                                            <div class="embla__slide">
+                                                                <div class="provider embla__slide__inner">
+                                                                    <h4>Rent</h4>
+                                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                        alt="watch-provider-logo"
+                                                                        title="Rent <%= movie.title %> on <%= provider.provider_name %>">
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+                                                            <% } %>
+                                                            <% if(watch.buy){%>
+                                                            <% for(let provider of watch.buy){%>
+                                                            <div class="embla__slide">
+                                                                <div class="provider embla__slide__inner">
+                                                                    <h4>Buy</h4>
+                                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                        alt="watch-provider-logo"
+                                                                        title="Buy <%= movie.title %> on <%= provider.provider_name %>">
+                                                                </div>
+
+                                                            </div>
+                                                            <% } %>
+
+                                                            <% } %>
+                                                            <% if(watch.flatrate) {%>
+                                                            <% for(let provider of watch.flatrate){%>
+                                                            <div class="embla__slide">
+                                                                <div class="provider embla__slide__inner">
+                                                                    <h4>Stream</h4>
+                                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                        alt="watch-provider-logo"
+                                                                        title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                                </div>
+                                                            </div>
+                                                            <% } %>
+
+                                                            <% } %>
+                                                            <% if(watch.ads) {%>
+                                                            <% for(let provider of watch.ads){%>
+                                                            <div class="embla__slide">
+                                                                <div class="provider embla__slide__inner">
+                                                                    <h4>Ads</h4>
+                                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                                        alt="watch-provider-logo"
+                                                                        title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                                </div>
+
+                                                            </div>
+                                                            <% } %>
+
+                                                            <% } %>
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <button class="embla__button embla__button--prev" type="button"
+                                                        style="display: none;">
+                                                        <svg class="embla__button__svg"
+                                                            viewBox="137.718 -1.001 366.563 643.999">
+                                                            <path
+                                                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                    <button class="embla__button embla__button--next" type="button"
+                                                        style="display: none;">
+                                                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                                                            <path
+                                                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+
+                                                </div>
+
+                                            </a>
+
+                                        </div>
+                                        <% } %>
+
+                                        <div class="similarmovies-container-fluid">
+                                            <% if(similar.length){%>
+                                            <h1 class="embla-small-title">similar movies</h1>
+                                            <div class="embla ">
+                                                <div class="embla__viewport">
+                                                    <div class="embla__container">
+                                                        <% similar.forEach(mov=>{%>
+                                                        <div class="embla__slide">
+                                                            <div
+                                                                class="slider-inner-card embla__slide__inner viewed-card">
+                                                                <a href="/movie/<%= mov.id %>" title="<%= mov.title %>">
+                                                                    <img class="slider-image"
+                                                                        src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
+                                                                        alt="" />
+                                                                </a>
+                                                                <div class="image-drop">
+                                                                    <%if(mov.title){%>
+                                                                    <h3><%= mov.title%></h3>
+                                                                    <%}else {%>
+                                                                    <h3>n/a</h3>
+                                                                    <%}%> 
                                         </div>
                                     </div>
                                     <!-- <h3><i
                                         class="far fa-calendar-alt"></i><%= mov.release_date %></h3> -->
-                                </div>
-                                <%}) %>
-                        </div>
+                                                                </div>
+                                                                <%}) %>
+                                                            </div>
+
+                                                        </div>
+                                                        <button class="embla__button embla__button--prev square__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="137.718 -1.001 366.563 643.999">
+                                                                <path
+                                                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+                                                        <button class="embla__button embla__button--next square__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="0 0 238.003 238.003">
+                                                                <path
+                                                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+
+
+                                                    </div>
+
+                                                    <% } %>
+
+                                                </div>
+
+                                                <% if(movie.credits.cast.length){%>
+                                                <div class="movie-cast">
+                                                    <h2>Cast</h2>
+                                                    <div class="embla cast-container">
+                                                        <div class="embla__viewport">
+                                                            <div class="embla__container">
+                                                                <%for(let cast of movie.credits.cast){%>
+                                                                <div class="embla__slide">
+                                                                    <div class="cast-card embla__slide__inner">
+                                                                        <% if(cast.profile_path){%>
+                                                                        <a href="/person/<%= cast.id %> "><img
+                                                                                src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>"
+                                                                                alt=""></a>
+                                                                        <%}else if(cast.profile_path === null){%>
+                                                                        <a href="/person/<%= cast.id %> "><img
+                                                                                src="/poster-alt.png" alt=""></a>
+                                                                        <% } %>
+                                                                        <div class="cast-name">
+                                                                            <a href="/person/<%= cast.id %>">
+                                                                                <h4><%= cast.name %></h4>
+                                                                            </a>
+                                                                            <h5><%= cast.character %> </h5>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <% } %>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <button
+                                                            class="embla__button embla__button--prev square__btn cast__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="137.718 -1.001 366.563 643.999">
+                                                                <path
+                                                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+                                                        <button
+                                                            class="embla__button embla__button--next square__btn cast__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="0 0 238.003 238.003">
+                                                                <path
+                                                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                <% if(media[0].length || media[1].length || media[2].length){%>
+                                                <div class="movie-cast videos-and-photos">
+                                                    <h2>Videos and Photos</h2>
+                                                    <div class="embla media-wrapper">
+                                                        <div class="embla__viewport">
+                                                            <div class="embla__container media-container ">
+                                                                <% for(let video of media[0]){%>
+                                                                <div class="embla__slide video-gallery">
+                                                                    <img src="https://i.ytimg.com/vi/<%= video.key %>/maxresdefault.jpg"
+                                                                        alt="video-bd">
+                                                                    <iframe class="video_player" width="500px"
+                                                                        height="300px"
+                                                                        src="https://www.youtube.com/embed/<%= video.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                                        title="YouTube video player" frameborder="0"
+                                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                                        allowfullscreen></iframe>
+                                                                    <div class="play-icon"><i
+                                                                            class="play fas fa-play"></i></div>
+                                                                </div>
+                                                                <%} %>
+                                                                <% for(let backdrop of media[2]){%>
+                                                                <div class="embla__slide">
+                                                                    <img class="media-backdrop"
+                                                                        src="https://image.tmdb.org/t/p/w500/<%= backdrop.file_path %>"
+                                                                        alt="movie-bd">
+                                                                </div>
+
+                                                                <% } %>
+                                                                <% for(let poster of media[1]){%>
+                                                                <div class="embla__slide">
+                                                                    <img class="media-poster"
+                                                                        src="https://image.tmdb.org/t/p/w500/<%= poster.file_path %>"
+                                                                        alt="movie-poster">
+                                                                </div>
+                                                                <% } %>
+                                                            </div>
+
+                                                        </div>
+                                                        <button class="embla__button embla__button--prev square__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="137.718 -1.001 366.563 643.999">
+                                                                <path
+                                                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+                                                        <button class="embla__button embla__button--next square__btn"
+                                                            type="button">
+                                                            <svg class="embla__button__svg"
+                                                                viewBox="0 0 238.003 238.003">
+                                                                <path
+                                                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                                <% if(reviews.length){%>
+                                                <div id="reviews-container">
+                                                    <h2>Movie Reviews</h2>
+                                                    <div class="reviews-wrapper">
+                                                        <div class="reviews-container">
+                                                            <h5>Reviews for <span><%= movie.title %></span></h5>
+                                                            <div class="reviews-inner" data-simplebar>
+                                                                <%for(let review of reviews){%>
+                                                                <div class="review-card">
+                                                                    <div class="review-details">
+                                                                        <img src="https://secure.gravatar.com/avatar<%=review.author_details.avatar_path%>"
+                                                                            alt="reviewer avatar">
+                                                                        <div class="reviewer-name">
+                                                                            <h4>A Review by <span
+                                                                                    class="review-author"><%= review.author_details.username %></span>
+                                                                                <i class="fas fa-star"></i><span
+                                                                                    class="rate"><%= review.author_details.rating%></span>
+                                                                            </h4>
+                                                                            <h6>Written by
+                                                                                <span><%= review.author_details.username %></span>
+                                                                                on
+                                                                                <%= review.created_at.substr(0, 10) %>
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="review-content">
+                                                                        <p class="author-content">
+                                                                            <%= review.content.substr(0, 140) %>...
+                                                                            <span class="expand-review">read more</span>
+                                                                        </p>
+                                                                        <p style="display: none;"><%= review.content %>
+                                                                        </p>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <% } %>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="full-review">
+                                                            <h5>Read Full Review <span>(The thoughts and opinions
+                                                                    expressed here are solely those of the
+                                                                    reviewer.)</span></h5>
+                                                            <div class="full-review-inner " data-simplebar>
+                                                                <h6><i class="fas fa-star"></i>A Review by
+                                                                    <span><%= reviews[0].author %> </span></h6>
+                                                                <p class="full-review-content">
+                                                                    <%= reviews[0].content.substr(0, 240) %>... </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="embla review-slider-container">
+                                                    <div class="embla__viewport">
+                                                        <div class="embla__container">
+                                                            <%for(let review of reviews){%>
+                                                            <div class="embla__slide review-card">
+                                                                <div class="review-details">
+                                                                    <img src="https://secure.gravatar.com/avatar<%=review.author_details.avatar_path%>"
+                                                                        alt="reviewer avatar">
+                                                                    <div class="reviewer-name">
+                                                                        <h4>A Review by <span
+                                                                                class="review-author"><%= review.author_details.username %></span>
+                                                                            <i class="fas fa-star"></i><span
+                                                                                class="rate"><%= review.author_details.rating%></span>
+                                                                        </h4>
+                                                                        <h6>Written by
+                                                                            <span><%= review.author_details.username %></span>
+                                                                            on <%= review.created_at.substr(0, 10) %>
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="review-content">
+                                                                    <p class="author-content">
+                                                                        <%= review.content.substr(0, 200) %>...</p>
+                                                                    <span class="read-on"> <a
+                                                                            href="/reviews/<%= review.id %>">read
+                                                                            more</a></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <% } %>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Buttons -->
+                                                    <button class="embla__button embla__button--prev square__btn"
+                                                        type="button">
+                                                        <svg class="embla__button__svg"
+                                                            viewBox="137.718 -1.001 366.563 643.999">
+                                                            <path
+                                                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                    <button class="embla__button embla__button--next square__btn"
+                                                        type="button">
+                                                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                                                            <path
+                                                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                                            </path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+
+                                                <% } %>
+
+                                            </div>
+                                </section>
+
+                                <section id="popular-movies">
+                                    <div class="wrapper-enclosure">
+                                        <div class="movies-container">
+                                            <% if(recommendedMovies.length>0){%>
+                                            <h1 class="popular serif">Movies like <span
+                                                    class="related-films"><%= movie.title %> </span></h1>
+                                            <div class="line-container">
+                                                <!-- <div class="line"></div> -->
+                                            </div>
+                                            <div class="movie-wrapper">
+                                                <% recommendedMovies.forEach(function(recommendedMovie){%>
+                                                <div class="movie-card-container">
+                                                    <div class="movie-card viewed-card">
+                                                        <a class="image" href="/movie/<%= recommendedMovie.id %>"
+                                                            title="<%= recommendedMovie.title %> ">
+                                                            <% if(recommendedMovie.poster_path){%>
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= recommendedMovie.poster_path %>"
+                                                                alt="">
+                                                            <%}else if(recommendedMovie.poster_path === null){%>
+                                                            <img src="/poster-alt.png" alt="">
+                                                            <% } %>
+                                                        </a>
+                                                        <a href="/movie/<%= recommendedMovie.id %>">
+                                                            <div class="movie-card-overlay">
+                                                                <div>
+                                                                    <%if(recommendedMovie.title){%>
+                                                                    <h2 class="movie-rating"><i
+                                                                            class="fas fa-star"></i><span><%= recommendedMovie.vote_average %></span>
+                                                                    </h2>
+                                                                    <%}%> 
+                                    <h4><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                                    </h4>
+                                                                </div>
+                                                                <p><%= recommendedMovie.overview?recommendedMovie.overview.substr(0, 100):"n/a"%>...
+                                                                </p>
+                                                                <button class="swiper-btn overlay-btn">View
+                                                                    Details</button>
+
+                                                            </div>
+                                                        </a>
+
+
+                                                    </div>
+                                                    <div class="movie-details">
+                                                        <div>
+                                                            <a href="/movie/<%= recommendedMovie.id %>">
+                                                                <%= recommendedMovie.title %>
+                                                            </a>
+
+                                                        </div>
+                                                        <%if(genres){%>
+                                                        <div>
+                                                            <span><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                                            <%for(let genreId of recommendedMovie.genre_ids.slice(0, 2)){%>
+                                                            <%for(let genre of genres){%>
+                                                            <%if(genreId === genre.id){%>
+                                                            <span
+                                                                class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                                            </span>
+                                                            <% } %>
+                                                            <% } %>
+                                                            <% } %>
+                                                        </div>
+
+                                                        <%} %>
+
+                                                    </div>
+                                                </div>
+                                                <%})%>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+
+                                            </div>
+                                            <% }else if(similarMovies.length){%>
+                                            <h1 class="popular serif">Movies like <span
+                                                    class="related-films"><%= movie.title %> </span></h1>
+                                            <div class="line-container">
+                                                <!-- <div class="line"></div> -->
+                                            </div>
+                                            <div class="movie-wrapper">
+                                                <% similarMovies.forEach(function(similarMovie){%>
+                                                <div class="movie-card-container">
+                                                    <div class="movie-card viewed-card">
+                                                        <a class="image" href="/movie/<%= similarMovie.id %>"
+                                                            title="<%= similarMovie.title %> ">
+                                                            <% if(similarMovie.poster_path){%>
+                                                            <img src="https://image.tmdb.org/t/p/w500/<%= similarMovie.poster_path %>"
+                                                                alt="">
+                                                            <%}else if(similarMovie.poster_path === null){%>
+                                                            <img src="/poster-alt.png" alt="">
+                                                            <% } %>
+                                                        </a>
+                                                        <a href="/movie/<%= similarMovie.id %>">
+                                                            <div class="movie-card-overlay">
+                                                                <div>
+                                                                    <%if(similarMovie.title){%>
+                                                                    <h2 class="movie-rating"><i
+                                                                            class="fas fa-star"></i><span><%= similarMovie.vote_average %></span>
+                                                                    </h2>
+                                                                    <%}%> 
+                                        <h4><%= similarMovie.release_date?similarMovie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                                    </h4>
+                                                                </div>
+                                                                <p><%= similarMovie.overview?similarMovie.overview.substr(0, 100):"n/a"%>...
+                                                                </p>
+                                                                <button class="swiper-btn overlay-btn">View
+                                                                    Details</button>
+
+                                                            </div>
+                                                        </a>
+
+                                                    </div>
+                                                    <div class="movie-details">
+                                                        <div>
+                                                            <a href="/movie/<%= similarMovie.id %>">
+                                                                <%= similarMovie.title %>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <span><%= similarMovie.release_date?similarMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                                            <%for(let genreId of similarMovie.genre_ids.slice(0, 2)){%>
+                                                            <%for(let genre of genres){%>
+                                                            <%if(genreId === genre.id){%>
+                                                            <span
+                                                                class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                                            </span>
+                                                            <% } %>
+                                                            <% } %>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%})%>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+                                                <div class="empty"></div>
+
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                        <% if(page_num < totalPages) {%>
+                                        <div class="page-controls">
+                                            <% if(page_num > 1) {%>
+                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> "
+                                                class="prev-page swiper-btn" role="button"><i
+                                                    class="fas fa-arrow-circle-left prev-indicator"></i>page
+                                                <%= page_num - 1 %> </a>
+
+                                            <% }else{%>
+                                            <hr class="bottom-rule" style="display: none;">
+                                            <% } %>
+                                            <% if(page_num < totalPages && totalResults > 21) {%>
+                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num + 1 %> "
+                                                class="next-page swiper-btn" role="button" value="next-page">page
+                                                <%= page_num + 1 %><i
+                                                    class="fas fa-arrow-circle-right next-indicator"></i></a>
+                                            <% }%>
+                                        </div>
+                                        <%}else {%>
+                                        <div class="page-controls">
+                                            <% if(page_num > 1) {%>
+                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> "
+                                                class="prev-page swiper-btn" role="button"><i
+                                                    class="fas fa-arrow-circle-left prev-indicator"></i>page
+                                                <%= page_num - 1 %></a>
+
+                                            <hr class="bottom-rule" style="display: none">
+
+                                            <%}%>
             
-                    </div>
-                    <button class="embla__button embla__button--prev square__btn" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                      
-                    
-                </div>
-        
-            <% } %>
-            
-        </div>
-        
-        <% if(movie.credits.cast.length){%> 
-        <div class="movie-cast">
-            <h2>Cast</h2>
-            <div class="embla cast-container">
-                <div class="embla__viewport">
-                    <div class="embla__container">
-                        <%for(let cast of movie.credits.cast){%>
-                            <div class="embla__slide">
-                                <div class="cast-card embla__slide__inner">
-                                    <% if(cast.profile_path){%>
-                                    <a href="/person/<%= cast.id %> "><img src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>" alt=""></a>
-                                    <%}else if(cast.profile_path === null){%>
-                                        <a href="/person/<%= cast.id %> "><img src="/poster-alt.png" alt=""></a>
-                                    <% } %> 
-                                    <div class="cast-name">
-                                        <a href="/person/<%= cast.id %>"><h4><%= cast.name %></h4></a>
-                                        <h5><%= cast.character %> </h5>
-                                    </div>
-                                </div>
-    
-                            </div>
-                            
-                        <% } %>
-                        
-                    </div>
-        
-                </div>
-                <button class="embla__button embla__button--prev square__btn cast__btn" type="button" >
-                    <svg
-                      class="embla__button__svg"
-                      viewBox="137.718 -1.001 366.563 643.999"
-                    >
-                      <path
-                        d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                      ></path>
-                    </svg>
-                </button>
-                <button class="embla__button embla__button--next square__btn cast__btn" type="button">
-                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                      <path
-                        d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                      ></path>
-                    </svg>
-                </button>
+            </div>
                 
-            </div>
-        </div>
+        
         <% } %>
-        <% if(media[0].length || media[1].length || media[2].length){%>
-            <div class="movie-cast videos-and-photos">
-                <h2>Videos and Photos</h2>
-                <div class="embla media-wrapper">
-                    <div class="embla__viewport">
-                        <div class="embla__container media-container ">
-                            <% for(let video of media[0]){%>
-                                <div class="embla__slide video-gallery" >
-                                    <img src="https://i.ytimg.com/vi/<%= video.key %>/maxresdefault.jpg" alt="video-bd">
-                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= video.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <div class="play-icon"><i class="play fas fa-play"></i></div>
-                                </div>
-                            <%} %>
-                            <% for(let backdrop of media[2]){%>
-                                <div class="embla__slide">
-                                    <img class="media-backdrop" src="https://image.tmdb.org/t/p/w500/<%= backdrop.file_path %>" alt="movie-bd">
-                                </div>
-                                
-                            <% } %>
-                            <% for(let poster of media[1]){%>
-                                <div class="embla__slide">
-                                    <img class="media-poster" src="https://image.tmdb.org/t/p/w500/<%= poster.file_path %>" alt="movie-poster">
-                                </div>
-                            <% } %>
-                        </div>
-            
-                    </div>
-                    <button class="embla__button embla__button--prev square__btn" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button> 
-                </div>
-            </div>   
-        <% } %>
-        <% if(reviews.length){%>
-            <div id="reviews-container">
-                <h2>Movie Reviews</h2>
-                <div class="reviews-wrapper">
-                    <div class="reviews-container">
-                        <h5>Reviews for <span><%= movie.title %></span></h5>
-                        <div class="reviews-inner" data-simplebar>
-                            <%for(let review of reviews){%> 
-                            <div class="review-card">
-                                <div class="review-details">
-                                    <img src="https://secure.gravatar.com/avatar<%=review.author_details.avatar_path%>" alt="reviewer avatar">
-                                    <div class="reviewer-name">
-                                        <h4>A Review by <span class="review-author"><%= review.author_details.username %></span> 
-                                            <i class="fas fa-star"></i><span class="rate"><%= review.author_details.rating%></span></h4>
-                                        <h6>Written by <span><%= review.author_details.username %></span> on <%= review.created_at.substr(0, 10) %></h6>
-                                    </div>
-                                </div>
-                                <div class="review-content">
-                                    <p class="author-content"><%= review.content.substr(0, 140) %>... <span class="expand-review">read more</span></p>
-                                    <p style="display: none;"><%= review.content %> </p>
-        
-                                </div>
-        
-                            </div>
-                            <% } %> 
-                        </div>
-                    </div>
-                    
-                    <div class="full-review">
-                        <h5>Read Full Review <span>(The thoughts and opinions expressed here are solely those of the reviewer.)</span></h5>
-                        <div class="full-review-inner " data-simplebar>
-                            <h6><i class="fas fa-star"></i>A Review by <span><%= reviews[0].author %> </span></h6>
-                            <p class="full-review-content"><%= reviews[0].content.substr(0, 240) %>... </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="embla review-slider-container">
-                <div class="embla__viewport">
-                  <div class="embla__container">
-                    <%for(let review of reviews){%>
-                        <div class="embla__slide review-card">
-                            <div class="review-details">
-                                <img src="https://secure.gravatar.com/avatar<%=review.author_details.avatar_path%>" alt="reviewer avatar">
-                                <div class="reviewer-name">
-                                    <h4>A Review by <span class="review-author"><%= review.author_details.username %></span> 
-                                        <i class="fas fa-star"></i><span class="rate"><%= review.author_details.rating%></span></h4>
-                                    <h6>Written by <span><%= review.author_details.username %></span> on <%= review.created_at.substr(0, 10) %></h6>
-                                </div>
-                            </div>
-                            <div class="review-content">
-                                <p class="author-content"><%= review.content.substr(0, 200) %>...</p>
-                                <span class="read-on"> <a href="/reviews/<%= review.id %>">read more</a></span>
-                            </div>
-                          </div>
-    
-                    <% } %> 
-                    
-                  </div>
-                </div>
-          
-                <!-- Buttons -->
-                <button class="embla__button embla__button--prev square__btn" type="button">
-                  <svg
-                    class="embla__button__svg"
-                    viewBox="137.718 -1.001 366.563 643.999"
-                  >
-                    <path
-                      d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                    ></path>
-                  </svg>
-                </button>
-                <button class="embla__button embla__button--next square__btn" type="button">
-                  <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                    <path
-                      d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
-    
-        <% } %>  
 
-    </div>
-</section>
 
-<section id="popular-movies">
-    <div class="wrapper-enclosure">
-        <div class="movies-container">
-            <% if(recommendedMovies.length>0){%>
-            <h1 class="popular serif">Movies like <span class="related-films"><%= movie.title %> </span></h1>
-            <div class="line-container">
-                <!-- <div class="line"></div> -->
-            </div>
-            <div class="movie-wrapper">
-                <% recommendedMovies.forEach(function(recommendedMovie){%>
-                <div class="movie-card-container">
-                    <div class="movie-card viewed-card">
-                        <a class="image" href="/movie/<%= recommendedMovie.id %>"
-                            title="<%= recommendedMovie.title %> ">
-                            <% if(recommendedMovie.poster_path){%> 
-                            <img src="https://image.tmdb.org/t/p/w500/<%= recommendedMovie.poster_path %>"
-                                alt="">
-                            <%}else if(recommendedMovie.poster_path === null){%>
-                                <img src="/poster-alt.png" alt="">
-                            <% } %>  
-                        </a>
-                        <a  href="/movie/<%= recommendedMovie.id %>">
-                            <div class="movie-card-overlay">
-                                <div>
-                                    <%if(recommendedMovie.title){%> 
-                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= recommendedMovie.vote_average %></span></h2>
-                                    <%}%> 
-                                    <h4><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></h4>
-                                </div>
-                                <p><%= recommendedMovie.overview?recommendedMovie.overview.substr(0, 100):"n/a"%>...</p>
-                                <button class="swiper-btn overlay-btn">View Details</button>
-                                
-                            </div>
-                        </a>
-                        
-    
-                    </div>
-                    <div class="movie-details">
-                        <div>
-                            <a href="/movie/<%= recommendedMovie.id %>">
-                                <%= recommendedMovie.title %>
-                            </a>
-                            
-                        </div>
-                        <%if(genres){%>
-                            <div>
-                                <span><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
-                                <%for(let genreId of recommendedMovie.genre_ids.slice(0, 2)){%>
-                                <%for(let genre of genres){%>
-                                <%if(genreId === genre.id){%>
-                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %> </span>
-                                <% } %>
-                                <% } %>
-                                <% } %>
-                            </div>
-    
-                        <%} %> 
-                        
-                    </div>
-                </div>
-                <%})%>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-    
-            </div>
-            <% }else if(similarMovies.length){%>
-                <h1 class="popular serif">Movies like <span class="related-films"><%= movie.title %> </span></h1>
-                <div class="line-container">
-                    <!-- <div class="line"></div> -->
-                </div>
-                <div class="movie-wrapper">
-                    <% similarMovies.forEach(function(similarMovie){%>
-                    <div class="movie-card-container">
-                        <div class="movie-card viewed-card">
-                            <a class="image" href="/movie/<%= similarMovie.id %>"
-                                title="<%= similarMovie.title %> ">
-                                <% if(similarMovie.poster_path){%> 
-                                <img src="https://image.tmdb.org/t/p/w500/<%= similarMovie.poster_path %>"
-                                    alt="">
-                                <%}else if(similarMovie.poster_path === null){%>
-                                    <img src="/poster-alt.png" alt="">
-                                <% } %>  
-                            </a>
-                            <a  href="/movie/<%= similarMovie.id %>">
-                                <div class="movie-card-overlay">
-                                    <div>
-                                        <%if(similarMovie.title){%> 
-                                            <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= similarMovie.vote_average %></span></h2>
-                                        <%}%> 
-                                        <h4><%= similarMovie.release_date?similarMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></h4>
-                                    </div>
-                                    <p><%= similarMovie.overview?similarMovie.overview.substr(0, 100):"n/a"%>...</p>
-                                    <button class="swiper-btn overlay-btn">View Details</button>
-                                    
-                                </div>
-                            </a>
-        
-                        </div>
-                        <div class="movie-details">
-                            <div>
-                                <a href="/movie/<%= similarMovie.id %>">
-                                    <%= similarMovie.title %> 
-                                </a>
-                            </div>
-                            <div>
-                                <span><%= similarMovie.release_date?similarMovie.release_date.split('').slice(0, 4).join(''):"n/a" %></span>
-                                <%for(let genreId of similarMovie.genre_ids.slice(0, 2)){%>
-                                <%for(let genre of genres){%>
-                                <%if(genreId === genre.id){%>
-                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %> </span>
-                                <% } %>
-                                <% } %>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                    <%})%>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-        
-                </div>
-            <% } %>
-        </div>
-        <% if(page_num < totalPages) {%> 
-            <div class="page-controls">
-                <% if(page_num > 1) {%>
-                <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> " class="prev-page swiper-btn" role="button"><i
-                        class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %> </a>
-        
-                <% }else{%>
-                <hr class="bottom-rule" style="display: none;">
-                <% } %>
-                <% if(page_num < totalPages && totalResults > 21) {%>
-                <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num + 1 %> " class="next-page swiper-btn" role="button" value="next-page">page <%= page_num + 1 %><i
-                        class="fas fa-arrow-circle-right next-indicator"></i></a>
-                <% }%>
-            </div>
-        <%}else {%>
-            <div class="page-controls">
-                <% if(page_num > 1) {%>
-                <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> " class="prev-page swiper-btn" role="button"><i
-                        class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
-        
-                <hr class="bottom-rule" style="display: none">
-        
-                <%}%>
-            
-            </div>
-                
-        
-        <% } %> 
-            
-
-    </div>
-</section>
+                                        </div>
+                                </section>
 
 
 
 
-<%- include('partials/footer') %>
+                                <%- include('partials/footer') %>

@@ -11,9 +11,13 @@ module.exports = {
     },
     ensureGuest: function(req, res, next){
         if(req.isAuthenticated()){
-            res.redirect('/blog/dashboard/' + req.user.id);
+            if(req.user?.privilege === "admin"){
+                res.redirect('/blog/admin/dashboard/' + req.user.id);
+            }else{
+                res.redirect('/blog/dashboard/' + req.user.id);
+            } 
         }else{
-            return next();
+            return next()
         }
     },
     ensureToken: function(req, res, next){
