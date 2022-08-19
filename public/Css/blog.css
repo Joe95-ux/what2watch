@@ -3040,11 +3040,12 @@ a.create-btn.edit-profile-btn {
 @media screen and (max-width:414px) {
     .rest-post-inner img {
         height: 210px;
+        border-radius: 5px;
     }
 
     .rest-post {
         padding: 0;
-        border-radius: 10px;
+        border-radius: 0;
         box-shadow: none;
         background-color: inherit;
         transition: none;
@@ -3059,6 +3060,14 @@ a.create-btn.edit-profile-btn {
         padding: 0;
         border-radius: 0;
         box-shadow: none;
+    }
+    .center-articles-first img {
+        border-radius: 5px;
+    }
+
+    .center-articles-first .post {
+        padding: 16px 0 0;
+        background-color: inherit;
     }
 
     .right-trending {
