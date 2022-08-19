@@ -54,3 +54,28 @@ function tableSearch() {
 }
 
 tableSearch();
+
+
+function readingTime() {
+  let text = document.querySelector(".post-content");
+  if (text !== null) {
+    text = text.innerText;
+    const wpm = 180;
+    const words = text.trim().split(/\s+/).length;
+    const time = Math.ceil(words / wpm);
+    document.querySelector(".read-time h5").innerText = time + " min read";
+  }
+}
+readingTime();
+
+function getDescription() {
+  const descs = [...document.querySelectorAll(".post-desc")];
+  for (let desc of descs) {
+    let paragraphs = [...desc.getElementsByTagName("p")].slice(0, 2);
+    let content = [];
+    paragraphs.forEach(p => content.push(p.innerText));
+    content = content.join(",");
+    desc.innerText = content;
+  }
+}
+getDescription()
