@@ -189,9 +189,13 @@
                         <h5 class="image-caption"><%= story.photoTitle %> </h5>
                         </h5>
                         <h3 class="single-post-title"><%= story.title %> </h3>
-                        <h5 class="date post-timestamp"> <span>by <strong><%= story.author %></strong></span>
-                            <span><%= story.createdAt %>
-                            </span> </h5>
+                        <div class="post-credit post-timestamp"> <span>by <strong><%= story.author %></strong></span>
+                            <span class="posted-date"><%= story.createdAt %>
+                            </span>
+                            <span class="read-time">
+                                <i class="fab fa-readme"></i><span>4 min read</span>
+                            </span> 
+                        </div>
                     </div>
                     <div class="post-content">
                         <%- story.body %>

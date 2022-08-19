@@ -63,7 +63,7 @@ function readingTime() {
     const wpm = 180;
     const words = text.trim().split(/\s+/).length;
     const time = Math.ceil(words / wpm);
-    document.querySelector(".read-time h5").innerText = time + " min read";
+    document.querySelector(".read-time span").innerText = time + " min read";
   }
 }
 readingTime();
