@@ -2694,6 +2694,7 @@ a.create-btn.edit-profile-btn {
     margin-top: 10px;
     font-size: 14px;
     border-radius: 55px;
+    align-self: center;
 }
 
 .create-btn i {
