@@ -1890,6 +1890,7 @@ textarea {
     height: auto;
     max-height: 520px;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 .read-time {
