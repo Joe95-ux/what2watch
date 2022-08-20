@@ -2828,6 +2828,8 @@ a.create-btn.edit-profile-btn {
     background-color: #001927;
     border-radius: 10px 10px 0 0;
     width: 100%;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .center-articles-first .post {
@@ -2935,6 +2937,9 @@ a.create-btn.edit-profile-btn {
         width: 90%;
         max-width: 100%;
     }
+    .center-articles-first img {
+        max-height: 300px;
+    }
 }
 
 @media screen and (max-width:850px) {
@@ -2978,6 +2983,9 @@ a.create-btn.edit-profile-btn {
         width: 140px;
         min-width: 140px;
     }
+    .center-articles-first img {
+        max-height: 300px
+    }
 
     .left-side {
         max-width: 100%;
@@ -3018,6 +3026,7 @@ a.create-btn.edit-profile-btn {
         height: 180px;
         min-width: 100%;
     }
+    
 
     .center-articles-rest .rest-post .post-desc {
         display: -webkit-box;
@@ -3039,6 +3048,9 @@ a.create-btn.edit-profile-btn {
 }
 
 @media screen and (max-width:414px) {
+    .center-articles-first img {
+        max-height: 210px;
+    }
     .rest-post-inner img {
         height: 210px;
         border-radius: 5px;
@@ -3056,6 +3068,13 @@ a.create-btn.edit-profile-btn {
         padding-bottom: 10px;
         border-bottom: var(--borderLine);
     }
+    .center-articles-rest .rest-post .post-desc {
+        display: none;
+    }
+
+    .center-articles-rest .post h3{
+        font-size: 17px;
+    } 
 
     .center-articles-first {
         padding: 0;
@@ -3093,6 +3112,9 @@ a.create-btn.edit-profile-btn {
 @media screen and (max-width:370px) {
     .rest-post-inner img {
         height: 160px;
+    }
+    .center-articles-first img {
+        max-height: 160px;
     }
 }
 
