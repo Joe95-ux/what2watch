@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("partials/blogheader") %>
 
 <div class="side-drawer" data-simplebar>
     <i class="fas fa-times"></i>
@@ -9,7 +9,7 @@
             </div>
             <div class="category-types">
                 <ul class="categories">
-                    <li><a class="active-cat" href="/">Blog</a></li>
+                    <li><a class="active-cat" href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                     <% if(user.privilege === "admin"){%>
                     <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>

@@ -25,6 +25,9 @@ const blogRouter = require("./routes/blog");
 const ckeditorRouter = require("./routes/ckeditorulr");
 const connectDB = require("./config/db");
 const User = require("./models/User");
+const Story = require("./models/Story");
+const format = "MMMM Do YYYY, h:mm:ss a";
+const { formatDate} = require("./helpers/helper");
 const app = express();
 
 // Method override
@@ -328,6 +331,18 @@ app.get("/", async (req, res) => {
     const header = await trendingToday[0];
     const genres = await getgenre();
     const pages = await getAllPages();
+    let stories = await Story.find({ status: "Public" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      stories = stories.slice(0, 12); 
+    }
     res.render("home", {
       popularMovies: popularMovies,
       headerMovies,
@@ -341,7 +356,8 @@ app.get("/", async (req, res) => {
       trendingToday:trendingToday,
       genres: genres,
       page_num: page_num,
-      pages:pages
+      pages:pages,
+      stories
     });
   } catch (e) {
     console.log(e);
@@ -373,6 +389,18 @@ app.get("/:page", async (req, res) => {
     const header = await trendingToday[0];
     const genres = await getgenre();
     const pages = await getAllPages();
+    let stories = await Story.find({ status: "Public" })
+      .populate("user")
+      .sort({ createdAt: "desc" })
+      .lean()
+      .exec();
+    if (stories) {
+      stories = stories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      stories = stories.slice(0, 12);
+    }
     res.render("home", {
       headerMovies,
       headerVideos,
@@ -386,7 +414,8 @@ app.get("/:page", async (req, res) => {
       trendingToday:trendingToday,
       genres: genres,
       page_num: page_num,
-      pages:pages
+      pages:pages,
+      stories
     });
   } catch (e) {
     console.log(e) ;

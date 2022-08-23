@@ -232,32 +232,37 @@
                     </div>
                 </div>
                 <div class="blog-header-right">
+                    <% if(topCelebs){%>
                     <div class="right-top header-post"
-                        style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;">
+                        style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[0].photo%>); background-size: cover; background-repeat: no-repeat;">
                         <div class="post-title">
-                            <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                            <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11, 2021</span> </h5>
+                            <h3><%=topCelebs[0].title%></h3>
+                            <h5 class="date"> <span>by <strong><%=topCelebs[0].author%></strong></span>
+                                <span><%=topCelebs[0].createdAt%></span> </h5>
                         </div>
 
                     </div>
                     <div class="right-bottom">
-                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;"
+                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[1].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
                             <div class="post-title">
-                                <h4>How tom Cruise performed his brilliant stunts in top gun 2</h4>
-                                <h5 class="date hide-date"> <span>by <strong> John Doe</strong></span><span>July 11,
-                                        2021</span> </h5>
+                                <h4><%=topCelebs[1].title%></h4>
+                                <h5 class="date hide-date"> <span>by <strong>
+                                            <%=topCelebs[1].author%></strong></span><span><%=topCelebs[1].createdAt%>
+                                    </span> </h5>
                             </div>
                         </div>
-                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(/dune.jpg); background-size: cover; background-repeat: no-repeat;"
+                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[2].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
                             <div class="post-title">
-                                <h4>How tom Cruise performed his brilliant stunts in top gun 2</h4>
-                                <h5 class="date hide-date"> <span>by <strong>John Doe</strong></span><span>July 11,
-                                        2021</span> </h5>
+                                <h4><%=topCelebs[2].title%></h4>
+                                <h5 class="date hide-date"> <span>by <strong>
+                                            <%=topCelebs[2].author%></strong></span><span><%=topCelebs[2].createdAt%>
+                                    </span> </h5>
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
             <div class="blog-body-wrapper">
@@ -382,104 +387,31 @@
                         </div>
 
                         <% } %>
+
+                        <% if(popCulture.length){%>
                         <div class="older-posts">
-                            <a href="#" class="cat-title">Pop Culture<i class="fas fa-chevron-right"></i></a>
+                            <a href="/blog/category/Pop Culture" class="cat-title">Pop Culture<i class="fas fa-chevron-right"></i></a>
                             <div class="older-posts-inner">
                                 <div class="embla old-posts-embla">
                                     <div class="embla__viewport">
                                         <div class="embla__container">
+                                            <% popCulture.forEach((story) =>{%>
                                             <div class="embla__slide">
                                                 <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by <strong> John Doe</strong></span>
-                                                            <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
+                                                    <a href="/blog/posts/<%= story.slug%>">
+                                                        <div class="post">
+                                                            <img src="<%= story.photo%>" alt="post image">
+                                                            <h5 class="cat-name"><%= story.category%></h5>
+                                                            <h3><%= story.title%></h3>
+                                                            <h5 class="date"> <span>by
+                                                                    <strong><%= story.author%></strong></span>
+                                                                <span><%=story.createdAt%></span></h5>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
 
-                                                </div>
-                                            </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="embla__slide">
-                                                <div class="embla__slide__inner slider-inner-card featured-card">
-                                                    <div class="post">
-                                                        <img src="/dune.jpg" alt="post image">
-                                                        <h5 class="cat-name">Dc news</h5>
-                                                        <h3>How tom Cruise performed his brilliant stunts in top gun 2
-                                                        </h3>
-                                                        <h5 class="date"> <span>by John Doe</span> <span>July 11,
-                                                                2021</span> </h5>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                                            <% }) %>
 
                                         </div>
 
@@ -506,6 +438,8 @@
 
                             </div>
                         </div>
+
+                        <% } %>
                     </div>
                 </div>
                 <div class="blog-body-bio to-stick">
@@ -564,7 +498,7 @@
                         </div>
                         <div class="instagram-page">
                             <h1 class="cat-title" style="margin-bottom: 0;">On Instagram</h1>
-                            <div class="ig-wrapper" >
+                            <div class="ig-wrapper">
                                 <div data-mc-src="b9280d29-b796-4020-9b04-70e2d2374e60#instagram"></div>
                             </div>
                         </div>

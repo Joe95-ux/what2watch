@@ -59,7 +59,7 @@
             <span class="focus-nav"><%= cat %></span>
         </div>
         <div class="blog-body-wrapper">
-            <% if(stories != ""){%>
+            <% if(stories.length){%>
             <div id="long" class="blog-body-content">
                 <div class="blog-body-popular">
                     <h1 class="cat-title">Category : <span><%= cat %> </span></h1>
@@ -78,6 +78,8 @@
                                     class="fas fa-angle-double-right"></i></a>
                         </div>
                         <%}) %>
+                        <div></div>
+                        <div></div>
 
                     </div>
                     <div class="page-controls blog-page-controls">
@@ -160,54 +162,29 @@
                         </div>
 
                     </div>
-                    <div class="tv-shows">
-                        <a href="/blog/posts" class="cat-title">Recent Posts<i class="fas fa-chevron-right"></i></a>
-                        <div class="latest-posts tv-news">
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by <strong>John Doe</strong></span> <span>July 11, 2021</span>
-                                </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                            <div class="post">
-                                <img src="/dune.jpg" alt="post image">
-                                <h5 class="cat-name"><span class="left-span">Featured</span> <span>Movie</span></h5>
-                                <h3>How tom Cruise performed his brilliant stunts in top gun 2</h3>
-                                <h5 class="date"> <span>by John Doe</span> <span>July 11, 2021</span> </h5>
-                                <a class="read-more" href="#">Read more <i class="fas fa-angle-double-right"></i></a>
+                    <% if(latest.length){%>
+                        <div class="tv-shows">
+                            <a href="/blog/posts" class="cat-title">Recent Posts<i class="fas fa-chevron-right"></i></a>
+                            <div class="latest-posts tv-news">
+                                <%latest.forEach(story=>{%>
+                                <div class="post">
+                                    <a href="/blog/posts/<%= story.slug %>">
+                                        <img src="<%= story.photo %>" alt="post image">
+                                        <h5 class="cat-name"><%= story.category %> </h5>
+                                        <h3><%= story.title %> </h3>
+                                        <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
+                                            <span><%= story.createdAt %>
+                                            </span> </h5>
+    
+                                    </a>
+                                    <a class="read-more" href="/blog/posts/<%= story.slug %> ">Read more <i
+                                            class="fas fa-angle-double-right"></i></a>
+                                </div>
+    
+                                <% }) %>
                             </div>
                         </div>
-                    </div>
+                        <% } %>
                 </div>
             </div>
 
@@ -269,9 +246,9 @@
                     </div>
                     <div class="instagram-page">
                         <h1 class="cat-title" style="margin-bottom: 0;">On Instagram</h1>
-                            <div class="ig-wrapper" >
-                                <div data-mc-src="b9280d29-b796-4020-9b04-70e2d2374e60#instagram"></div>
-                            </div>
+                        <div class="ig-wrapper">
+                            <div data-mc-src="b9280d29-b796-4020-9b04-70e2d2374e60#instagram"></div>
+                        </div>
                     </div>
 
 

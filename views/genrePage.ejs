@@ -2,33 +2,52 @@
 <div class="side-drawer" data-simplebar>
     <i class="fas fa-times"></i>
     <div class="side-drawer-inner">
-      <div class="main-category discover-movies">
-        <div class="category-title">
-            <h2 class="discover">Discover</h2>
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Menu</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                    <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                    <% if(user){%>
+                    <% if(user.privilege === "admin"){%>
+                    <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
+                    <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
+                    <% } %>
+                </ul>
+            </div>
+
         </div>
-        <div class="category-types">
-            <ul class="categories">
-                <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
-                <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
-                <li><i class="fas fa-calendar-week"></i><a class="active-cat"
-                        href="/movie/upcoming"></i>Upcoming</a></li>
-            </ul>
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Discover</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                    <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
+                    <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                            href="/movie/upcoming"></i>Upcoming</a></li>
+                </ul>
+            </div>
+
         </div>
-  
-      </div>
-      <div class="main-category movie-genres">
-        <div class="category-title">
-            <h2>Genres</h2>
-        </div>
-        <div class="category-types">
-            <ul class="categories">
-                <% if(genres){%>
-                <% genres.forEach(genre=>{ %>
-                <li><i class="fas fa-dot-circle"></i><a class="active-cat"
-                        href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
-  
-                <%})%>
-                <%}%>
+        <div class="main-category movie-genres">
+            <div class="category-title">
+                <h2>Genres</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <% if(genres){%>
+                    <% genres.forEach(genre=>{ %>
+                    <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                            href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+
+                    <%})%>
+                    <%}%>
   
             </ul>
         </div>
@@ -83,7 +102,8 @@
         <div class="movies-container movie-search">
             <div class="page-intro">
                 <h1 class="genre-intro"><%= genre %> </h1>
-                <p>Find movies carefully sorted based on your genre of choice. Browse through pages to find the movies you like.</p>
+                    <p>Find movies carefully sorted based on your genre of choice. Browse through pages to find the
+                        movies you like.</p>
             </div>
             <% if(movies.length > 0){%>
             <div class="movie-wrapper">
@@ -94,27 +114,29 @@
                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
                         </a>
-                        <a  href="/movie/<%= movie.id %>">
+                        <a href="/movie/<%= movie.id %>">
                             <div class="movie-card-overlay">
                                 <div>
-                                    <%if(movie.title){%> 
-                                        <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                    <%if(movie.title){%>
+                                    <h2 class="movie-rating"><i
+                                            class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
                                     <%}%> 
-                                    <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %></h4>
+                                    <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                    </h4>
                                 </div>
                                 <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
                                 <button class="swiper-btn overlay-btn" role="button">View Details</button>
-                                
+
                             </div>
                         </a>
                     </div>
-    
+
                     <%}else if(movie.poster_path === null){%>
                     <div class="movie-card" style="background-color: aliceblue;">
                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %>">
                             <img src="../../poster-alt.png" alt="">
                         </a>
-    
+
                     </div>
                     <% } %>
                     <div class="movie-details">
@@ -128,7 +150,7 @@
                             <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
                             <%for(let genre of genres){%>
                             <%if(genreId === genre.id){%>
-                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %> </span>
+                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %> </span>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -157,39 +179,39 @@
         <% if(page_num < totalPages) {%>
         <div class="page-controls">
             <% if(page_num > 1) {%>
-            <a href="/movie/genres/<%= encodedGenre %>/<%= page_num - 1 %>" class="prev-page swiper-btn" role="button"><i
-                    class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
-    
+            <a href="/movie/genres/<%= encodedGenre %>/<%= page_num - 1 %>" class="prev-page swiper-btn"
+                role="button"><i class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
+
             <% }%>
             <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
             <% if(page_num < totalPages && totalResults > 20) {%>
             <a href="/movie/genres/<%= encodedGenre %>/<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
                 value="next-page">page <%= page_num + 1 %><i class="fas fa-arrow-circle-right next-indicator"></i></a>
-    
-    
+
+
             <% } %>
-    
+
         </div>
         <%}else {%>
-            <div class="page-controls">
-                <% if(page_num > 1) {%>
-                <a href="/movie/genres/<%= encodedGenre %>/<%= page_num - 1 %>" class="prev-page swiper-btn" role="button"><i
-                        class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
-        
-                <hr class="bottom-rule" style="display: none;">
-        
-                <%}%>
+        <div class="page-controls">
+            <% if(page_num > 1) {%>
+            <a href="/movie/genres/<%= encodedGenre %>/<%= page_num - 1 %>" class="prev-page swiper-btn"
+                role="button"><i class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %></a>
+
+            <hr class="bottom-rule" style="display: none;">
+
+            <%}%>
             
             </div>
     
-        <% } %> 
-    
-
-    </div>
-    
-</section>
+        <% } %>
 
 
+        </div>
+
+        </section>
 
 
-<%- include('partials/footer') %>
+
+
+        <%- include('partials/footer') %>

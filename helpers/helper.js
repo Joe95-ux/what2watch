@@ -50,6 +50,10 @@ module.exports = {
     return related;
 
   },
+  celebs: function(stories, cat){
+    let celebs = stories.filter(story=>story.category === cat);
+    return celebs
+  },
   recentPosts: function(stories, storyId){
     storyId = storyId.toString()
     let newStories = stories.filter(story=>story._id.toString() !== storyId);
@@ -57,8 +61,13 @@ module.exports = {
       newStories = newStories.slice(0,6);
     }
     return newStories;
-
-
+  },
+  otherCats: function(stories, cat){
+    let recents = stories.filter(story => story.category !== cat);
+    if(recents.length){
+      recents = recents.slice(0, 6);
+    }
+    return recents;
   },
   latestPosts: function (stories){
     const posts =  stories.slice(0, 8);

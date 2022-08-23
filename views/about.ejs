@@ -4,31 +4,49 @@
   <div class="side-drawer-inner">
     <div class="main-category discover-movies">
       <div class="category-title">
-          <h2 class="discover">Discover</h2>
+        <h2 class="discover">Menu</h2>
       </div>
       <div class="category-types">
-          <ul class="categories">
-              <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
-              <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
-              <li><i class="fas fa-calendar-week"></i><a class="active-cat"
-                      href="/movie/upcoming"></i>Upcoming</a></li>
-          </ul>
+        <ul class="categories">
+          <li class="nav_link"> <a href="/about-us">About us</a> </li>
+          <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+          <% if(user){%>
+          <% if(user.privilege === "admin"){%>
+          <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+          <% }else{%>
+          <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+          <% } %>
+          <% } %>
+        </ul>
+      </div>
+
+    </div>
+    <div class="main-category discover-movies">
+      <div class="category-title">
+        <h2 class="discover">Discover</h2>
+      </div>
+      <div class="category-types">
+        <ul class="categories">
+          <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+          <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
+          <li><i class="fas fa-calendar-week"></i><a class="active-cat" href="/movie/upcoming"></i>Upcoming</a></li>
+        </ul>
       </div>
 
     </div>
     <div class="main-category movie-genres">
       <div class="category-title">
-          <h2>Genres</h2>
+        <h2>Genres</h2>
       </div>
       <div class="category-types">
-          <ul class="categories">
-              <% if(genres){%>
-              <% genres.forEach(genre=>{ %>
-              <li><i class="fas fa-dot-circle"></i><a class="active-cat"
-                      href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+        <ul class="categories">
+          <% if(genres){%>
+          <% genres.forEach(genre=>{ %>
+          <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+              href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
 
-              <%})%>
-              <%}%>
+          <%})%>
+          <%}%>
 
           </ul>
       </div>
@@ -64,183 +82,186 @@
 </div>
 
 <section class="side-drawer-backdrop"></section>
-<section id="header-container" class="about-header-container" style="background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280/<%=header.backdrop_path%>); background-size: cover;">
-  <div class="small-screen-search search-bar" >
-    <i class="fas fa-times close-sm-search"></i>
-    <form action="/search" method="GET" class="small-search-form search-form">
-        <div class="small-search-field">
-            <i class="fas fa-search"></i>
-            <input type="text" class="small-search" placeholder="search for a movie..." name="query">
-            <input type="submit" value="search" hidden>
-        </div>
-    </form>
-  </div>
-  <button class="back about-back"><i class="fas fa-arrow-left go-back go-back-nav" ></i></button>
-  <div class="wrapper-enclosure-home about-header-enclosure">
-    <div class="about-header">
-      <div class="header-note">
-        <h2>
-            Welcome to What2watch<br>
-            Find Your Favourite Movies and More 
-        </h2>
-        <p>With thousands of movies to explore, step up your entertainment game by learning everything you would love to know about your favourite movies. </p>
-    
-      </div>
-      <div class="swiper-btns">
-        <a href="/" class="swiper-btn about-red" role="button" ><i class="fas fa-fire"></i>Discover movies</a>
-      </div> 
-    </div>
+<section id="header-container" class="about-header-container" style="background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.7)), url(https://image.tmdb.org/t/p/w1280/<%=header.backdrop_path%>);
+          background-size: cover;">
+          <div class="small-screen-search search-bar">
+            <i class="fas fa-times close-sm-search"></i>
+            <form action="/search" method="GET" class="small-search-form search-form">
+              <div class="small-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <input type="submit" value="search" hidden>
+              </div>
+            </form>
+          </div>
+          <button class="back about-back"><i class="fas fa-arrow-left go-back go-back-nav"></i></button>
+          <div class="wrapper-enclosure-home about-header-enclosure">
+            <div class="about-header">
+              <div class="header-note">
+                <h2>
+                  Welcome to What2watch<br>
+                  Find Your Favourite Movies and More
+                </h2>
+                <p>With thousands of movies to explore, step up your entertainment game by learning everything you would
+                  love to know about your favourite movies. </p>
 
-  </div>  
-</section>
-<section id="about">
-  <div class="wrapper-enclosure">
-    <div class="about-content">
-      <div class="about-image">
-        <img
-          src="/movie-night.jpg"
-          alt="about-image"
-        />
-      </div>
-      
-      <div class="about-text">
-        <h2>Get to Know Us </h2>
-        <p>
-          Welcome to what2watch.net, your number one source for all things movies. We're dedicated to providing you the very best of movies, with an emphasis on excellent user interface and experience.
+              </div>
+              <div class="swiper-btns">
+                <a href="/" class="swiper-btn about-red" role="button"><i class="fas fa-fire"></i>Discover movies</a>
+              </div>
+            </div>
 
-          Founded in 2021 by Nelson Njoku, what2watch.net has come a long way from its conception in 2019. When he first started out, his passion for a movie app that suggests and provides users with what movies to watch drove the creation of this website.
-          Our goal is to provide you a simple user interface to help you navigate our website and find the best movies for your entertainment.
-          We will continue to improve on the website and provide more features to suite your needs.
-          We hope you enjoy our website as much as we enjoy offering our services to you. If you have any questions or comments, please don't hesitate to contact us.
-        </p>
-        <div class="swiper-btns">
-          <a href="#footer" class="swiper-btn about-red" role="button" style="padding: 0.8rem 1.5rem; font-size: 1rem;">Contact us</a>
-        </div>
-      </div>
-        
-    </div>
-  </div>
-    
-</section>
-<section id="faq">
-  <h1>Frequently Asked Questions</h1>
-  <div class="faq-inner">
-    <div class="faq-items">
-      <h1 class="faq-title">FAQs</h1>
-      <div class="first-faq-item faq-item">
-        <div class="accodion">
-          <h2>
-            What is what2watch.net?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+          </div>
+          </section>
+          <section id="about">
+            <div class="wrapper-enclosure">
+              <div class="about-content">
+                <div class="about-image">
+                  <img src="/movie-night.jpg" alt="about-image" />
+                </div>
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            Watch2watch.net is simply a website that helps you see what movies are out 
-            there to watch so that you make the right decision on "what to watch".
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="faq-item">
-        <div class="accodion">
-          <h2>
-            Is what2watch.net Free?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+                <div class="about-text">
+                  <h2>Get to Know Us </h2>
+                  <p>
+                    Welcome to what2watch.net, your number one source for all things movies. We're dedicated to
+                    providing you the very best of movies, with an emphasis on excellent user interface and experience.
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            Yes, this website is free of charge.
-            With the help of thousands of movies from TMDB(The movie database),
-            we are able to display to you thousands of movies from around the World.
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="faq-item">
-        <div class="accodion">
-          <h2>
-            Is Watch2watch.net Legal?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+                    Founded in 2021 by Nelson Njoku, what2watch.net has come a long way from its conception in 2019.
+                    When he first started out, his passion for a movie app that suggests and provides users with what
+                    movies to watch drove the creation of this website.
+                    Our goal is to provide you a simple user interface to help you navigate our website and find the
+                    best movies for your entertainment.
+                    We will continue to improve on the website and provide more features to suite your needs.
+                    We hope you enjoy our website as much as we enjoy offering our services to you. If you have any
+                    questions or comments, please don't hesitate to contact us.
+                  </p>
+                  <div class="swiper-btns">
+                    <a href="#footer" class="swiper-btn about-red" role="button"
+                      style="padding: 0.8rem 1.5rem; font-size: 1rem;">Contact us</a>
+                  </div>
+                </div>
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            Yes, we are.
-            We do not own any movie data on this website. Our sole source of data is TMDB.
-            For watch providers, TMDB provides us the data directly from justwatch.com.
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="faq-item">
-        <div class="accodion">
-          <h2>How are watch providers recommended?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+              </div>
+            </div>
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            Watch providers are recommended by justwatch.com based on your country.
-            At the moment, we only show watch providers for USA.
-            JustWatch makes it easy to find out where you can legally watch your favorite movies & TV shows online. Visit JustWatch for more information.
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="faq-item">
-        <div class="accodion">
-          <h2>
-            Why am I redirected to themoviedb.org when I click on a watch provider?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+          </section>
+          <section id="faq">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faq-inner">
+              <div class="faq-items">
+                <h1 class="faq-title">FAQs</h1>
+                <div class="first-faq-item faq-item">
+                  <div class="accodion">
+                    <h2>
+                      What is what2watch.net?<span class="toggler"><i class="fas fa-plus"></i><i
+                          class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            As per their terms of use, they don't provide us with deep links to the watch providers.
-            Instead, our users are redirected to themoviedb.org where they can view and choose
-            watch providers for their Country.
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="faq-item">
-        <div class="accodion">
-          <h2>
-            Can I download or stream movies from what2watch.net?<span class="toggler"
-              ><i class="fas fa-plus"></i><i class="fas fa-minus"></i
-            ></span>
-          </h2>
-        </div>
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      Watch2watch.net is simply a website that helps you see what movies are out
+                      there to watch so that you make the right decision on "what to watch".
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="faq-item">
+                  <div class="accodion">
+                    <h2>
+                      Is what2watch.net Free?<span class="toggler"><i class="fas fa-plus"></i><i
+                          class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
 
-        <div class="faq-note-container">
-          <p class="faq-note">
-            No you can't. Since we do not own the movie data, all movie data is fetched from themoviedb.org's API.
-            The movie database (TMDB) is a movie database for hundreds of thousands of movies. It doesn't contain or provide full length videos
-            as this is not theirs to provide.
-            However, they provide thousands of high definition images, movie trailers, short clips and information for all the movies on this website.
-          </p>
-        </div>
-      </div>
-      <hr />
-    </div>
-  </div>
-  
-    
-</section>
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      Yes, this website is free of charge.
+                      With the help of thousands of movies from TMDB(The movie database),
+                      we are able to display to you thousands of movies from around the World.
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="faq-item">
+                  <div class="accodion">
+                    <h2>
+                      Is Watch2watch.net Legal?<span class="toggler"><i class="fas fa-plus"></i><i
+                          class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
 
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      Yes, we are.
+                      We do not own any movie data on this website. Our sole source of data is TMDB.
+                      For watch providers, TMDB provides us the data directly from justwatch.com.
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="faq-item">
+                  <div class="accodion">
+                    <h2>How are watch providers recommended?<span class="toggler"><i class="fas fa-plus"></i><i
+                          class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
 
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      Watch providers are recommended by justwatch.com based on your country.
+                      At the moment, we only show watch providers for USA.
+                      JustWatch makes it easy to find out where you can legally watch your favorite movies & TV shows
+                      online. Visit JustWatch for more information.
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="faq-item">
+                  <div class="accodion">
+                    <h2>
+                      Why am I redirected to themoviedb.org when I click on a watch provider?<span class="toggler"><i
+                          class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
+
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      As per their terms of use, they don't provide us with deep links to the watch providers.
+                      Instead, our users are redirected to themoviedb.org where they can view and choose
+                      watch providers for their Country.
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div class="faq-item">
+                  <div class="accodion">
+                    <h2>
+                      Can I download or stream movies from what2watch.net?<span class="toggler"><i
+                          class="fas fa-plus"></i><i class="fas fa-minus"></i></span>
+                    </h2>
+                  </div>
+
+                  <div class="faq-note-container">
+                    <p class="faq-note">
+                      No you can't. Since we do not own the movie data, all movie data is fetched from themoviedb.org's
+                      API.
+                      The movie database (TMDB) is a movie database for hundreds of thousands of movies. It doesn't
+                      contain or provide full length videos
+                      as this is not theirs to provide.
+                      However, they provide thousands of high definition images, movie trailers, short clips and
+                      information for all the movies on this website.
+                    </p>
+                  </div>
+                </div>
+                <hr />
+              </div>
+            </div>
 
 
-<%- include('partials/footer') %>
+          </section>
+
+
+
+
+          <%- include('partials/footer') %>

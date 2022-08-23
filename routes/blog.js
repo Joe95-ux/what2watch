@@ -28,7 +28,9 @@ const {
   relatedPosts,
   recentPosts,
   storyMap,
-  paginate
+  paginate,
+  celebs,
+  otherCats
 } = require("../helpers/helper");
 const User = require("../models/User");
 const Story = require("../models/Story");
@@ -106,8 +108,10 @@ router.get("/category/:catName", async (req, res) => {
   let sortedCats;
   let pages;
   let pageNum = 1;
+  let latest;
   try {
-    let allStories = await Story.find({ status: "Public" });
+    let allStories = await Story.find({ status: "Public" }).lean()
+    .exec();
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
     let stories = await Story.find({ category: cat, status: "Public" })
@@ -128,6 +132,11 @@ router.get("/category/:catName", async (req, res) => {
         sortedCats = sortCats(categories);
       }
     }
+    allStories = allStories.map(story => {
+      story.createdAt = formatDate(story.createdAt);
+      return story;
+    });
+    latest = otherCats(allStories, cat);
     res.render("blogCategory", {
       title,
       stories:currentPage,
@@ -136,7 +145,8 @@ router.get("/category/:catName", async (req, res) => {
       sortedCats,
       cat,
       category,
-      trending
+      trending,
+      latest
     });
   } catch (err) {
     console.log(err);
@@ -152,8 +162,10 @@ router.get("/category/:catName/:num", async (req, res) => {
   let sortedCats;
   let pages;
   let pageNum = parseInt(req.params.num);
+  let latest;
   try {
-    let allStories = await Story.find({ status: "Public" });
+    let allStories = await Story.find({ status: "Public" }).lean()
+    .exec();
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
     let stories = await Story.find({ category: cat, status: "Public" })
@@ -166,6 +178,11 @@ router.get("/category/:catName/:num", async (req, res) => {
         story.createdAt = formatDate(story.createdAt);
         return story;
       });
+      allStories = allStories.map(story => {
+        story.createdAt = formatDate(story.createdAt);
+        return story;
+      });
+      latest = otherCats(allStories, cat);
       const paginated = paginate(stories, 8);
       currentPage = paginated[pageNum - 1];
       pages = paginated.length;
@@ -182,16 +199,13 @@ router.get("/category/:catName/:num", async (req, res) => {
       sortedCats,
       cat,
       category,
-      trending
+      trending,
+      latest
     });
   } catch (err) {
     console.log(err);
   }
 });
-
-
-
-
 
 router.get("/compose", ensureAuth, async (req, res) => {
   const title = "compose";
@@ -229,6 +243,9 @@ router.get("/posts", async (req, res) => {
   let pages;
   let pageNum = 1;
   let currentPage;
+  let topCelebs;
+  let celebNews;
+  let popCulture;
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
@@ -245,6 +262,10 @@ router.get("/posts", async (req, res) => {
       allStories = paginate(stories, 6);
       currentPage = allStories[pageNum - 1];
       pages = allStories.length;
+      celebNews = celebs(stories, "Celebrities");
+      topCelebs = celebNews.slice(1, 4);
+      let pop = celebs(stories, "Pop Culture");
+      popCulture = pop.slice(0, 10);
 
       let categories = getCats(stories);
       if (categories.length) {
@@ -265,7 +286,10 @@ router.get("/posts", async (req, res) => {
       latest,
       currentPage,
       pages,
-      pageNum
+      pageNum,
+      celebNews,
+      topCelebs,
+      popCulture
     });
   } catch (err) {
     console.log(err);
@@ -282,6 +306,9 @@ router.get("/posts/page=:num", async (req, res) => {
   let pages;
   let pageNum = parseInt(req.params.num);
   let currentPage;
+  let topCelebs;
+  let celebNews;
+  let popCulture;
   try {
     const allTrending = await trendingMovies();
     const trending = await allTrending.slice(0, 6);
@@ -298,6 +325,10 @@ router.get("/posts/page=:num", async (req, res) => {
       allStories = paginate(stories, 6);
       currentPage = allStories[pageNum - 1];
       pages = allStories.length;
+      celebNews = celebs(stories, "Celebrities");
+      topCelebs = celebNews.slice(1, 4);
+      let pop = celebs(stories, "Pop Culture");
+      popCulture = pop.slice(0, 10);
 
       let categories = getCats(stories);
       if (categories.length) {
@@ -318,7 +349,10 @@ router.get("/posts/page=:num", async (req, res) => {
       latest,
       currentPage,
       pages,
-      pageNum
+      pageNum,
+      celebNews,
+      topCelebs,
+      popCulture
     });
   } catch (err) {
     console.log(err);

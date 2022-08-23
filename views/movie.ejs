@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title>What2watch | The movie Watch Guide</title>
+    <title><%= movie.title %></title>
     <meta name="description"
         content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
     <meta name="keywords"
@@ -77,6 +77,14 @@
                 </div>
                 <ul class="nav_links ld-nav_links">
                     <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
+                    <% if(user){%>
+                        <% if(user.privilege === "admin"){%>
+                        <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                        <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %>
                 </ul>
 
             </div>
