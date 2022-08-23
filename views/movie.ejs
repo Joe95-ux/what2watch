@@ -79,12 +79,12 @@
                     <li class="nav_link"> <a href="/about-us">About us</a> </li>
                     <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
                     <% if(user){%>
-                        <% if(user.privilege === "admin"){%>
-                        <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% }else{%>
-                        <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
-                        <% } %>
-                        <% } %>
+                    <% if(user.privilege === "admin"){%>
+                    <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
+                    <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
+                    <% } %>
                 </ul>
 
             </div>
@@ -95,6 +95,25 @@
     <div class="side-drawer" data-simplebar>
         <i class="fas fa-times"></i>
         <div class="side-drawer-inner">
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Menu</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                        <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                        <% if(user){%>
+                        <% if(user.privilege === "admin"){%>
+                        <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                        <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+
+            </div>
             <div class="main-category discover-movies">
                 <div class="category-title">
                     <h2 class="discover">Discover</h2>
@@ -386,7 +405,6 @@
                                 </div>
 
                                 <% }%>
-
                                 </section>
 
 
@@ -404,7 +422,7 @@
                                         <img class="close-trailer" src="/multiply.png" alt="close">
                                         <% } %>
                                     </div>
-                                </div>
+                                </div>                               
 
 
 
@@ -893,7 +911,7 @@
                                                                             class="fas fa-star"></i><span><%= recommendedMovie.vote_average %></span>
                                                                     </h2>
                                                                     <%}%> 
-                                    <h4><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                                    <h4><%= recommendedMovie.release_date?recommendedMovie.release_date.split('').slice(0, 4).join(''):"n/a" %>
                                                                     </h4>
                                                                 </div>
                                                                 <p><%= recommendedMovie.overview?recommendedMovie.overview.substr(0, 100):"n/a"%>...
