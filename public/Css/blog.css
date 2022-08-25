@@ -3176,3 +3176,11 @@ a.create-btn.edit-profile-btn {
 .users-wrapper a:not(:last-child) {
     margin-bottom: 15px;
 }
+
+.footer-sponsor{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
