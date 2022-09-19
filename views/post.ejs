@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
     <title><%= title %> | what2watch</title>
-    <meta name="description"
-        content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
-    <meta name="keywords"
-        content="what to watch, Trending movies, upcoming movies, action, thriller, movie guide, actors, actresses, synopsis, trailers, reviews">
+    <meta name="description" content="<%= story.description ? story.description : story.title %> ">
+    <meta name="keywords" content="<%= story.keywords ? story.keywords : story.title%>">
+    <meta name="news_keywords" content="<%= story.category %>, <%= story.title %> celeb news, movie news, movie stories, tv news">
     <!--favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -22,7 +21,7 @@
     <meta property="og:url" content="/blog/posts/<%= story.slug%>" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="<%= story.title %> " />
-    <meta property="og:description" content="<%= story.title %> " />
+    <meta property="og:description" content="<%= story.description ? story.description : story.title %> " />
     <meta property="og:image" content="<%=story.photo %>" />
     <meta name="theme-color" content="#001019">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -231,12 +230,6 @@
                         <% } %>
                         <div class="post-author-details">
                             <h4><%= story.author %> </h4>
-                            <% if(story.user?.bio){%>
-                            <p><%= story.user?.bio %></p>
-                            <% }else{%>
-                            <p>No Info about writer to display.</p>
-                            <% } %>
-                            <a href="/blog/profiles/<%= story.user?._id%>">Read more from <%= story.user?.name || story.user?.username %></a>
                             <div class="post-author-socials">
                                 <% if(story.user?.facebook){%>
                                 <a href="<%= story.user.facebook%>" target="_blank"><img src="/Facebook_Logo.png"
@@ -251,6 +244,12 @@
                                         alt="tw logo"></a>
                                 <% } %>
                             </div>
+                            <% if(story.user?.bio){%>
+                            <p><%= story.user?.bio %></p>
+                            <% }else{%>
+                            <p>No Info about writer to display.</p>
+                            <% } %>
+                            <a class="more-link" href="/blog/profiles/<%= story.user?._id%>">Read more from <%= story.user?.name || story.user?.username %></a>
                         </div>
                         <% } %>
 

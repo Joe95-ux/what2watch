@@ -2038,21 +2038,27 @@ blockquote h4::before {
     opacity: 0.8;
 }
 
-.post-author-bio a {
-    color: var(--yellow);
+a.more-link {
+    color: var(--midGray);
+    font-size: 16px;
+    transition: var(--mainTransition);
+}
+
+a.more-link:hover {
+    color: var(--mainWhite);
+    text-decoration: underline;
 }
 
 .post-author-bio {
     display: flex;
-    align-items: center;
-    color: darkgrey;
+    color: var(--lightGrey);
     padding: 1.3rem 0 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .post-author-bio img {
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
     margin-right: 18px;
     border-radius: 50%;
@@ -2061,10 +2067,21 @@ blockquote h4::before {
 
 .post-author-details h4 {
     text-transform: capitalize;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.70rem;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
     color: lightgrey;
+}
+
+.post-author-details a.more-link::after {
+    content: "\f30b";
+    margin-left: .5rem;
+    position: relative;
+    bottom: -1px;
+    font-size: 12px;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+
 }
 
 div.embedly-card-hug {
@@ -2079,13 +2096,14 @@ div.embedly-card-hug iframe {
 .post-author-details p {
     line-height: 1.4;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
     min-width: 85%;
     max-width: 100%;
+    margin-bottom: 0.5rem;
 }
 
 .post-author-socials {
-    margin-top: 1.2rem;
+    margin-top: 0.70rem;
     display: flex;
     align-items: center;
 }
@@ -2108,6 +2126,7 @@ div.embedly-card-hug iframe {
 @media screen and (max-width:560px) {
     .post-author-bio {
         flex-direction: column;
+        align-items: center;
     }
 
     .post-author-bio img {
