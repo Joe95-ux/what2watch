@@ -419,6 +419,11 @@ button {
     color: var(--mainWhite);
 }
 
+.ads-banner{
+    display: flex;
+    justify-content: center;
+}
+
 /* side-drawer */
 .side-drawer .fa-times,
 .burger {
