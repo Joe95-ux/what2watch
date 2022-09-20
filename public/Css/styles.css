@@ -420,8 +420,8 @@ button {
 }
 
 .ads-banner{
-    display: flex;
-    justify-content: center;
+    display: block;
+    text-align: center;
 }
 
 /* side-drawer */
@@ -822,6 +822,7 @@ button {
     /* padding: 1rem 1.3rem 1.3rem; */
     padding: 0.4rem;
     position: relative;
+    overflow-y: auto;
 
 }
 
