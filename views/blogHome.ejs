@@ -235,6 +235,9 @@
                     <% if(topCelebs){%>
                     <div class="right-top header-post"
                         style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[0].photo%>); background-size: cover; background-repeat: no-repeat;">
+                        <a  href="/blog/posts/<%= topCelebs[0].slug %>">
+                            <span class="clickable"></span>
+                        </a>
                         <div class="post-title">
                             <h3><%=topCelebs[0].title%></h3>
                             <h5 class="date"> <span>by <strong><%=topCelebs[0].author%></strong></span>
@@ -245,6 +248,9 @@
                     <div class="right-bottom">
                         <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[1].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
+                            <a  href="/blog/posts/<%= topCelebs[1].slug %>">
+                                <span class="clickable"></span>
+                            </a>
                             <div class="post-title">
                                 <h4><%=topCelebs[1].title%></h4>
                                 <h5 class="date hide-date"> <span>by <strong>
@@ -254,6 +260,9 @@
                         </div>
                         <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[2].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
+                            <a  href="/blog/posts/<%= topCelebs[2].slug %>">
+                                <span class="clickable"></span>
+                            </a>
                             <div class="post-title">
                                 <h4><%=topCelebs[2].title%></h4>
                                 <h5 class="date hide-date"> <span>by <strong>
