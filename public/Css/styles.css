@@ -5000,6 +5000,17 @@ footer {
     display: flex;
 
 }
+.recents-wrapper::-webkit-scrollbar{
+    height: 8px;
+    background: #0d141f;
+    border-radius: 8px;
+
+}
+
+.recents-wrapper::-webkit-scrollbar-thumb {
+    background: #1b212c;
+    border-radius: 8px;
+}
 
 .viewed-info {
     font-size: 1.1rem;
