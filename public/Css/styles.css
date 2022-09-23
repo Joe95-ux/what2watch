@@ -3328,6 +3328,7 @@ h1.genre-intro {
 
 .slider-inner-card img {
     object-fit: cover;
+    display: block;
 }
 
 .see-more-upcoming {
@@ -3787,6 +3788,8 @@ h1.genre-intro {
 .cast-card img, .person-card img{
     background-color: #001927;
     border: none;
+    display: block;
+    color: wheat;
 }
 
 @media screen and (max-width:500px) {
@@ -3862,6 +3865,7 @@ h1.genre-intro {
     display: none;
 }
 
+
 .video-gallery img,
 .media-container .media-backdrop,
 .media-container .media-poster {
@@ -3869,6 +3873,8 @@ h1.genre-intro {
     width: 450px;
     object-fit: cover;
     background-color: #001927;
+    display: block;
+    color: wheat;
 }
 
 @media screen and (max-width:765px) {

@@ -6,11 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title><%= movie.title %></title>
+    <title><%= movie.title %> | what2watch.net</title>
     <meta name="description"
-        content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
+        content="<%= movie.overview ? movie.overview : movie.title %> ">
     <meta name="keywords"
-        content="<%= movie.title %>, what to watch, Trending movies, upcoming movies, action movies, thriller movies, movie guide, actors, actresses, synopsis, trailers, reviews, horror movies, adventure movies, fantasy movies">
+        content="<%= movie.title %>, <%= movie.title %> movie, <%= movie.title %> the movie, <%= movie.title %> trailer, <%= movie.title %> release-date ">
+    <meta property="og:url" content="/movie/<%= movie.id%>" />
+    <meta property="og:type" content="Website" />
+    <meta property="og:title" content="<%= movie.title %> " />
+    <meta property="og:description" content="<%= movie.overview ? movie.overview : movie.title %> " />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" />
+    <meta property="og:site_name" content="what2watch.net"/>
     <!--favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -201,7 +207,7 @@
                                     <div class="single-movie-content">
                                         <div class="single-movie-card">
                                             <% if(movie.poster_path){%>
-                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %> ">
                                             <%}else if(movie.poster_path === null){%>
                                             <img src="/poster-alt.png" alt="movie-poster">
                                             <% } %>
@@ -285,7 +291,7 @@
                                                         <div class="provider">
                                                             <h4>Rent</h4>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                alt="watch-provider-logo"
+                                                                alt="<%= provider.provider_name %>"
                                                                 title="Rent <%= movie.title %> on <%= provider.provider_name %>">
                                                         </div>
                                                         <% } %>
@@ -295,7 +301,7 @@
                                                         <div class="provider">
                                                             <h4>Buy</h4>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                alt="watch-provider-logo"
+                                                                alt="<%= provider.provider_name %>"
                                                                 title="Buy <%= movie.title %> on <%= provider.provider_name %>">
                                                         </div>
                                                         <% } %>
@@ -306,7 +312,7 @@
                                                         <div class="provider">
                                                             <h4>Stream</h4>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                alt="watch-provider-logo"
+                                                                alt="<%= provider.provider_name %>"
                                                                 title="Stream <%= movie.title %> on <%= provider.provider_name %>">
                                                         </div>
                                                         <% } %>
@@ -317,7 +323,7 @@
                                                         <div class="provider">
                                                             <h4>Ads</h4>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                alt="watch-provider-logo"
+                                                                alt="<%= provider.provider_name %>"
                                                                 title="Stream <%= movie.title %> on <%= provider.provider_name %>">
                                                         </div>
                                                         <% } %>
@@ -360,7 +366,7 @@
                                                             <a href="/movie/<%= mov.id %>" title="<%=mov.title%>">
                                                                 <img class="slider-image"
                                                                     src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
-                                                                    alt="" />
+                                                                    alt="<%= mov.title %> " />
                                                             </a>
                                                             <div class="image-drop">
                                                                 <%if(mov.title){%>
@@ -523,7 +529,7 @@
                                                                 <div class="provider embla__slide__inner">
                                                                     <h4>Rent</h4>
                                                                     <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                        alt="watch-provider-logo"
+                                                                        alt="<%= provider.provider_name %>"
                                                                         title="Rent <%= movie.title %> on <%= provider.provider_name %>">
                                                                 </div>
                                                             </div>
@@ -535,7 +541,7 @@
                                                                 <div class="provider embla__slide__inner">
                                                                     <h4>Buy</h4>
                                                                     <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                        alt="watch-provider-logo"
+                                                                        alt="<%= provider.provider_name %>"
                                                                         title="Buy <%= movie.title %> on <%= provider.provider_name %>">
                                                                 </div>
 
@@ -549,7 +555,7 @@
                                                                 <div class="provider embla__slide__inner">
                                                                     <h4>Stream</h4>
                                                                     <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                        alt="watch-provider-logo"
+                                                                        alt="<%= provider.provider_name %>"
                                                                         title="Stream <%= movie.title %> on <%= provider.provider_name %>">
                                                                 </div>
                                                             </div>
@@ -562,7 +568,7 @@
                                                                 <div class="provider embla__slide__inner">
                                                                     <h4>Ads</h4>
                                                                     <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                        alt="watch-provider-logo"
+                                                                        alt="<%= provider.provider_name %>"
                                                                         title="Stream <%= movie.title %> on <%= provider.provider_name %>">
                                                                 </div>
 
@@ -613,7 +619,7 @@
                                                                 <a href="/movie/<%= mov.id %>" title="<%= mov.title %>">
                                                                     <img class="slider-image"
                                                                         src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
-                                                                        alt="" />
+                                                                        alt="<%= mov.title %>" />
                                                                 </a>
                                                                 <div class="image-drop">
                                                                     <%if(mov.title){%>
@@ -683,10 +689,10 @@
                                                                         <% if(cast.profile_path){%>
                                                                         <a href="/person/<%= cast.id %> "><img
                                                                                 src="https://image.tmdb.org/t/p/w500/<%= cast.profile_path %>"
-                                                                                alt=""></a>
+                                                                                alt="<%= cast.name %>"></a>
                                                                         <%}else if(cast.profile_path === null){%>
                                                                         <a href="/person/<%= cast.id %> "><img
-                                                                                src="/poster-alt.png" alt=""></a>
+                                                                                src="/poster-alt.png" alt="<%= cast.name %>"></a>
                                                                         <% } %>
                                                                         <div class="cast-name">
                                                                             <a href="/person/<%= cast.id %>">
@@ -751,7 +757,7 @@
                                                                 <div class="embla__slide">
                                                                     <img class="media-backdrop"
                                                                         src="https://image.tmdb.org/t/p/w500/<%= backdrop.file_path %>"
-                                                                        alt="movie-bd">
+                                                                        alt="<%= movie.title %> ">
                                                                 </div>
 
                                                                 <% } %>
@@ -759,7 +765,7 @@
                                                                 <div class="embla__slide">
                                                                     <img class="media-poster"
                                                                         src="https://image.tmdb.org/t/p/w500/<%= poster.file_path %>"
-                                                                        alt="movie-poster">
+                                                                        alt="<%= movie.title  %> ">
                                                                 </div>
                                                                 <% } %>
                                                             </div>
@@ -929,7 +935,7 @@
                                                             title="<%= recommendedMovie.title %> ">
                                                             <% if(recommendedMovie.poster_path){%>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= recommendedMovie.poster_path %>"
-                                                                alt="">
+                                                                alt="<%= recommendedMovie.title %>">
                                                             <%}else if(recommendedMovie.poster_path === null){%>
                                                             <img src="/poster-alt.png" alt="">
                                                             <% } %>
@@ -1004,7 +1010,7 @@
                                                             title="<%= similarMovie.title %> ">
                                                             <% if(similarMovie.poster_path){%>
                                                             <img src="https://image.tmdb.org/t/p/w500/<%= similarMovie.poster_path %>"
-                                                                alt="">
+                                                                alt="<%= similarMovie.title %> ">
                                                             <%}else if(similarMovie.poster_path === null){%>
                                                             <img src="/poster-alt.png" alt="">
                                                             <% } %>

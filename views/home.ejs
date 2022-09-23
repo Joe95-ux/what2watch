@@ -110,7 +110,7 @@
                                         <div class="embla__slide__inner">
                                             <div class="new-movie-wrapper">
                                                 <% if(movie.poster_path){%> 
-                                                    <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
                                                     <%}else if(movie.poster_path === null){%>
                                                         <img src="/poster-alt.png" alt="movie-poster">
                                                     <% } %>
@@ -178,7 +178,7 @@
                                 <% if(movie.poster_path){%> 
                                     <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
                                 <%}else if(movie.poster_path === null){%>
-                                    <img src="/poster-alt.png" alt="">
+                                    <img src="/poster-alt.png" alt="<%= movie.title %>">
                                 <% } %>
                                 <div>
                                     <h3 class="movie-title"><%= movie.title %></h3>
@@ -216,11 +216,11 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.poster_path){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="">
+                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
                                             </a>
                                             <%}else if(mov.poster_path === null){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
-                                                <img src="/poster-alt.png" alt="">
+                                                <img src="/poster-alt.png" alt="<%= mov.title %>">
                                             </a>
                                         <% } %>
                                         <div class="image-drop">
@@ -343,11 +343,11 @@
                                     <div class="movie-card viewed-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="">
+                                            <img src="/poster-alt.png" alt="<%= movie.title %>">
                                         </a>
                     
                                         <% } %>
@@ -424,11 +424,11 @@
                                     <div class="movie-card viewed-card">
                                         <% if(movie.poster_path){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="">
+                                            <img src="/poster-alt.png" alt="<%= movie.title %>">
                                         </a>
                     
                                         <% } %>
@@ -563,7 +563,7 @@
                         <% if(popularMovie.poster_path){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
                             <img src="https://image.tmdb.org/t/p/w500/<%= popularMovie.poster_path %>"
-                                alt="">
+                                alt="<%= popularMovie.title %>">
                         </a>
                         <%}else if(popularMovie.poster_path === null){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
@@ -665,7 +665,7 @@
                                     <div class="embla__slide__inner slider-inner-card featured-card">
                                         <a href="/blog/posts/<%= story.slug%>">
                                             <div class="post">
-                                                <img src="<%= story.photo%>" alt="post image">
+                                                <img src="<%= story.photo%>" alt="<%= story.title%>">
                                                 <h5 class="cat-name"><%= story.category%></h5>
                                                 <h3><%= story.title%></h3>
                                                 <h5 class="date"> <span>by
