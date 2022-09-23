@@ -198,7 +198,7 @@
                 <div id="long" class="blog-body-content">
                     <% if(story){%>
                     <div class="post post-header">
-                        <img src="<%= story.photo%>" alt="post-image">
+                        <img src="<%= story.photo%>" alt="<%= story.title%>">
                         <h5 class="image-caption"><%= story.photoTitle %> </h5>
                         </h5>
                         <h3 class="single-post-title"><%= story.title %> </h3>
@@ -294,7 +294,7 @@
                                             <div class="embla__slide__inner slider-inner-card featured-card">
                                                 <a href="/blog/posts/<%= story.slug%>">
                                                     <div class="post">
-                                                        <img src="<%= story.photo%>" alt="post image">
+                                                        <img src="<%= story.photo%>" alt="<%=story.title%> ">
                                                         <h5 class="cat-name"><%= story.category%></h5>
                                                         <h3><%= story.title%></h3>
                                                         <h5 class="date"> <span>by

@@ -189,7 +189,7 @@
                                 <% if(picks){%>
                                 <% picks.forEach(story=>{%>
                                 <div class="embla__slide autoplay__slide"
-                                    style="background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url(<%=story.photo%>); background-size: cover; background-repeat: no-repeat;">
+                                    style="background: linear-gradient(180deg,transparent 60%,#000), url(<%=story.photo%>); background-size: cover; background-repeat: no-repeat;">
                                     <a href="/blog/posts/<%= story.slug%>">
                                         <div class="embla__slide__inner">
                                             <div class="post-title blog-header-post-title">
@@ -234,7 +234,7 @@
                 <div class="blog-header-right">
                     <% if(topCelebs){%>
                     <div class="right-top header-post"
-                        style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[0].photo%>); background-size: cover; background-repeat: no-repeat;">
+                        style="background: linear-gradient(180deg,transparent 60%,#000), url(<%=topCelebs[0].photo%>); background-size: cover; background-repeat: no-repeat;">
                         <a  href="/blog/posts/<%= topCelebs[0].slug %>">
                             <span class="clickable"></span>
                         </a>
@@ -246,7 +246,7 @@
 
                     </div>
                     <div class="right-bottom">
-                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[1].photo%>); background-size: cover; background-repeat: no-repeat;"
+                        <div style="background: linear-gradient(180deg,transparent 60%,#000), url(<%=topCelebs[1].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
                             <a  href="/blog/posts/<%= topCelebs[1].slug %>">
                                 <span class="clickable"></span>
@@ -258,7 +258,7 @@
                                     </span> </h5>
                             </div>
                         </div>
-                        <div style="background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(<%=topCelebs[2].photo%>); background-size: cover; background-repeat: no-repeat;"
+                        <div style="background: linear-gradient(180deg,transparent 60%,#000), url(<%=topCelebs[2].photo%>); background-size: cover; background-repeat: no-repeat;"
                             class="header-post">
                             <a  href="/blog/posts/<%= topCelebs[2].slug %>">
                                 <span class="clickable"></span>
