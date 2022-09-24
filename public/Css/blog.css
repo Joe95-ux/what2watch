@@ -1961,6 +1961,12 @@ h3.single-post-title {
     margin-bottom: 5px;
 }
 
+.post-content figcaption {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400px;
+}
+
 .post-content p {
     font-size: 18px;
     line-height: 1.6;
