@@ -255,6 +255,7 @@ div.post-header h3 {
 
 div.blog-header-right .post-title {
     margin-right: 10px;
+    max-width: 420px;
 }
 
 .share-story {
