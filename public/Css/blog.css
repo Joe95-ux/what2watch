@@ -2921,6 +2921,7 @@ a.create-btn.edit-profile-btn {
 .rest-post-inner {
     display: flex;
     justify-content: space-between;
+    position: relative;
 }
 
 .rest-post-inner img {
