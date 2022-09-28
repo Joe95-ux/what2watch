@@ -422,6 +422,24 @@ button {
 .ads-banner{
     display: block;
     text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.ads-banner::before{
+    content: "ADVERTISEMENT";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: grey;
+    background-color: #001927;
+    padding:0.5rem;
+    border-radius: 5px;
+    z-index: 1;
+
 }
 
 /* side-drawer */
