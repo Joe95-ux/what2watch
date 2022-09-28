@@ -197,6 +197,10 @@ div.blog-header-right {
     color: var(--mainWhite);
 }
 
+.right-top .post-title h3{
+    font-size: 18px;
+}
+
 .post strong {
     color: var(--mainWhite);
 }
