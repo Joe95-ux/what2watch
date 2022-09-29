@@ -68,8 +68,8 @@
 }
 
 div.blog-header-wrapper {
-    height: 480px;
-    min-height: 400px;
+    height: 500px;
+    min-height: 450px;
 }
 
 .blog-nav {
@@ -355,16 +355,16 @@ div.blog-header-right .post-title {
 
 @media screen and (max-width:642px) {
     div.blog-header-wrapper {
-        height: 400px;
-        min-height: 300px;
+        height: 480px;
+        min-height: 400px;
     }
 
     div.blog-header-left {
-        flex-basis: 62%;
+        flex-basis: 64%;
     }
 
     div.blog-header-right {
-        flex-basis: 37.5%;
+        flex-basis: 35.5%;
         display: flex;
         flex-direction: row;
     }
@@ -409,11 +409,6 @@ div.blog-header-right .post-title {
 }
 
 @media screen and (max-width:420px) {
-
-    div.blog-header-wrapper {
-        height: 320px;
-        min-height: 280px;
-    }
 
     div.blog-header-left {
         flex-basis: 63%;
