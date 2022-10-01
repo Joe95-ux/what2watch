@@ -1923,7 +1923,7 @@ textarea {
 }
 
 h3.single-post-title {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     line-height: 1.3;
     font-weight: 600;
     font-family: "Poppins", sans-serif;
@@ -1975,10 +1975,10 @@ h3.single-post-title {
     font-family: 'Roboto', sans-serif;
 }
 
-.post-content h2 {
+.post-content h2, .post-content h3 {
     font-family: "Poppins", sans-serif;
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: lightgray;
     font-weight: 500;
 }
@@ -2024,7 +2024,7 @@ blockquote h4 {
 
 @media screen and (max-width:420px) {
     h3.single-post-title {
-        font-size: 1.25rem;
+        font-size: 1.5rem;
     }
 
     .post-content h2 {
