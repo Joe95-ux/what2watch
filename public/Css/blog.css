@@ -176,6 +176,7 @@ div.blog-header-right {
     -webkit-box-orient: vertical;
     overflow: hidden;
     color: var(--mainWhite);
+    margin-top: 8px;
 }
 
 @media screen and (max-width:414px) {
