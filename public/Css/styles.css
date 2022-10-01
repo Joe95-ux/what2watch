@@ -1513,7 +1513,7 @@ ins{
     overflow: hidden;
 }
 
-.clamp-synopsis {
+.clamp-synopsis, .post-author-details p {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
