@@ -23,6 +23,7 @@ const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
 const blogRouter = require("./routes/blog");
 const ckeditorRouter = require("./routes/ckeditorulr");
+const tvRouter = require("./routes/tv");
 const connectDB = require("./config/db");
 const User = require("./models/User");
 const Story = require("./models/Story");
@@ -427,6 +428,7 @@ app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
 app.use("/blog", blogRouter);
 app.use("/editor", ckeditorRouter);
+app.use("/tv", tvRouter)
 
 
 let port = process.env.PORT;
