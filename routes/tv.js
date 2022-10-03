@@ -158,16 +158,16 @@ router.get("/tv-shows", async (req, res) => {
     const reality = await getGenreList("Reality");
     const comedy = await getGenreList("Comedy");
     const documentary = await getGenreList("Documentary");
+    const family = await getGenreList("Family");
+    const soap = await getGenreList("Soap");
+    const animation = await getGenreList("Animation");
+    const list = [{content:action, name:"action & adventure"}, {content:kids, name:"kids"}, {content:politics, name:"war & politics"}, {content:reality, name:"reality"}, {content:family, name:"family"}, {content:soap, name:"soap"}, {content:animation, name:"animation"}, {content:documentary, name:"documentary"}];
     res.render("tv", {
       movies: headerMovies,
       popularMovies,
-      action,
-      kids,
       comedy,
-      politics,
       title,
-      documentary,
-      reality,
+      list,
       headerVideos,
       airing_Today,
       airingTodayVideos,

@@ -105,6 +105,15 @@
     fill: #1bcacd;
     padding: 0;
 }
+.list-btn{
+    height: 170px;
+}
+
+@media screen and (max-width:540px){
+    .list-btn{
+        height: 130px;
+    }
+}
 
 .square__btn, .circular-btn {
     height: 3rem;

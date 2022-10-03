@@ -111,9 +111,9 @@
                                             <div class="new-movie-wrapper">
                                                 <% if(movie.poster_path){%> 
                                                     <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %>">
-                                                    <%}else if(movie.poster_path === null){%>
-                                                        <img src="/poster-alt.png" alt="movie-poster">
-                                                    <% } %>
+                                                <%}else if(movie.poster_path === null){%>
+                                                    <img src="/poster-alt.png" alt="movie-poster">
+                                                <% } %>
                                                     
                                                 <div class="new-header-movie">
                                                     <h1 class="movie-title"><%= movie.name %></h1>
@@ -129,7 +129,7 @@
                                                         <a  href="/tv/tv-shows/<%= movie.id %>" class="swiper-btn" role="button">More info</a>
                                                         <button class="swiper-btn header-trailer"><i class="fas fa-play"></i>Trailer</button>
                                                     </div>
-                                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= headerVideos[index]?.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    
                                                 </div>
 
                                             </div>
@@ -167,7 +167,7 @@
                 </div>
             </div>
             <div id="simple-bar" class="new-header-right">
-                <a class="sticky-header" href="/tv/tv-shows/airing-today">Airing Today<i class="fas fa-chevron-right"></i></a>
+                <h2 class="sticky-header">Airing Today</h2>
                 <div class="top-rated-wrapper">
                     <% if(airing_Today){%>
                         <% airing_Today.forEach((movie, index)=>{%>
@@ -200,329 +200,66 @@
                 </div>
             </div>
         </div>
-        <div class="featured mini-margin-top">
-            <div class="featured-title">
-                <a  href="/tv/genres/Action & Adventure">Action & Adventure <i class="fas fa-chevron-right"></i></a>
-            </div>
-            <% if(action){%>
-                <div class="embla ">
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            <% action.forEach(mov=>{%>
-                                <div class="embla__slide" >
-                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.name %>">
-                                            </a>
-                                            <%}else if(mov.poster_path === null){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="/poster-alt.png" alt="<%= mov.name %>">
-                                            </a>
-                                        <% } %>
-                                        <div class="image-drop">
-                                            <%if(mov.name){%>
-                                                <h3><%= mov.name%></h3>
-                                                <%}else {%>
-                                                    <h3>n/a</h3>
-                                                <%}%> 
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            <%}) %>
-                            <div class="embla__slide " >
-                                <div class="embla__slide__inner see-more-upcoming ">
-                                    <a href="/tv/top-rated" >View More >></a>
-                                </div>
-                            </div>
-                            
-                        </div>
-            
-                    </div>
-                    <button class="embla__button embla__button--prev square__btn embla__upcoming__prev" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn embla__upcoming__next" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                      
-                    
-                </div>
-            <% } %> 
-        </div>
 
-        <div class="featured add-top-margin">
-            <div class="featured-title">
-                <a  href="/tv/genres/Kids">Kids<i class="fas fa-chevron-right"></i></a>
-            </div>
-            <% if(kids){%>
-                <div class="embla ">
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            <% kids.forEach(mov=>{%>
-                                <div class="embla__slide" >
-                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.name %>">
-                                            </a>
-                                            <%}else if(mov.poster_path === null){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= moname %> ">
-                                                <img src="/poster-alt.png" alt="<%= moname %>">
-                                            </a>
-                                        <% } %>
-                                        <div class="image-drop">
-                                            <%if(mov.name){%>
-                                                <h3><%= mov.name%></h3>
-                                                <%}else {%>
-                                                    <h3>n/a</h3>
-                                                <%}%> 
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            <%}) %>
-                            <div class="embla__slide " >
-                                <div class="embla__slide__inner see-more-upcoming ">
-                                    <a href="/tv/tv-shows/top-rated" >View More >></a>
-                                </div>
-                            </div>
-                            
-                        </div>
-            
-                    </div>
-                    <button class="embla__button embla__button--prev square__btn embla__upcoming__prev" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn embla__upcoming__next" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                      
-                    
+        <% list.forEach(item=>{%>
+            <div class="featured add-top-margin">
+                <div class="featured-title">
+                    <a  href="/tv/genres/<%= item.name%>"><%= item.name %> <i class="fas fa-chevron-right"></i></a>
                 </div>
-            <% } %> 
-        </div>
-        <div class="featured add-top-margin">
-            <div class="featured-title">
-                <a  href="/tv/genres/War-&-Politics">War & Politics<i class="fas fa-chevron-right"></i></a>
-            </div>
-            <% if(politics){%>
-                <div class="embla ">
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            <% politics.forEach(mov=>{%>
-                                <div class="embla__slide" >
-                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
-                                            </a>
-                                            <%}else if(mov.poster_path === null){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="/poster-alt.png" alt="<%= mov.name %>">
-                                            </a>
-                                        <% } %>
-                                        <div class="image-drop">
-                                            <%if(mov.name){%>
-                                                <h3><%= mov.name%></h3>
-                                                <%}else {%>
-                                                    <h3>n/a</h3>
-                                                <%}%> 
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            <%}) %>
-                            <div class="embla__slide " >
-                                <div class="embla__slide__inner see-more-upcoming ">
-                                    <a href="/tv/top-rated" >View More >></a>
-                                </div>
-                            </div>
-                            
-                        </div>
-            
-                    </div>
-                    <button class="embla__button embla__button--prev square__btn embla__upcoming__prev" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn embla__upcoming__next" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                      
-                    
-                </div>
-            <% } %> 
-        </div>
-        <div class="featured add-top-margin">
-            <div class="featured-title">
-                <a  href="/tv/genres/Reality">Reality<i class="fas fa-chevron-right"></i></a>
-            </div>
-            <% if(reality){%>
-                <div  class="embla trending__embla">
-                    <div class="embla__viewport ">
-                        <div class="embla__container">
-                            <% if(reality){%>
-                            <% reality.forEach(function(movie){%>
-                                <div class="embla__slide trending__slide">
-                                    <div class="movie-card-container embla__slide__inner">
-                                        <div class="movie-card viewed-card">
-                                            <% if(movie.poster_path){%>
-                                            <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.title %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %>">
-                                            </a>
-                                            <%}else if(movie.poster_path === null){%>
-                                            <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.name %> ">
-                                                <img src="/poster-alt.png" alt="<%= movie.name %>">
-                                            </a>
-                        
+                <% if(item.content){%>
+                    <div class="embla ">
+                        <div class="embla__viewport">
+                            <div class="embla__container">
+                                <% item.content.forEach(mov=>{%>
+                                    <div class="embla__slide" >
+                                        <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
+                                            <% if(mov.poster_path){%>
+                                                <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
+                                                </a>
+                                                <%}else if(mov.poster_path === null){%>
+                                                <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                    <img src="/poster-alt.png" alt="<%= mov.name %>">
+                                                </a>
                                             <% } %>
-                                            <a href="/tv/tv-shows/<%= movie.id %>">
-                                                <div class="movie-card-overlay">
-                                                    <div>
-                                                        <%if(movie.name){%>
-                                                            <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
-                                                        <%}%> 
-                                                            <h4><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %>
-                                                        </h4>
-                                                    </div>
-                                                    <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
-                                                    <button class="swiper-btn overlay-btn">View Details</button>
-                        
-                                                </div>
-                                            </a>
-                        
+                                            <div class="image-drop">
+                                                <%if(mov.name){%>
+                                                    <h3><%= mov.name%></h3>
+                                                    <%}else {%>
+                                                        <h3>n/a</h3>
+                                                    <%}%> 
+                                            </div>
                                         </div>
-                                        <div class="movie-details">
-                                            <a href="/movie/<%= movie.id %>">
-                                                <%= movie.name.length>18?movie.name.slice(0,19) + "...":movie.name%>
-                                            </a>
-                                        </div>
+                                        
                                     </div>
-            
-                                </div>
-                            
-                            <%})%>
-                            <%}%> 
-                        </div>
-            
-                    </div>
-                    
-                    <button class="embla__button embla__button--prev trending__prev" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next trending__next" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                </div>
-            <% } %> 
-        </div>
-        <div class="featured add-top-margin">
-            <div class="featured-title">
-                <a  href="/tv/genres/Documentary">Documentary<i class="fas fa-chevron-right"></i></a>
-            </div>
-            <% if(documentary){%>
-                <div class="embla ">
-                    <div class="embla__viewport">
-                        <div class="embla__container">
-                            <% documentary.forEach(mov=>{%>
-                                <div class="embla__slide" >
-                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
-                                            </a>
-                                            <%}else if(mov.poster_path === null){%>
-                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="/poster-alt.png" alt="<%= mov.name %>">
-                                            </a>
-                                        <% } %>
-                                        <div class="image-drop">
-                                            <%if(mov.name){%>
-                                                <h3><%= mov.name%></h3>
-                                                <%}else {%>
-                                                    <h3>n/a</h3>
-                                                <%}%> 
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            <%}) %>
-                            <div class="embla__slide " >
-                                <div class="embla__slide__inner see-more-upcoming ">
-                                    <a href="/tv/top-rated" >View More >></a>
-                                </div>
+                                <%}) %>                               
                             </div>
-                            
+                
                         </div>
-            
+                        <button class="embla__button embla__button--prev list-btn" type="button">
+                            <svg
+                              class="embla__button__svg"
+                              viewBox="137.718 -1.001 366.563 643.999"
+                            >
+                              <path
+                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                              ></path>
+                            </svg>
+                        </button>
+                        <button class="embla__button embla__button--next list-btn " type="button">
+                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                              <path
+                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                              ></path>
+                            </svg>
+                        </button>
+                          
+                        
                     </div>
-                    <button class="embla__button embla__button--prev square__btn embla__upcoming__prev" type="button">
-                        <svg
-                          class="embla__button__svg"
-                          viewBox="137.718 -1.001 366.563 643.999"
-                        >
-                          <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                          ></path>
-                        </svg>
-                    </button>
-                    <button class="embla__button embla__button--next square__btn embla__upcoming__next" type="button">
-                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                          <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                          ></path>
-                        </svg>
-                    </button>
-                      
-                    
-                </div>
-            <% } %> 
-        </div>
+                <% } %> 
+            </div>
+
+        <% }) %> 
     </div>
     
 </section>
@@ -539,7 +276,7 @@
 
 <section id="popular-movies">
     <div class="wrapper-enclosure">
-        <div class="ads-banner" style="margin-top: 1.5rem;">
+        <div class="ads-banner" style="margin-bottom: 1.5rem; margin-top: -0.5rem;">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"
                 crossorigin="anonymous"></script>
             <!-- what2watch-ads -->
@@ -553,83 +290,63 @@
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
-        <div class="movies-container">
-            <h1 class="popular"><i class="fas fa-fire"></i>Popular Tv Shows</h1>
-            <div class="line-container">
-                <!-- <div class="line"></div> -->
-            </div>
-            <div class="movie-wrapper">
-                <% if(popularMovies){%>
-                    <div  class="embla trending__embla">
-                        <div class="embla__viewport ">
-                            <div class="embla__container">
-                                <% popularMovies.forEach(function(movie){%>
-                                    <div class="embla__slide trending__slide">
-                                        <div class="movie-card-container embla__slide__inner">
-                                            <div class="movie-card viewed-card">
-                                                <% if(movie.poster_path){%>
-                                                <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.title %> ">
-                                                    <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %>">
-                                                </a>
-                                                <%}else if(movie.poster_path === null){%>
-                                                <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.name %> ">
-                                                    <img src="/poster-alt.png" alt="<%= movie.name %>">
-                                                </a>
-                            
-                                                <% } %>
-                                                <a href="/tv/tv-shows/<%= movie.id %>">
-                                                    <div class="movie-card-overlay">
-                                                        <div>
-                                                            <%if(movie.name){%>
-                                                                <h2 class="movie-rating"><i class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
-                                                            <%}%> 
-                                                                <h4><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %>
-                                                            </h4>
-                                                        </div>
-                                                        <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
-                                                        <button class="swiper-btn overlay-btn">View Details</button>
-                            
-                                                    </div>
-                                                </a>
-                            
-                                            </div>
-                                            <div class="movie-details">
-                                                <a href="/movie/<%= movie.id %>">
-                                                    <%= movie.name.length>18?movie.name.slice(0,19) + "...":movie.name%>
-                                                </a>
-                                            </div>
+        <% if(popularMovies){%>
+            <div class="featured">
+                <div class="featured-title">
+                    <h2>Popular Tv Shows</h2>
+                </div>
+                <div class="embla ">
+                    <div class="embla__viewport">
+                        <div class="embla__container">
+                            <% popularMovies.forEach(mov=>{%>
+                                <div class="embla__slide" >
+                                    <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
+                                        <% if(mov.poster_path){%>
+                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
+                                            </a>
+                                            <%}else if(mov.poster_path === null){%>
+                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                <img src="/poster-alt.png" alt="<%= mov.name %>">
+                                            </a>
+                                        <% } %>
+                                        <div class="image-drop">
+                                            <%if(mov.name){%>
+                                                <h3><%= mov.name%></h3>
+                                                <%}else {%>
+                                                    <h3>n/a</h3>
+                                                <%}%> 
                                         </div>
-                
                                     </div>
-                                
-                                <%})%>
-                            </div>
-                
+                                    
+                                </div>
+                            <%}) %>   
                         </div>
-                        
-                        <button class="embla__button embla__button--prev trending__prev" type="button">
-                            <svg
-                              class="embla__button__svg"
-                              viewBox="137.718 -1.001 366.563 643.999"
-                            >
-                              <path
-                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
-                              ></path>
-                            </svg>
-                        </button>
-                        <button class="embla__button embla__button--next trending__next" type="button">
-                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                              <path
-                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
-                              ></path>
-                            </svg>
-                        </button>
+            
                     </div>
-                
-                <% } %>
-    
+                    <button class="embla__button embla__button--prev list-btn" type="button">
+                        <svg
+                          class="embla__button__svg"
+                          viewBox="137.718 -1.001 366.563 643.999"
+                        >
+                          <path
+                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+                          ></path>
+                        </svg>
+                    </button>
+                    <button class="embla__button embla__button--next list-btn" type="button">
+                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                          <path
+                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+                          ></path>
+                        </svg>
+                    </button>
+                      
+                    
+                </div>
             </div>
-        </div>
+        
+        <% } %>
         <div class="featured add-top-margin">
             <div class="featured-title">
                 <a  href="/tv/genres/Comedy">Comedy<i class="fas fa-chevron-right"></i></a>
@@ -663,14 +380,14 @@
                             <%}) %>
                             <div class="embla__slide " >
                                 <div class="embla__slide__inner see-more-upcoming ">
-                                    <a href="/tv/top-rated" >View More >></a>
+                                    <a href="/tv/genres/Comedy">View More >></a>
                                 </div>
                             </div>
                             
                         </div>
             
                     </div>
-                    <button class="embla__button embla__button--prev square__btn embla__upcoming__prev" type="button">
+                    <button class="embla__button embla__button--prev list-btn" type="button">
                         <svg
                           class="embla__button__svg"
                           viewBox="137.718 -1.001 366.563 643.999"
@@ -680,7 +397,7 @@
                           ></path>
                         </svg>
                     </button>
-                    <button class="embla__button embla__button--next square__btn embla__upcoming__next" type="button">
+                    <button class="embla__button embla__button--next list-btn" type="button">
                         <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
                           <path
                             d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"

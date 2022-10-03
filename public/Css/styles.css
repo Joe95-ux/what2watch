@@ -864,7 +864,7 @@ ins{
     display: block;
 }
 
-.new-header-right a {
+.new-header-right a, .new-header-right h2 {
     text-decoration: none;
     color: var(--mainWhite);
     font-weight: 400;
@@ -1794,12 +1794,13 @@ a.learn-more {
     margin-top: 0.5rem;
 }
 
-.featured-title a {
+.featured-title a, .featured-title h2 {
     color: var(--mainWhite);
     font-size: 1.5rem;
     font-weight: 600;
     text-decoration: none;
     margin-bottom: 0.9rem;
+    text-transform: capitalize;
 }
 
 .featured-title a i {
@@ -3391,7 +3392,7 @@ h1.genre-intro {
 }
 
 .image-drop h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--mainWhite);
     font-weight: 400;
     width: 100%;
