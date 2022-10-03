@@ -3345,7 +3345,6 @@ h1.genre-intro {
 
 @media screen and (max-width:540px) {
     .slider-inner-card {
-        height: 170px;
         width: 230px;
     }
 
