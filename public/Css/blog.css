@@ -249,7 +249,7 @@ div.post-header h3 {
 .post-title h5,
 .post h5 {
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-top: 5px;
     color: var(--mainGrey);
 }
@@ -1530,7 +1530,7 @@ footer.blog-footer {
 
 /* category of post */
 h5.cat-name {
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin: 0 0 6px;
     color: var(--yellow);
     width: 100%;

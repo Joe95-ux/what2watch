@@ -76,7 +76,7 @@ async function getMovieTrailer(id) {
 async function airingToday() {
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/tv/airing_today?api_key=" +
+      "https://api.themoviedb.org/3/tv/top_rated?api_key=" +
         apiKey +
         "&language=en-US&page=1"
     );
