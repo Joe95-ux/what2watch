@@ -423,10 +423,10 @@ button {
     display: block;
     text-align: center;
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
-.ads-banner::before{
+/* .ads-banner::before{
     content: "ADVERTISEMENT";
     position: absolute;
     left: 50%;
@@ -443,7 +443,7 @@ button {
 }
 ins{
     z-index: 4;
-}
+} */
 
 /* side-drawer */
 .side-drawer .fa-times,

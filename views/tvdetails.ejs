@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#001019">
+    <title><%= movie.title %> | what2watch.net</title>
+    <meta name="description"
+        content="<%= movie.overview ? movie.overview : movie.title %> ">
+    <meta name="keywords"
+        content="<%= movie.title %>, <%= movie.title %> movie, <%= movie.title %> the movie, <%= movie.title %> trailer, <%= movie.title %> release-date, <%= movie.title %> Reviews, <%= movie.title %> Showtime, <%= movie.title %> Photos, <%= movie.title %> movie posters, <%= movie.title %> movie backdrops, <%= movie.title %> user ratings, <%= movie.title %> synopsis, <%= movie.title %> trailers, <%= movie.title %> credits">
+    <meta property="og:url" content="https://what2watch.net/movie/<%= movie.id%>"/>
+    <meta property="og:type" content="Website" />
+    <meta property="og:title" content="<%= movie.title %> " />
+    <meta property="og:description" content="<%= movie.overview ? movie.overview : movie.title %> " />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" />
+    <meta property="og:site_name" content="what2watch.net"/>
+    <!--favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@400;500&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
+    <link rel="stylesheet" href="/Css/embla.css">
+    <link rel="stylesheet" href="/Css/blog.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+    <noscript>
+        <style>
+            /**
+          * Reinstate scrolling for non-JS clients
+          */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3S8E3V6Q"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <nav class="navigation">
+        <div class="wrapper-enclosure nav-enclosure">
+            <div class="logo-and-links">
+                <div class="logo">
+                    <div class="burger">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
+                    <a href="/">
+                        <div class="logo-wrapper">
+                            <img src="/logo.png" alt="what2watch">
+                        </div>
+
+                    </a>
+                </div>
+                <i class="fas fa-search small-screen-search-icon"></i>
+                <div class="search-bar big-screen-search">
+                    <form action="/search" method="GET" class="search-form">
+                        <div class="search-field">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="search" placeholder="search for a movie..." name="query">
+                            <input type="submit" value="search" hidden>
+                        </div>
+                    </form>
+                </div>
+                <ul class="nav_links ld-nav_links">
+                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
+                    <% if(user){%>
+                    <% if(user.privilege === "admin"){%>
+                    <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
+                    <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
+                    <% } %>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="side-drawer" data-simplebar>
+        <i class="fas fa-times"></i>
+        <div class="side-drawer-inner">
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Menu</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li class="nav_link"> <a href="/about-us">About us</a> </li>
+                        <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                        <% if(user){%>
+                        <% if(user.privilege === "admin"){%>
+                        <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                        <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Discover</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                        <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a>
+                        </li>
+                        <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                                href="/movie/upcoming"></i>Upcoming</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="main-category movie-genres">
+                <div class="category-title">
+                    <h2>Genres</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <% if(genres){%>
+                        <% genres.forEach(genre=>{ %>
+                        <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                                href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+
+                        <%})%>
+                        <%}%>
+  
+                    </ul>
+                </div>
+            </div>
+      <div class="main-category discover-movies appearance">
+        <div class="category-title">
+            <h2 class="discover">Appearance</h2>
+        </div>
+        <div class="category-types">
+            <ul class="categories setting">
+                <li><i class="fas fa-moon"></i>light/dark mode</li>
+                <div>
+                    <input type="checkbox" class="checkbox" id="checkbox">
+                    <label for="checkbox" class="label">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                        <div class="ball"></div>
+                    </label>
+                </div>
+            </ul>
+        </div>
+    
+      </div>
+      <div class="side-drawer-btns">
+        <button class="browse-btn">Sign-Up</button>
+        <button class="browse-btn">Login</button>
+      </div>
+      <div class="credits">
+        <h5>powered by</h5>
+        <img src="/moviedb-logo2.svg" alt="moviedb">
+      </div>    
+    </div>
+</div>
+<section class="side-drawer-backdrop"></section>
+
+
+
+<%- include('partials/moviefooter') %>
