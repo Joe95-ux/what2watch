@@ -212,9 +212,11 @@
                                             <img src="/poster-alt.png" alt="movie-poster">
                                             <% } %>
                                             <%if(watch){%>
-                                            <div class="watch-banner">
-                                                <h2>see watch providers</h2>
-                                            </div>
+                                                <div class="watch-banner">
+                                                    <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                                    <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                                    
+                                                </div>
                                             <% } %>
                                         </div>
 
@@ -241,8 +243,8 @@
                                             <div class="genres-and-director top-genres">
                                                 <div class="genres">
                                                     <%for(let genre of movie.genres.slice(0, 3)){%>
-                                                    <span class="genre1"><i class="fas fa-dot-circle"></i><a
-                                                            href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
+                                                    <span class="genre1 genre-span">
+                                                        <a href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
                                                     <% } %>
                                                     <p class="movie-rating"><i
                                                             class="fas fa-star"></i><span><%= movie.vote_average %></span>
@@ -807,6 +809,7 @@
                                                                     <div class="review-content">
                                                                         <p class="author-content">
                                                                             <%= review.content.substr(0, 140) %>...
+                                                                            <br>
                                                                             <span class="expand-review">read more</span>
                                                                         </p>
                                                                         <p style="display: none;"><%= review.content %>

@@ -83,13 +83,13 @@
             <div class="movie-info-and-poster">
                 <div class="poster">
                     <% if(movie.poster_path){%> 
-                        <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="movie-poster">
+                        <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= title %> ">
                         <%}else if(movie.poster_path === null){%>
-                            <img src="/poster-alt.png" alt="movie-poster">
+                            <img src="/poster-alt.png" alt="<%= title %>">
                         <% } %>
                 </div>
                 <div class="movie-info">
-                    <h2><%= movie.title %> </h2>
+                    <h2><%= title %> </h2>
                     <h3>User Review</h3>
                     <h4>Written by <span><%= review.author_details.username %></span> on <span><%=review.created_at?review.created_at.substr(0, 10):"" %></span></h4>
                 </div>

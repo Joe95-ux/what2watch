@@ -1,6 +1,7 @@
 const express = require("express");
 const { parseInt } = require("lodash");
 const fetch = require("node-fetch");
+const {getTrailer, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
 const router = express.Router();
 
 const apiKey = process.env.API_KEY;
@@ -212,42 +213,9 @@ async function getRecommended(movieId, page_num) {
   }
 }
 
-//get movie trailer
-function getTrailer(videos) {
-  let trailers = [];
-  for (let video of videos) {
-    if (video.type === "Trailer") {
-      trailers.unshift(video);
-    } else {
-      trailers.push(video);
-    }
-  }
-  return trailers[0];
-}
-
-//get runtime
-function getRunTime(time) {
-  if (time < 60 && time !== 0) {
-    return time + "mins";
-  }
-  if (time === 0) {
-    return "n/a";
-  }
-  let totalTime = time / 60;
-  totalTime = totalTime.toString().split(".");
-  let hr = totalTime[0];
-  let mins = time % 60;
-
-  return hr + "hr" + " " + mins + "m";
-}
-
-// media
-function getMedia(videos, backdrops, posters) {
-  const media = [videos, posters, backdrops];
-  return media;
-}
 //get watch providers
 async function getWatchProviders(movieId) {
+  let provider;
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/" +
@@ -256,50 +224,15 @@ async function getWatchProviders(movieId) {
         apiKey
     );
     const data = await response.json();
-    return data.results.US;
+    const results = await data.results.US;
+    if(results){
+      provider = getSingleProvider(results);
+    }
+    
+    return {results, provider};
   } catch (e) {
     console.log(e);
   }
-}
-// get crew
-function getCrew(allCrew) {
-  let execCrew = [];
-  let directors = [];
-  let writers = [];
-  let producers = [];
-  for (let crew of allCrew) {
-    if (crew.job === "Director") {
-      directors.push(crew);
-    }
-    if (
-      crew.job === "Writer" ||
-      crew.job === "Novel" ||
-      crew.job === "Screenplay"
-    ) {
-      writers.push(crew);
-    }
-    if (crew.job === "Producer") {
-      producers.push(crew);
-    }
-  }
-  if (directors.length || writers.length || producers.length) {
-    directors = directors.slice(0, 1);
-    writers = writers.slice(0, 1);
-    producers = producers.slice(0, 1);
-  }
-  execCrew = [...directors, ...writers, ...producers];
-
-  return execCrew;
-}
-
-function getOverview(overview) {
-  const arrOverview = overview.split(" ");
-  let movieOverview = {};
-  if (overview.length) {
-    movieOverview.short = arrOverview.slice(0, 30).join(" ");
-    movieOverview.long = arrOverview.slice(30).join(" ");
-  }
-  return movieOverview;
 }
 
 function getSpokenLan(languages) {
@@ -348,12 +281,15 @@ router.get("/:movie_id", async (req, res) => {
     const recommendedMovies = await recommendedData.results;
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
-    const watchProviders = await getWatchProviders(movieId);
+    const getProviders = await getWatchProviders(movieId);
+    const watchProviders = getProviders.results;
+    const provider = getProviders.provider;
     const genres = await getgenre();
 
     res.render("movie", {
       movie: movie,
       watch: watchProviders,
+      provider,
       title: title,
       spokenLanguages: spokenLanguages,
       genres: genres,
@@ -411,12 +347,15 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const recommendedMovies = await recommendedData.results;
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
-    const watchProviders = await getWatchProviders(movieId);
+    const getProviders = await getWatchProviders(movieId);
+    const watchProviders = getProviders.results;
+    const provider = getProviders.provider;
     const genres = await getgenre();
 
     res.render("movie", {
       movie: movie,
       watch: watchProviders,
+      provider,
       title: title,
       spokenLanguages: spokenLanguages,
       genres: genres,

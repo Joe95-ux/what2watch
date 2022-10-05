@@ -581,6 +581,9 @@ ins{
 .categories li:last-child{
     padding-top: 5px;
 }
+.categories li:last-child:hover{
+    padding-bottom: 0;
+}
 
 .categories li:hover {
     /* color: black; */
@@ -1486,6 +1489,7 @@ ins{
 .genres .genre1 {
     margin-right: 10px;
     font-size: 1.3rem;
+    position: relative;
 }
 
 
@@ -2483,11 +2487,11 @@ h1.genre-intro {
 .movie-details span:first-child::before {
     content: '';
     position: absolute;
-    right: 0;
+    right: -2px;
     top: 5px;
     bottom: 5px;
     height: 12px;
-    width: 2px;
+    width: 1px;
     background-color: grey;
 }
 
@@ -2495,12 +2499,15 @@ h1.genre-intro {
     margin-right: 5px;
 }
 
-.genre-span:not(:last-child)::before {
+.genre-span:not(:last-of-type)::before {
     content: ',';
     position: absolute;
-    right: 0;
+    right: -2px;
     bottom: 0;
 
+}
+.genre1:not(:last-of-type)::before{
+    right: -3px;
 }
 
 /* .movie-card-container:hover .movie-details span {
@@ -3089,28 +3096,42 @@ h1.genre-intro {
 
 .watch-banner {
     border-radius: 0 0 10px 10px;
-    color: var(--yellow);
+    color: var(--mainWhite);
     text-align: center;
-    padding: 0.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-transform: capitalize;
     font-weight: 400;
     width: 100%;
+    position: relative;
     margin-top: -1rem;
     z-index: 3;
-    background-color: #001019;
+    background-color: #001927;
+}
+.watch-banner div{
+    padding: 5px;
 }
 
-.watch-banner h2 {
+img.provider-img{
+    display: block;
+    max-width: 80px;
+    min-width: 60px;
+    max-height: 50px;
+    min-height: 40px;
+    height: auto;
+    width: auto;
+    border-radius: 0 0 0 10px;
+    margin-right: 10px;
+}
+
+.watch-banner h4 {
     cursor: pointer;
     transition: color 0.5s ease;
 }
 
-.watch-banner h2:hover {
-    color: var(--mainWhite);
+.watch-banner h4:hover {
+    color: var(--yellow);
 }
 
 /* movie-watch-providers */
@@ -3297,7 +3318,7 @@ h1.genre-intro {
 .similarmovies-container-fluid {
     position: relative;
     color: var(--mainWhite);
-    margin: 1.5rem 0 2rem;
+    margin: 0 0 2rem;
 }
 
 
@@ -3803,7 +3824,6 @@ h1.genre-intro {
 
 .cast-card {
     width: 160px;
-    margin-right: 10px;
 }
 
 
@@ -4111,7 +4131,9 @@ h1.genre-intro {
 .review-content {
     margin: 1rem 0 0 0;
 }
-
+.review-content p span{
+    text-align: right;
+}
 .review-content p span,
 .read-on a {
     color: var(--mainWhite);
@@ -4287,6 +4309,7 @@ h1.genre-intro {
 
 .movie-info-and-poster .movie-info {
     color: var(--mainWhite);
+    line-height: 1.4;
 }
 
 .movie-info-and-poster .movie-info h2 {
@@ -4329,6 +4352,9 @@ h1.genre-intro {
     font-size: 1.2rem;
     /* background-color: #FBFBFB; */
     padding: 0.6rem;
+    color: var(--mainGrey);
+    line-height: 1.4;
+    font-weight: 300;
 }
 
 @media screen and (max-width:567px) {

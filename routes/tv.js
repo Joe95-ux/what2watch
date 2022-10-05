@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const {getTrailer, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
@@ -263,6 +264,187 @@ router.get("/genres/:genre/:page", async (req, res) => {
       console.log(e);
     }
 });
+
+// get show watch providers
+//get watch providers
+async function getWatchProviders(movieId) {
+  let provider;
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/tv/" +
+        movieId +
+        "/watch/providers?api_key=" +
+        apiKey
+    );
+    const data = await response.json();
+    const results = await data.results.US;
+    if(results){
+      provider = getSingleProvider(results);
+    }
+    
+    return {results, provider};
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+
+//get a movie by id
+router.get("/tv-shows/:movie_id", async (req, res) => {
+  const movieId = req.params.movie_id;
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/tv/" +
+        movieId +
+        "?api_key=" +
+        apiKey +
+        "&append_to_response=videos,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US"
+    );
+    const movie = await response.json();
+    const movieTitle = await movie.name;
+    const languages = await movie.spoken_languages;
+    const spokenLanguages = getSpokenLanguage(languages);
+    const title = encodeURIComponent(movieTitle);
+    const videos = await movie.videos.results.slice(0, 8);
+    const posters = await movie.images.posters.slice(0, 8);
+    const backdrops = await movie.images.backdrops.slice(0, 8);
+    const media = getMedia(videos, backdrops, posters);
+    const trailer = getTrailer(videos);
+    const allCrew = await movie.credits.crew;
+    const crews = getCrew(allCrew);
+    const movieOverview = await movie.overview;
+    const overview = getOverview(movieOverview);
+    const reviews = await movie.reviews.results;
+    const recommendedMovies = await movie.recommendations.results;
+    const similarMovies = await movie.similar.results;
+    const getProviders = await getWatchProviders(movieId);
+    const watchProviders = getProviders.results;
+    const provider = getProviders.provider;
+    const genres = await getgenre();
+
+    res.render("tvdetails", {
+      movie: movie,
+      watch: watchProviders,
+      title: title,
+      spokenLanguages: spokenLanguages,
+      genres: genres,
+      trailer: trailer,
+      media: media,
+      reviews: reviews,
+      crews: crews,
+      overview: overview,
+      recommendedMovies: recommendedMovies,
+      similarMovies: similarMovies,
+      similar:similarMovies,
+      provider
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+
+// top rated tv shows
+router.get("/top-rated", async (req, res) => {
+  const title = "Top Rated Tv Shows";
+  let cat = "top-rated";
+  pageNum = 1;
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/tv/top_rated?api_key=" +
+        apiKey +
+        "&language=en-US&page=1"
+    );
+    const data = await response.json();
+    const topRatedMovie = await data.results;
+    const totalPages = await data.total_pages;
+    const totalResults = await data.total_results;
+    const genres = await getgenre();
+    res.render("top-rated-tv", {
+      movies: topRatedMovie,
+      title,
+      cat,
+      genres: genres,
+      page_num: pageNum,
+      totalPages: totalPages,
+      totalResults: totalResults
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+// shows on air 
+router.get("/on-the-air", async (req, res) => {
+  const title = "Tv Shows on Air";
+  let cat = "on-the-air";
+  pageNum = 1;
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/tv/on_the_air?api_key=" +
+        apiKey +
+        "&language=en-US&page=1"
+    );
+    const data = await response.json();
+    const topRatedMovie = await data.results;
+    const totalPages = await data.total_pages;
+    const totalResults = await data.total_results;
+    const genres = await getgenre();
+    res.render("top-rated-tv", {
+      movies: topRatedMovie,
+      title,
+      cat,
+      genres: genres,
+      page_num: pageNum,
+      totalPages: totalPages,
+      totalResults: totalResults
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+//next page for on air and top rated
+
+router.get("/:cat/:page", async (req, res) => {
+  let title;
+  let param;
+  if(req.params.cat === "on-the-air"){
+    title = "Tv Shows on Air";
+    param = "on_the_air";
+  }else if(req.params.cat === "top-rated"){
+    title = "Top rated Tv Shows";
+    param = "top_rated";
+  }
+  let cat = req.params.cat;
+  pageNum = parseInt(req.params.page);
+  try {
+    const response = await fetch(
+      "https://api.themoviedb.org/3/tv/"+ param + "?api_key=" +
+        apiKey +
+        "&language=en-US&page=" + pageNum
+    );
+    const data = await response.json();
+    const topRatedMovie = await data.results;
+    const totalPages = await data.total_pages;
+    const totalResults = await data.total_results;
+    const genres = await getgenre();
+    res.render("top-rated-tv", {
+      movies: topRatedMovie,
+      title,
+      cat,
+      genres: genres,
+      page_num: pageNum,
+      totalPages: totalPages,
+      totalResults: totalResults
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+
   
 
 

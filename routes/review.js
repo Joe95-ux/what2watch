@@ -37,6 +37,19 @@ async function getMovie(movieId){
     
 }
 
+async function getTv(movieId){
+  try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&include_image_language=en,null&language=en-US`
+      );
+      const movie = await response.json();
+      return movie;
+    } catch (e) {
+      console.log(e);
+    }
+  
+}
+
 router.get("/:id", async (req,res)=>{
     const id = req.params.id;
     try{
@@ -45,14 +58,36 @@ router.get("/:id", async (req,res)=>{
         const review = await response.json();
         const movieId = await review.media_id;
         const movie = await getMovie(movieId);
+        const title = await movie.title;
         res.render("review", {
             genres:genres,
             review:review,
-            movie:movie
+            movie:movie,
+            title
         })
     }catch(e){
         console.log(e);
     }
+})
+
+router.get("/tv/:id", async (req,res)=>{
+  const id = req.params.id;
+  try{
+      const genres = await getgenre();
+      const response = await fetch(url+id+"?api_key="+apiKey);
+      const review = await response.json();
+      const movieId = await review.media_id;
+      const movie = await getTv(movieId);
+      const title = await movie.name;
+      res.render("review", {
+          genres:genres,
+          review:review,
+          movie:movie,
+          title
+      })
+  }catch(e){
+      console.log(e);
+  }
 })
 
 
