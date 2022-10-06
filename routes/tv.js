@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const _ = require("lodash");
 const {getTrailer, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
 
 const apiKey = process.env.API_KEY;
@@ -161,8 +162,9 @@ router.get("/tv-shows", async (req, res) => {
     const documentary = await getGenreList("Documentary");
     const family = await getGenreList("Family");
     const soap = await getGenreList("Soap");
+    const news = await getGenreList("News");
     const animation = await getGenreList("Animation");
-    const list = [{content:action, name:"action & adventure"}, {content:kids, name:"kids"}, {content:politics, name:"war & politics"}, {content:reality, name:"reality"}, {content:family, name:"family"}, {content:soap, name:"soap"}, {content:animation, name:"animation"}, {content:documentary, name:"documentary"}];
+    const list = [{content:action, name:"Action & Adventure"}, {content:kids, name:"Kids"}, {content:politics, name:"War & Politics"}, {content:reality, name:"Reality"}, {content:family, name:"Family"}, {content:soap, name:"Soap"}, {content:animation, name:"Animation"}, {content:documentary, name:"Documentary"}, {content:news, name:"News"}];
     res.render("tv", {
       movies: headerMovies,
       popularMovies,

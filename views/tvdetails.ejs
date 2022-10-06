@@ -717,11 +717,11 @@
                                 <div class="embla__container media-container ">
                                     <% for(let video of media[0]){%>
                                     <div class="embla__slide video-gallery">
-                                        <img src="https://i.ytimg.com/vi/<%= video.key %>/maxresdefault.jpg"
+                                        <img src="https://i.ytimg.com/vi/<%=video.key%>/maxresdefault.jpg"
                                             alt="video-bd">
                                         <iframe class="video_player" width="500px"
                                             height="300px"
-                                            src="https://www.youtube.com/embed/<%= video.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                            src="https://www.youtube.com/embed/<%= video.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"
                                             title="YouTube video player" frameborder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             allowfullscreen></iframe>
@@ -893,7 +893,7 @@
                     <% recommendedMovies.forEach(function(recommendedMovie){%>
                     <div class="movie-card-container">
                         <div class="movie-card viewed-card">
-                            <a class="image" href="/tv/tv-show/<%= recommendedMovie.id %>"
+                            <a class="image" href="/tv/tv-shows/<%= recommendedMovie.id %>"
                                 title="<%= recommendedMovie.name %> ">
                                 <% if(recommendedMovie.poster_path){%>
                                 <img src="https://image.tmdb.org/t/p/w500/<%= recommendedMovie.poster_path %>"

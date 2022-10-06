@@ -43,7 +43,8 @@ module.exports = {
       if (
         crew.job === "Writer" ||
         crew.job === "Novel" ||
-        crew.job === "Screenplay"
+        crew.job === "Screenplay" ||
+        crew.job === "Book"
       ) {
         writers.push(crew);
       }

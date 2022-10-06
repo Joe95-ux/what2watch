@@ -205,7 +205,8 @@
         <% list.forEach(item=>{%>
             <div class="featured add-top-margin">
                 <div class="featured-title">
-                    <a  href="/tv/genres/<%= item.name%>"><%= item.name %> <i class="fas fa-chevron-right"></i></a>
+                    <h2><%= item.name %></h2>
+                    <a  href="/tv/genres/<%= item.name%>">view all</a>
                 </div>
                 <% if(item.content){%>
                     <div class="embla ">
@@ -350,7 +351,8 @@
         <% } %>
         <div class="featured add-top-margin">
             <div class="featured-title">
-                <a  href="/tv/genres/Comedy">Comedy<i class="fas fa-chevron-right"></i></a>
+                <h2>Comedy</h2>
+                <a  href="/tv/genres/Comedy">view all</a>
             </div>
             <% if(comedy){%>
                 <div class="embla ">

@@ -336,13 +336,13 @@ button {
 }
 
 .nav_links li:not(:last-child) {
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .nav_links a {
     text-decoration: none;
-    font-weight: 400;
-    font-size: 1.1rem;
+    font-weight: 600;
+    font-size: 17px;
     margin-bottom: 0;
     color: rgb(223, 217, 217);
 }
@@ -1787,6 +1787,7 @@ a.learn-more {
 .featured-title {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     position: relative;
 }
@@ -1798,13 +1799,24 @@ a.learn-more {
     margin-top: 0.5rem;
 }
 
-.featured-title a, .featured-title h2 {
+.featured-title h2 {
     color: var(--mainWhite);
     font-size: 1.5rem;
     font-weight: 600;
     text-decoration: none;
     margin-bottom: 0.9rem;
     text-transform: capitalize;
+}
+.featured-title a{
+    font-size: 15px;
+    color:var(--mainWhite);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--mainTransition);
+}
+
+.featured-title a:hover{
+    color: var(--yellow);
 }
 
 .featured-title a i {
@@ -2109,7 +2121,7 @@ h1.genre-intro {
 .popular {
     text-transform: capitalize;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 400;
     display: inline-block;
     padding-bottom: 1rem;
     margin-bottom: -1px;
@@ -3107,7 +3119,7 @@ h1.genre-intro {
     position: relative;
     margin-top: -1rem;
     z-index: 3;
-    background-color: #001927;
+    background-color: #002544;
 }
 .watch-banner div{
     padding: 5px;
@@ -3341,7 +3353,7 @@ img.provider-img{
 .sliders,
 .slider-inner-card,
 .slider-inner-card img {
-    border-radius: 3px;
+    border-radius: 0;
     border: none;
 }
 
@@ -4029,7 +4041,7 @@ img.provider-img{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #1b212c;
+    background-color: #001927;
     border-radius: 10px;
     padding: 2rem;
 
@@ -5037,14 +5049,10 @@ img.provider-img{
     list-style-position: inside;
 }
 
-
-
-
-
 /* footer-section */
 
 footer {
-    background-color: #001927;
+    background-image: linear-gradient(to right bottom, #001019, #031724, #011e30, #00243d, #002a4a);
     padding: 0 0 2rem;
     color: var(--darkGrey);
     font-size: var(--smallText);
