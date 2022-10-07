@@ -449,6 +449,45 @@
 
                 </div>
             </div>
+            <div class="seasons-enclosure">
+                <div class="seasons-wrapper">
+                    <ul>
+                        <% if(seasons){%>
+                            <% seasons.forEach((season, index)=>{%>
+                                <li class="season" data-index="<%=season.season_number%> " data-tv="<%= movie.id %> "> Season <%= index + 1 %> </li>
+                            <%}) %> 
+    
+                        <% } %> 
+
+                    </ul> 
+                </div>
+                <div class="season-contents">
+                    <% if(episodes){%>
+                        <% episodes.forEach((episode, index)=>{%>
+                            <div class="episode-details">
+                                <img src="https://image.tmdb.org/t/p/w500/<%= episode.still_path %> " alt="<%= episode.name%> ">
+                                <div class="episode-info">
+                                    <h3><%= index + 1 %>. <%= episode.name %></h3>
+                                    <p class="episode-overview incomplete"><%= episode.overview.substr(0, 105) + "..." %></p><span class="more">More<i class="fas fa-chevron-down"></i></span>
+                                    <p class="episode-overview complete"><%= episode.overview%></p><span class="less">Less<i class="fas fa-chevron-up"></i></span>
+                                    <h5> 
+                                        <% if(episode.runtime !== null){%>
+                                            <span class="left-bold"><%= episode.runtime + "" + "mins"%></span>
+                                            <% } %>  
+                                        <span class="right-span"><%= episode.air_date%></span></h5>
+                                </div>
+        
+                            </div>
+
+                        <%})%> 
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    <% } %> 
+                    
+                </div>
+            </div>
             <div class="small-display-details">
                 <div>
                     <div class="sub-detail">

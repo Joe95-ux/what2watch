@@ -423,6 +423,7 @@ app.get("/:page", async (req, res) => {
   }
 });
 
+
 app.use("/movie", movieRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);

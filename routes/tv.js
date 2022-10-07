@@ -292,6 +292,40 @@ async function getWatchProviders(movieId) {
 
 
 
+// get episodes
+async function getEpisodes(id, season_num){
+  let url = `https://api.themoviedb.org/3/tv/${id}/season/${season_num}?api_key=${apiKey}&language=en-US`
+  try{
+    const response = await fetch(url);
+    const results = await response.json();
+    const episodes = await results.episodes;
+    return episodes;
+  }catch(err){
+    console.log(err)
+  }
+}
+
+// get other episodes 
+router.get("/episodes/:id/:num", async(req, res)=>{
+  let url = `https://api.themoviedb.org/3/tv/${req.params.id}/season/${req.params.num}?api_key=${apiKey}&language=en-US`;
+  try {
+    const response = await fetch(url);
+    const results = await response.json();
+    const episodes = await results.episodes;
+    res.json(episodes);
+  } catch (error) {
+    console.log(error)
+  }
+
+})
+// get real seasons
+
+function getSeasons(seasons){
+  let series = seasons.filter(season=>season.season_number != 0);
+  return series;
+}
+
+
 //get a movie by id
 router.get("/tv-shows/:movie_id", async (req, res) => {
   const movieId = req.params.movie_id;
@@ -323,6 +357,10 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const getProviders = await getWatchProviders(movieId);
     const watchProviders = getProviders.results;
     const provider = getProviders.provider;
+    const seasons = await movie.seasons;
+    const realSeasons = getSeasons(seasons);
+    const season1 = await realSeasons[0].season_number
+    const episodes = await getEpisodes(movieId, season1);
     const genres = await getgenre();
 
     res.render("tvdetails", {
@@ -331,6 +369,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       title: title,
       spokenLanguages: spokenLanguages,
       genres: genres,
+      seasons: realSeasons,
       trailer: trailer,
       media: media,
       reviews: reviews,
@@ -339,7 +378,8 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       recommendedMovies: recommendedMovies,
       similarMovies: similarMovies,
       similar:similarMovies,
-      provider
+      provider,
+      episodes
     });
   } catch (e) {
     console.log(e);
