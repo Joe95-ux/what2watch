@@ -3636,7 +3636,7 @@ img.provider-img{
 }
 @media screen and (max-width:420px){
     .episode-details img{
-        min-height: 180px;
+        min-height: 200px;
     }
 }
 
