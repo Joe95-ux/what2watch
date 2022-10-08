@@ -36,7 +36,6 @@ const simpleBarContainer = document.getElementById("simple-bar");
 const episodesWrapper = document.querySelector(".season-contents");
 const seasons = [...document.querySelectorAll(".season")];
 
-
 // navigation bar
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -490,66 +489,71 @@ function accToggler() {
 accToggler();
 
 function seasonHandler() {
-  seasons[0].classList.add("active-season");
-  for (let season of seasons) {
-    season.addEventListener("click", function getEpisodes() {
-      episodesWrapper.innerHTML = ` <div class="loader-wrapper"><span class="loader"></span></div> `;
-      let season_num = season.dataset.index;
-      let season_id = season.dataset.tv;
-      let unclicked = seasons.filter(
-        season => season.dataset.index !== season_num
-      );
-      unclicked.forEach(season => {
-        if (season.classList.contains("active-season")) {
-          season.classList.remove("active-season");
-        }
+  if (seasons.length) {
+    seasons[0].classList.add("active-season");
+    for (let season of seasons) {
+      season.addEventListener("click", function getEpisodes() {
+        episodesWrapper.innerHTML = ` <div class="loader-wrapper"><span class="loader"></span></div> `;
+        let season_num = season.dataset.index;
+        let season_id = season.dataset.tv;
+        let unclicked = seasons.filter(
+          season => season.dataset.index !== season_num
+        );
+        unclicked.forEach(season => {
+          if (season.classList.contains("active-season")) {
+            season.classList.remove("active-season");
+          }
+        });
+        season.classList.add("active-season");
+        const headers = window.location;
+        let url =
+          headers.protocol +
+          "//" +
+          headers.host +
+          "/tv/episodes/" +
+          season_id +
+          "/" +
+          season_num;
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onprogress = function() {
+          episodesWrapper.innerHTML = "<h1>Loading...</h1>";
+        };
+        xhr.onload = function() {
+          if (this.status == 200) {
+            let response = JSON.parse(this.responseText);
+            createEpisode(response);
+          }
+          showMoreHandler();
+        };
+        xhr.send();
       });
-      season.classList.add("active-season");
-      const headers = window.location;
-      let url =
-        headers.protocol +
-        "//" +
-        headers.host +
-        "/tv/episodes/" +
-        season_id +
-        "/" +
-        season_num;
-      let xhr = new XMLHttpRequest();
-      xhr.open("GET", url, true);
-      xhr.onprogress = function(){
-        episodesWrapper.innerHTML = "<h1>Loading...</h1>";
-      }
-      xhr.onload = function() {
-        if (this.status == 200) {
-          let response = JSON.parse(this.responseText);
-          createEpisode(response);
-        }
-        showMoreHandler();
-      };
-      xhr.send();
-    });
+    }
   }
 }
 
 // handle more and less
-function showMoreHandler(){
-  let more = [ ...document.querySelectorAll('[data-more]')];
-  let less = [ ...document.querySelectorAll('[data-less]')];
-  for(let btn of more){
-    btn.addEventListener("click", function(){
+function showMoreHandler() {
+  let more = [...document.querySelectorAll("[data-more]")];
+  let less = [...document.querySelectorAll("[data-less]")];
+  for (let btn of more) {
+    btn.addEventListener("click", function() {
       btn.style.display = "none";
       btn.previousElementSibling.style.display = "none";
       btn.nextElementSibling.style.display = "inline";
       btn.nextElementSibling.nextElementSibling.style.display = "inline";
-    })
+      
+    });
   }
-  for(let btn of less){
-    btn.addEventListener("click", function(){
+  for (let btn of less) {
+    btn.addEventListener("click", function() {
       btn.style.display = "none";
       btn.previousElementSibling.style.display = "none";
-      btn.previousElementSibling.previousElementSibling.style.display = "inline";
-      btn.previousElementSibling.previousElementSibling.previousElementSibling.style.display = "inline";
-    })
+      btn.previousElementSibling.previousElementSibling.style.display =
+        "inline";
+      btn.previousElementSibling.previousElementSibling.previousElementSibling.style.display =
+        "inline";
+    });
   }
 }
 
@@ -558,16 +562,17 @@ showMoreHandler();
 function createEpisode(episodes) {
   let output = "";
 
-  for (let i = 0; i < episodes.length;  i++) {
+  for (let i = 0; i < episodes.length; i++) {
     output += `
     <div class="episode-details">
                                 <img src="https://image.tmdb.org/t/p/w500/${episodes[i].still_path} " alt="${episodes[i].name}">
                                 <div class="episode-info">
                                     <h3>${episodes[i].episode_number}. ${episodes[i].name}</h3>
-                                    <p class="episode-overview incomplete">${episodes[i].overview.substr(0, 105) + "..."}</p><span data-more class="more">More<i class="fas fa-chevron-down"></i></span>
-                                    <p class="episode-overview complete">${episodes[i].overview}</p><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span>
-                                    <h5>
-                                    ${episodes[i].runtime?`<span class="left-bold">${episodes[i].runtime} mins</span>`:""}
+                                    <div class="episode-overview-wrapper>
+                                      <p class="episode-overview incomplete">${episodes[i].overview.length > 102 ? episodes[i].overview.substr(0, 102) + "..." : episodes[i].overview}</p>${episodes[i].overview.length > 102 ? `<span data-more class="more">More<i class="fas fa-chevron-down"></i></span>`:""}
+                                      <p class="episode-overview complete">${episodes[i].overview}</p><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span>
+                                    </div>
+                                    <h5>${episodes[i].runtime ? `<span class="left-bold">${episodes[i].runtime} mins</span>`: ""}
                                     <span class="right-span">${episodes[i].air_date}</span></h5>
                                 </div>
         
@@ -575,7 +580,14 @@ function createEpisode(episodes) {
   
   `;
   }
-  episodesWrapper.innerHTML = output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
+  if(episodes.length){
+    episodesWrapper.innerHTML =
+    output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
+
+  }else{
+    episodesWrapper.innerHTML = "<h2>No Episodes yet</h2>";
+  }
+  
 }
 
 seasonHandler();

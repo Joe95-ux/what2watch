@@ -1815,6 +1815,7 @@ a.learn-more {
     transition: var(--mainTransition);
 }
 
+
 .featured-title a:hover{
     color: var(--yellow);
 }
@@ -2176,6 +2177,14 @@ h1.genre-intro {
 
 
 
+}
+@media screen and (max-width:420px){
+    .featured-title h2{
+        font-size: 1.3rem;
+    }
+    .featured-title a{
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width:414px) {
@@ -3472,7 +3481,7 @@ img.provider-img{
     display: none;
 }
 
-.active-long-synopsis, .episode-overview {
+.active-long-synopsis {
     display: inline;
     animation: slide-down 1s ease-out;
     -webkit-animation: slide-down 1s ease-out;
@@ -3583,12 +3592,17 @@ img.provider-img{
     width: 100%;
     column-gap: 1.2rem;
     row-gap: 1.4rem;
+    transition: all 1s ease;
+    color: var(--darkGrey);
 }
 
 
 .episode-details{
     height: fit-content;
+    transition: var(--dropTransition);
 }
+
+
 .episode-details img{
     height: auto;
     min-height: 225px;
@@ -3644,7 +3658,11 @@ img.provider-img{
 .episode-info{
     color: var(--lightGrey);
     font-weight: 400;
+    overflow-y: hidden;
+    transition: max-height 0.4s linear;
+   
 }
+
 .episode-info h3{
     font-size: 17px;
     font-weight: 600;
@@ -4016,6 +4034,7 @@ img.provider-img{
     .watch-providers-sm {
         display: block;
         color: var(--mainWhite);
+        margin-bottom: 1.5rem;
     }
 
     .watch-providers-sm a {

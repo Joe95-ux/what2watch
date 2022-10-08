@@ -153,6 +153,14 @@
     height: 27px;
 }
 
+@media screen and (max-width:420px){
+    
+    .embla__button__svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
 .embla__button--prev {
     left: 0;
 }
@@ -218,11 +226,6 @@
 @media screen and (max-width:412px) {
     .embla__button {
         width: 2.4rem;
-    }
-
-    .embla__button__svg {
-        width: 23px;
-        height: 23px;
     }
 
     .embla__button--prev {
