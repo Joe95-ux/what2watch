@@ -3634,7 +3634,11 @@ img.provider-img{
         min-height: 150px;
     }
 }
-
+@media screen and (max-width:420px){
+    .episode-details img{
+        min-height: 101px;
+    }
+}
 
 
 .episode-info{
