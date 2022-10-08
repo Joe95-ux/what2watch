@@ -426,7 +426,7 @@ button {
     z-index: 2;
 }
 
-.ads-banner::before{
+/* .ads-banner::before{
     content: "ADVERTISEMENT";
     position: absolute;
     left: 50%;
@@ -440,7 +440,7 @@ button {
     border-radius: 5px;
     z-index: 0;
 
-}
+} */
 ins{
     z-index: 4;
 }
