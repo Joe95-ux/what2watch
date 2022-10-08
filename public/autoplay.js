@@ -92,6 +92,6 @@ if (autoplayWrap !== null) {
 
     view.addEventListener("mouseenter", auto.stop, false);
     view.addEventListener("touchstart", auto.stop, false);
-    auto.play();
+    // auto.play();
   });
 }
