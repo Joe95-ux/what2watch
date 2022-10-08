@@ -3631,12 +3631,12 @@ img.provider-img{
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     .episode-details img{
-        min-height: 150px;
+        min-height: 220px;
     }
 }
 @media screen and (max-width:420px){
     .episode-details img{
-        min-height: 101px;
+        min-height: 180px;
     }
 }
 
