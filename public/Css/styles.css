@@ -3472,7 +3472,7 @@ img.provider-img{
     display: none;
 }
 
-.active-long-synopsis {
+.active-long-synopsis, .episode-overview {
     display: inline;
     animation: slide-down 1s ease-out;
     -webkit-animation: slide-down 1s ease-out;
@@ -3628,20 +3628,13 @@ img.provider-img{
 
 @media screen and (max-width:550px){
     .season-contents{
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     .episode-details img{
         min-height: 150px;
     }
 }
-@media screen and (max-width:420px){
-    .season-contents{
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-    .episode-details img{
-        min-height: 101px;
-    }
-}
+
 
 
 .episode-info{

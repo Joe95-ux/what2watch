@@ -36,6 +36,7 @@ const simpleBarContainer = document.getElementById("simple-bar");
 const episodesWrapper = document.querySelector(".season-contents");
 const seasons = [...document.querySelectorAll(".season")];
 
+
 // navigation bar
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -523,41 +524,17 @@ function seasonHandler() {
           let response = JSON.parse(this.responseText);
           createEpisode(response);
         }
+        showMoreHandler();
       };
       xhr.send();
     });
   }
 }
 
-function createEpisode(episodes) {
-  let output = "";
-
-  for (let i = 0; i < episodes.length;  i++) {
-    output += `
-    <div class="episode-details">
-                                <img src="https://image.tmdb.org/t/p/w500/${episodes[i].still_path} " alt="${episodes[i].name}">
-                                <div class="episode-info">
-                                    <h3>${episodes[i].episode_number}. ${episodes[i].name}</h3>
-                                    <p class="episode-overview incomplete">${episodes[i].overview.substr(0, 105) + "..."}</p><span class="more">More<i class="fas fa-chevron-down"></i></span>
-                                    <p class="episode-overview complete">${episodes[i].overview}</p><span class="less">Less<i class="fas fa-chevron-up"></i></span>
-                                    <h5>
-                                    ${episodes[i].runtime?`<span class="left-bold">${episodes[i].runtime} mins</span>`:""}
-                                    <span class="right-span">${episodes[i].air_date}</span></h5>
-                                </div>
-        
-                            </div>
-  
-  `;
-  }
-  episodesWrapper.innerHTML = output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
-}
-
-seasonHandler();
-
 // handle more and less
 function showMoreHandler(){
-  let more = [ ...document.querySelectorAll(".more")];
-  let less = [ ...document.querySelectorAll(".less")];
+  let more = [ ...document.querySelectorAll('[data-more]')];
+  let less = [ ...document.querySelectorAll('[data-less]')];
   for(let btn of more){
     btn.addEventListener("click", function(){
       btn.style.display = "none";
@@ -577,6 +554,31 @@ function showMoreHandler(){
 }
 
 showMoreHandler();
+
+function createEpisode(episodes) {
+  let output = "";
+
+  for (let i = 0; i < episodes.length;  i++) {
+    output += `
+    <div class="episode-details">
+                                <img src="https://image.tmdb.org/t/p/w500/${episodes[i].still_path} " alt="${episodes[i].name}">
+                                <div class="episode-info">
+                                    <h3>${episodes[i].episode_number}. ${episodes[i].name}</h3>
+                                    <p class="episode-overview incomplete">${episodes[i].overview.substr(0, 105) + "..."}</p><span data-more class="more">More<i class="fas fa-chevron-down"></i></span>
+                                    <p class="episode-overview complete">${episodes[i].overview}</p><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span>
+                                    <h5>
+                                    ${episodes[i].runtime?`<span class="left-bold">${episodes[i].runtime} mins</span>`:""}
+                                    <span class="right-span">${episodes[i].air_date}</span></h5>
+                                </div>
+        
+                            </div>
+  
+  `;
+  }
+  episodesWrapper.innerHTML = output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
+}
+
+seasonHandler();
 
 // welcome banner
 $(document).ready(function() {
