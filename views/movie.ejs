@@ -259,8 +259,10 @@
                                                 <% if(movie.overview.length > 100){%>
                                                 <p class="clamp-synopsis">
                                                     <%= movie.overview%>
+                                                    
                                                 </p>
-                                                <h5 class="open-synopsis synopsis-read-more">...Read more</h5>
+                                                <span class="open-synopsis synopsis-read-more">Read more</span>
+                                                
                                                 <% }else{%>
                                                 <p class="no-clamp"><%= movie.overview%></p>
                                                 <% } %>
@@ -809,7 +811,6 @@
                                                                     <div class="review-content">
                                                                         <p class="author-content">
                                                                             <%= review.content.substr(0, 140) %>...
-                                                                            <br>
                                                                             <span class="expand-review">read more</span>
                                                                         </p>
                                                                         <p style="display: none;"><%= review.content %>

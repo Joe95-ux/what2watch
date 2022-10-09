@@ -538,21 +538,15 @@ function showMoreHandler() {
   let less = [...document.querySelectorAll("[data-less]")];
   for (let btn of more) {
     btn.addEventListener("click", function() {
-      btn.style.display = "none";
-      btn.previousElementSibling.style.display = "none";
-      btn.nextElementSibling.style.display = "inline";
-      btn.nextElementSibling.nextElementSibling.style.display = "inline";
+      btn.parentElement.style.maxHeight = 0;
+      btn.parentElement.nextElementSibling.style.maxHeight = btn.parentElement.nextElementSibling.scrollHeight + "px" ;
       
     });
   }
   for (let btn of less) {
     btn.addEventListener("click", function() {
-      btn.style.display = "none";
-      btn.previousElementSibling.style.display = "none";
-      btn.previousElementSibling.previousElementSibling.style.display =
-        "inline";
-      btn.previousElementSibling.previousElementSibling.previousElementSibling.style.display =
-        "inline";
+      btn.parentElement.style.maxHeight = 0;
+      btn.parentElement.previousElementSibling.style.maxHeight = btn.parentElement.previousElementSibling.scrollHeight + "px" ;
     });
   }
 }
@@ -568,10 +562,8 @@ function createEpisode(episodes) {
                                 <img src="https://image.tmdb.org/t/p/w500/${episodes[i].still_path} " alt="${episodes[i].name}">
                                 <div class="episode-info">
                                     <h3>${episodes[i].episode_number}. ${episodes[i].name}</h3>
-                                    <div class="episode-overview-wrapper>
-                                      <p class="episode-overview incomplete">${episodes[i].overview.length > 102 ? episodes[i].overview.substr(0, 102) + "..." : episodes[i].overview}</p>${episodes[i].overview.length > 102 ? `<span data-more class="more">More<i class="fas fa-chevron-down"></i></span>`:""}
-                                      <p class="episode-overview complete">${episodes[i].overview}</p><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span>
-                                    </div>
+                                    <div class="episode-overview incomplete">${episodes[i].overview.length > 102 ? episodes[i].overview.substr(0, 102) + `...` : episodes[i].overview} ${episodes[i].overview.length > 102 ? `<span data-more class="more">More<i class="fas fa-chevron-down"></i></span>`:""}</div>
+                                    <div class="episode-overview complete">${episodes[i].overview}<span data-less class="less">Less<i class="fas fa-chevron-up"></i></span></div>
                                     <h5>${episodes[i].runtime ? `<span class="left-bold">${episodes[i].runtime} mins</span>`: ""}
                                     <span class="right-span">${episodes[i].air_date}</span></h5>
                                 </div>

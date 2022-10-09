@@ -258,8 +258,9 @@
                             <% if(movie.overview.length > 100){%>
                             <p class="clamp-synopsis">
                                 <%= movie.overview%>
+                                
                             </p>
-                            <h5 class="open-synopsis synopsis-read-more">...Read more</h5>
+                            <span class="open-synopsis synopsis-read-more">Read more</span>
                             <% }else{%>
                             <p class="no-clamp"><%= movie.overview%></p>
                             <% } %>
@@ -468,14 +469,12 @@
                                 <img src="https://image.tmdb.org/t/p/w500/<%= episode.still_path %> " alt="<%= episode.name%> ">
                                 <div class="episode-info">
                                     <h3><%= index + 1 %>. <%= episode.name %></h3>
-                                    <div class="episode-overview-wrapper">
-                                        <% if(episode.overview.length > 102){%>
-                                            <p class="episode-overview incomplete"><%= episode.overview.substr(0, 102) + "..." %></p><span data-more class="more">More<i class="fas fa-chevron-down"></i></span>
-                                            <% }else{%>
-                                                <p class="episode-overview incomplete"><%= episode.overview %></p>
-                                            <% } %>  
-                                        <p class="episode-overview complete"><%= episode.overview%></p><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span>
-                                    </div>
+                                    <% if(episode.overview.length > 102){%>
+                                        <div class="episode-overview incomplete"><%= episode.overview.substr(0, 102) + "..." %><span data-more class="more">More<i class="fas fa-chevron-down"></i></span></div>
+                                        <% }else{%>
+                                            <div class="episode-overview incomplete"><%= episode.overview %></div>
+                                        <% } %>  
+                                    <div class="episode-overview complete"><%= episode.overview%><span data-less class="less">Less<i class="fas fa-chevron-up"></i></span></div>
                                     <h5> 
                                         <% if(episode.runtime !== null){%>
                                             <span class="left-bold"><%= episode.runtime + "" + "mins"%></span>
@@ -842,7 +841,6 @@
                                         <div class="review-content">
                                             <p class="author-content">
                                                 <%= review.content.substr(0, 140) %>...
-                                                <br>
                                                 <span class="expand-review">read more</span>
                                             </p>
                                             <p style="display: none;"><%= review.content %>
