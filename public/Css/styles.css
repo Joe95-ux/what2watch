@@ -457,6 +457,19 @@ input.multi-search::placeholder{
 
 }
 
+@media screen and (max-width: 414px){
+    
+    .multi-search-field i{
+        font-size: 16px;
+    }
+    input.multi-search{
+        font-size: 15px;
+    }
+    input.multi-search::placeholder{
+        font-size: 14px;
+    }
+}
+
 @media screen and (max-width:370px){
     
     .multi-search-form{
@@ -475,9 +488,7 @@ input.multi-search::placeholder{
     .multi-search-field i, input.multi-search{
         font-size: 14px;
     }
-    input.multi-search::placeholder{
-        font-size: 14px;
-    }
+    
 
 }
 
