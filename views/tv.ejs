@@ -86,19 +86,22 @@
     
 </div>
 <section class="side-drawer-backdrop"></section>
-
-
-<section id="header-container">
-    <div class="small-screen-search search-bar" >
-        <i class="fas fa-times close-sm-search"></i>
-        <form action="/search" method="GET" class="small-search-form search-form">
-            <div class="small-search-field">
+<div class="multi-search-modal" >
+    <div class="multi-search-wrapper" >
+        <form action="/search" method="GET" class="multi-search-form">
+            <div class="multi-search-field">
                 <i class="fas fa-search"></i>
-                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <input type="text" class="multi-search" placeholder="search for movies, tv shows or cast members..." name="query" autofocus>
                 <input type="submit" value="search" hidden>
             </div>
         </form>
+        <div class="multi-search-cancel"><i class="fas fa-times"></i></div>
+        
     </div>
+</div>
+
+
+<section id="header-container">
     <div class="wrapper-enclosure-home">
         <div class="new-header-wrapper">
             <div class="new-header-left">
@@ -128,9 +131,9 @@
 
                                                     <div class="swiper-btns new-header-btn">
                                                         <a  href="/tv/tv-shows/<%= movie.id %>" class="swiper-btn" role="button">More info</a>
-                                                        <button class="swiper-btn header-trailer"><i class="fas fa-play"></i>Trailer</button>
+                                                        <button class="swiper-btn header-trailer" data-source="https://www.youtube.com/embed/<%= headerVideos[index]?.key%>"><i class="fas fa-play"></i>Trailer</button>
                                                     </div>
-                                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= headerVideos[index]?.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    
                                                 </div>
 
                                             </div>
@@ -185,9 +188,9 @@
                                     </p>
                                     <div class="swiper-btns top-rated-btn">
                                         <a  href="/tv/tv-shows/<%= movie.id %>" class="swiper-btn" role="button">More info</a>
-                                        <button class="swiper-btn header-trailer"><i class="fas fa-play"></i></button>
+                                        <button class="swiper-btn header-trailer" data-source="https://www.youtube.com/embed/<%= airingTodayVideos[index]?.key%>"><i class="fas fa-play"></i></button>
                                     </div>
-                                    <iframe class="video_player" width="500px" height="300px" src="https://www.youtube.com/embed/<%= airingTodayVideos[index]?.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    
                                       
 
                                 </div>
@@ -217,7 +220,7 @@
                                         <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                             <% if(mov.poster_path){%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                    <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
+                                                    <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                                 </a>
                                                 <%}else if(mov.poster_path === null){%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
@@ -305,7 +308,7 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.poster_path){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                             </a>
                                             <%}else if(mov.poster_path === null){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
@@ -363,7 +366,7 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.poster_path){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>" alt="<%= mov.title %>">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                             </a>
                                             <%}else if(mov.poster_path === null){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">

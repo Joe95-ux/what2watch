@@ -154,7 +154,7 @@ app.get( "/search", async (req, res) => {
   const query = encodeURIComponent(search);
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/search/movie?api_key=" +
+      "https://api.themoviedb.org/3/search/multi?api_key=" +
         apiKey +
         "&language=en-US&page=" +
         page_num +
@@ -187,7 +187,7 @@ app.get("/search/:movie/:page", async (req, res) => {
   let page_num = parseInt(req.params.page);
   try {
     const response = await fetch(
-      "https://api.themoviedb.org/3/search/movie?api_key=" +
+      "https://api.themoviedb.org/3/search/multi?api_key=" +
         apiKey +
         "&language=en-US&page=" +
         page_num +
@@ -315,8 +315,11 @@ app.get("/privacy", async (req, res) => {
 });
 
 
+
 //Get popular Movies
 app.get("/", async (req, res) => {
+
+  
 
   try {
     const assets = await getPopularMovies();
@@ -431,11 +434,11 @@ app.use("/blog", blogRouter);
 app.use("/editor", ckeditorRouter);
 app.use("/tv", tvRouter)
 
-
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 4000;
 }
+
 app.listen(port, function () {
   console.log("Server has started sucessfully");
 });

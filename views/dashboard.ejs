@@ -41,17 +41,20 @@
 
 </div>
 <section class="side-drawer-backdrop"></section>
-<section id="header-container" class="blog-header">
-    <div class="small-screen-search search-bar">
-        <i class="fas fa-times close-sm-search"></i>
-        <form action="/search" method="GET" class="small-search-form search-form">
-            <div class="small-search-field">
+<div class="multi-search-modal" >
+    <div class="multi-search-wrapper" >
+        <form action="/search" method="GET" class="multi-search-form">
+            <div class="multi-search-field">
                 <i class="fas fa-search"></i>
-                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
+                <input type="text" class="multi-search" placeholder="search for movies, tv shows or cast members..." name="query" autofocus>
                 <input type="submit" value="search" hidden>
             </div>
         </form>
+        <div class="multi-search-cancel"><i class="fas fa-times"></i></div>
+        
     </div>
+</div>
+<section id="header-container" class="blog-header">
 
     <div class="wrapper-enclosure-blog">
         <div class="dashboard-title">

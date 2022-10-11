@@ -83,7 +83,9 @@
                     </a>
                 </div>
                 <ul class="nav_links">
-                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
+                    <li class="nav_link"> <a href="/">Movies</a></li>
+                    <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                     <% if(user.privilege === "admin"){%>
                     <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>

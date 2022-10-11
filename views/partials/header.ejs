@@ -78,18 +78,9 @@
 
                     </a>
                 </div>
-                <i class="fas fa-search small-screen-search-icon"></i>
-                <div class="search-bar big-screen-search">
-                    <form action="/search" method="GET" class="search-form">
-                        <div class="search-field">
-                            <i class="fas fa-search"></i>
-                            <input type="text" class="search" placeholder="search for a movie..." name="query">
-                            <input type="submit" value="search" hidden>
-                        </div>
-                    </form>
-                </div>
                 <ul class="nav_links ld-nav_links">
-                    <li class="nav_link"> <a href="/about-us">About us</a></li>
+                    <li class="nav_link"> <a href="/">Movies</a></li>
+                    <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
                     <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                         <% if(user.privilege === "admin"){%>
@@ -99,8 +90,20 @@
                         <% } %>
                         <% } %>
                 </ul>
-
+                
+                <!-- <div class="search-bar big-screen-search">
+                    <form action="/search" method="GET" class="search-form">
+                        <div class="search-field">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="search" placeholder="search for a movie..." name="query">
+                            <input type="submit" value="search" hidden>
+                        </div>
+                    </form>
+                </div> -->
+                <div class="search-trigger" title="find what to watch">
+                    <i class="fas fa-search"></i>
+                </div>
             </div>
-
+            
         </div>
     </nav>

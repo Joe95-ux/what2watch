@@ -74,7 +74,7 @@
                     </a>
                 </div>
                 <i class="fas fa-search small-screen-search-icon"></i>
-                <div class="search-bar big-screen-search">
+                <!-- <div class="search-bar big-screen-search">
                     <form action="/search" method="GET" class="search-form">
                         <div class="search-field">
                             <i class="fas fa-search"></i>
@@ -82,10 +82,11 @@
                             <input type="submit" value="search" hidden>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <ul class="nav_links ld-nav_links">
-                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
-                    <li class="nav_link"> <a href="/blog/posts">Blog</a> </li>
+                    <li class="nav_link"> <a href="/">Movies</a></li>
+                    <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                     <% if(user.privilege === "admin"){%>
                     <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
@@ -94,6 +95,9 @@
                     <% } %>
                     <% } %>
                 </ul>
+                <div class="search-trigger" title="find what to watch">
+                    <i class="fas fa-search"></i>
+                </div>
 
             </div>
 
@@ -183,20 +187,33 @@
     </div>
 </div>
 <section class="side-drawer-backdrop"></section>
+<div class="multi-search-modal" >
+    <div class="multi-search-wrapper" >
+        <form action="/search" method="GET" class="multi-search-form">
+            <div class="multi-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="multi-search" placeholder="search for movies, tv shows or cast members..." name="query" autofocus>
+                <input type="submit" value="search" hidden>
+            </div>
+        </form>
+        <div class="multi-search-cancel"><i class="fas fa-times"></i></div>
+        
+    </div>
+</div>
 <section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>);
     background-size: cover; background-position: center center;">
-    <div class="small-screen-search search-bar">
+    <!-- <div class="small-screen-search search-bar">
         <i class="fas fa-times close-sm-search"></i>
         <form action="/search" method="GET" class="small-search-form search-form">
             <div class="small-search-field">
                 <i class="fas fa-search"></i>
                 <input type="text" class="small-search" placeholder="search for a movie..."
                     name="query">
-                <!-- <i class="blink"></i> -->
+                
                 <input type="submit" value="search" hidden>
             </div>
         </form>
-    </div>
+    </div> -->
     <%if(movie){%>
     <div class="single-movie-wrapper">
         <div class="wrapper-enclosure">
@@ -367,7 +384,7 @@
                                     <div class="slider-inner-card embla__slide__inner viewed-card">
                                         <a href="/tv/tv-shows/<%= mov.id %>" title="<%=mov.name%>">
                                             <img class="slider-image"
-                                                src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
+                                                src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>"
                                                 alt="<%= mov.name %> " />
                                         </a>
                                         <div class="image-drop">
@@ -485,10 +502,10 @@
                             </div>
 
                         <%})%> 
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <div class="place"></div>
+                        <div class="place"></div>
+                        <div class="place"></div>
+                        <div class="place"></div>
                     <% } %> 
                     
                 </div>
@@ -496,7 +513,7 @@
             <div class="small-display-details">
                 <div>
                     <div class="sub-detail">
-                        <h4>Taglines</h4>
+                        <h4>Tagline</h4>
                         <p><%= movie.tagline %> </p>
                     </div>
                     <div class="sub-detail">
@@ -653,7 +670,7 @@
                                     class="slider-inner-card embla__slide__inner viewed-card">
                                     <a href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %>">
                                         <img class="slider-image"
-                                            src="https://image.tmdb.org/t/p/w500/<%= mov.poster_path %>"
+                                            src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>"
                                             alt="<%= mov.name %>" />
                                     </a>
                                     <div class="image-drop">

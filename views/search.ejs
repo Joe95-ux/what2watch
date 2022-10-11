@@ -82,21 +82,23 @@
     </div>
 </div>
 <section class="side-drawer-backdrop"></section>
+<div class="multi-search-modal" >
+    <div class="multi-search-wrapper" >
+        <form action="/search" method="GET" class="multi-search-form">
+            <div class="multi-search-field">
+                <i class="fas fa-search"></i>
+                <input type="text" class="multi-search" placeholder="search for movies, tv shows or cast members..." name="query" autofocus>
+                <input type="submit" value="search" hidden>
+            </div>
+        </form>
+        <div class="multi-search-cancel"><i class="fas fa-times"></i></div>
+        
+    </div>
+</div>
 
 
 
 <section id="popular-movies" class="search-container">
-    <div class="small-screen-search search-bar" >
-        <i class="fas fa-times close-sm-search"></i>
-        <form action="/search" method="GET" class="small-search-form search-form">
-            <div class="small-search-field">
-                <i class="fas fa-search"></i>
-                <input type="text" class="small-search" placeholder="search for a movie..." name="query">
-                <!-- <i class="blink"></i> -->
-                <input type="submit" value="search" hidden>
-            </div>
-        </form>
-    </div>
     <div class="wrapper-enclosure">
         <button class="back upcoming-back"><i class="fas fa-arrow-left go-back go-back-nav" ></i></button>
         <div class="movies-container movie-search">
@@ -122,56 +124,139 @@
                     <div class="movie-wrapper">
                         <% movies.forEach(function(movie){%>
                         <div class="movie-card-container">
-                            <% if(movie.poster_path){%>
-                            <div class="movie-card viewed-card">
-                                <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                    <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
-                                </a>
-                                <a href="/movie/<%= movie.id %>">
-                                    <div class="movie-card-overlay">
-                                        <div>
-                                            <%if(movie.title){%>
-                                            <h2 class="movie-rating"><i
-                                                    class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
-                                            <%}%> 
-                                    <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
-                                            </h4>
-                                        </div>
-                                        <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
-                                        <button class="swiper-btn overlay-btn">View Details</button>
+                            <% if(movie.media_type==="person"){%>
+                                <div class="movie-card viewed-card">
+                                    <% if(movie.profile_path){%>
+                                        <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
+                                          <img src="https://image.tmdb.org/t/p/w500/<%= movie.profile_path %>" alt="<%= movie.name %>">
+                                        </a>
+                                    <% }else if(movie.profile_path === null){%>
+                                        <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
+                                            <img src="/default-profile.png" alt="<%= movie.name %>">
+                                        </a>
 
+                                    <% } %>   
+                                    
+                                </div>
+                                <div class="movie-details">
+                                    <div>
+                                        <a href="/person/<%= movie.id %>">
+                                            <%= movie.name %>
+                                        </a>
                                     </div>
-                                </a>
-
-                            </div>
-
-                            <%}else if(movie.poster_path === null){%>
-                            <div class="movie-card viewed-card">
-                                <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                    <img src="/poster-alt.png" alt="">
-                                </a>
-
-                            </div>
-
-                            <% } %>
-                            <div class="movie-details">
-                                <div>
-                                    <a href="/movie/<%= movie.id %>">
-                                        <%= movie.title %>
-                                    </a>
                                 </div>
-                                <div>
-                                    <span><%= movie.release_date?movie.release_date.split('-').slice(0, 1).join(''):'n/a'%></span>
-                                    <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
-                                    <%for(let genre of genres){%>
-                                    <%if(genreId === genre.id){%>
-                                    <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
-                                    </span>
-                                    <% } %>
-                                    <% } %>
-                                    <% } %>
-                                </div>
-                            </div>
+
+                                <% }else if (movie.media_type === "movie"){%>
+                                    <% if(movie.poster_path){%>
+                                        <div class="movie-card viewed-card">
+                                            <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
+                                            </a>
+                                            <a href="/movie/<%= movie.id %>">
+                                                <div class="movie-card-overlay">
+                                                    <div>
+                                                        <%if(movie.title){%>
+                                                        <h2 class="movie-rating"><i
+                                                                class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                                        <%}%> 
+                                                <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                        </h4>
+                                                    </div>
+                                                    <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
+                                                    <button class="swiper-btn overlay-btn">View Details</button>
+            
+                                                </div>
+                                            </a>
+            
+                                        </div>
+            
+                                        <%}else if(movie.poster_path === null){%>
+                                        <div class="movie-card viewed-card">
+                                            <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                                <img src="/poster-alt.png" alt="">
+                                            </a>
+            
+                                        </div>
+            
+                                        <% } %>
+                                        <div class="movie-details">
+                                            <div>
+                                                <a href="/movie/<%= movie.id %>">
+                                                    <%= movie.title %>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <span><%= movie.release_date?movie.release_date.split('-').slice(0, 1).join(''):'n/a'%></span>
+                                                <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
+                                                <%for(let genre of genres){%>
+                                                <%if(genreId === genre.id){%>
+                                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                                </span>
+                                                <% } %>
+                                                <% } %>
+                                                <% } %>
+                                            </div>
+                                        </div>
+
+                                <% }else if (movie.media_type === "tv"){%>
+                                    <div class="movie-card viewed-card">
+                                        <a class="image" href="/tv/tv-shows/<%= movie.id %>"
+                                            title="<%= movie.name %> ">
+                                            <% if(movie.poster_path){%>
+                                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
+                                                alt="<%= movie.name %>">
+                                            <%}else if(movie.poster_path === null){%>
+                                            <img src="/poster-alt.png" alt="">
+                                            <% } %>
+                                        </a>
+                                        <a href="/tv/tv-shows/<%= movie.id %>">
+                                            <div class="movie-card-overlay">
+                                                <div>
+                                                    <%if(movie.name){%>
+                                                    <h2 class="movie-rating"><i
+                                                            class="fas fa-star"></i><span><%= movie.vote_average %></span>
+                                                    </h2>
+                                                    <%}%> 
+                                                    <h4><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %>
+                                                    </h4>
+                                                </div>
+                                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...
+                                                </p>
+                                                <button class="swiper-btn overlay-btn">View
+                                                    Details</button>
+            
+                                            </div>
+                                        </a>
+            
+            
+                                    </div>
+                                    <div class="movie-details">
+                                        <div>
+                                            <a href="/tv/tv-shows/<%= movie.id %>">
+                                                <%= movie.name %>
+                                            </a>
+            
+                                        </div>
+                                        <%if(genres){%>
+                                            <div>
+                                                <span><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                                <%for(let genreId of movie.genre_ids.slice(0, 1)){%>
+                                                <%for(let genre of genres){%>
+                                                <%if(genreId === genre.id){%>
+                                                <span
+                                                    class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                                </span>
+                                                <% } %>
+                                                <% } %>
+                                                <% } %>
+                                            </div>
+            
+                                            <%} %>
+                                        
+            
+                                    </div>
+
+                                <% } %>  
                         </div>
                         <%})%>
                         <div class="empty"></div>

@@ -35,6 +35,10 @@ const profileInput = document.getElementById("profile-pic");
 const simpleBarContainer = document.getElementById("simple-bar");
 const episodesWrapper = document.querySelector(".season-contents");
 const seasons = [...document.querySelectorAll(".season")];
+const multiSearch = document.querySelector(".multi-search-modal");
+const searchTrigger = document.querySelector(".search-trigger");
+const multiSearchInput = document.querySelector(".multi-search");
+const cancelMultiSearch = document.querySelector(".multi-search-cancel");
 
 // navigation bar
 const navSlide = () => {
@@ -129,6 +133,23 @@ const navSlide = () => {
 
 // invoke function
 navSlide();
+
+//multi search trigger
+function triggerMultiSearch(){
+  if(searchTrigger !== null){
+    searchTrigger.addEventListener("click", function(){
+      multiSearch.classList.add("active-multi-search");
+      multiSearchInput.focus();
+
+    })
+    cancelMultiSearch.addEventListener("click", function(){
+      multiSearch.classList.remove("active-multi-search");
+
+    })
+
+  }
+}
+triggerMultiSearch();
 
 // sticky layout
 function stickLayout() {
@@ -253,7 +274,7 @@ if (watchBanner !== null) {
 function trailerController() {
   if (trailerBtn !== null) {
     trailerBtn.addEventListener("click", () => {
-      video.src = trailerVideo + "&autoplay=1";
+      video.src = trailerVideo + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
       trailerContainer.classList.toggle("active-trailer");
     });
   }
@@ -262,8 +283,8 @@ function trailerController() {
     let videoSource;
     for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
-        videoSource = trailer.parentElement.nextElementSibling.src;
-        video.src = videoSource + "&autoplay=1";
+        videoSource = trailer.dataset.source;
+        video.src = videoSource + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
     }
