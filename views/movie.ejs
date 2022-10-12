@@ -223,9 +223,11 @@
                                             <span class="hero-read open-synopsis synopsis-read-more">More<i class="fas fa-chevron-down"></i></span>
                                         </div>
                                         <div class="hero-trailer">
-                                            <div class="hero-btn-wrapper trailer" data-source="https://www.youtube.com/embed/<%= trailer.key %>">
-                                                <button class="hero-btn"><i class="fas fa-play"></i></button><span class="hero-trailer-span">Trailer</span>
-                                            </div>
+                                            <% if(movie.videos.results.length > 0){%>
+                                                <div class="hero-btn-wrapper trailer" data-source="https://www.youtube.com/embed/<%= trailer?.key %>">
+                                                    <button class="hero-btn"><i class="fas fa-play"></i></button><span class="hero-trailer-span">Trailer</span>
+                                                </div>
+                                            <%}%>
                                             
                                             <%if(watch){%>
                                                 <a href="<%= watch.link%>" target="_blank">
