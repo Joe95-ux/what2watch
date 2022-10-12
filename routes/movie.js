@@ -1,7 +1,7 @@
 const express = require("express");
 const { parseInt } = require("lodash");
 const fetch = require("node-fetch");
-const {getTrailer, getNetworks, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
+const {getTrailer, getNetworks, getSpokenLanguage, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
 const router = express.Router();
 
 const apiKey = process.env.API_KEY;
@@ -245,17 +245,6 @@ async function getWatchProviders(movieId) {
   }
 }
 
-function getSpokenLan(languages) {
-  let lanArr = [];
-  if (languages.length) {
-    for (let lan of languages) {
-      lanArr.push(lan.name);
-    }
-  }
-  let lanStr = lanArr.join(", ");
-  return lanStr;
-}
-
 //get a movie by id
 router.get("/:movie_id", async (req, res) => {
   const movieId = req.params.movie_id;
@@ -273,7 +262,7 @@ router.get("/:movie_id", async (req, res) => {
     const movieNetworks = await movie.production_companies;
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
-    const spokenLanguages = getSpokenLan(languages);
+    const spokenLanguages = getSpokenLanguage(languages);
     const title = encodeURIComponent(movieTitle);
     const videos = await movie.videos.results.slice(0, 5);
     const posters = await movie.images.posters.slice(0, 4);
@@ -345,7 +334,7 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const movieNetworks = await movie.production_companies;
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
-    const spokenLanguages = getSpokenLan(languages);
+    const spokenLanguages = getSpokenLanguage(languages);
     const title = encodeURIComponent(movieTitle);
     const videos = await movie.videos.results.slice(0, 5);
     const posters = await movie.images.posters.slice(0, 4);

@@ -71,14 +71,18 @@ module.exports = {
     return movieOverview;
   },
   getSpokenLanguage: function getSpokenLan(languages) {
-    let lanArr = [];
-    if (languages.length) {
-      for (let lan of languages) {
-        lanArr.push(lan.name);
-      }
+    let languageList;
+    if(languages?.length){
+      languageList = languages.map(language=>language.name);
+      languageList = languageList.filter(language=> language !== "");
     }
-    let lanStr = lanArr.join(", ");
-    return lanStr;
+    if(languageList?.length > 1){
+      languageList = languageList.join(", ");
+    }else{
+      languageList = languageList.join(" ");
+    }
+  
+    return languageList;
   },
   getSingleProvider: function getSingleProvider(providers){
     let stream;
@@ -106,8 +110,14 @@ module.exports = {
     let networkList;
     if(networks?.length){
       networkList = networks.map(network=>network.name);
+      networkList = networkList.filter(network=> network !== "");
     }
-    networkList = networkList.join(", ")
+    if(networkList?.length > 1){
+      networkList = networkList.join(", ");
+    }else{
+      networkList = networkList.join(" ");
+    }
+    
     return networkList;
   }
   
