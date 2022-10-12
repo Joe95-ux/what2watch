@@ -3273,19 +3273,40 @@ h1.genre-intro {
     font-size: 17px;
     margin: 1.2rem 0;
 }
-.hero-dates a{
-    text-decoration: none;
-    color: var(--darkGrey);
-}
+
 .hero-dates .fa-star{
     color: var(--primaryColor);
     font-size: 15px;
     margin-right: 5px;
 }
+
+
+.hero-dates a{
+    text-decoration: none;
+    color: var(--darkGrey);
+}
+
 .hero-dates span:not(:last-child){
     padding-right:10px;
     margin-right: 10px;
     border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 330px) {
+    .hero-dates{
+        font-size: 15px;
+        flex-wrap: wrap;
+    }
+    .hero-dates .fa-star{
+        font-size: 13px;
+    }
+
+    .hero-dates span:not(:last-child){
+        padding-right:5px;
+        margin-right: 5px;
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
 }
 .hero-overview p{
     font-size: 18px;
@@ -3916,7 +3937,7 @@ img.provider-img{
 
 @media screen and (max-width:900px){
     .seasons-enclosure{
-        margin: 1.5rem 0 0;
+        margin: 0 0 1.5rem;
     }
 }
 
