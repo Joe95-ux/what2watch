@@ -75,14 +75,15 @@ module.exports = {
     if(languages?.length){
       languageList = languages.map(language=>language.name);
       languageList = languageList.filter(language=> language !== "");
+      if(languageList?.length > 1){
+        languageList = languageList.join(", ");
+      }else{
+        languageList = languageList.join(" ");
+      }
+    
+      return languageList;
     }
-    if(languageList?.length > 1){
-      languageList = languageList.join(", ");
-    }else{
-      languageList = languageList.join(" ");
-    }
-  
-    return languageList;
+    
   },
   getSingleProvider: function getSingleProvider(providers){
     let stream;
@@ -111,14 +112,15 @@ module.exports = {
     if(networks?.length){
       networkList = networks.map(network=>network.name);
       networkList = networkList.filter(network=> network !== "");
-    }
-    if(networkList?.length > 1){
-      networkList = networkList.join(", ");
-    }else{
-      networkList = networkList.join(" ");
+      if(networkList?.length > 1){
+        networkList = networkList.join(", ");
+      }else{
+        networkList = networkList.join(" ");
+      }
+      
+      return networkList;
     }
     
-    return networkList;
   }
   
   
