@@ -199,242 +199,76 @@
         
     </div>
 </div>
-<section id="single-movie-container" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0, 25, 39, 0.9)), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>);
-    background-size: cover; background-position: center center;">
-    <!-- <div class="small-screen-search search-bar">
-        <i class="fas fa-times close-sm-search"></i>
-        <form action="/search" method="GET" class="small-search-form search-form">
-            <div class="small-search-field">
-                <i class="fas fa-search"></i>
-                <input type="text" class="small-search" placeholder="search for a movie..."
-                    name="query">
-                
-                <input type="submit" value="search" hidden>
-            </div>
-        </form>
-    </div> -->
-    <%if(movie){%>
-    <div class="single-movie-wrapper">
-        <div class="wrapper-enclosure">
-            <button class="back back-movie"><i
-                    class="fas fa-arrow-left go-back go-back-nav"></i></button>
-            <div class="single-movie-inner">
-                <div class="single-movie-content">
-                    <div class="single-movie-card">
-                        <% if(movie.poster_path){%>
-                        <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %> ">
-                        <%}else if(movie.poster_path === null){%>
-                        <img src="/poster-alt.png" alt="movie-poster">
-                        <% } %>
-                        <%if(watch){%>
-                        <div class="watch-banner">
-                            <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                            <div><h4>Watch on <%= provider.provider_name %></h4></div>
+<section id="single-movie-container" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.6) 52%, #001019 80%), url(https://image.tmdb.org/t/p/w1280/<%=movie.backdrop_path%>); background-repeat: no-repeat; background-position: center center ;
+    background-size: cover;">
+    <% if(movie){%>
+        <div class="single-movie-wrapper">
+            <div class="wrapper-enclosure">
+                <button class="back back-movie"><i class="fas fa-arrow-left go-back go-back-nav"></i></button>
+    
+                <div class="single-movie-inner hero-height">
+                   <div class="hero-main">
+                    <h1 class="hero-title"><%= movie.name %></h1>
+                    <% if(movie.tagline){%>
+                        <p class="hero-tagline">"<%= movie.tagline%>"</p>
+                    <% }%>
+                    <div class="hero-dates">
+                        <span><%= movie.first_air_date?movie.first_air_date:"n/a" %></span>
+                        <%for(let genre of movie.genres.slice(0, 1)){%>
+                            <span>
+                                <a href="/tv/genres/<%= genre.name %>"><%= genre.name %></a></span>
+                            <% } %>
+                        <span><i
+                            class="fas fa-star"></i><span><%= movie.vote_average %></span></span>
+                    </div>
+                    <div class="hero-overview">
+                        <p class="clamp-synopsis">
+                            <%= movie.overview%>
                             
-                        </div>
-                        <% } %>
+                        </p>
+                        <span class="hero-read open-synopsis synopsis-read-more">More<i class="fas fa-chevron-down"></i></span>
                     </div>
-
-                    <div class="main-content">
-                        <div class="swiper-main-title">
-                            <h1 class="movie-title"><%= movie.name %></h1>
-                            </span></p>
-                            <div class="language-container top-lang">
-                                <% if(movie?.spoken_languages){%>
-                                <% for(let language of movie?.spoken_languages.slice(0, 3)){%>
-                                <span class="language"><%= language.name %><i
-                                        class="fas fa-dot-circle"></i></span>
-
-                                <% } %>
-                                <% } %>
-                                <p class="run-time">Episode run-time (<%= movie.episode_run_time %>mins)</p>
-                                <p class="release-date">
-                                    <span>|</span>
-                                    <%= movie.first_air_date?movie.first_air_date:"n/a" %>
-                                </p>
-                            </div>
-
+                    <div class="hero-trailer">
+                        <div class="hero-btn-wrapper trailer" data-source="https://www.youtube.com/embed/<%= trailer.key %>">
+                            <button class="hero-btn"><i class="fas fa-play"></i></button><span class="hero-trailer-span">Trailer</span>
                         </div>
-                        <div class="genres-and-director top-genres">
-                            <div class="genres">
-                                <%for(let genre of movie.genres.slice(0, 3)){%>
-                                <span class="genre1 genre-span">
-                                    <a href="/tv/genres/<%= genre.name %>"><%= genre.name %></a></span>
-                                <% } %>
-                                <p class="movie-rating"><i
-                                        class="fas fa-star"></i><span><%= movie.vote_average %></span>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="synopsis">
-                            <% if(movie.tagline){%>
-                            <p class="tagline">"<%= movie.tagline%>"</p>
-                            <% }%>
-                            <% if(movie.overview.length > 100){%>
-                            <p class="clamp-synopsis">
-                                <%= movie.overview%>
-                                
-                            </p>
-                            <span class="open-synopsis synopsis-read-more">Read more</span>
-                            <% }else{%>
-                            <p class="no-clamp"><%= movie.overview%></p>
-                            <% } %>
-                            <%if(crews){%>
-                            <div class="crews crews-top">
-                                <% for(let person of crews){%>
-                                <div class="director">
-                                    <a class="crew-name" href="#"><%= person.name %></a>
-                                    <h5><%= person.job %> </h5>
-                                </div>
-
-                                <% } %>
-
-                            </div>
-                            <%} %>
-                        </div>
-                        <% if(watch){%>
-                        <div class="watch-providers">
-                            <div class="watch-title">
-                                <h2>Where to Watch</h2>
-                                <div class="just-watch">
-                                    <p>Powered by</p>
-                                    <img src="/justwatch-logo.png" alt="just-watch">
-                                </div>
-                            </div>
+                        
+                        <%if(watch){%>
                             <a href="<%= watch.link%>" target="_blank">
-                                <div class="watch-providers-inner">
-                                    <% if(watch.rent) {%>
-                                    <% for(let provider of watch.rent){%>
-                                    <div class="provider">
-                                        <h4>Rent</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Rent <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                    <% } %>
-                                    <% } %>
-                                    <% if(watch.buy){%>
-                                    <% for(let provider of watch.buy){%>
-                                    <div class="provider">
-                                        <h4>Buy</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Buy <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                    <% } %>
-
-                                    <% } %>
-                                    <% if(watch.flatrate) {%>
-                                    <% for(let provider of watch.flatrate){%>
-                                    <div class="provider">
-                                        <h4>Stream</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                    <% } %>
-
-                                    <% } %>
-                                    <% if(watch.ads) {%>
-                                    <% for(let provider of watch.ads){%>
-                                    <div class="provider">
-                                        <h4>Ads</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                    <% } %>
-
-                                    <% } %>
-                                    <div class="close-providers" title="close"><i
-                                            class="fas fa-times"></i></div>
-
+                                <div class="hero-watch-banner">
+                                    <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                    <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                    
                                 </div>
-
                             </a>
-
-
-                        </div>
                         <% } %>
-                        <div class="swiper-btns">
-                            <% if(movie.homepage !== "" && movie.homepage !== null){%>
-                            <a href="<%= movie.homepage %> " target="_blank" class="swiper-btn"
-                                role="button"><i class="fas fa-link"></i>Website</a>
-                            <% } %>
-                            <a href="https://www.imdb.com/title/<%= movie.imdb_id %>/"
-                                target="_blank" class="swiper-btn" role="button"><i
-                                    class="fab fa-imdb"></i>IMDB</a>
-                            <% if(movie.videos.results.length > 0){%>
-                            <button class="swiper-btn trailer red-btn"><i
-                                    class="fas fa-play"></i>Trailer</button>
-                            <% } %>
-                        </div>
+                        
                     </div>
-                </div>
-                <div class="similarmovies-container">
-                    <% if(similar.length){%>
-                    <h1 class="embla-title">Similar Tv Shows</h1>
-                    <div class="embla" style="margin-top: 1.2rem;">
-                        <div class="embla__viewport">
-                            <div class="embla__container">
-                                <% similar.forEach(mov=>{%>
-                                <div class="embla__slide">
-                                    <div class="slider-inner-card embla__slide__inner viewed-card">
-                                        <a href="/tv/tv-shows/<%= mov.id %>" title="<%=mov.name%>">
-                                            <img class="slider-image"
-                                                src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>"
-                                                alt="<%= mov.name %> " />
-                                        </a>
-                                        <div class="image-drop">
-                                            <%if(mov.name){%>
-                                            <h3><%=mov.name%></h3>
-                                            <%}else {%>
-                                            <h3>n/a</h3>
-                                            <%}%> 
-                                        </div>
-                                    </div>
-                                
-                                </div>
-                                <%}) %>
-                            </div>
+                    
 
-                        </div>
-                        <button class="embla__button embla__button--prev square__btn"
-                            type="button">
-                            <svg class="embla__button__svg"
-                                viewBox="137.718 -1.001 366.563 643.999">
-                                <path
-                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
-                                </path>
-                            </svg>
-                        </button>
-                        <button class="embla__button embla__button--next square__btn"
-                            type="button">
-                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                                <path
-                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
-                                </path>
-                            </svg>
-                        </button>
-                                
-                    </div>
-
-                    <% } %>
+    
+    
+                   </div> 
                 </div>
+    
+    
+    
+    
+    
+                
             </div>
-        </div>
-
-    </div>
-
-    <% }%>
+        
+       </div>
+    <% } %>  
+    
+    
     </section>
     <div class="movie-trailer">
         <div class="trailer-container">
             <% if(trailer){%>
             <div class="trailer-video">
                 <iframe class="video_player" width="100%" height="100%"
-                    src="https://www.youtube.com/embed/<%= trailer.key %>?enablejsapi=1&version=3&playerapiid=ytplayer"
+                    src=""
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
@@ -447,36 +281,231 @@
         <div class="wrapper-enclosure">
             <div class="movie-synopsis movie-storyline">
                 <div class="measuring-wrapper">
-                    <h2>Synopsis</h2>
-                    <p class="large-display-synopsis ">
-                        <%= movie.overview %>
-                    </p>
-                    <div class="small-display-synopsis">
-                        <% if(movie.overview.length > 200){%>
-                        <p class="short-synopsis"><%= overview.short %> <span
-                                class="dots">...</span> <span class="read-all">Read
-                                all</span> </p>
-                        <p class="long-synopsis"><%= overview.long %> <span
-                                class="read-less">Read less</span></p>
-                        <% }else{%>
-                        <p><%= movie.overview %> </p>
-                        <% } %>
+                    <div class="measuring-content">
+                        <div class="single-movie-card">
+                            <% if(movie.poster_path){%>
+                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %> ">
+                            <%}else if(movie.poster_path === null){%>
+                            <img src="/poster-alt.png" alt="movie-poster">
+                            <% } %>
+                            <%if(watch){%>
+                                <a href="<%= watch.link%>" target="_blank">
+                                    <div class="watch-banner">
+                                        <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                        <div>
+                                        <h4>Watch on <%= provider.provider_name %></h4></div>
+                                
+                                    </div> 
+                                </a>
+                            
+                            <% } %>
+                        </div>
+                        <div class="movie-complete-info">
+                            <h2>Storyline</h2>
+                            <p class="large-display-synopsis ">
+                                <%= movie.overview %>
+                            </p>
+                            <% if(movie){%>
+                                <div class="details-list-wrapper">
+                                    <ul class="details-list">
+                                        <li>
+                                            <div class="item-key">First Aired</div>
+                                            <div class="item-value"><%= movie.first_air_date %> </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Last Aired</div>
+                                            <div class="item-value"><%= movie.last_air_date %></div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Creator</div>
+                                            <div class="item-value"><%= movie.created_by[0]?.name %></div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Genre</div>
+                                            <div class="item-value">
+                                               <%= tvGenres %> 
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Seasons</div>
+                                            <div class="item-value"><%= movie.number_of_seasons %> </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Episodes</div>
+                                            <div class="item-value"><%= movie.number_of_episodes %> </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Status</div>
+                                            <div class="item-value"><%= movie.status %> </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Language</div>
+                                            <div class="item-value"><%= spokenLanguages%></div>
+                                        </li>
+                                        <li>
+                                            <div class="item-key">Network</div>
+                                            <div class="item-value"><%= network%></div>
+                                        </li>
+                                    </ul>
+                                    <div class="movie-links">
+                                        <% if(movie.homepage !== "" && movie.homepage !== null){%>
+                                        <a href="<%= movie.homepage %> " target="_blank" class="web"
+                                            role="button"><i class="fas fa-link"></i></a>
+                                        <% } %>
+                                        <a href="https://www.imdb.com/title/<%= movie.imdb_id %>/"
+                                            target="_blank" role="button"><i
+                                                class="fab fa-imdb"></i></a>
+                                    </div>
+                                    
+                                </div>
+                                
 
+
+                            <% } %> 
+                            
+
+                        </div>
                     </div>
+                    <% if(watch){%>
+                        <div class="watch-providers-sm">
+                            <h2>Stream and watch <%= movie.name %> </h2>
+                            <a href="<%= watch.link%>" target="_blank">
+                                <div class="embla cast-container">
+                                    <div class="embla__viewport">
+                                        <div class="embla__container">
+                                            <% if(watch.rent) {%>
+                                            <% for(let provider of watch.rent){%>
+                                            <div class="embla__slide" style="margin-right: 30px;">
+                                                <div class="provider embla__slide__inner">
+                                                    <h4>Rent</h4>
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                        alt="<%= provider.provider_name %>"
+                                                        title="Rent <%= movie.title %> on <%= provider.provider_name %>">
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                            <% } %>
+                                            <% if(watch.buy){%>
+                                            <% for(let provider of watch.buy){%>
+                                            <div class="embla__slide " style="margin-right: 30px;">
+                                                <div class="provider embla__slide__inner">
+                                                    <h4>Buy</h4>
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                        alt="<%= provider.provider_name %>"
+                                                        title="Buy <%= movie.title %> on <%= provider.provider_name %>">
+                                                </div>
+            
+                                            </div>
+                                            <% } %>
+            
+                                            <% } %>
+                                            <% if(watch.flatrate) {%>
+                                            <% for(let provider of watch.flatrate){%>
+                                            <div class="embla__slide" style="margin-right: 30px;">
+                                                <div class="provider embla__slide__inner">
+                                                    <h4>Stream</h4>
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                        alt="<%= provider.provider_name %>"
+                                                        title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                </div>
+                                            </div>
+                                            <% } %>
+            
+                                            <% } %>
+                                            <% if(watch.ads) {%>
+                                            <% for(let provider of watch.ads){%>
+                                            <div class="embla__slide">
+                                                <div class="provider embla__slide__inner">
+                                                    <h4>Ads</h4>
+                                                    <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
+                                                        alt="<%= provider.provider_name %>"
+                                                        title="Stream <%= movie.title %> on <%= provider.provider_name %>">
+                                                </div>
+            
+                                            </div>
+                                            <% } %>
+            
+                                            <% } %>
+            
+            
+                                        </div>
+            
+                                    </div>
+                                    <button class="embla__button embla__button--prev" type="button"
+                                        style="display: none;">
+                                        <svg class="embla__button__svg"
+                                            viewBox="137.718 -1.001 366.563 643.999">
+                                            <path
+                                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <button class="embla__button embla__button--next" type="button"
+                                        style="display: none;">
+                                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                                            <path
+                                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                            </path>
+                                        </svg>
+                                    </button>
+            
+                                </div>
+            
+                            </a>
+                            <div class="just-watch">
+                                <p>Powered by</p>
+                                <img src="/justwatch-logo.png" alt="just-watch">
+                            </div>
+            
+                        </div>
+                        <% } %>
 
                 </div>
             </div>
             <div class="seasons-enclosure">
                 <div class="seasons-wrapper">
-                    <ul>
-                        <% if(seasons){%>
-                            <% seasons.forEach((season, index)=>{%>
-                                <li class="season" data-index="<%=season.season_number%> " data-tv="<%= movie.id %> "> Season <%= index + 1 %> </li>
-                            <%}) %> 
-    
-                        <% } %> 
+                    <div class="embla cast-container">
+                        <div class="embla__viewport">
+                            
+                            <ul class="embla__container">
+                                <% if(seasons){%>
+                                    <% seasons.forEach((season, index)=>{%>
+                                        <div class="embla__slide">
+                                            <div class="provider embla__slide__inner">
+                                                <li class="season" data-index="<%=season.season_number%> " data-tv="<%= movie.id %> "> Season <%= index + 1 %> </li>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                    <%}) %> 
+            
+                                <% } %> 
+                                
+                                
 
-                    </ul> 
+                            </ul>
+
+                        </div>
+                        <button class="embla__button embla__button--prev" type="button"
+                            >
+                            <svg class="embla__button__svg"
+                                viewBox="137.718 -1.001 366.563 643.999">
+                                <path
+                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                                </path>
+                            </svg>
+                        </button>
+                        <button class="embla__button embla__button--next" type="button"
+                            >
+                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                                <path
+                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                                </path>
+                            </svg>
+                        </button>
+
+                    </div>
+                    
                 </div>
                 <div class="season-contents">
                     <% if(episodes){%>
@@ -509,153 +538,8 @@
                     
                 </div>
             </div>
-            <div class="small-display-details">
-                <div>
-                    <div class="sub-detail">
-                        <h4>Tagline</h4>
-                        <p><%= movie.tagline %> </p>
-                    </div>
-                    <div class="sub-detail">
-                        <h4>Genres</h4>
-                        <% if(genres){%>
-                        <p class="sub-detail-genre">
-                            <%for(let genre of movie.genres.slice(0, 4)){%>
-                            <span><a
-                                    href="/tv/genres/<%= genre.name %>"><%= genre.name %></a></span>
-                            <% } %>
-                        </p>
-                        <% } %>
-                    </div>
-                    <div class="sub-detail">
-                        <h4>Rating(tmdb)</h4>
-                        <p class="rating"><i
-                                class="fas fa-star"></i><%= movie.vote_average %></p>
-
-                    </div>
-                    <div class="sub-detail">
-                        <h4>Episode Runtime</h4>
-                        <p><%= movie.episode_run_time %></p>
-                    </div>
-                    <div class="sub-detail">
-                        <h4>Languages</h4>
-                        <p><%= spokenLanguages%> </p>
-                    </div>
-                    <div class="sub-detail">
-                        <h4>Watch Guide</h4>
-                        <div class="just-watch">
-                            <span><a href="https://www.justwatch.com/"><img
-                                        src="/justwatch-logo.png"
-                                        alt="just-watch"></a></span>
-                        </div>
-                    </div>
-                    <%if(crews){%>
-                    <div class="crews-bottom-wrapper">
-                        <h4>Crew</h4>
-                        <div class="crews crews-bottom">
-                            <% for(let person of crews){%>
-                            <div class="director">
-                                <a class="crew-name" href="#"><%= person.name %></a>
-                                <h5><%= person.job %> </h5>
-                            </div>
-
-                            <% } %>
-
-                        </div>
-
-                    </div>
-
-                    <%} %>
-                </div>
-            </div>
-            <% if(watch){%>
-            <div class="watch-providers-sm">
-                <h2>Where to watch</h2>
-                <a href="<%= watch.link%>" target="_blank">
-                    <div class="embla cast-container">
-                        <div class="embla__viewport">
-                            <div class="embla__container">
-                                <% if(watch.rent) {%>
-                                <% for(let provider of watch.rent){%>
-                                <div class="embla__slide">
-                                    <div class="provider embla__slide__inner">
-                                        <h4>Rent</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Rent <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                </div>
-                                <% } %>
-                                <% } %>
-                                <% if(watch.buy){%>
-                                <% for(let provider of watch.buy){%>
-                                <div class="embla__slide">
-                                    <div class="provider embla__slide__inner">
-                                        <h4>Buy</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Buy <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-
-                                </div>
-                                <% } %>
-
-                                <% } %>
-                                <% if(watch.flatrate) {%>
-                                <% for(let provider of watch.flatrate){%>
-                                <div class="embla__slide">
-                                    <div class="provider embla__slide__inner">
-                                        <h4>Stream</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-                                </div>
-                                <% } %>
-
-                                <% } %>
-                                <% if(watch.ads) {%>
-                                <% for(let provider of watch.ads){%>
-                                <div class="embla__slide">
-                                    <div class="provider embla__slide__inner">
-                                        <h4>Ads</h4>
-                                        <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                            alt="<%= provider.provider_name %>"
-                                            title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                    </div>
-
-                                </div>
-                                <% } %>
-
-                                <% } %>
-
-
-                            </div>
-
-                        </div>
-                        <button class="embla__button embla__button--prev" type="button"
-                            style="display: none;">
-                            <svg class="embla__button__svg"
-                                viewBox="137.718 -1.001 366.563 643.999">
-                                <path
-                                    d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
-                                </path>
-                            </svg>
-                        </button>
-                        <button class="embla__button embla__button--next" type="button"
-                            style="display: none;">
-                            <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                                <path
-                                    d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
-                                </path>
-                            </svg>
-                        </button>
-
-                    </div>
-
-                </a>
-
-            </div>
-            <% } %>
+            
+            
 
             <div class="similarmovies-container-fluid">
                 <% if(similar.length){%>
@@ -779,13 +663,7 @@
                                     <div class="embla__slide video-gallery">
                                         <img src="https://i.ytimg.com/vi/<%=video.key%>/maxresdefault.jpg"
                                             alt="video-bd">
-                                        <iframe class="video_player" width="500px"
-                                            height="300px"
-                                            src="https://www.youtube.com/embed/<%= video.key%>?enablejsapi=1&version=3&playerapiid=ytplayer"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                        <div class="play-icon"><i
+                                        <div class="play-icon" data-source="https://www.youtube.com/embed/<%= video.key%>"><i
                                                 class="play fas fa-play"></i></div>
                                     </div>
                                     <%} %>

@@ -19,7 +19,7 @@ const playIcons = document.getElementsByClassName("play-icon");
 const expandReviews = document.querySelectorAll(".expand-review");
 const reviewer = document.querySelector(".full-review-inner h6 span");
 const reviewContent = document.querySelector(".full-review-content");
-const watchBanner = document.querySelector(".watch-banner");
+// const watchBanner = document.querySelector(".watch-banner");
 const watchProviders = document.querySelector(".watch-providers");
 const closeProviders = document.querySelector(".close-providers");
 const short = document.getElementById("short");
@@ -146,6 +146,7 @@ function triggerMultiSearch(){
       multiSearch.classList.remove("active-multi-search");
 
     })
+    
 
   }
 }
@@ -226,17 +227,17 @@ function openSynopsisContainer() {
 openSynopsisContainer();
 
 // close/open watch providers
-function revealWatchProviders() {
-  if (closeProviders !== null) {
-    closeProviders.addEventListener("click", e => {
-      e.preventDefault();
-      headerSynopsis.style.display = "block";
-      watchProviders.style.display = "none";
-      watchBanner.style.display = "flex";
-    });
-  }
-}
-revealWatchProviders();
+// function revealWatchProviders() {
+//   if (closeProviders !== null) {
+//     closeProviders.addEventListener("click", e => {
+//       e.preventDefault();
+//       headerSynopsis.style.display = "block";
+//       watchProviders.style.display = "none";
+//       watchBanner.style.display = "flex";
+//     });
+//   }
+// }
+// revealWatchProviders();
 
 // toggle synopsis for small screens: here to ease work
 function smallScreenSynopsis() {
@@ -262,19 +263,19 @@ function smallScreenSynopsis() {
 
 smallScreenSynopsis();
 
-if (watchBanner !== null) {
-  watchBanner.addEventListener("click", () => {
-    headerSynopsis.style.display = "none";
-    watchProviders.style.display = "block";
-    watchBanner.style.display = "none";
-  });
-}
+// if (watchBanner !== null) {
+//   watchBanner.addEventListener("click", () => {
+//     headerSynopsis.style.display = "none";
+//     watchProviders.style.display = "block";
+//     watchBanner.style.display = "none";
+//   });
+// }
 
 //trailer control
 function trailerController() {
   if (trailerBtn !== null) {
     trailerBtn.addEventListener("click", () => {
-      video.src = trailerVideo + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
+      video.src = trailerBtn.dataset.source + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
       trailerContainer.classList.toggle("active-trailer");
     });
   }
@@ -318,8 +319,8 @@ function trailerController() {
   if (playIcons !== null) {
     for (let icon = 0; icon < playIcons.length; icon++) {
       playIcons[icon].addEventListener("click", () => {
-        const videoSource = playIcons[icon].previousElementSibling.src;
-        video.src = videoSource + "&autoplay=1";
+        const videoSource = playIcons[icon].dataset.source;
+        video.src = videoSource + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
     }

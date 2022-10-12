@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 const _ = require("lodash");
-const {getTrailer, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
+const {getTrailer, getNetworks, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
@@ -339,6 +339,8 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     );
     const movie = await response.json();
     const movieTitle = await movie.name;
+    const tvNetworks = await movie.networks;
+    const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLanguage(languages);
     const title = encodeURIComponent(movieTitle);
@@ -362,6 +364,8 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const season1 = await realSeasons[0].season_number
     const episodes = await getEpisodes(movieId, season1);
     const genres = await getgenre();
+    const network = getNetworks(tvNetworks);
+    const tvGenres = getNetworks(genreList);
 
     res.render("tvdetails", {
       movie: movie,
@@ -379,6 +383,8 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       similarMovies: similarMovies,
       similar:similarMovies,
       provider,
+      network,
+      tvGenres,
       episodes
     });
   } catch (e) {

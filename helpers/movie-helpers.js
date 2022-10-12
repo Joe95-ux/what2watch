@@ -101,6 +101,14 @@ module.exports = {
     }
     return provider[0];
   
+  },
+  getNetworks: function getNetworks(networks){
+    let networkList;
+    if(networks?.length){
+      networkList = networks.map(network=>network.name);
+    }
+    networkList = networkList.join(", ")
+    return networkList;
   }
   
   

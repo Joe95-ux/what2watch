@@ -1,7 +1,7 @@
 const express = require("express");
 const { parseInt } = require("lodash");
 const fetch = require("node-fetch");
-const {getTrailer, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
+const {getTrailer, getNetworks, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
 const router = express.Router();
 
 const apiKey = process.env.API_KEY;
@@ -29,6 +29,7 @@ async function getgenre() {
 
 router.get("/genres/:genre", async (req, res) => {
   let genreName = req.params.genre;
+  let title = genreName;
   let encodedGenre = encodeURIComponent(genreName);
 
   try {
@@ -51,6 +52,7 @@ router.get("/genres/:genre", async (req, res) => {
     const page_num = await data.page;
 
     res.render("genres", {
+      title,
       movies: genreMovies,
       genres: genres,
       page_num: page_num,
@@ -68,6 +70,7 @@ router.get("/genres/:genre", async (req, res) => {
 
 router.get("/genres/:genre/:page", async (req, res) => {
   const genreName = req.params.genre;
+  let title = genreName;
   const encodedGenre = encodeURIComponent(genreName);
   page_num = parseInt(req.params.page);
 
@@ -94,6 +97,7 @@ router.get("/genres/:genre/:page", async (req, res) => {
     const totalResults = await data.total_results;
 
     res.render("genrePage", {
+      title,
       movies: genreMovies,
       genres: genres,
       page_num: page_num,
@@ -109,6 +113,7 @@ router.get("/genres/:genre/:page", async (req, res) => {
 
 router.get("/upcoming", async (req, res) => {
   page_num = 1;
+  let title = "Upcoming Movies";
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?api_key=" +
@@ -123,6 +128,7 @@ router.get("/upcoming", async (req, res) => {
     const totalResults = await data.total_results;
     const genres = await getgenre();
     res.render("upcoming", {
+      title,
       movies: upcomingMovie,
       genres: genres,
       page_num: page_num,
@@ -138,6 +144,7 @@ router.get("/upcoming", async (req, res) => {
 
 router.get("/:category/:page", async (req, res) => {
   page_num = parseInt(req.params.page);
+  let title = req.params.category;
   const category = req.params.category;
   try {
     const response = await fetch(
@@ -155,6 +162,7 @@ router.get("/:category/:page", async (req, res) => {
     const totalResults = await data.total_results;
     const genres = await getgenre();
     res.render("next_page", {
+      title,
       movies: upcomingMovie,
       genres: genres,
       category: category,
@@ -170,6 +178,7 @@ router.get("/:category/:page", async (req, res) => {
 //top rated
 router.get("/top_rated", async (req, res) => {
   page_num = 1;
+  let title = "Top rated Movies";
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
@@ -184,6 +193,7 @@ router.get("/top_rated", async (req, res) => {
     const totalResults = await data.total_results;
     const genres = await getgenre();
     res.render("top_rated", {
+      title,
       movies: topRatedMovie,
       genres: genres,
       page_num: page_num,
@@ -260,6 +270,8 @@ router.get("/:movie_id", async (req, res) => {
     );
     const movie = await response.json();
     const movieTitle = await movie.title;
+    const movieNetworks = await movie.production_companies;
+    const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLan(languages);
     const title = encodeURIComponent(movieTitle);
@@ -285,6 +297,8 @@ router.get("/:movie_id", async (req, res) => {
     const watchProviders = getProviders.results;
     const provider = getProviders.provider;
     const genres = await getgenre();
+    const network = getNetworks(movieNetworks);
+    const movieGenres = getNetworks(genreList);
 
     res.render("movie", {
       movie: movie,
@@ -302,6 +316,8 @@ router.get("/:movie_id", async (req, res) => {
       recommendedMovies: recommendedMovies,
       similarMovies: similarMovies,
       similar: similar,
+      network,
+      movieGenres,
       page_num: page_num,
       totalPages: totalPages,
       totalResults: totalResults
@@ -326,6 +342,8 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     );
     const movie = await response.json();
     const movieTitle = await movie.title;
+    const movieNetworks = await movie.production_companies;
+    const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLan(languages);
     const title = encodeURIComponent(movieTitle);
@@ -351,6 +369,8 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const watchProviders = getProviders.results;
     const provider = getProviders.provider;
     const genres = await getgenre();
+    const movieGenres = getNetworks(genreList);
+    const network = getNetworks(movieNetworks);
 
     res.render("movie", {
       movie: movie,
@@ -368,6 +388,8 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
       recommendedMovies: recommendedMovies,
       similarMovies: similarMovies,
       similar: similar,
+      network,
+      movieGenres,
       page_num: page_num,
       totalPages: totalPages,
       totalResults: totalResults

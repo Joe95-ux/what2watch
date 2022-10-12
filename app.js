@@ -151,6 +151,7 @@ async function getgenre() {
 //search movies
 app.get( "/search", async (req, res) => {
   const search = req.query.query;
+  let title = search !== ""? search: "search movies, tv shows and cast";
   const query = encodeURIComponent(search);
   try {
     const response = await fetch(
@@ -170,6 +171,7 @@ app.get( "/search", async (req, res) => {
       movies: searchedMovie,
       genres: genres,
       search: search,
+      title,
       query:query,
       page_num: page_num,
       totalPages: totalPages,
@@ -183,6 +185,7 @@ app.get( "/search", async (req, res) => {
 //search pages
 app.get("/search/:movie/:page", async (req, res) => {
   const search = req.params.movie;
+  let title = search !== ""? search: "search movies, tv shows and cast";
   const query = encodeURIComponent(search);
   let page_num = parseInt(req.params.page);
   try {
@@ -200,6 +203,7 @@ app.get("/search/:movie/:page", async (req, res) => {
     const totalResults = await data.total_results;
     const genres = await getgenre();
     res.render("search-page", {
+      title,
       movies: searchedMovie,
       genres: genres,
       search: search,
@@ -288,6 +292,7 @@ async function getTrendingToday(){
   }
 }
 app.get("/about-us", async (req, res) => {
+  let title = "about what2watch.net";
   try {
     const trending = await getTrending();
     const header = await trending[0];
@@ -295,7 +300,8 @@ app.get("/about-us", async (req, res) => {
 
     res.render("about", {
       genres: genres,
-      header:header
+      header:header,
+      title
     });
   } catch (e) {
     console.log(e);
@@ -303,11 +309,13 @@ app.get("/about-us", async (req, res) => {
 });
 
 app.get("/privacy", async (req, res) => {
+  let title = "Privacy policy for what2watch.net";
   try {
     const genres = await getgenre();
 
     res.render("privacy", {
       genres: genres,
+      title
     });
   } catch (e) {
     console.log(e);
@@ -318,6 +326,7 @@ app.get("/privacy", async (req, res) => {
 
 //Get popular Movies
 app.get("/", async (req, res) => {
+  const title = "Movies to watch";
 
   
 
@@ -358,6 +367,7 @@ app.get("/", async (req, res) => {
       header:header,
       trending:trending,
       trendingToday:trendingToday,
+      title,
       genres: genres,
       page_num: page_num,
       pages:pages,
@@ -370,6 +380,7 @@ app.get("/", async (req, res) => {
 
 app.get("/:page", async (req, res) => {
   let page_num = parseInt(req.params.page);
+  const title = "Movies to watch";
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=" +
@@ -406,6 +417,7 @@ app.get("/:page", async (req, res) => {
       stories = stories.slice(0, 12);
     }
     res.render("home", {
+      title,
       headerMovies,
       headerVideos,
       topRated,

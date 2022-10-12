@@ -3,6 +3,26 @@
 <div class="side-drawer" data-simplebar>
     <i class="fas fa-times"></i>
     <div class="side-drawer-inner">
+        <div class="main-category discover-movies">
+            <div class="category-title">
+                <h2 class="discover">Menu</h2>
+            </div>
+            <div class="category-types">
+                <ul class="categories">
+                    <li> <a class="active-cat" href="/">Movies</a></li>
+                    <li> <a class="active-cat" href="/tv/tv-shows">Tv Shows</a></li>
+                    <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                    <% if(user){%>
+                    <% if(user.privilege === "admin"){%>
+                    <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% }else{%>
+                    <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <% } %>
+                    <% } %>
+                </ul>
+            </div>
+
+        </div>
       <div class="main-category discover-movies">
         <div class="category-title">
             <h2 class="discover">Discover</h2>

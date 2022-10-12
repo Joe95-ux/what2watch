@@ -44,6 +44,9 @@ h6 {
     font-weight: normal;
 }
 
+a{
+    text-decoration: none;
+}
 button {
     user-select: none;
 }
@@ -56,7 +59,7 @@ button {
 
 
 .navigation {
-    background-color: rgba(7, 7, 7, 0.4);
+    background-color: rgba(7, 7, 7, 0.7);
     position: absolute;
     top: 0;
     width: 100%;
@@ -1755,11 +1758,6 @@ ins{
 
 }
 
-@media screen and (max-width:900px) {
-    .synopsis-read-more {
-        display: none;
-    }
-}
 
 @media screen and (max-width:560px) {
 
@@ -3231,14 +3229,227 @@ h1.genre-intro {
     display: flex;
     width: 100%;
 }
+.hero-height{
+    height: 750px;
+    max-height: 79vh;
+}
+
+.hero-main{
+    position: absolute;
+    bottom: 1.2rem;
+    left: 0;
+    width: 700px;
+    max-width: calc(100% - 2rem);
+    color: #b0b2b4;
+}
+
+@media screen and (max-width:418px){
+    .hero-height{
+        height: 550px;
+        max-height: 85vh;
+    }
+    .hero-main{
+        left: 1rem;
+        right: 1rem;
+        bottom: 0rem;
+    }
+}
+
+.hero-title{
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--mainWhite);
+    line-height: 30px;
+}
+.hero-tagline{
+    margin-top: 16px;
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: italic;
+}
+.hero-dates{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin: 1.2rem 0;
+}
+.hero-dates a{
+    text-decoration: none;
+    color: var(--darkGrey);
+}
+.hero-dates .fa-star{
+    color: var(--primaryColor);
+    font-size: 15px;
+    margin-right: 5px;
+}
+.hero-dates span:not(:last-child){
+    padding-right:10px;
+    margin-right: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+}
+.hero-overview p{
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+}
+.hero-overview span.hero-read{
+    color: var(--mainWhite);
+    font-weight: 600;
+}
+
+.hero-trailer{
+    display: flex;
+    align-items: center;
+    margin-top: 1.2rem;
+}
+
+
+.hero-btn-wrapper{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.hero-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mainWhite);
+    background-color: var(--primaryColor);
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: var(--mainTransition);
+}
+.hero-btn:hover{
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero-trailer-span{
+    font-size: 16px;
+    color:var(--lightGrey);
+    font-weight: 400;
+    margin-left: 5px;
+}
+@media screen and (max-width:350px){
+    .hero-trailer{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .hero-trailer .trailer{
+        margin-bottom: 1rem;
+    }
+    .hero-trailer .hero-watch-banner{
+        margin-left: 0;
+    }
+}
+
+.hero-watch-banner{
+    margin-left: 20px;
+    background-color: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 0.8rem;
+    border-radius: 5px;
+    height: auto;
+    max-height: 50px;
+}
+.hero-watch-banner h4{
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--lightGrey);
+}
+
+@media screen and (max-width:418px){
+    .hero-watch-banner h4{
+        font-size: 15px;
+    }
+}
+.hero-watch-banner .hero-img{
+    border-radius: 5px;
+    max-width: 30px;
+    min-width: 28px;
+    max-height: 27px;
+    min-height: 25px;
+}
+
+.movie-synopsis h2{
+    font-size: 1.5rem;
+    color: var(--mainWhite);
+    font-weight: 500;
+    margin-bottom: 1.3rem;
+}
+
+.movie-synopsis .large-display-synopsis {
+    font-size: 18px;
+    font-weight: 400;
+    max-width: calc(100% - 2rem);
+    line-height: 1.6;
+    color: var(--lightGrey);
+}
+
+@media screen and (max-width:765px){
+    .movie-synopsis .large-display-synopsis{
+        max-width: 100%;
+    }
+}
+
+.measuring-wrapper{
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: "Roboto", sans-serif;
+}
+.details-list-wrapper{
+    margin: 1.4rem 0;
+    color: var(--lightGrey);
+}
+.details-list li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding: 0.2rem 0;
+}
+.details-list li div{
+    flex: 1;
+}
+.movie-links{
+    display: flex;
+    margin-top: 1rem;
+}
+.movie-links a{
+    color: var(--mainWhite);
+    font-size: 1.2rem;
+}
+.movie-links .web{
+    margin-right: 25px;
+}
+.details-list li:not(:last-child){
+    margin-bottom: 0.4rem;
+}
+.details-list .item-key{
+    margin-right: 25px;
+    max-width: 110px;
+}
+.details-list .item-value{
+    color: #C4DDFF;
+}
+
+.item-value a{
+    color: var(--mainWhite);
+}
 
 .single-movie-inner .swiper-btns {
     margin-top: 1rem;
 }
 
-.single-movie-content {
+.single-movie-content, .measuring-content {
     display: flex;
-    margin-top: 5rem;
 }
 
 
@@ -3256,8 +3467,8 @@ h1.genre-intro {
 
 .single-movie-card img {
     /* height: 100%; */
-    min-height: 400px;
-    width: 300px;
+    min-height: 528px;
+    width: 350px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -3343,6 +3554,9 @@ img.provider-img{
     display: flex;
     align-items: center;
 }
+.just-watch{
+    margin-top: 1rem;
+}
 
 .watch-title {
     justify-content: space-between;
@@ -3356,7 +3570,7 @@ img.provider-img{
 }
 
 .just-watch p {
-    font-size: 1rem;
+    font-size: 14px;
     margin-bottom: 0;
 }
 
@@ -3364,6 +3578,7 @@ img.provider-img{
     height: 25px;
     width: 100px;
     border-radius: 5px;
+    margin-left: 5px;
     object-fit: contain;
 }
 
@@ -3413,9 +3628,9 @@ img.provider-img{
 
 
 .provider h4 {
-    font-size: 1rem;
+    font-size: 15px;
     font-weight: 400;
-    color: var(--mainGrey);
+    color: var(--darkGrey);
 }
 
 .provider img {
@@ -3431,9 +3646,7 @@ img.provider-img{
     display: flex;
 }
 
-.crews-bottom {
-    display: none;
-}
+
 
 .crews-bottom-wrapper {
     margin-top: 1rem;
@@ -3445,23 +3658,15 @@ img.provider-img{
     }
 }
 
-@media screen and (max-width:900px) {
-    .crews-top {
-        display: none;
-    }
-
-    .crews-bottom {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0;
-    }
-
-    .crews-bottom .director:not(:last-child) {
-        margin-bottom: 10px;
-    }
-
+.crews-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
 }
 
+.crews-bottom .director:not(:last-child) {
+    margin-bottom: 10px;
+}
 .director:not(:last-child) {
     margin-right: 2.5rem;
 }
@@ -3624,7 +3829,7 @@ img.provider-img{
 /* more movie info */
 
 #more-movie-info {
-    padding: 3% 0 0;
+    padding: 2rem 0 0;
     background: #001019;
     position: relative;
     overflow: hidden;
@@ -3721,7 +3926,6 @@ img.provider-img{
 }
 
 .seasons-wrapper{
-    overflow-x:auto;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     border-top: 1px solid rgba(255, 255, 255, 0.2);;
 }
@@ -3738,10 +3942,10 @@ img.provider-img{
     margin-right: 10px;
     white-space: nowrap;
     cursor: pointer;
-    -webkit-transition: all 1.4s 1.1s ease;
-    -moz-transition: all 1.4s 1.1s ease;
-    -o-transition: all 1.4s 1.1s ease;
-    transition: all 1.4s 1.1s ease;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
     
 }
 
@@ -3878,7 +4082,7 @@ img.provider-img{
     cursor: pointer;
     white-space: nowrap;
 }
-.more i, .less i{
+.more i, .less i, .hero-read i{
     font-size: 12px;
     position: relative;
     margin-left: 2px;
@@ -4031,9 +4235,6 @@ img.provider-img{
         width: 100%;
     }
 
-    .similarmovies-container {
-        display: none;
-    }
 
     .chevron-left {
         left: -15px
@@ -4045,26 +4246,11 @@ img.provider-img{
 
 }
 
-@media screen and (min-width:1440px) {
-    .similarmovies-container-fluid {
-        display: none;
-    }
-
-}
-
-@media screen and (max-width:900px) {
+/* @media screen and (max-width:900px) {
     .movie-storyline {
         height: inherit;
     }
-
-    .large-display-synopsis {
-        display: none;
-    }
-
-    .small-display-synopsis {
-        display: block;
-    }
-}
+} */
 
 @media screen and (max-width:418px) {
     .navigation {
@@ -4110,11 +4296,6 @@ img.provider-img{
     transition: all 0.5s;
 }
 
-.movie-synopsis p {
-    font-size: 1.3rem;
-    font-weight: 400;
-    line-height: 1.6;
-}
 
 .movie-cast {
     margin-bottom: 2rem;
@@ -4125,7 +4306,6 @@ img.provider-img{
 }
 
 .movie-cast h2,
-.movie-synopsis h2,
 .small-screen-carousel h2,
 #reviews-container h2 {
     border-left: 2px solid var(--primaryColor);
@@ -4138,19 +4318,25 @@ img.provider-img{
 }
 
 .small-display-details {
-    display: none;
+    
     color: var(--mainWhite);
 }
 
 
+
 .small-display-details h4,
 .watch-providers-sm h2 {
-    font-size: 1.2rem;
-    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
     font-weight: 400;
     margin-bottom: 5px;
     color: var(--mainWhite);
     text-transform: capitalize;
+}
+
+.watch-providers-sm h2{
+    margin-bottom: 1.3rem;
+    font-size: 1.2rem;
+
 }
 
 .sub-detail {
@@ -4213,49 +4399,40 @@ img.provider-img{
 }
 
 .watch-providers-sm {
-    display: none;
+    margin-top: 1.5rem;
 }
 
-.watch-providers-sm h2 {
-    margin-bottom: 0.68rem;
-    color: var(--yellow);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 3px;
-    background-color: #1b212c;
-    border-radius: 5px;
-    text-align: center;
+
+
+.watch-providers-sm {
+    display: block;
+    color: var(--mainWhite);
+    margin-bottom: 1.5rem;
+}
+.bottom-border{
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.watch-providers-sm a {
+    text-decoration: none;
+}
+
+.watch-providers-sm p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.small-display-details {
+    margin: 0.8rem 0 0.8rem;
+    display: block;
+    text-align: left;
 }
 
 
 @media screen and (max-width:900px) {
-    .watch-providers-sm {
-        display: block;
-        color: var(--mainWhite);
-        margin-bottom: 1.5rem;
-    }
 
-    .watch-providers-sm a {
-        text-decoration: none;
-    }
-
-    .watch-providers-sm p {
-        font-size: 1rem;
-        color: #ccc;
-        margin-bottom: 10px;
-    }
-
-    .small-display-details {
-        margin: 0.8rem 0 0.8rem;
-        display: block;
-        text-align: left;
-    }
-
-    .top-lang .language,
-    .top-genres {
-        display: none;
-    }
-
-    .small-display-details .crews-bottom {
+     .crews-bottom {
         margin-top: 0.68rem;
         flex-wrap: wrap;
     }
