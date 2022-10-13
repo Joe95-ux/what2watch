@@ -219,7 +219,15 @@
                             <span>
                                 <a href="/tv/genres/<%= genre.name %>"><%= genre.name %></a></span>
                             <% } %>
-                        <span class="content-rating"><%= cert.rating %> </span>
+                            <% if (cert === undefined){%>
+                                <span><i
+                                    class="fas fa-star"></i><span><%= movie.vote_average %></span></span>
+                                
+
+                            <% } else{%>
+                                <span class="content-rating"><%= cert %> </span>
+                                
+                                <% } %>   
                     </div>
                     <div class="hero-overview">
                         <p class="clamp-synopsis">
@@ -233,17 +241,28 @@
                             <div class="hero-btn-wrapper trailer" data-source="https://www.youtube.com/embed/<%= trailer?.key %>">
                                 <button class="hero-btn"><i class="fas fa-play"></i></button><span class="hero-trailer-span">Trailer</span>
                             </div>
+                            <%if(watch){%>
+                                <a href="<%= watch.link%>" target="_blank">
+                                    <div class="hero-watch-banner">
+                                        <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                        <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                        
+                                    </div>
+                                </a>
+                            <% } %>
 
-                        <% } %> 
-                        <%if(watch){%>
-                            <a href="<%= watch.link%>" target="_blank">
-                                <div class="hero-watch-banner">
-                                    <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                                    <div><h4>Watch on <%= provider.provider_name %></h4></div>
-                                    
-                                </div>
-                            </a>
-                        <% } %>
+                        <% }else{%>
+                            <%if(watch){%>
+                                <a href="<%= watch.link%>" target="_blank">
+                                    <div class="hero-watch-banner" style="margin-left: 0;">
+                                        <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                        <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                        
+                                    </div>
+                                </a>
+                            <% } %>
+                        <% } %>  
+                        
                         
                     </div>
                     
