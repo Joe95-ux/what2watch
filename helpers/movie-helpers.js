@@ -125,7 +125,8 @@ module.exports = {
   getcert: function getCert(certs){
     if(certs.length){
       let cert = certs.find(cert => cert.iso_3166_1 === "US");
-      cert = cert.rating;
+      let certAlt = certs[0];
+      cert = cert?.rating || certAlt?.rating;
       return cert;
     }
     
