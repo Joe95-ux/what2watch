@@ -121,6 +121,14 @@ module.exports = {
       return networkList;
     }
     
+  },
+  getcert: function getCert(certs){
+    if(certs.length){
+      let cert = certs.find(cert => cert.iso_3166_1 === "US");
+      return cert;
+    }
+    
+    
   }
   
   

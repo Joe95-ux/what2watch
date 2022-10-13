@@ -3296,6 +3296,12 @@ h1.genre-intro {
     margin-right: 5px;
 }
 
+.content-rating{
+    padding: 2px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    font-size: 15px;
+}
 
 .hero-dates a{
     text-decoration: none;
@@ -3461,7 +3467,7 @@ h1.genre-intro {
 }
 .movie-links a{
     color: var(--mainWhite);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 .movie-links .web{
     margin-right: 25px;

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
 const _ = require("lodash");
-const {getTrailer, getNetworks, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
+const {getTrailer, getcert, getNetworks, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
@@ -335,11 +335,13 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
         movieId +
         "?api_key=" +
         apiKey +
-        "&append_to_response=videos,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US"
+        "&append_to_response=videos,content_ratings,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US"
     );
     const movie = await response.json();
     const movieTitle = await movie.name;
     const tvNetworks = await movie.networks;
+    const certs = await movie.content_ratings.results;
+    const cert = getcert(certs);
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLanguage(languages);
@@ -384,6 +386,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       similar:similarMovies,
       provider,
       network,
+      cert,
       tvGenres,
       episodes
     });
