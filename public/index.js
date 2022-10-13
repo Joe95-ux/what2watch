@@ -300,6 +300,7 @@ function trailerController() {
           "*"
         );
       });
+      video.src = "";
       trailerContainer.classList.remove("active-trailer");
     });
   }
@@ -311,6 +312,7 @@ function trailerController() {
           "*"
         );
       });
+      video.src = "";
       trailerContainer.classList.remove("active-trailer");
     }
   };
