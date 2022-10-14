@@ -3395,6 +3395,7 @@ h1.genre-intro {
     margin-left: 20px;
     background-color: inherit;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: crosshair;
     display: flex;
     align-items: center;
     padding: 0.2rem 0.8rem;

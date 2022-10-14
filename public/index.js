@@ -5,7 +5,7 @@ const smallSearchBar = document.querySelector(".small-screen-search");
 const smallSearchInput = document.querySelector(".small-search");
 const closeSmallSearch = document.querySelector(".close-sm-search");
 const movieSynopsis = document.querySelector(".movie-synopsis");
-const openSynopsis = document.querySelector(".open-synopsis");
+const openSynopsis = [ ...document.querySelectorAll(".hero-collapse")];
 const headerSynopsis = document.querySelector(".synopsis");
 const returnBtns = document.querySelectorAll(".go-back");
 const trailerBtn = document.querySelector(".trailer");
@@ -212,16 +212,20 @@ revealPass();
 //toggle synopsis and bio container
 function openSynopsisContainer() {
   if (openSynopsis !== null) {
-    openSynopsis.addEventListener("click", () => {
-      if (movieSynopsis.clientHeight) {
-        movieSynopsis.style.height = 0;
-        movieSynopsis.style.marginBottom = 0;
-      } else {
-        let wrapper = document.querySelector(".measuring-wrapper");
-        movieSynopsis.style.height = wrapper.clientHeight + "px";
-        movieSynopsis.style.marginBottom = "1.5rem";
-      }
-    });
+    openSynopsis.forEach(drop=>{
+      drop.addEventListener("click", () => {
+        if (movieSynopsis.clientHeight) {
+          movieSynopsis.style.height = 0;
+          movieSynopsis.style.marginBottom = 0;
+        } else {
+          let wrapper = document.querySelector(".measuring-wrapper");
+          movieSynopsis.style.height = wrapper.clientHeight + "px";
+          movieSynopsis.style.marginBottom = "1.5rem";
+        }
+      });
+
+    })
+    
   }
 }
 openSynopsisContainer();

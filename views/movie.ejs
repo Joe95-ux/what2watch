@@ -220,7 +220,7 @@
                                                 <%= movie.overview%>
                                                 
                                             </p>
-                                            <span class="hero-read open-synopsis synopsis-read-more">More<i class="fas fa-chevron-down"></i></span>
+                                            <span class="hero-read hero-collapse open-synopsis synopsis-read-more">More<i class="fas fa-chevron-down"></i></span>
                                         </div>
                                         <div class="hero-trailer">
                                             <% if(movie.videos.results.length > 0){%>
@@ -228,24 +228,20 @@
                                                     <button class="hero-btn"><i class="fas fa-play"></i></button><span class="hero-trailer-span">Trailer</span>
                                                 </div>
                                                 <%if(watch){%>
-                                                    <a href="<%= watch.link%>" target="_blank">
-                                                        <div class="hero-watch-banner">
-                                                            <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                                                            <div><h4>Watch on <%= provider.provider_name %></h4></div>
-                                                            
-                                                        </div>
-                                                    </a>
+                                                    <div class="hero-watch-banner hero-collapse">
+                                                        <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                                        <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                                        
+                                                    </div>
                                                 <% } %>
                     
                                             <% }else{%>
                                                 <%if(watch){%>
-                                                    <a href="<%= watch.link%>" target="_blank">
-                                                        <div class="hero-watch-banner" style="margin-left: 0;">
-                                                            <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                                                            <div><h4>Watch on <%= provider.provider_name %></h4></div>
-                                                            
-                                                        </div>
-                                                    </a>
+                                                    <div class="hero-watch-banner hero-collapse" style="margin-left: 0;">
+                                                        <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                                        <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                                        
+                                                    </div>
                                                 <% } %>
                                             <% } %>  
                                             
@@ -298,14 +294,12 @@
                                                         <img src="/poster-alt.png" alt="movie-poster">
                                                         <% } %>
                                                         <%if(watch){%>
-                                                            <a href="<%= watch.link%>" target="_blank">
-                                                                <div class="watch-banner">
-                                                                    <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                                                                    <div>
-                                                                    <h4>Watch on <%= provider.provider_name %></h4></div>
-                                                            
-                                                                </div> 
-                                                            </a>
+                                                            <div class="watch-banner">
+                                                                <img class="provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                                                <div>
+                                                                <h4>Watch on <%= provider.provider_name %></h4></div>
+                                                        
+                                                            </div> 
                                                         
                                                         <% } %>
                                                     </div>
@@ -389,119 +383,33 @@
                             
                                                     </div>
                                                 </div>
-                                                <div class="justwatch-wrapper">
-                                                    <div data-jw-widget
-                                                        data-api-key="<%= justwatchToken %> "
-                                                        data-object-type="movie"                 
-                                                        data-id="<%= movie.id %>"
-                                                        data-id-type="tmdb"
-                                                        data-offer-label="price"
-                                                        data-no-offers-message="Oopsy daisy, no offers for <%= movie.title %>  at this time!"
-                                                        data-title-not-found-message="Oopsy daisy, no offers at this time!"
-                                                        data-theme="dark"
-                                                        >
-                                                    </div>
-                                                    <div>
-                                                        <a style="font-size: 11px; font-family: sans-serif; color: white; text-decoration: none;" target="_blank" data-original="https://www.justwatch.com/us" href="https://www.justwatch.com/de/Film/<%= movie.title %>">
-                                                          Powered by
-                                                          <span style="display: -moz-inline-box; display: inline-block; width: 66px; height: 10px; margin-left: 3px; background: url(https://widget.justwatch.com/assets/JW_logo_color_10px.svg); overflow: hidden; text-indent: -3000px;">JustWatch</span>
-                                                       </a>
-                                                    </div>
-
-                                                    <script async src="https://widget.justwatch.com/justwatch_widget.js"></script>
-
-                                                </div>
+                                                
 
                                                 <% if(watch){%>
                                                     <div class="watch-providers-sm bottom-border">
                                                         <h2>Stream and watch <%= movie.title %> </h2>
-                                                        <a href="<%= watch.link%>" target="_blank">
-                                                            <div class="embla cast-container">
-                                                                <div class="embla__viewport">
-                                                                    <div class="embla__container">
-                                                                        <% if(watch.rent) {%>
-                                                                        <% for(let provider of watch.rent){%>
-                                                                        <div class="embla__slide" style="margin-right: 30px;">
-                                                                            <div class="provider embla__slide__inner">
-                                                                                <h4>Rent</h4>
-                                                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                                    alt="<%= provider.provider_name %>"
-                                                                                    title="Rent <%= movie.title %> on <%= provider.provider_name %>">
-                                                                            </div>
-                                                                        </div>
-                                                                        <% } %>
-                                                                        <% } %>
-                                                                        <% if(watch.buy){%>
-                                                                        <% for(let provider of watch.buy){%>
-                                                                        <div class="embla__slide" style="margin-right: 30px;">
-                                                                            <div class="provider embla__slide__inner">
-                                                                                <h4>Buy</h4>
-                                                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                                    alt="<%= provider.provider_name %>"
-                                                                                    title="Buy <%= movie.title %> on <%= provider.provider_name %>">
-                                                                            </div>
-                                        
-                                                                        </div>
-                                                                        <% } %>
-                                        
-                                                                        <% } %>
-                                                                        <% if(watch.flatrate) {%>
-                                                                        <% for(let provider of watch.flatrate){%>
-                                                                        <div class="embla__slide" style="margin-right: 30px;">
-                                                                            <div class="provider embla__slide__inner">
-                                                                                <h4>Stream</h4>
-                                                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                                    alt="<%= provider.provider_name %>"
-                                                                                    title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                                                            </div>
-                                                                        </div>
-                                                                        <% } %>
-                                        
-                                                                        <% } %>
-                                                                        <% if(watch.ads) {%>
-                                                                        <% for(let provider of watch.ads){%>
-                                                                        <div class="embla__slide">
-                                                                            <div class="provider embla__slide__inner">
-                                                                                <h4>Ads</h4>
-                                                                                <img src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path %>"
-                                                                                    alt="<%= provider.provider_name %>"
-                                                                                    title="Stream <%= movie.title %> on <%= provider.provider_name %>">
-                                                                            </div>
-                                        
-                                                                        </div>
-                                                                        <% } %>
-                                        
-                                                                        <% } %>
-                                        
-                                        
-                                                                    </div>
-                                        
-                                                                </div>
-                                                                <button class="embla__button embla__button--prev" type="button"
-                                                                    style="display: none;">
-                                                                    <svg class="embla__button__svg"
-                                                                        viewBox="137.718 -1.001 366.563 643.999">
-                                                                        <path
-                                                                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </button>
-                                                                <button class="embla__button embla__button--next" type="button"
-                                                                    style="display: none;">
-                                                                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                                                                        <path
-                                                                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </button>
-                                        
+                                                        <div class="justwatch-wrapper">
+                                                            <div data-jw-widget
+                                                                data-api-key="kdXlICVx4d6qwyZYSThFxvVKAhQtwtqY"
+                                                                data-object-type="movie"                 
+                                                                data-id="<%= movie.imdb_id %>"
+                                                                data-id-type="imdb"
+                                                                data-offer-label="price"
+                                                                data-no-offers-message="Oopsy daisy, no offers for <%= movie.title %>  at this time!"
+                                                                data-title-not-found-message="Oopsy daisy, no offers at this time!"
+                                                                data-theme="dark"
+                                                                >
                                                             </div>
-                                        
-                                                        </a>
-                                                        <div class="just-watch">
-                                                            <p>Powered by</p>
-                                                            <img src="/justwatch-logo.png" alt="just-watch">
+                                                            
+                                                            <div>
+                                                                <a style="font-size: 11px; font-family: sans-serif; color: white; text-decoration: none;" target="_blank" data-original="https://www.justwatch.com/" href="https://www.justwatch.com/de/Film/<%= movie.title %>">
+                                                                  Powered by
+                                                                  <span style="display: -moz-inline-box; display: inline-block; width: 66px; height: 10px; margin-left: 3px; background: url(https://widget.justwatch.com/assets/JW_logo_color_10px.svg); overflow: hidden; text-indent: -3000px;">JustWatch</span>
+                                                               </a>
+                                                            </div>
+        
                                                         </div>
+                                                        
                                         
                                                     </div>
                                                     <% } %>

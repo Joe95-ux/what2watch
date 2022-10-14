@@ -279,7 +279,7 @@ async function getWatchProviders(movieId) {
         apiKey
     );
     const data = await response.json();
-    const results = await data.results.US;
+    const results = await data?.results?.US;
     if(results){
       provider = getSingleProvider(results);
     }
