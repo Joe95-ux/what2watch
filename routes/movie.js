@@ -6,6 +6,7 @@ const router = express.Router();
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
+const justwatchToken = process.env.JUSTWATCH_API_KEY;
 let page_num = 1;
 const url =
   "https://api.themoviedb.org/3/movie/popular?api_key=" +
@@ -292,6 +293,7 @@ router.get("/:movie_id", async (req, res) => {
     res.render("movie", {
       movie: movie,
       watch: watchProviders,
+      justwatchToken,
       provider,
       title: title,
       spokenLanguages: spokenLanguages,
@@ -364,6 +366,7 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     res.render("movie", {
       movie: movie,
       watch: watchProviders,
+      justwatchToken,
       provider,
       title: title,
       spokenLanguages: spokenLanguages,
