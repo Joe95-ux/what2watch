@@ -388,34 +388,32 @@
                                                 </div>
                                                 
 
-                                                <% if(watch){%>
-                                                    <div class="watch-providers-sm bottom-border">
-                                                        <h2>Stream and watch <%= movie.title %> </h2>
-                                                        <div class="justwatch-wrapper">
-                                                            <div data-jw-widget
-                                                                data-api-key="kdXlICVx4d6qwyZYSThFxvVKAhQtwtqY"
-                                                                data-object-type="movie"                 
-                                                                data-id="<%= movie.imdb_id %>"
-                                                                data-id-type="imdb"
-                                                                data-offer-label="price"
-                                                                data-no-offers-message="Oopsy daisy, no offers for <%= movie.title %>  at this time!"
-                                                                data-title-not-found-message="Oopsy daisy, no offers at this time!"
-                                                                data-theme="dark"
-                                                                >
-                                                            </div>
-                                                            
-                                                            <div>
-                                                                <a style="font-size: 11px; font-family: sans-serif; color: white; text-decoration: none;" target="_blank" data-original="https://www.justwatch.com/" href="https://www.justwatch.com/de/Film/<%= movie.title %>">
-                                                                  Powered by
-                                                                  <span style="display: -moz-inline-box; display: inline-block; width: 66px; height: 10px; margin-left: 3px; background: url(https://widget.justwatch.com/assets/JW_logo_color_10px.svg); overflow: hidden; text-indent: -3000px;">JustWatch</span>
-                                                               </a>
-                                                            </div>
-        
+                                                <div class="watch-providers-sm bottom-border">
+                                                    <h2>Stream and watch <%= movie.title %> </h2>
+                                                    <div class="justwatch-wrapper">
+                                                        <div data-jw-widget
+                                                            data-api-key="kdXlICVx4d6qwyZYSThFxvVKAhQtwtqY"
+                                                            data-object-type="movie"                 
+                                                            data-id="<%= movie.imdb_id %>"
+                                                            data-id-type="imdb"
+                                                            data-offer-label="price"
+                                                            data-no-offers-message="Oopsy daisy, no offers for <%= movie.title %>  at this time!"
+                                                            data-title-not-found-message="Oopsy daisy, no offers at this time!"
+                                                            data-theme="dark"
+                                                            >
                                                         </div>
                                                         
-                                        
+                                                        <div>
+                                                            <a style="font-size: 11px; font-family: sans-serif; color: white; text-decoration: none;" target="_blank" data-original="https://www.justwatch.com/" href="https://www.justwatch.com/de/Film/<%= movie.title %>">
+                                                              Powered by
+                                                              <span style="display: -moz-inline-box; display: inline-block; width: 66px; height: 10px; margin-left: 3px; background: url(https://widget.justwatch.com/assets/JW_logo_color_10px.svg); overflow: hidden; text-indent: -3000px;">JustWatch</span>
+                                                           </a>
+                                                        </div>
+    
                                                     </div>
-                                                    <% } %>
+                                                    
+                                    
+                                                </div>
                             
                                             </div>
                                         </div>
