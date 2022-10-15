@@ -325,6 +325,22 @@ function getSeasons(seasons){
   return series;
 }
 
+// get external Id
+async function getExternalId(id){
+  let url = `https://api.themoviedb.org/3/tv/${id}/external_ids?api_key=${apiKey}&language=en-US`;
+  try{
+    const response = await fetch(url);
+    const result = await response.json();
+    let imdb;
+    if(result?.imdb_id){
+      imdb = result?.imdb_id;
+    }
+    return imdb;
+  }catch(e){
+    console.log(e)
+  }
+}
+
 
 //get a movie by id
 router.get("/tv-shows/:movie_id", async (req, res) => {
@@ -342,6 +358,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const tvNetworks = await movie.networks;
     const certs = await movie.content_ratings.results;
     const cert = getcert(certs);
+    const imdb = await getExternalId(movie.id);
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLanguage(languages);
@@ -373,6 +390,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       movie: movie,
       watch: watchProviders,
       title: title,
+      imdb,
       spokenLanguages: spokenLanguages,
       genres: genres,
       seasons: realSeasons,

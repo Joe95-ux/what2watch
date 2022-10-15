@@ -212,8 +212,7 @@
                                                 <span>
                                                     <a href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></span>
                                                 <% } %>
-                                            <span><i
-                                                class="fas fa-star"></i><span><%= movie.vote_average %></span></span>
+                                            <span><span><%= runTime %></span></span>
                                         </div>
                                         <div class="hero-overview">
                                             <p class="clamp-synopsis">
@@ -341,6 +340,10 @@
                                                                     <li>
                                                                         <div class="item-key">Language</div>
                                                                         <div class="item-value"><%= spokenLanguages%></div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="item-key">Vote Average</div>
+                                                                        <div class="item-value"><%= movie.vote_average%></div>
                                                                     </li>
                                                                     <li>
                                                                         <div class="item-key">Production</div>
