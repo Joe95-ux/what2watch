@@ -251,13 +251,11 @@
 
                         <% }else{%>
                             <%if(watch){%>
-                                <a href="<%= watch.link%>" target="_blank">
-                                    <div class="hero-watch-banner" style="margin-left: 0;">
-                                        <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
-                                        <div><h4>Watch on <%= provider.provider_name %></h4></div>
-                                        
-                                    </div>
-                                </a>
+                                <div class="hero-watch-banner hero-collapse" style="margin-left: 0;">
+                                    <img class="hero-img provider-img" src="https://image.tmdb.org/t/p/w500/<%= provider.logo_path%> " alt="<%= provider.provider_name %>">
+                                    <div><h4>Watch on <%= provider.provider_name %></h4></div>
+                                    
+                                </div>
                             <% } %>
                         <% } %>  
                         
