@@ -131,6 +131,12 @@ module.exports = {
     }
     
     
+  },
+  getRev: function getRev(rev){
+    if(rev > 0){
+      return rev.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+
+    }
   }
   
   

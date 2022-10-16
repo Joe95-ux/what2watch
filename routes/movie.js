@@ -1,7 +1,7 @@
 const express = require("express");
 const { parseInt } = require("lodash");
 const fetch = require("node-fetch");
-const {getTrailer, getNetworks, getSpokenLanguage, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
+const {getTrailer, getRev, getNetworks, getSpokenLanguage, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
 const router = express.Router();
 
 const apiKey = process.env.API_KEY;
@@ -260,6 +260,10 @@ router.get("/:movie_id", async (req, res) => {
     );
     const movie = await response.json();
     const movieTitle = await movie.title;
+    let revenue = await movie.revenue;
+    revenue = getRev(revenue);
+    let budget = await movie.budget;
+    budget = getRev(budget);
     const movieNetworks = await movie.production_companies;
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
@@ -292,6 +296,8 @@ router.get("/:movie_id", async (req, res) => {
 
     res.render("movie", {
       movie: movie,
+      revenue,
+      budget,
       watch: watchProviders,
       justwatchToken,
       provider,
@@ -333,6 +339,10 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     );
     const movie = await response.json();
     const movieTitle = await movie.title;
+    let revenue = await movie.revenue;
+    revenue = getRev(revenue);
+    let budget = await movie.budget;
+    budget = getRev(budget);
     const movieNetworks = await movie.production_companies;
     const genreList = await movie.genres;
     const languages = await movie.spoken_languages;
@@ -365,6 +375,8 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
 
     res.render("movie", {
       movie: movie,
+      revenue,
+      budget,
       watch: watchProviders,
       justwatchToken,
       provider,
