@@ -283,7 +283,7 @@ router.get("/:movie_id", async (req, res) => {
     const reviews = await movie.reviews.results;
     const recommendedData = await getRecommended(movieId, page_num);
     let totalPages, totalResults, recommendedMovies;
-    if(recommendedData.length){
+    if(recommendedData?.length){
       totalPages = await recommendedData.total_pages;
       totalResults = await recommendedData.total_results;
       recommendedMovies = await recommendedData.results;
