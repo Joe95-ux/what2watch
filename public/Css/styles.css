@@ -2273,9 +2273,7 @@ a.learn-more {
 }
 
 .page-intro p {
-    font-size: 1.4rem;
-    border-left: 3px solid var(--yellow);
-    padding-left: 5px;
+    font-size: 1.25rem;
     color: #ccc;
 }
 
@@ -3958,6 +3956,10 @@ img.provider-img{
     .seasons-enclosure{
         margin: 0 0 1.5rem;
     }
+}
+
+.guide-wrapper{
+    margin-bottom: 1rem;
 }
 
 .seasons-wrapper ul{

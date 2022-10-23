@@ -36,8 +36,7 @@ async function getGenreList(name){
           "https://api.themoviedb.org/3/discover/tv?api_key=" +
             apiKey +
             "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
-            id +
-            "&with_watch_monetization_types=free"
+            id
         );
         const data = await response.json();
         const genreMovies = await data.results;

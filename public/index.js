@@ -5,7 +5,7 @@ const smallSearchBar = document.querySelector(".small-screen-search");
 const smallSearchInput = document.querySelector(".small-search");
 const closeSmallSearch = document.querySelector(".close-sm-search");
 const movieSynopsis = document.querySelector(".movie-synopsis");
-const openSynopsis = [ ...document.querySelectorAll(".hero-collapse")];
+const openSynopsis = [...document.querySelectorAll(".hero-collapse")];
 const headerSynopsis = document.querySelector(".synopsis");
 const returnBtns = document.querySelectorAll(".go-back");
 const trailerBtn = document.querySelector(".trailer");
@@ -34,7 +34,9 @@ const clearViewInfo = document.querySelector(".view-info-header a");
 const profileInput = document.getElementById("profile-pic");
 const simpleBarContainer = document.getElementById("simple-bar");
 const episodesWrapper = document.querySelector(".season-contents");
-const seasons = [...document.querySelectorAll(".season")];
+const seasons = [...document.querySelectorAll(".current-season")];
+const recommendList = [...document.querySelectorAll(".roller-item")];
+const recWrapper = document.querySelector(".rec-media-wrapper");
 const multiSearch = document.querySelector(".multi-search-modal");
 const searchTrigger = document.querySelector(".search-trigger");
 const multiSearchInput = document.querySelector(".multi-search");
@@ -135,19 +137,17 @@ const navSlide = () => {
 navSlide();
 
 //multi search trigger
-function triggerMultiSearch(){
-  if(searchTrigger !== null){
-    searchTrigger.addEventListener("click", function(){
+function triggerMultiSearch() {
+  if (searchTrigger !== null) {
+    searchTrigger.addEventListener("click", function() {
       multiSearch.classList.add("active-multi-search");
       multiSearchInput.focus();
-
-    })
-    cancelMultiSearch.addEventListener("click", function(){
-      multiSearch.classList.remove("active-multi-search");
-
-    })
-    
-
+    });
+    if (cancelMultiSearch !== null) {
+      cancelMultiSearch.addEventListener("click", function() {
+        multiSearch.classList.remove("active-multi-search");
+      });
+    }
   }
 }
 triggerMultiSearch();
@@ -212,7 +212,7 @@ revealPass();
 //toggle synopsis and bio container
 function openSynopsisContainer() {
   if (openSynopsis !== null) {
-    openSynopsis.forEach(drop=>{
+    openSynopsis.forEach(drop => {
       drop.addEventListener("click", () => {
         if (movieSynopsis.clientHeight) {
           movieSynopsis.style.height = 0;
@@ -223,9 +223,7 @@ function openSynopsisContainer() {
           movieSynopsis.style.marginBottom = "1.5rem";
         }
       });
-
-    })
-    
+    });
   }
 }
 openSynopsisContainer();
@@ -279,7 +277,9 @@ smallScreenSynopsis();
 function trailerController() {
   if (trailerBtn !== null) {
     trailerBtn.addEventListener("click", () => {
-      video.src = trailerBtn.dataset.source + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
+      video.src =
+        trailerBtn.dataset.source +
+        "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
       trailerContainer.classList.toggle("active-trailer");
     });
   }
@@ -289,7 +289,9 @@ function trailerController() {
     for (let trailer of headerTrailer) {
       trailer.addEventListener("click", () => {
         videoSource = trailer.dataset.source;
-        video.src = videoSource + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
+        video.src =
+          videoSource +
+          "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
     }
@@ -326,7 +328,9 @@ function trailerController() {
     for (let icon = 0; icon < playIcons.length; icon++) {
       playIcons[icon].addEventListener("click", () => {
         const videoSource = playIcons[icon].dataset.source;
-        video.src = videoSource + "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
+        video.src =
+          videoSource +
+          "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
         trailerContainer.classList.toggle("active-trailer");
       });
     }
@@ -516,6 +520,8 @@ function accToggler() {
 }
 accToggler();
 
+
+
 function seasonHandler() {
   if (seasons.length) {
     seasons[0].classList.add("active-season");
@@ -567,14 +573,15 @@ function showMoreHandler() {
   for (let btn of more) {
     btn.addEventListener("click", function() {
       btn.parentElement.style.maxHeight = 0;
-      btn.parentElement.nextElementSibling.style.maxHeight = btn.parentElement.nextElementSibling.scrollHeight + "px" ;
-      
+      btn.parentElement.nextElementSibling.style.maxHeight =
+        btn.parentElement.nextElementSibling.scrollHeight + "px";
     });
   }
   for (let btn of less) {
     btn.addEventListener("click", function() {
       btn.parentElement.style.maxHeight = 0;
-      btn.parentElement.previousElementSibling.style.maxHeight = btn.parentElement.previousElementSibling.scrollHeight + "px" ;
+      btn.parentElement.previousElementSibling.style.maxHeight =
+        btn.parentElement.previousElementSibling.scrollHeight + "px";
     });
   }
 }
@@ -587,27 +594,43 @@ function createEpisode(episodes) {
   for (let i = 0; i < episodes.length; i++) {
     output += `
     <div class="episode-details">
-                                <img src="https://image.tmdb.org/t/p/w500/${episodes[i].still_path} " alt="${episodes[i].name}">
+                                <img src="https://image.tmdb.org/t/p/w500/${episodes[
+                                  i
+                                ].still_path} " alt="${episodes[i].name}">
                                 <div class="episode-info">
-                                    <h3>${episodes[i].episode_number}. ${episodes[i].name}</h3>
-                                    <div class="episode-overview incomplete">${episodes[i].overview.length > 102 ? episodes[i].overview.substr(0, 102) + `...` : episodes[i].overview} ${episodes[i].overview.length > 102 ? `<span data-more class="more">More<i class="fas fa-chevron-down"></i></span>`:""}</div>
-                                    <div class="episode-overview complete">${episodes[i].overview}<span data-less class="less">Less<i class="fas fa-chevron-up"></i></span></div>
-                                    <h5>${episodes[i].runtime ? `<span class="left-bold">${episodes[i].runtime} mins</span>`: ""}
-                                    <span class="right-span">${episodes[i].air_date}</span></h5>
+                                    <h3>${episodes[i]
+                                      .episode_number}. ${episodes[i].name}</h3>
+                                    <div class="episode-overview incomplete">${episodes[
+                                      i
+                                    ].overview.length > 102
+                                      ? episodes[i].overview.substr(0, 102) +
+                                        `...`
+                                      : episodes[i].overview} ${episodes[i]
+      .overview.length > 102
+      ? `<span data-more class="more">More<i class="fas fa-chevron-down"></i></span>`
+      : ""}</div>
+                                    <div class="episode-overview complete">${episodes[
+                                      i
+                                    ]
+                                      .overview}<span data-less class="less">Less<i class="fas fa-chevron-up"></i></span></div>
+                                    <h5>${episodes[i].runtime
+                                      ? `<span class="left-bold">${episodes[i]
+                                          .runtime} mins</span>`
+                                      : ""}
+                                    <span class="right-span">${episodes[i]
+                                      .air_date}</span></h5>
                                 </div>
         
                             </div>
   
   `;
   }
-  if(episodes.length){
+  if (episodes.length) {
     episodesWrapper.innerHTML =
-    output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
-
-  }else{
+      output + "<div></div>" + "<div></div>" + "<div></div>" + "<div></div>";
+  } else {
     episodesWrapper.innerHTML = "<h2>No Episodes yet</h2>";
   }
-  
 }
 
 seasonHandler();
