@@ -376,7 +376,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const similarMovies = await movie.similar.results;
     const getProviders = await getWatchProviders(movieId);
     let watchProviders, provider;
-    if(getProviders?.length){
+    if(getProviders){
       watchProviders = getProviders.results;
       provider = getProviders.provider;
     }
