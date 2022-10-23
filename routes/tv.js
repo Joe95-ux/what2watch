@@ -375,8 +375,11 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const recommendedMovies = await movie.recommendations.results;
     const similarMovies = await movie.similar.results;
     const getProviders = await getWatchProviders(movieId);
-    const watchProviders = getProviders.results;
-    const provider = getProviders.provider;
+    let watchProviders, provider;
+    if(getProviders?.length){
+      watchProviders = getProviders.results;
+      provider = getProviders.provider;
+    }
     const seasons = await movie.seasons;
     const realSeasons = getSeasons(seasons);
     const season1 = await realSeasons[0].season_number
