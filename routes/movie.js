@@ -293,8 +293,12 @@ router.get("/:movie_id", async (req, res) => {
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
     const getProviders = await getWatchProviders(movieId);
-    const watchProviders = getProviders.results;
-    const provider = getProviders.provider;
+    let watchProviders, provider;
+    if(getProviders?.length){
+      watchProviders = getProviders.results;
+      provider = getProviders.provider;
+    }
+    
     const genres = await getgenre();
     const network = getNetworks(movieNetworks);
     const movieGenres = getNetworks(genreList);
@@ -367,7 +371,7 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const reviews = await movie.reviews.results;
     const recommendedData = await getRecommended(movieId, page_num);
     let totalPages, totalResults, recommendedMovies;
-    if(recommendedData.length){
+    if(recommendedData?.length){
       totalPages = await recommendedData.total_pages;
       totalResults = await recommendedData.total_results;
       recommendedMovies = await recommendedData.results;
@@ -376,8 +380,11 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
     const getProviders = await getWatchProviders(movieId);
-    const watchProviders = getProviders.results;
-    const provider = getProviders.provider;
+    let watchProviders, provider;
+    if(getProviders?.length){
+      watchProviders = getProviders.results;
+      provider = getProviders.provider;
+    }
     const genres = await getgenre();
     const movieGenres = getNetworks(genreList);
     const network = getNetworks(movieNetworks);
