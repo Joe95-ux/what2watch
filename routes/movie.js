@@ -282,9 +282,14 @@ router.get("/:movie_id", async (req, res) => {
     const overview = getOverview(movieOverview);
     const reviews = await movie.reviews.results;
     const recommendedData = await getRecommended(movieId, page_num);
-    const totalPages = await recommendedData.total_pages;
-    const totalResults = await recommendedData.total_results;
-    const recommendedMovies = await recommendedData.results;
+    let totalPages, totalResults, recommendedMovies;
+    if(recommendedData.length){
+      totalPages = await recommendedData.total_pages;
+      totalResults = await recommendedData.total_results;
+      recommendedMovies = await recommendedData.results;
+
+    }
+    
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
     const getProviders = await getWatchProviders(movieId);
@@ -361,9 +366,13 @@ router.get("/:title/:movie_id/:page", async (req, res) => {
     const overview = getOverview(movieOverview);
     const reviews = await movie.reviews.results;
     const recommendedData = await getRecommended(movieId, page_num);
-    const totalPages = await recommendedData.total_pages;
-    const totalResults = await recommendedData.total_results;
-    const recommendedMovies = await recommendedData.results;
+    let totalPages, totalResults, recommendedMovies;
+    if(recommendedData.length){
+      totalPages = await recommendedData.total_pages;
+      totalResults = await recommendedData.total_results;
+      recommendedMovies = await recommendedData.results;
+
+    }
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
     const getProviders = await getWatchProviders(movieId);

@@ -110,7 +110,7 @@
                 <p>Find movies and tv shows to watch across all your favourite streaming networks in a hassle-free way.</p>
             </div>
             
-            <% if(media.length > 0){%>
+            <% if(media?.length){%>
                 <div class="movie-wrapper rec-media-wrapper">
                     <% media.forEach(function(movie){%>
                     <div class="movie-card-container">

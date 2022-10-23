@@ -76,7 +76,7 @@
             <span class="focus-nav"><%= cat %></span>
         </div>
         <div class="blog-body-wrapper">
-            <% if(stories.length){%>
+            <% if(stories?.length){%>
             <div id="long" class="blog-body-content">
                 <div class="blog-body-popular">
                     <h1 class="cat-title">Category : <span><%= cat %> </span></h1>
@@ -190,7 +190,7 @@
                         </div>
 
                     </div>
-                    <% if(latest.length){%>
+                    <% if(latest?.length){%>
                     <div class="tv-shows">
                         <a href="/blog/posts" class="cat-title">Recent Posts<i class="fas fa-chevron-right"></i></a>
                         <div class="latest-posts tv-news">

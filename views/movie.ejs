@@ -419,7 +419,7 @@
                                         </div>
 
                                         <div class="similarmovies-container-fluid">
-                                            <% if(similar.length){%>
+                                            <% if(similar?.length){%>
                                             <h1 class="embla-small-title">similar movies</h1>
                                             <div class="embla ">
                                                 <div class="embla__viewport">
@@ -585,7 +585,7 @@
                                                 </div>
                                                 <% } %>
                                                 
-                                                <% if(reviews.length){%>
+                                                <% if(reviews?.length){%>
                                                 <div id="reviews-container">
                                                     <h2>Movie Reviews</h2>
                                                     <div class="reviews-wrapper">
@@ -700,7 +700,7 @@
                                 <section id="popular-movies">
                                     <div class="wrapper-enclosure">
                                         <div class="movies-container">
-                                            <% if(recommendedMovies.length>0){%>
+                                            <% if(recommendedMovies?.length>0){%>
                                             <h1 class="popular serif">Movies like <span
                                                     class="related-films"><%= movie.title %> </span></h1>
                                             <div class="line-container">

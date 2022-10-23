@@ -106,7 +106,7 @@
                     <p><%= category==="top_rated"?"Get to know the top rated movies of all time. Explore old classics and get entertained.":"Fresh out of the Oven. Browse through new and upcoming movies to learn more and find suitable watch providers." %>
                     </p>
             </div>
-            <% if(movies.length > 0){%>
+            <% if(movies?.length){%>
             <div class="movie-wrapper">
                 <% movies.forEach(function(movie){%>
                 <div class="movie-card-container search-movie-container">

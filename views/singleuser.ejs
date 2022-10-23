@@ -110,7 +110,7 @@
                     </div>
 
                 </div>
-                <% if(users.length){%>
+                <% if(users?.length){%>
                 <div class="left-side-writers">
                     <h2>Writers to check out</h2>
                     <div class="users-wrapper">
@@ -140,7 +140,7 @@
             <div class="center-right">
                 <div class="center-articles">
                     <div class="center-articles-first">
-                        <% if(first.length){%>
+                        <% if(first?.length){%>
                         <%first.forEach(story=>{  %>
                         <a href="/blog/posts/<%= story.slug %>"><img src="<%= story.photo %>" alt="post image"></a>
                         <div class="post">
