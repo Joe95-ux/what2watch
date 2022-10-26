@@ -3473,6 +3473,11 @@ h1.genre-intro {
 .item-value a{
     color: var(--mainWhite);
 }
+.item-value .fa-star{
+    font-size: 15px;
+    color: var(--yellow);
+    margin-left: 5px;
+}
 
 .single-movie-inner .swiper-btns {
     margin-top: 1rem;

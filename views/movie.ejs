@@ -207,6 +207,9 @@
                                             <p class="hero-tagline">"<%= movie.tagline%>"</p>
                                         <% }%>
                                         <div class="hero-dates">
+                                            <% if(extData?.mpa_rating !== ""){%>
+                                                <span class="content-rating"><%= extData.mpa_rating%> </span>
+                                                <% } %>  
                                             <span><%= movie.release_date?movie.release_date:"n/a" %></span>
                                             <%for(let genre of movie.genres.slice(0, 1)){%>
                                                 <span>
@@ -342,8 +345,8 @@
                                                                         <div class="item-value"><%= spokenLanguages%></div>
                                                                     </li>
                                                                     <li>
-                                                                        <div class="item-key">Vote Average</div>
-                                                                        <div class="item-value"><%= movie.vote_average%></div>
+                                                                        <div class="item-key"><img src="/logo-imdb.svg" alt="imdb-logo"></div>
+                                                                        <div class="item-value"><%= extData.rating%> <i class="fas fa-star"></i></div>
                                                                     </li>
                                                                     <li>
                                                                         <div class="item-key">Production</div>
@@ -700,7 +703,7 @@
                                 <section id="popular-movies">
                                     <div class="wrapper-enclosure">
                                         <div class="movies-container">
-                                            <% if(recommendedMovies?.length>0){%>
+                                            <% if(recommendedMovies?.length){%>
                                             <h1 class="popular serif">Movies like <span
                                                     class="related-films"><%= movie.title %> </span></h1>
                                             <div class="line-container">
@@ -846,39 +849,25 @@
                                             </div>
                                             <% } %>
                                         </div>
-                                        <% if(page_num < totalPages) {%>
-                                        <div class="page-controls">
-                                            <% if(page_num > 1) {%>
-                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> "
-                                                class="prev-page swiper-btn" role="button"><i
-                                                    class="fas fa-arrow-circle-left prev-indicator"></i>page
-                                                <%= page_num - 1 %> </a>
-
-                                            <% }else{%>
-                                            <hr class="bottom-rule" style="display: none;">
-                                            <% } %>
-                                            <% if(page_num < totalPages && totalResults > 21) {%>
-                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num + 1 %> "
-                                                class="next-page swiper-btn" role="button" value="next-page">page
-                                                <%= page_num + 1 %><i
-                                                    class="fas fa-arrow-circle-right next-indicator"></i></a>
-                                            <% }%>
-                                        </div>
-                                        <%}else {%>
-                                        <div class="page-controls">
-                                            <% if(page_num > 1) {%>
-                                            <a href="/movie/<%= title %>/<%= movie.id %>/<%= page_num - 1 %> "
-                                                class="prev-page swiper-btn" role="button"><i
-                                                    class="fas fa-arrow-circle-left prev-indicator"></i>page
-                                                <%= page_num - 1 %></a>
-
-                                            <hr class="bottom-rule" style="display: none">
-
-                                            <%}%>
-            
-                                        </div>
-                
-        
+                                        <% if(totalPages>1) {%>
+                                            <div class="page-controls">
+                                                <% if(page_num > 1) {%>
+                                                <a href="/movie/<%= movie.id %>/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
+                                                    role="button"><i class="fas fa-arrow-circle-left prev-indicator"></i>page <%= page_num - 1 %>
+                                                </a>
+                                    
+                                                <% }%>
+                                                <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
+                                                <% if(page_num < totalPages && totalResults > 20) {%>
+                                                <a href="/movie/<%= movie.id %>/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
+                                                    value="next-page">page <%= page_num + 1 %><i class="fas fa-arrow-circle-right next-indicator"></i></a>
+                                    
+                                    
+                                                <% } %>
+                                    
+                                            </div>
+                                    
+                                    
                                         <% } %>
                                         
 

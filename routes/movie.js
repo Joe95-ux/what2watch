@@ -246,10 +246,30 @@ async function getWatchProviders(movieId) {
   }
 }
 
+
+// get external movie data 
+async function getExternalData(id){
+  try {
+    const response = await fetch(`https://yts.mx/api/v2/movie_details.json?imdb_id=${id}`);
+    const data = await response.json();
+    const movieData = await data.data.movie;
+    if(id){
+      return movieData;
+    }
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
 //get a movie by id
 router.get("/:movie_id", async (req, res) => {
   const movieId = req.params.movie_id;
   let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/" +
@@ -266,6 +286,7 @@ router.get("/:movie_id", async (req, res) => {
     budget = getRev(budget);
     const movieNetworks = await movie.production_companies;
     const genreList = await movie.genres;
+    const extData = await getExternalData(movie.imdb_id);
     const languages = await movie.spoken_languages;
     const spokenLanguages = getSpokenLanguage(languages);
     const title = encodeURIComponent(movieTitle);
@@ -283,7 +304,7 @@ router.get("/:movie_id", async (req, res) => {
     const reviews = await movie.reviews.results;
     const recommendedData = await getRecommended(movieId, page_num);
     let totalPages, totalResults, recommendedMovies;
-    if(recommendedData?.length){
+    if(recommendedData){
       totalPages = await recommendedData.total_pages;
       totalResults = await recommendedData.total_results;
       recommendedMovies = await recommendedData.results;
@@ -307,6 +328,7 @@ router.get("/:movie_id", async (req, res) => {
       movie: movie,
       revenue,
       budget,
+      extData,
       watch: watchProviders,
       justwatchToken,
       provider,
@@ -333,90 +355,5 @@ router.get("/:movie_id", async (req, res) => {
   }
 });
 
-//single-movie-next-page
-
-router.get("/:title/:movie_id/:page", async (req, res) => {
-  const movieId = req.params.movie_id;
-  let page_num = parseInt(req.params.page);
-  try {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        movieId +
-        "?api_key=" +
-        apiKey +
-        "&append_to_response=videos,credits,reviews,similar,images&include_image_language=en,null&language=en-US"
-    );
-    const movie = await response.json();
-    const movieTitle = await movie.title;
-    let revenue = await movie.revenue;
-    revenue = getRev(revenue);
-    let budget = await movie.budget;
-    budget = getRev(budget);
-    const movieNetworks = await movie.production_companies;
-    const genreList = await movie.genres;
-    const languages = await movie.spoken_languages;
-    const spokenLanguages = getSpokenLanguage(languages);
-    const title = encodeURIComponent(movieTitle);
-    const videos = await movie.videos.results.slice(0, 5);
-    const posters = await movie.images.posters.slice(0, 4);
-    const backdrops = await movie.images.backdrops.slice(0, 3);
-    const media = getMedia(videos, backdrops, posters);
-    const trailer = getTrailer(videos);
-    const time = await movie.runtime;
-    const runTime = getRunTime(time);
-    const allCrew = await movie.credits.crew;
-    const crews = getCrew(allCrew);
-    const movieOverview = await movie.overview;
-    const overview = getOverview(movieOverview);
-    const reviews = await movie.reviews.results;
-    const recommendedData = await getRecommended(movieId, page_num);
-    let totalPages, totalResults, recommendedMovies;
-    if(recommendedData?.length){
-      totalPages = await recommendedData.total_pages;
-      totalResults = await recommendedData.total_results;
-      recommendedMovies = await recommendedData.results;
-
-    }
-    const similarMovies = await movie.similar.results;
-    const similar = await similarMovies;
-    const getProviders = await getWatchProviders(movieId);
-    let watchProviders, provider;
-    if(getProviders){
-      watchProviders = getProviders.results;
-      provider = getProviders.provider;
-    }
-    const genres = await getgenre();
-    const movieGenres = getNetworks(genreList);
-    const network = getNetworks(movieNetworks);
-
-    res.render("movie", {
-      movie: movie,
-      revenue,
-      budget,
-      watch: watchProviders,
-      justwatchToken,
-      provider,
-      title: title,
-      spokenLanguages: spokenLanguages,
-      genres: genres,
-      trailer: trailer,
-      runTime: runTime,
-      media: media,
-      reviews: reviews,
-      crews: crews,
-      overview: overview,
-      recommendedMovies: recommendedMovies,
-      similarMovies: similarMovies,
-      similar: similar,
-      network,
-      movieGenres,
-      page_num: page_num,
-      totalPages: totalPages,
-      totalResults: totalResults
-    });
-  } catch (e) {
-    console.log(e);
-  }
-});
 
 module.exports = router;
