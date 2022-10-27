@@ -4361,20 +4361,25 @@ img.provider-img{
 }
 
 
-
+.small-display-details h4{
+    color: var(--mainWhite);
+}
 .small-display-details h4,
-.watch-providers-sm h2 {
+.watch-notice {
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 5px;
-    color: var(--mainWhite);
     text-transform: capitalize;
 }
 
-.watch-providers-sm h2{
-    margin-bottom: 1.3rem;
-    font-size: 1.2rem;
+.watch-notice{
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    color: var(--darkGrey);
 
+}
+.watch-notice span{
+    color:var(--mainWhite);
 }
 
 .sub-detail {

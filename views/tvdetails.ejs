@@ -382,7 +382,7 @@
                         </div>
                     </div>
                     <div class="watch-providers-sm">
-                        <h2>Stream and watch <%= movie.name %> </h2>
+                        <h3 class="watch-notice">Stream and watch <span><%= movie.name %></span></h3>
                         <div class="justwatch-wrapper">
                             <div data-jw-widget
                                 data-api-key="kdXlICVx4d6qwyZYSThFxvVKAhQtwtqY"
@@ -918,6 +918,27 @@
                 </div>
                 <% } %>
             </div>
+            <% if(totalPages>1) {%>
+                <div class="page-controls">
+                    <% if(page_num > 1) {%>
+                    <a href="/tv/tv-shows/<%= movie.id%>/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
+                        role="button"><i class="fas fa-long-arrow-alt-left prev-indicator"></i>page <%= page_num - 1 %>
+                    </a>
+        
+                    <% }%>
+                    <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
+                    <% if(page_num < totalPages && totalResults > 20) {%>
+                    <a href="/tv/tv-shows/<%= movie.id%>/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
+                        value="next-page">page <%= page_num + 1 %><i class="fas fa-long-arrow-alt-right next-indicator"></i></a>
+        
+        
+                    <% } %>
+        
+                </div>
+        
+        
+                <% } %>
+            
             
 
 

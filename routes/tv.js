@@ -344,13 +344,17 @@ async function getExternalId(id){
 //get a movie by id
 router.get("/tv-shows/:movie_id", async (req, res) => {
   const movieId = req.params.movie_id;
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/tv/" +
         movieId +
         "?api_key=" +
         apiKey +
-        "&append_to_response=videos,content_ratings,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US"
+        "&append_to_response=videos,content_ratings,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US&page=" + page_num
     );
     const movie = await response.json();
     const movieTitle = await movie.name;
@@ -372,7 +376,14 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
     const movieOverview = await movie.overview;
     const overview = getOverview(movieOverview);
     const reviews = await movie.reviews.results;
-    const recommendedMovies = await movie.recommendations.results;
+    const recommendedData = await movie.recommendations;
+    let recommendedMovies, total_pages, total_results;
+    if(recommendedData){
+      recommendedMovies = await recommendedData.results;
+      total_pages = await recommendedData.total_pages;
+      total_results = await recommendedData.total_results;
+
+    }
     const similarMovies = await movie.similar.results;
     const getProviders = await getWatchProviders(movieId);
     let watchProviders, provider;
@@ -404,6 +415,9 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       recommendedMovies: recommendedMovies,
       similarMovies: similarMovies,
       similar:similarMovies,
+      page_num,
+      totalPages:total_pages,
+      totalResults:total_results,
       provider,
       network,
       cert,
