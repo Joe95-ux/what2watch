@@ -108,7 +108,7 @@
                     <% if(movie.poster_path){%> 
                         <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= title %> ">
                         <%}else if(movie.poster_path === null){%>
-                            <img src="/poster-alt.png" alt="<%= title %>">
+                            <img src="/noposter.svg" alt="<%= title %>">
                         <% } %>
                 </div>
                 <div class="movie-info">

@@ -106,15 +106,84 @@
         <div class="movies-container movie-search">
             
             <div class="page-intro">
-                <h1>Explore and Discover what to watch today</h1>
-                <p>Find movies and tv shows to watch across all your favourite streaming networks in a hassle-free way.</p>
+                <h1>Discover what <%= ref %> to watch on <%= currentProvider?.provider_name %> </h1>
+                <p>Find what to watch on <%= currentProvider?.provider_name %> including the latest releases. Filter by Movies, TV shows, Watch monitization type and more.</p>
+            </div>
+
+            <div class="media-filter-wrapper">
+                <form class="media-filter-form" action="/recommendations/watch-guide" method="GET">
+                    <div class="select-box">
+                        <div class="options-container">
+                          <div class="option">
+                            <input type="radio" class="radio" id="draft" name="draft"/>
+                            <label for="draft">Draft</label>
+                          </div>
+                          <div class="option">
+                            <input type="radio" class="radio" id="public" name="public" />
+                            <label for="public">Public</label>
+                          </div>
+                        </div>
+                        <div class="selected" name="media-type" id="media-type">
+                            Tv
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div class="options-container">
+                          <div class="option">
+                            <input type="radio" class="radio" id="draft" name="draft"/>
+                            <label for="draft">Draft</label>
+                          </div>
+                          <div class="option">
+                            <input type="radio" class="radio" id="public" name="public" />
+                            <label for="public">Public</label>
+                          </div>
+                        </div>
+                        <div class="selected" name="region" id="region">
+                          US
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div class="options-container">
+                          <div class="option">
+                            <input type="radio" class="radio" id="draft" name="draft"/>
+                            <label for="draft">Draft</label>
+                          </div>
+                          <div class="option">
+                            <input type="radio" class="radio" id="public" name="public" />
+                            <label for="public">Public</label>
+                          </div>
+                        </div>
+                        <div class="selected" name="provider" id="provider">
+                          Netflix
+                        </div>
+                    </div>
+                    <div class="select-box">
+                        <div class="options-container">
+                          <div class="option">
+                            <input type="radio" class="radio" id="draft" name="draft"/>
+                            <label for="draft">Draft</label>
+                          </div>
+                          <div class="option">
+                            <input type="radio" class="radio" id="public" name="public" />
+                            <label for="public">Public</label>
+                          </div>
+                        </div>
+                        <div class="selected" name="monitize" id="monitize" >
+                          Streaming
+                        </div>
+                    </div>
+                    <div class="action-btns">
+                        <button type="submit" class="publish-btn">Search</button>
+                    </div>
+                </form>
+
             </div>
             
             <% if(media?.length){%>
                 <div class="movie-wrapper rec-media-wrapper">
                     <% media.forEach(function(movie){%>
                     <div class="movie-card-container">
-                        <% if(movie.media_type==="person"){%>
+                        <% if(mediaType==="person"){%>
                             <div class="movie-card viewed-card">
                                 <% if(movie.profile_path){%>
                                     <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
@@ -136,7 +205,7 @@
                                 </div>
                             </div>
 
-                            <% }else if (movie.media_type === "movie"){%>
+                            <% }else if (mediaType === "movie"){%>
                                 <% if(movie.poster_path){%>
                                     <div class="movie-card viewed-card">
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
@@ -188,7 +257,7 @@
                                         </div>
                                     </div>
 
-                            <% }else if (movie.media_type === "tv"){%>
+                            <% }else if (mediaType === "tv"){%>
                                 <div class="movie-card viewed-card">
                                     <a class="image" href="/tv/tv-shows/<%= movie.id %>"
                                         title="<%= movie.name %> ">
@@ -270,14 +339,14 @@
             <% if(totalPages>1) {%>
                 <div class="page-controls">
                     <% if(page_num > 1) {%>
-                    <a href="/recommendations/what-to-watch/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
+                    <a href="/recommendations/watch-guide/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
                         role="button"><i class="fas fa-long-arrow-alt-left prev-indicator"></i>page <%= page_num - 1 %>
                     </a>
         
                     <% }%>
                     <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
                     <% if(page_num < totalPages && totalResults > 20) {%>
-                    <a href="/recommendations/what-to-watch/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
+                    <a href="/recommendations/watch-guide/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
                         value="next-page">page <%= page_num + 1 %><i class="fas fa-long-arrow-alt-right next-indicator"></i></a>
         
         

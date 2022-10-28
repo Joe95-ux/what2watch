@@ -174,7 +174,7 @@
                                         <%}else if(movie.poster_path === null){%>
                                         <div class="movie-card viewed-card">
                                             <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                                <img src="/poster-alt.png" alt="">
+                                                <img src="/noposter.svg" alt="">
                                             </a>
             
                                         </div>
@@ -207,7 +207,7 @@
                                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
                                                 alt="<%= movie.name %>">
                                             <%}else if(movie.poster_path === null){%>
-                                            <img src="/poster-alt.png" alt="">
+                                            <img src="/noposter.svg" alt="">
                                             <% } %>
                                         </a>
                                         <a href="/tv/tv-shows/<%= movie.id %>">
@@ -271,7 +271,7 @@
                     <% }else{%>
                     <div class="search-not-found">
                         <h1 class="movie-not-found">Oops! no search results for <span><%= search %></span>.</h1>
-                        <img src="../../poster-alt.png" alt="search not found">
+                        <img src="../../noposter.svg" alt="search not found">
                         <div class="swiper-btns">
                             <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
                         </div>

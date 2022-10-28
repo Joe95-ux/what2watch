@@ -117,7 +117,7 @@
                                                 <% if(movie.poster_path){%> 
                                                     <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
                                                     <%}else if(movie.poster_path === null){%>
-                                                        <img src="/poster-alt.png" alt="movie-poster">
+                                                        <img src="/noposter.svg" alt="movie-poster">
                                                     <% } %>
                                                     
                                                 <div class="new-header-movie">
@@ -183,7 +183,7 @@
                                 <% if(movie.poster_path){%> 
                                     <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="">
                                 <%}else if(movie.poster_path === null){%>
-                                    <img src="/poster-alt.png" alt="<%= movie.title %>">
+                                    <img src="/noposter.svg" alt="<%= movie.title %>">
                                 <% } %>
                                 <div>
                                     <h3 class="movie-title"><%= movie.title %></h3>
@@ -226,7 +226,7 @@
                                             </a>
                                             <%}else if(mov.poster_path === null){%>
                                             <a class="image" href="/movie/<%= mov.id %>" title="<%= mov.title %> ">
-                                                <img src="/poster-alt.png" alt="<%= mov.title %>">
+                                                <img src="/noposter.svg" alt="<%= mov.title %>">
                                             </a>
                                         <% }%>
                                         <div class="image-drop">
@@ -353,7 +353,7 @@
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="<%= movie.title %>">
+                                            <img src="/noposter.svg" alt="<%= movie.title %>">
                                         </a>
                     
                                         <% } %>
@@ -434,7 +434,7 @@
                                         </a>
                                         <%}else if(movie.poster_path === null){%>
                                         <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                                            <img src="/poster-alt.png" alt="<%= movie.title %>">
+                                            <img src="/noposter.svg" alt="<%= movie.title %>">
                                         </a>
                     
                                         <% } %>
@@ -573,7 +573,7 @@
                         </a>
                         <%}else if(popularMovie.poster_path === null){%>
                         <a class="image" href="/movie/<%= popularMovie.id %>" title="<%= popularMovie.title %> ">
-                            <img src="/poster-alt.png" alt="">
+                            <img src="/noposter.svg" alt="">
                         </a>
     
                         <% } %>

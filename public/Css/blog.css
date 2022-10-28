@@ -1885,14 +1885,14 @@ textarea {
     margin-right: 4px;
 }
 
-.compose-form .publish-btn,
+ .publish-btn,
 .create-btn,
 .dashboard-search {
     border-radius: 5px;
     padding: 0.5rem 1rem;
 }
 
-.compose-form .publish-btn:hover,
+.publish-btn:hover,
 .create-btn:hover {
     background-color: inherit;
     color: var(--mainWhite);

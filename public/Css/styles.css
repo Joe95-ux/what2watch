@@ -2281,6 +2281,27 @@ h1.genre-intro {
     font-size: 2.5rem;
 }
 
+/* media filters */
+.media-filter-wrapper{
+    margin-bottom: 3rem;
+}
+
+.media-filter-form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.media-filter-form .select-box{
+    flex-basis: 22%;
+
+}
+
+
+.media-filter-form .select-box, .media-filter-form .action-btns{
+    border-radius: 3px;
+    margin: 0;
+}
+
 @media screen and (max-width:480px) {
     .page-intro h1 {
         font-size: 1.4rem;

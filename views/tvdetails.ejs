@@ -303,7 +303,7 @@
                             <% if(movie.poster_path){%>
                             <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %> ">
                             <%}else if(movie.poster_path === null){%>
-                            <img src="/poster-alt.png" alt="movie-poster">
+                            <img src="/noposter.svg" alt="movie-poster">
                             <% } %>
                             <%if(watch){%>
                                 <div class="watch-banner">
@@ -559,7 +559,7 @@
                                                     alt="<%= cast.name %>"></a>
                                             <%}else if(cast.profile_path === null){%>
                                             <a href="/person/<%= cast.id %> "><img
-                                                    src="/poster-alt.png" alt="<%= cast.name %>"></a>
+                                                    src="/noposter.svg" alt="<%= cast.name %>"></a>
                                             <% } %>
                                             <div class="cast-name">
                                                 <a href="/person/<%= cast.id %>">
@@ -783,7 +783,7 @@
                                 <img src="https://image.tmdb.org/t/p/w500/<%= recommendedMovie.poster_path %>"
                                     alt="<%= recommendedMovie.name %>">
                                 <%}else if(recommendedMovie.poster_path === null){%>
-                                <img src="/poster-alt.png" alt="">
+                                <img src="/noposter.svg" alt="">
                                 <% } %>
                             </a>
                             <a href="/tv/tv-shows/<%= recommendedMovie.id %>">
@@ -858,7 +858,7 @@
                                 <img src="https://image.tmdb.org/t/p/w500/<%= similarMovie.poster_path %>"
                                     alt="<%= similarMovie.name %> ">
                                 <%}else if(similarMovie.poster_path === null){%>
-                                <img src="/poster-alt.png" alt="">
+                                <img src="/noposter.svg" alt="">
                                 <% } %>
                             </a>
                             <a href="/tv/tv-shows/<%= similarMovie.id %>">

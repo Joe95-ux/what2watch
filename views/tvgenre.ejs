@@ -152,7 +152,7 @@
                     <%}else if(movie.poster_path === null){%>
                     <div class="movie-card viewed-card">
                         <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.name %> ">
-                            <img src="/poster-alt.png" alt="<%= movie.name %>">
+                            <img src="/noposter.svg" alt="<%= movie.name %>">
                         </a>
 
                     </div>
@@ -193,7 +193,7 @@
             <% }else{%>
             <div class="search-not-found">
                 <h1 class="movie-not-found">Oops! Sorry, an error occured.</h1>
-                <img src="/poster-alt.png" alt="search not found">
+                <img src="/noposter.svg" alt="search not found">
                 <div class="swiper-btns">
                     <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
                 </div>
