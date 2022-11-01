@@ -144,12 +144,12 @@ router.get("/tv-shows", async (req, res) => {
   const title = "Tv Shows";
   try {
     const assets = await getPopularTv();
-    const popularMovies = await assets?.popMovies;
-    const headerMovies = await popularMovies?.slice(0, 8);
-    const headerVideos = await assets?.videos;
+    const popularMovies = await assets.popMovies;
+    const headerMovies = await popularMovies.slice(0, 8);
+    const headerVideos = await assets.videos;
     const airingTodayAssets = await airingToday();
-    const airing_Today = await airingTodayAssets?.airingToday;
-    const airingTodayVideos = await airingTodayAssets?.videos;
+    const airing_Today = await airingTodayAssets.airingToday;
+    const airingTodayVideos = await airingTodayAssets.videos;
     const topRated = await topRatedTv();
     const genres = await getgenre();
     const pages = await getAllPages();

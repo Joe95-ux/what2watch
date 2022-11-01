@@ -77,6 +77,8 @@
                 <ul class="nav_links ld-nav_links">
                     <li class="nav_link"> <a href="/">Movies</a></li>
                     <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
+                    <li class="nav_link"> <a href="/recommendations/watch-guide">Watch Guide</a></li>
+                    <li class="nav_link"> <a href="/recommendations/what-to-watch">what-to-watch</a></li>
                     <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                     <% if(user.privilege === "admin"){%>
@@ -106,6 +108,8 @@
                     <ul class="categories">  
                         <li> <a class="active-cat" href="/">Movies</a></li>
                         <li> <a class="active-cat" href="/tv/tv-shows">Tv Shows</a></li>
+                        <li> <a class="active-cat" href="/recommendations/watch-guide">Watch Guide</a></li>
+                        <li> <a class="active-cat" href="/recommendations/what-to-watch">what-to-watch</a></li>
                         <li><a class="active-cat" href="/blog/posts">Blog</a></li>
                         <% if(user){%>
                         <% if(user.privilege === "admin"){%>
@@ -208,7 +212,7 @@
                                         <% }%>
                                         <div class="hero-dates">
                                             <% if(extData?.mpa_rating !== null && extData?.mpa_rating !== ""){%>
-                                                <span class="content-rating"><%= extData.mpa_rating%> </span>
+                                                <span class="content-rating"><%= extData?.mpa_rating%> </span>
                                             <% } %>  
                                             <span><%= movie.release_date?movie.release_date:"n/a" %></span>
                                             <%for(let genre of movie.genres.slice(0, 1)){%>
@@ -346,7 +350,7 @@
                                                                     </li>
                                                                     <li>
                                                                         <div class="item-key"><img src="/logo-imdb.svg" alt="imdb-logo"></div>
-                                                                        <div class="item-value"><%= extData.rating%> <i class="fas fa-star"></i></div>
+                                                                        <div class="item-value"><%= extData?.rating%> <i class="fas fa-star"></i></div>
                                                                     </li>
                                                                     <li>
                                                                         <div class="item-key">Production</div>

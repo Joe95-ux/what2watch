@@ -41,6 +41,19 @@ const multiSearch = document.querySelector(".multi-search-modal");
 const searchTrigger = document.querySelector(".search-trigger");
 const multiSearchInput = document.querySelector(".multi-search");
 const cancelMultiSearch = document.querySelector(".multi-search-cancel");
+const optionsContainer = [...document.querySelectorAll(".options-container")];
+let providerEmbla = document.querySelector(".providers__embla__container");
+const providerWrapper = document.getElementById("providers_wrapper");
+let providerInput = document.getElementById("watch_provider");
+let regionInput = document.getElementById("watch_region");
+let mediaInput = document.getElementById("media_cat");
+let mediaVal, regionVal;
+if (mediaInput !== null) {
+  mediaVal = mediaInput.value;
+}
+if (regionInput !== null) {
+  regionVal = regionInput.value;
+}
 
 // navigation bar
 const navSlide = () => {
@@ -437,7 +450,6 @@ recentlyViewedHandler();
 // custom select dropdown
 function dropDown() {
   const selected = [...document.querySelectorAll(".selected")];
-  const optionsContainer = [...document.querySelectorAll(".options-container")];
   if (selected) {
     selected.forEach(select => {
       select.addEventListener("click", () => {
@@ -446,13 +458,34 @@ function dropDown() {
     });
   }
 
-  if (optionsContainer) {
+  handlpeOptions();
+}
+
+function handlpeOptions() {
+  if (optionsContainer !== null) {
     optionsContainer.forEach(container => {
-      const optionsList = container.querySelectorAll(".option");
+      const optionsList = [...container.querySelectorAll(".option")];
+      const selectedInput = container.nextElementSibling.firstElementChild;
       optionsList.forEach(option => {
-        option.addEventListener("click", () => {
-          const selectedInput = container.nextElementSibling.firstElementChild;
-          selectedInput.value = option.querySelector("label").innerHTML;
+        let optionLabel = option.querySelector("label");
+
+        if (selectedInput.value === optionLabel.innerHTML) {
+          option.classList.add("active-label");
+        } else {
+          if (option.classList.contains("active-label")) {
+            option.classList.remove("active-label");
+          }
+        }
+        option.addEventListener("click", e => {
+          optionsList.forEach(opt => {
+            if (opt.classList.contains("active-label")) {
+              opt.classList.remove("active-label");
+            }
+          });
+
+          option.classList.add("active-label");
+
+          selectedInput.value = optionLabel.innerHTML;
           container.classList.remove("active-options");
         });
       });
@@ -520,8 +553,143 @@ function accToggler() {
 }
 accToggler();
 
+// watch providers filter start
+async function watchFilterHandler() {
+  if (providerWrapper !== null) {
+    providerWrapper.innerHTML = ` <div class="loader-wrapper"><span class="circle-loader"></span></div> `;
+  }
+  if (providerEmbla !== null) {
+    providerEmbla.innerHTML = ` <div class="loader-wrapper"><span class="circle-loader"></span></div> `;
+  }
 
+  const headers = window.location;
+  let baseUrl =
+    headers.protocol +
+    "//" +
+    headers.host +
+    "/recommendations/watch/providers/";
+  let regionsUrl = baseUrl + "regions";
+  let regions;
+  try {
+    regions = await fetchRegionCode(regionsUrl);
+  } catch (error) {
+    console.log(error);
+  }
+  let regionCode = regions.find(region => region.native_name === regionVal);
+  regionCode = regionCode.iso_3166_1;
 
+  let providersUrl = baseUrl + mediaVal.toLowerCase() + "/" + regionCode;
+
+  xhrRequest(providersUrl);
+}
+
+function xhrRequest(providersUrl) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", providersUrl, true);
+  xhr.onprogress = function() {
+    if (providerWrapper !== null) {
+      providerWrapper.innerHTML =
+        "<h1>Oops! Something went wrong. Please try again.</h1>";
+    }
+  };
+  xhr.onload = function() {
+    if (this.status == 200) {
+      let response = JSON.parse(this.responseText);
+      // if(providerInput !== null){
+      //   providerInput.value = response[0].provider_name;
+      // }
+      createProviders(response);
+      createProvidersEmbla(response);
+    }
+    handlpeOptions();
+    rebuild();
+  };
+  xhr.send();
+}
+
+function createProviders(providers) {
+  let output = "";
+
+  for (let i = 0; i < providers.length; i++) {
+    output += `
+    <div class="option provider-options">
+                                <input type="radio" class="radio" id="${providers[
+                                  i
+                                ].provider_name}" />
+                                <label for="${providers[i]
+                                  .provider_name}">${providers[i]
+      .provider_name}</label>
+                            </div>
+  
+  `;
+  }
+
+  if (providers.length) {
+    providerWrapper.innerHTML = output;
+  } else {
+    providerWrapper.innerHTML = "<h2>No Watch providers for this regions.</h2>";
+  }
+}
+
+function createProvidersEmbla(providers) {
+  let output = "";
+
+  for (let i = 0; i < providers.length; i++) {
+    output += `
+    <div class="embla__slide new-slides" style="margin-right: 10px;">
+      <div class="provider embla__slide__inner">
+        <img src="https://image.tmdb.org/t/p/w500/${providers[i]
+          .logo_path}" alt="${providers[i].provider_name}">
+      </div>
+                                                                                
+    </div>
+  
+  `;
+  }
+  if (providers.length) {
+    providerEmbla.innerHTML = output;
+  } else {
+    providerEmbla.innerHTML =
+      "<h2>Oops! Something went wrong. Please try again later.</h2>";
+  }
+}
+
+// fetch regions codes
+async function fetchRegionCode(url) {
+  try {
+    let response = await fetch(url);
+    let results = await response.json();
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+watchFilterHandler();
+
+// check change in watch regions and media type
+
+setInterval(function() {
+  let newMediaVal, newRegionVal;
+  if (mediaInput !== null) {
+    newMediaVal = mediaInput.value;
+  }
+  if (regionInput !== null) {
+    newRegionVal = regionInput.value;
+  }
+  if (newMediaVal !== mediaVal) {
+    mediaVal = newMediaVal;
+    watchFilterHandler();
+  }
+  if (newRegionVal !== regionVal) {
+    regionVal = newRegionVal;
+    watchFilterHandler();
+  }
+}, 2000);
+
+//watch prroviders filter end
+
+// fetching seasons
 function seasonHandler() {
   if (seasons.length) {
     seasons[0].classList.add("active-season");
@@ -551,7 +719,8 @@ function seasonHandler() {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.onprogress = function() {
-          episodesWrapper.innerHTML = "<h1>Loading...</h1>";
+          episodesWrapper.innerHTML =
+            "<h1><h1>Oops! Something went wrong. Please try again.</h1></h1>";
         };
         xhr.onload = function() {
           if (this.status == 200) {
@@ -653,3 +822,54 @@ $(document).ready(function() {
 });
 
 new SimpleBar(simpleBarContainer, { autoHide: true });
+
+function rebuild() {
+  const wrap = document.querySelectorAll(".ajax-embla");
+  const toscroll = document.querySelector(".toscroll");
+  const width = $(window).width();
+  let value;
+  if (width <= 830) {
+    value = 1;
+  } else {
+    value = 8;
+  }
+
+  if (wrap !== null) {
+    const viewPort = Array.from(document.querySelectorAll(".ajax-embla-viewport"));
+    viewPort.forEach(view => {
+      let embla = EmblaCarousel(view, {
+        dragFree: true,
+        containScroll: "trimSnaps",
+        slidesToScroll: value,
+        skipSnaps: false
+      });
+
+      const prevBtn = view.nextElementSibling;
+      const nextBtn = view.nextElementSibling.nextElementSibling;
+
+      const setupPrevNextBtns = (prevBtn, nextBtn, embla) => {
+        prevBtn.addEventListener("click", embla.scrollPrev, false);
+        nextBtn.addEventListener("click", embla.scrollNext, false);
+      };
+      setupPrevNextBtns(prevBtn, nextBtn, embla);
+      const disablePrevNextBtns = (prevBtn, nextBtn, embla) => {
+        return () => {
+          if (embla.canScrollPrev()) prevBtn.removeAttribute("disabled");
+          else prevBtn.setAttribute("disabled", "disabled");
+
+          if (embla.canScrollNext()) nextBtn.removeAttribute("disabled");
+          else nextBtn.setAttribute("disabled", "disabled");
+        };
+      };
+
+      const disablePrevAndNextBtns = disablePrevNextBtns(
+        prevBtn,
+        nextBtn,
+        embla
+      );
+
+      embla.on("select", disablePrevAndNextBtns);
+      embla.on("init", disablePrevAndNextBtns);
+    });
+  }
+}

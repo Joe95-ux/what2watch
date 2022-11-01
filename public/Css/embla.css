@@ -11,7 +11,7 @@
     --dropTransition: all 0.5s ease-in;
 }
 
-.embla {
+.embla, .ajax-embla {
     position: relative;
     width: 100%;
     margin-left: auto;
@@ -44,7 +44,7 @@
 }
 
 .embla__viewport,
-.autoplay {
+.autoplay, .ajax-embla-viewport {
     overflow: hidden;
     width: 100%;
 }
@@ -57,13 +57,13 @@
 }
 
 .embla__viewport.is-draggable,
-.autoplay.is-draggable {
+.autoplay.is-draggable, .ajax-embla-viewport.is-draggable {
     cursor: move;
     cursor: grab;
 }
 
 .embla__viewport.is-dragging,
-.autoplay.is-draggable {
+.autoplay.is-draggable, .ajax-embla-viewport.is-draggable {
     cursor: grabbing;
 }
 

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const {capitalize} = require("../helpers/movie-helpers");
 
 const apiKey = process.env.API_KEY;
 const accessToken = process.env.API_READ_ACCESS_TOKEN;
@@ -83,15 +84,88 @@ async function getProviders(media) {
   }
 }
 
+// get regions
+async function getRegions() {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=en-US`
+    );
+    const data = await response.json();
+    const regions = await data.results;
+    return regions;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// get region code
+async function getRegionCode(reg){
+    try {
+      const regions = await getRegions();
+      let specificRegion =  await regions.find(region=>region.native_name === reg);
+      const regionCode =  specificRegion.iso_3166_1;
+      return regionCode;
+      
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+// get watch providers by region and media type
+router.get("/watch/providers/:media/:region", async (req, res)=>{
+  const media = req.params.media;
+  const region = req.params.region;
+
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/watch/providers/${media}?api_key=${apiKey}&language=en-US&watch_region=${region}`
+    );
+    const data = await response.json();
+    const providers = await data.results;
+    res.json(providers);
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+// return rgions json data
+
+router.get("/watch/providers/regions", async (req, res)=>{
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/watch/providers/regions?api_key=${apiKey}&language=en-US`
+    );
+    const data = await response.json();
+    const regions = await data.results;
+    res.json(regions);
+  } catch (e) {
+    console.log(e);
+  }
+})
+
 
 
 router.get("/watch-guide", async (req, res)=>{
   const title = "watch guide";
-  let {page, watch_providers, watch_region, watch_monetization_types, media  } = req.query;
-  let provider = watch_providers || 8;
-  let region = watch_region || "US";
-  let type = watch_monetization_types || "flatrate";
-  let mediaType = media || "tv";
+  let {page, watch_provider, watch_region, watch_monetization_types, media  } = req.query;
+  let provider = watch_provider || "Netflix";
+  let region = watch_region || "United States";
+  let regionCode, countryProviders;
+  let mediaType = media?.toLowerCase() || "tv";
+  try {
+    regionCode = await getRegionCode(region);
+    countryProviders = await getProviders(mediaType);
+    
+  } catch (error) {
+    console.log(error)
+    
+  }
+  
+  let type = watch_monetization_types?.toLowerCase() || "flatrate";
+  let uniqueProvider = countryProviders?.find(countryProvider=>countryProvider.provider_name === provider);
+  const provider_id = uniqueProvider?.provider_id;
+  const useType = capitalize(type);
+  const useMediatype = capitalize(mediaType);
   let ref;
   if(mediaType === "tv"){
     ref = "Tv Shows";
@@ -102,20 +176,20 @@ router.get("/watch-guide", async (req, res)=>{
   if(page >=1){
     currentPage = parseInt(page);
   }
-  let url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_watch_providers=${provider}&watch_region=${region}&with_watch_monetization_types=${type}`;
+  let url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_watch_providers=${provider_id}&watch_region=${regionCode}&with_watch_monetization_types=${type}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
-    const media = await data.results;
+    const mediaData = await data.results;
     const movieGenres = await getMovieGenre();
+    const regions = await getRegions();
     const tvGenres = await getTvGenre();
-    const watchProviders = await getProviders(mediaType);
-    const currentProvider = watchProviders.find(watchProvider => watchProvider.provider_id == provider);
     const totalPages = await data.total_pages;
     const totalResults = await data.total_results;
     const page_num = await data.page;
-
-    res.render("guide", { media, mediaType, ref, movieGenres, currentProvider, tvGenres, title, totalPages, totalResults, page_num });
+    const watchProviders = await getProviders(mediaType);
+    const currentProvider = await watchProviders?.find(watchProvider => watchProvider.provider_id == provider_id);
+    res.render("guide", { media:mediaData, mediaType, ref, movieGenres, regions, currentProvider, tvGenres, title, totalPages, totalResults, page_num, provider, region, type:useType, useMediatype });
   } catch (e) {
     console.log(e);
   }
