@@ -829,7 +829,7 @@ function rebuild() {
   const width = $(window).width();
   let value;
   if (width <= 830) {
-    value = 1;
+    value = 5;
   } else {
     value = 8;
   }
