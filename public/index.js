@@ -653,7 +653,7 @@ function createProvidersEmbla(providers, guideLink, monitizationParam) {
     output += `
     <div class="embla__slide new-slides" style="margin-right: 10px;">
       <div class="provider embla__slide__inner">
-      <a href="${guideLink + providers[i].provider_name + monitizationParam}" style="color:#darkGray; font-size:14px;" title="${providers[i].provider_name}">
+      <a href="${guideLink + providers[i].provider_name + monitizationParam}" style="color:darkGray; font-size:13px;" title="${providers[i].provider_name}">
       <img src="https://image.tmdb.org/t/p/w500/${providers[i]
       .logo_path}" alt="${providers[i].provider_name}">
 

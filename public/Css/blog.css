@@ -1805,6 +1805,11 @@ textarea {
     max-height: 240px;
 }
 
+.profile-biography.active-options {
+    opacity: 1;
+    z-index: 9;
+}
+
 .select-box .options-container.active-options+.selected::after {
     content: "\f077";
 }
@@ -2650,9 +2655,13 @@ div.pass-reveal i {
     padding: 10px;
     font-size: 13px;
     font-weight: 400;
+    max-height: 0;
     opacity: 0;
-    transition: all 0.4s ease;
-    -webkit-transition: all 0.4s ease;
+    -webkit-transition: max-height 0.7s ease-out; 
+    -moz-transition: max-height 0.7s ease-out; 
+    -ms-transition: max-height 0.7s ease-out; 
+    -o-transition: max-height 0.7s ease-out; 
+    transition: max-height 0.7s ease-out; 
     overflow: hidden;
     background-color: #2f3640;
     color: var(--lightGrey);
@@ -2663,8 +2672,8 @@ div.pass-reveal i {
 }
 
 .see-bio {
-    transition: all 0.4s;
-    cursor: pointer;
+    transform: rotateX('0deg');
+    transition: transform 0.4s;
 }
 
 .active-see-bio {
