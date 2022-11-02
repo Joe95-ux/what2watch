@@ -1733,10 +1733,10 @@ textarea {
     width: 100%;
     padding: 0 24px;
     opacity: 0;
-    transition: all 0.4s ease;
-    -webkit-transition: all 0.4s ease;
-    -o-transition: all 0.4s ease;
-    -moz-transition: all 0.4s ease;
+    transition: all 0.4s ;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s ;
+    -moz-transition: all 0.4s ;
     border-radius: 8px;
     overflow: hidden;
     order: 1;
@@ -1771,6 +1771,7 @@ textarea {
     background: url("/images/arrow.svg");
     background-size: contain;
     background-repeat: no-repeat;
+    backface-visibility: visible;
     position: absolute;
     height: 80%;
     width: 30px;
@@ -1784,12 +1785,12 @@ textarea {
 
 .select-box .options-container,
 .profile-biography {
-    overflow-y: auto;
     display: block;
 }
 
 .select-box .options-container.active-options,
 .profile-biography.active-options {
+    overflow-y: auto;
     opacity: 1;
     z-index: 9;
     max-height: 240px;
