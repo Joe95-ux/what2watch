@@ -1723,7 +1723,7 @@ textarea {
     position: relative;
 }
 
-.select-box .options-container {
+ .options-container {
     background: #2f3640;
     color: var(--midGray);
     max-height: 0;
@@ -1782,20 +1782,42 @@ textarea {
     transition: all 0.4s;
 }
 
+.profile-biography {
+    position: absolute;
+    top: 51px;
+    left: 0;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    overflow: hidden;
+    background-color: #2f3640;
+    color: var(--lightGrey);
+    border-radius: 3px;
+    width: 100%;
+    order: 1;
+    z-index: -1;
+}
+
 .select-box .options-container,
 .profile-biography {
     overflow-y: auto;
 }
-
-.select-box .options-container.active-options,
-.profile-biography.active-options {
+.active-options{
     display: block;
     opacity: 1;
     z-index: 9;
     max-height: 240px;
-}
 
-.select-box .options-container.active-options+.selected::after {
+}
+/* .select-box .options-container.active-options,
+.profile-biography.active-options {
+    
+} */
+
+.active-options+.selected::after {
     transform: rotateX(180deg);
     -webkit-transform: rotateX(180deg);
     -o-transform: rotateX(180deg);
@@ -2637,23 +2659,7 @@ div.pass-reveal i {
     margin-right: 0;
 }
 
-.profile-biography {
-    position: absolute;
-    top: 51px;
-    left: 0;
-    padding: 10px;
-    font-size: 13px;
-    font-weight: 400;
-    opacity: 0;
-    transition: all 0.4s ease;
-    overflow: hidden;
-    background-color: #2f3640;
-    color: var(--lightGrey);
-    border-radius: 3px;
-    width: 100%;
-    order: 1;
-    z-index: -1;
-}
+/* profile biography here */
 
 .see-bio {
     transition: all 0.4s;

@@ -449,8 +449,8 @@ recentlyViewedHandler();
 
 // custom select dropdown
 function dropDown() {
-  const selected = [...document.querySelectorAll(".selected")];
-  if (selected) {
+  const selected = [ ...document.querySelectorAll(".selected")];
+  if (selected !== null) {
     selected.forEach(select => {
       select.addEventListener("click", () => {
         select.previousElementSibling.classList.toggle("active-options");
