@@ -290,6 +290,7 @@ smallScreenSynopsis();
 function trailerController() {
   if (trailerBtn !== null) {
     trailerBtn.addEventListener("click", () => {
+      video.style.display = "block";
       video.src =
         trailerBtn.dataset.source +
         "?enablejsapi=1&version=3&playerapiid=ytplayer&autoplay=1";
@@ -319,7 +320,7 @@ function trailerController() {
           "*"
         );
       });
-      video.src = "";
+      video.style.display = "none";
       trailerContainer.classList.remove("active-trailer");
     });
   }
@@ -331,7 +332,7 @@ function trailerController() {
           "*"
         );
       });
-      video.src = "";
+      video.style.display = "none";
       trailerContainer.classList.remove("active-trailer");
     }
   };
@@ -340,6 +341,7 @@ function trailerController() {
   if (playIcons !== null) {
     for (let icon = 0; icon < playIcons.length; icon++) {
       playIcons[icon].addEventListener("click", () => {
+        video.style.display = "block";
         const videoSource = playIcons[icon].dataset.source;
         video.src =
           videoSource +
@@ -576,11 +578,14 @@ async function watchFilterHandler() {
     console.log(error);
   }
   let regionCode = regions.find(region => region.native_name === regionVal);
-  regionCode = regionCode.iso_3166_1;
-
-  let providersUrl = baseUrl + mediaVal.toLowerCase() + "/" + regionCode;
-
-  xhrRequest(providersUrl);
+  if(regionCode){
+    regionCode = regionCode.iso_3166_1;
+  }
+  
+  if(mediaVal){
+    let providersUrl = baseUrl + mediaVal.toLowerCase() + "/" + regionCode;
+    xhrRequest(providersUrl);
+  }
 }
 
 function xhrRequest(providersUrl) {
