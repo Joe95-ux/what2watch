@@ -47,12 +47,16 @@ const providerWrapper = document.getElementById("providers_wrapper");
 let providerInput = document.getElementById("watch_provider");
 let regionInput = document.getElementById("watch_region");
 let mediaInput = document.getElementById("media_cat");
-let mediaVal, regionVal;
+let watchTypeInput = document.getElementById("watch-type");
+let mediaVal, regionVal, watchTypeVal;
 if (mediaInput !== null) {
   mediaVal = mediaInput.value;
 }
 if (regionInput !== null) {
   regionVal = regionInput.value;
+}
+if(watchTypeInput !== null){
+  watchTypeVal = watchTypeInput.value;
 }
 
 // navigation bar
@@ -582,14 +586,19 @@ async function watchFilterHandler() {
   if(regionCode){
     regionCode = regionCode.iso_3166_1;
   }
+  let monitizationParam = "&watch_monetization_types=" + watchTypeVal
+  let guideLink = headers.protocol +
+  "//" +
+  headers.host +
+  "/recommendations/watch-guide?media=" + mediaVal + "&watch_region=" + regionVal  + "&watch_provider=";
   
   if(mediaVal){
     let providersUrl = baseUrl + mediaVal.toLowerCase() + "/" + regionCode;
-    xhrRequest(providersUrl);
+    xhrRequest(providersUrl, guideLink, monitizationParam);
   }
 }
 
-function xhrRequest(providersUrl) {
+function xhrRequest(providersUrl, guideLink, monitizationParam) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", providersUrl, true);
   xhr.onprogress = function() {
@@ -605,7 +614,7 @@ function xhrRequest(providersUrl) {
       //   providerInput.value = response[0].provider_name;
       // }
       createProviders(response);
-      createProvidersEmbla(response);
+      createProvidersEmbla(response, guideLink, monitizationParam);
     }
     handlpeOptions();
     rebuild();
@@ -637,15 +646,18 @@ function createProviders(providers) {
   }
 }
 
-function createProvidersEmbla(providers) {
+function createProvidersEmbla(providers, guideLink, monitizationParam) {
   let output = "";
 
   for (let i = 0; i < providers.length; i++) {
     output += `
     <div class="embla__slide new-slides" style="margin-right: 10px;">
       <div class="provider embla__slide__inner">
-        <img src="https://image.tmdb.org/t/p/w500/${providers[i]
-          .logo_path}" alt="${providers[i].provider_name}">
+      <a href="${guideLink + providers[i].provider_name + monitizationParam}" style="color:#darkGray; font-size:14px;" title="${providers[i].provider_name}">
+      <img src="https://image.tmdb.org/t/p/w500/${providers[i]
+      .logo_path}" alt="${providers[i].provider_name}">
+
+      </a>
       </div>
                                                                                 
     </div>
@@ -676,9 +688,12 @@ watchFilterHandler();
 // check change in watch regions and media type
 
 setInterval(function() {
-  let newMediaVal, newRegionVal;
+  let newMediaVal, newRegionVal, newWatchTypeVal;
   if (mediaInput !== null) {
     newMediaVal = mediaInput.value;
+  }
+  if (watchTypeInput !== null) {
+    newWatchTypeVal = watchTypeInput.value;
   }
   if (regionInput !== null) {
     newRegionVal = regionInput.value;
@@ -689,6 +704,10 @@ setInterval(function() {
   }
   if (newRegionVal !== regionVal) {
     regionVal = newRegionVal;
+    watchFilterHandler();
+  }
+  if (newWatchTypeVal !== watchTypeVal) {
+    watchTypeVal = newWatchTypeVal;
     watchFilterHandler();
   }
 }, 2000);
