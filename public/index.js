@@ -821,7 +821,6 @@ $(document).ready(function() {
   });
 });
 
-new SimpleBar(simpleBarContainer, { autoHide: true });
 
 function rebuild() {
   const wrap = document.querySelectorAll(".ajax-embla");
@@ -873,3 +872,5 @@ function rebuild() {
     });
   }
 }
+
+new SimpleBar(simpleBarContainer, { autoHide: true });
