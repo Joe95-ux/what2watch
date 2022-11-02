@@ -1770,15 +1770,27 @@ textarea {
     content: "\f078";
     position: relative;
     bottom: -1px;
-    right: 12px;
+    right: 6px;
     font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
     font-family: 'Font Awesome\ 5 Free';
     font-weight: 900;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
     color: var(--mainWhite);
     -webkit-transition: all 0.4s;
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
+}
+
+@media screen and (max-width:500px){
+    .selected::after {
+        right: -5px;
+    }
 }
 
 .select-box .options-container,
@@ -1794,12 +1806,7 @@ textarea {
     max-height: 240px;
 }
 
-.select-box .options-container.active-options+.selected::after {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-    -o-transform: rotateX(180deg);
-    -moz-transform: rotateX(180deg);
-}
+
 
 .select-box .options-container::-webkit-scrollbar,
 .profile-biography::-webkit-scrollbar {

@@ -278,6 +278,7 @@ function smallScreenSynopsis() {
 
 smallScreenSynopsis();
 
+
 // if (watchBanner !== null) {
 //   watchBanner.addEventListener("click", () => {
 //     headerSynopsis.style.display = "none";
