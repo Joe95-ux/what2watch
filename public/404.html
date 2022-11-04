@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#001019">
     <title>404 page | What2watch.net</title>
     <meta name="description"
-        content="What2watch is the ultimate watch guide for movies. Get to know what movies to watch or stream in a hassle-free way.">
+        content="What2watch is the ultimate watch guide for movies and tv-shows. Get to know what movies to watch or stream in a hassle-free way.">
     <meta name="keywords"
         content="what to watch, Trending movies, upcoming movies, action, thriller, movie guide, actors, actresses, synopsis, trailers, reviews">
     <!--favicon-->
@@ -79,46 +79,47 @@
 
                     </a>
                 </div>
-                <i class="fas search small-screen-search-icon"></i>
-                <div class="search-bar big-screen-search">
-                    <form action="/search" method="GET" class="search-form">
-                        <div class="search-field">
-                            <i class="fas fa-search"></i>
-                            <input type="text" class="search" placeholder="search for a movie..." name="query">
-                            <input type="submit" value="search" hidden>
-                        </div>
-                    </form>
-                </div>
                 <ul class="nav_links ld-nav_links">
-                    <li class="nav_link"> <a href="/about-us">About us</a> </li>
-
+                    <li class="nav_link"> <a href="/">Movies</a></li>
+                    <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
+                    <li class="nav_link"> <a href="/recommendations/watch-guide">Watch Guide</a></li>
+                    <li class="nav_link"> <a href="/recommendations/what-to-watch">what-to-watch</a></li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                 </ul>
-
+                <div class="search-trigger" title="find what to watch">
+                    <i class="fas fa-search"></i>
+                </div>
             </div>
 
         </div>
-
     </nav>
-    <section id="error-page">
-        <div class="small-screen-search search-bar">
-            <i class="fas fa-times close-sm-search"></i>
-            <form action="/search" method="GET" class="small-search-form search-form">
-                <div class="small-search-field">
+    <div class="multi-search-modal">
+        <div class="multi-search-wrapper">
+            <form action="/search" method="GET" class="multi-search-form">
+                <div class="multi-search-field">
                     <i class="fas fa-search"></i>
-                    <input type="text" class="small-search" placeholder="search for a movie..." name="query">
-                    <!-- <i class="blink"></i> -->
+                    <input type="text" class="multi-search" placeholder="search for movies, tv shows or cast members..."
+                        name="query" autofocus>
                     <input type="submit" value="search" hidden>
                 </div>
             </form>
+            <div class="multi-search-cancel"><i class="fas fa-times"></i></div>
+
         </div>
-        <div class="error-message">
-            <h1>404</h1>
-            <h2>Page not found</h2>
-            <p>Sorry, the link you requested for may be broken or the page may have been removed or
-                renamed!</p>
-            <div class="swiper-btns">
-                <a href="/" class="swiper-btn" role="button" style="background-color:red;"><i class="fas fa-home"></i>Take Me Home</a>
+    </div>
+    <section id="error-page">
+        <div class="wrapper-enclosure">
+            <div class="search-not-found">
+                <img src="../../404.svg" alt="search not found" style="margin-top: 3rem;">
+                <p class="movie-not-found">Oops! the link you requested for may be broken or the page may have been
+                    removed or
+                    renamed!
+                </p>
+                <div class="swiper-btns">
+                    <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
+                </div>
             </div>
+
         </div>
 
     </section>
