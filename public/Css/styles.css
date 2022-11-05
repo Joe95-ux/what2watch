@@ -2618,8 +2618,10 @@ h1.genre-intro {
 .movie-not-found {
     color: var(--darkGrey);
     font-weight: 400;
-    margin-bottom: 1.5rem;
     text-align: center;
+}
+.search-not-found h1{
+    margin-bottom: 1.5rem;
 }
 
 .movie-not-found span {
