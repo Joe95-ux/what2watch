@@ -219,11 +219,11 @@
                                 </div>
                                 <div class="option">
                                     <input type="radio" class="radio" id="flatrate" />
-                                    <label for="flatrate">Flatrate</label>
+                                    <label for="flatrate">Subscription</label>
                                 </div>
                             </div>
                             <div class="selected">
-                                <input type="text" name="watch_monetization_types" id="watch-type" value="<%= type ? type:"Flatrate" %>" readonly />
+                                <input type="text" name="watch_monetization_types" id="watch-type" value="<%= type === "flatrate" ? "Subscription": type %>" readonly />
                             </div>
                         </div>
 

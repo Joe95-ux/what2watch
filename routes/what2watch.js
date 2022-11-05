@@ -161,7 +161,13 @@ router.get("/watch-guide", async (req, res)=>{
     
   }
   
-  let type = watch_monetization_types?.toLowerCase() || "flatrate";
+  let type = watch_monetization_types?.toLowerCase() || "subscription";
+  let watchType;
+  if(type === "subscription"){
+    watchType = "flatrate";
+  }else if (type !== "subscription"){
+    watchType = type;
+  }
   let uniqueProvider = countryProviders?.find(countryProvider=>countryProvider.provider_name === provider);
   const provider_id = uniqueProvider?.provider_id;
   const useType = capitalize(type);
@@ -176,7 +182,7 @@ router.get("/watch-guide", async (req, res)=>{
   if(page >=1){
     currentPage = parseInt(page);
   }
-  let url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_watch_providers=${provider_id}&watch_region=${regionCode}&with_watch_monetization_types=${type}`;
+  let url = `https://api.themoviedb.org/3/discover/${mediaType}?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_watch_providers=${provider_id}&watch_region=${regionCode}&with_watch_monetization_types=${watchType}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
