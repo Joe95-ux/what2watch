@@ -1832,6 +1832,19 @@ textarea {
     cursor: pointer;
     position: relative;
 }
+.region_wrapper, .prov_wrapper{
+    display: flex;
+    align-items: center;
+}
+.region_wrapper img, .prov_wrapper img{
+    margin-right: 5px;
+
+}
+.prov_wrapper img{
+    border-radius: 5px;
+    width:20px; 
+    height:20px
+}
 
 .active-label::before{
     content: "✓";
