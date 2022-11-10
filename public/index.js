@@ -471,12 +471,13 @@ function dropDown() {
 function handlpeOptions() {
   if (optionsContainer !== null) {
     optionsContainer.forEach(container => {
-      const optionsList = [...container.querySelectorAll(".option")];
+      const optionsList = [ ...container.querySelectorAll(".option")];
       const selectedInput = container.nextElementSibling.firstElementChild;
       optionsList.forEach(option => {
         let optionLabel = option.querySelector("label");
+        let trimmedInput = selectedInput.value.trim();
 
-        if (selectedInput.value === optionLabel.innerHTML) {
+        if ( trimmedInput === optionLabel.innerHTML) {
           option.classList.add("active-label");
         } else {
           if (option.classList.contains("active-label")) {
@@ -630,7 +631,7 @@ function createProviders(providers) {
     <div class="option provider-options prov_wrapper">
       <input type="radio" class="radio" id="${providers[i].provider_name}" />
       <img src="https://image.tmdb.org/t/p/w500/${providers[i]
-      .logo_path}" alt="${providers[i].provider_name}">
+      .logo_path}" alt="">
       <label for="${providers[i].provider_name}">${providers[i].provider_name}</label>
     </div>
   

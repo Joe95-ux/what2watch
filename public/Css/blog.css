@@ -1888,7 +1888,7 @@ textarea {
     }
 
     .selected input {
-        height: 20px;
+        height: 25px;
     }
 
     .selected::after {
