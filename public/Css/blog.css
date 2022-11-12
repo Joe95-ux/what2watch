@@ -1943,6 +1943,14 @@ textarea {
     padding: 0.5rem 1rem;
 }
 
+.mn-w-btn{
+    min-width: 150px;
+}
+.explore-now-arrow{
+    position: relative;
+    top: 2px;
+}
+
 .publish-btn:hover,
 .create-btn:hover {
     background-color: inherit;
