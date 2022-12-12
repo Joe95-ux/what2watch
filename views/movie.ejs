@@ -373,13 +373,20 @@
                                                                 <%} %>
                                                                 <div class="movie-keywords">
                                                                     <div class="keyword-title">Keywords:</div>
-                                                                    <div class="keywords-wrapper">
-                                                                        <% keywords.forEach(keyword=>{%>
-                                                                            <a href="/keyword/<%=keyword.id%>-<%=keyword.name%>" class="keyword-proper">
-                                                                                <%= keyword.name %> 
-                                                                            </a>
-                                                                        <%}) %> 
-                                                                    </div>
+                                                                    <% if(keywords.length){%> 
+                                                                        <div class="keywords-wrapper">
+                                                                            <% keywords.forEach(keyword=>{%>
+                                                                                <a href="/keyword/<%=keyword.id%>-<%=keyword.slug%>" class="keyword-proper">
+                                                                                    <%= keyword.name %> 
+                                                                                </a>
+                                                                            <%}) %> 
+                                                                        </div>
+                                                                        <% }else{%>
+                                                                            <div class="keywords-wrapper">
+                                                                                <p>No keywords have been added yet</p>
+                                                                            </div>
+                                                                            
+                                                                        <% } %>  
                                                                 </div>
                                                                 <div class="movie-links">
                                                                     <% if(movie.homepage !== "" && movie.homepage !== null){%>

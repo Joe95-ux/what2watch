@@ -121,8 +121,8 @@
                 </script>
             </div>
             <div class="page-intro">
-                <h1>Keyword: <%= keyword %> </h1>
-                <p> Explore <strong><%= keyword %></strong> related movies in a hassle free way.</p>
+                <h1>Keyword: <span><%= keyword %></span></h1>
+                <p> Explore <span><%= keyword %></span> related movies in a hassle free way.</p>
             </div>
             <% if(movies?.length){%>
                     <div class="movie-wrapper ">
@@ -201,14 +201,14 @@
             <% if(totalPages>1) {%>
                 <div class="page-controls">
                     <% if(page_num > 1) {%>
-                    <a href="/keyword/<%= keyId %>-<%= keyword %>/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
+                    <a href="/keyword/<%= keyId %>-<%= rawName %>/?page=<%= page_num - 1 %>" class="prev-page swiper-btn"
                         role="button"><i class="fas fa-long-arrow-alt-left prev-indicator"></i>page <%= page_num - 1 %>
                     </a>
         
                     <% }%>
                     <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
                     <% if(page_num < totalPages && totalResults > 20) {%>
-                    <a href="/keyword/<%= keyId %>-<%= keyword %>/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
+                    <a href="/keyword/<%= keyId %>-<%= rawName %>/?page=<%= page_num + 1 %>" class="next-page swiper-btn" role="button"
                         value="next-page">page <%= page_num + 1 %><i class="fas fa-long-arrow-alt-right next-indicator"></i></a>
         
         

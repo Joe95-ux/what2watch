@@ -24,8 +24,9 @@ async function getgenre() {
 router.get("/:keyword", async (req, res)=>{
     const keyword = req.params.keyword;
     const keys = keyword.split("-");
-    const keyId = keys[0];
-    const keyName = keys[1];
+    const keyId = keys.slice(0, 1);
+    const rawName = keys.slice(1).join("-")
+    const keyName = keys.slice(1).join(" ");
     const title = keyName + "movies";
     let page_num = 1;
     if(req.query.page >=1){
@@ -47,6 +48,7 @@ router.get("/:keyword", async (req, res)=>{
       res.render("keywordpage", {
         title,
         keyword:keyName,
+        rawName,
         keyId,
         movies,
         genres: genres,

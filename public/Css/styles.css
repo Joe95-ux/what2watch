@@ -2274,8 +2274,12 @@ a.learn-more {
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: var(--mainWhite);
-    font-weight: 700;
+    font-weight: 600;
     font-family: 'Noto serif', serif;
+}
+
+.page-intro span{
+    color: var(--darkGrey);
 }
 
 .page-intro p {
@@ -2604,7 +2608,6 @@ h1.genre-intro {
     height: 100%;
     width: 100%;
     border-radius: 5px;
-    object-fit: cover;
     border: none;
 }
 
@@ -3497,7 +3500,7 @@ h1.genre-intro {
 .keyword-title{
     font-size: 1.2rem;
     color: var(--mainWhite);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .keywords-wrapper{
@@ -3506,6 +3509,9 @@ h1.genre-intro {
     flex-wrap: wrap;
     width: 100%;
     margin-left: 8px;
+}
+.keywords-wrapper p{
+    align-self: center;
 }
 .keywords-wrapper a{
     color: var(--darkGrey);

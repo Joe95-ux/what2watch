@@ -1,6 +1,7 @@
 const express = require("express");
 const { parseInt } = require("lodash");
 const fetch = require("node-fetch");
+const slugify = require("slugify");
 const {getTrailer, getRev, getNetworks, getSpokenLanguage, getSingleProvider, getRunTime, getMedia, getCrew, getOverview} = require("../helpers/movie-helpers");
 const router = express.Router();
 
@@ -318,7 +319,12 @@ router.get("/:movie_id", async (req, res) => {
       watchProviders = getProviders.results;
       provider = getProviders.provider;
     }
-    const keywords = await movie.keywords.keywords;
+    let keywords = await movie.keywords.keywords;
+    keywords = keywords.map(keyword=>{
+      keyword.slug = slugify(keyword.name);
+      return keyword;
+    })
+
     const genres = await getgenre();
     const network = getNetworks(movieNetworks);
     const movieGenres = getNetworks(genreList);
