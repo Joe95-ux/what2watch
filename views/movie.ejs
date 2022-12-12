@@ -254,9 +254,6 @@
                                             
                                         </div>
                                         
-                    
-                        
-                        
                                        </div> 
                                     </div>
                         
@@ -374,6 +371,16 @@
                                                                     </div>
                                                         
                                                                 <%} %>
+                                                                <div class="movie-keywords">
+                                                                    <div class="keyword-title">Keywords:</div>
+                                                                    <div class="keywords-wrapper">
+                                                                        <% keywords.forEach(keyword=>{%>
+                                                                            <a href="/keyword/<%=keyword.id%>-<%=keyword.name%>" class="keyword-proper">
+                                                                                <%= keyword.name %> 
+                                                                            </a>
+                                                                        <%}) %> 
+                                                                    </div>
+                                                                </div>
                                                                 <div class="movie-links">
                                                                     <% if(movie.homepage !== "" && movie.homepage !== null){%>
                                                                     <a href="<%= movie.homepage %> " target="_blank" class="web"

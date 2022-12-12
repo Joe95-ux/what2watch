@@ -276,7 +276,7 @@ router.get("/:movie_id", async (req, res) => {
         movieId +
         "?api_key=" +
         apiKey +
-        "&append_to_response=videos,credits,reviews,similar,images&include_image_language=en,null&language=en-US"
+        "&append_to_response=videos,credits,reviews,similar,images,keywords&include_image_language=en,null&language=en-US"
     );
     const movie = await response.json();
     const movieTitle = await movie.title;
@@ -310,7 +310,6 @@ router.get("/:movie_id", async (req, res) => {
       recommendedMovies = await recommendedData.results;
 
     }
-    
     const similarMovies = await movie.similar.results;
     const similar = await similarMovies;
     const getProviders = await getWatchProviders(movieId);
@@ -319,13 +318,14 @@ router.get("/:movie_id", async (req, res) => {
       watchProviders = getProviders.results;
       provider = getProviders.provider;
     }
-    
+    const keywords = await movie.keywords.keywords;
     const genres = await getgenre();
     const network = getNetworks(movieNetworks);
     const movieGenres = getNetworks(genreList);
 
     res.render("movie", {
       movie: movie,
+      keywords,
       revenue,
       budget,
       extData,
@@ -355,5 +355,5 @@ router.get("/:movie_id", async (req, res) => {
   }
 });
 
-
 module.exports = router;
+

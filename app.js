@@ -19,6 +19,7 @@ const path = require("path");
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const movieRouter = require("./routes/movie");
+const keywordRouter = require("./routes/keyword");
 const personRouter = require("./routes/person");
 const reviewRouter = require("./routes/review");
 const blogRouter = require("./routes/blog");
@@ -441,6 +442,7 @@ app.get("/:page", async (req, res) => {
 
 
 app.use("/movie", movieRouter);
+app.use("/keyword", keywordRouter);
 app.use("/person", personRouter);
 app.use("/reviews", reviewRouter);
 app.use("/blog", blogRouter);
