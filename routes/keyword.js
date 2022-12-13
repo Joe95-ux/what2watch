@@ -34,11 +34,11 @@ router.get("/:keyword", async (req, res)=>{
     }
     try{
       const response = await fetch(
-        "https://api.themoviedb.org/3/keyword/" + keyId + "/movies?api_key=" +
+        "https://api.themoviedb.org/3/discover/movie?api_key=" +
           apiKey +
           "&language=en-US&page=" +
           page_num +
-          "&include_adult=false"
+          "&include_adult=false&with_keywords="  + keyId
       );
       const data = await response.json();
       const movies = await data.results;
