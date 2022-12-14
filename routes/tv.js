@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fetch = require("node-fetch");
+const slugify = require("slugify");
 const _ = require("lodash");
 const {getTrailer, getcert, getNetworks, getSingleProvider, getMedia, getCrew, getOverview, getSpokenLanguage} = require("../helpers/movie-helpers");
 
@@ -354,7 +355,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
         movieId +
         "?api_key=" +
         apiKey +
-        "&append_to_response=videos,content_ratings,credits,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US&page=" + page_num
+        "&append_to_response=videos,content_ratings,credits,keywords,reviews,similar,recommendations,images&include_image_language=en,null&language=en-US&page=" + page_num
     );
     const movie = await response.json();
     const movieTitle = await movie.name;
@@ -391,6 +392,11 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
       watchProviders = getProviders.results;
       provider = getProviders.provider;
     }
+    let keywords = await movie.keywords.results;
+    keywords = keywords.map(keyword=>{
+      keyword.slug = slugify(keyword.name);
+      return keyword;
+    })
     const seasons = await movie.seasons;
     const realSeasons = getSeasons(seasons);
     const season1 = await realSeasons[0].season_number
@@ -401,6 +407,7 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
 
     res.render("tvdetails", {
       movie: movie,
+      keywords,
       watch: watchProviders,
       title: title,
       imdb,

@@ -375,6 +375,23 @@
                                             target="_blank" role="button"><i
                                                 class="fab fa-imdb"></i></a>
                                     </div>
+                                    <div class="movie-keywords">
+                                        <div class="keyword-title">Keywords:</div>
+                                        <% if(keywords.length){%> 
+                                            <div class="keywords-wrapper">
+                                                <% keywords.forEach(keyword=>{%>
+                                                    <a href="/keyword/tv-shows/<%=keyword.id%>-<%=keyword.slug%>" class="keyword-proper">
+                                                        <%= keyword.name %> 
+                                                    </a>
+                                                <%}) %> 
+                                            </div>
+                                            <% }else{%>
+                                                <div class="keywords-wrapper">
+                                                    <p>No keywords have been added yet</p>
+                                                </div>
+                                                
+                                            <% } %>  
+                                    </div>
                                     
                                 </div>
                                 

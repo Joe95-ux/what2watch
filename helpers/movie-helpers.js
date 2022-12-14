@@ -89,6 +89,7 @@ module.exports = {
     let stream;
     let rent;
     let buy;
+    let ads;
     let provider;
   
     if(providers.flatrate !== null ){
@@ -100,11 +101,17 @@ module.exports = {
     if(providers.buy !== null){
       buy = providers.buy? providers.buy :"";
     }
-  
-    if(stream.length || buy.length || rent.length){
-      provider = [...stream, ...buy, ...rent];
+    if(providers.ads !== null){
+      ads = providers.ads? providers.ads :"";
     }
-    return provider[0];
+  
+    if(stream.length || buy.length || rent.length || ads.length){
+      provider = [...stream, ...buy, ...rent, ...ads];
+    }
+    if(provider.length){
+      return provider[0];
+    }
+    
   
   },
   getNetworks: function getNetworks(networks){

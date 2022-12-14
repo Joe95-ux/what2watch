@@ -371,6 +371,15 @@
                                                                     </div>
                                                         
                                                                 <%} %>
+                                                                <div class="movie-links">
+                                                                    <% if(movie.homepage !== "" && movie.homepage !== null){%>
+                                                                    <a href="<%= movie.homepage %> " target="_blank" class="web"
+                                                                        role="button"><i class="fas fa-link"></i></a>
+                                                                    <% } %>
+                                                                    <a href="https://www.imdb.com/title/<%= movie.imdb_id %>/"
+                                                                        target="_blank" role="button"><i
+                                                                            class="fab fa-imdb"></i></a>
+                                                                </div>
                                                                 <div class="movie-keywords">
                                                                     <div class="keyword-title">Keywords:</div>
                                                                     <% if(keywords.length){%> 
@@ -388,15 +397,7 @@
                                                                             
                                                                         <% } %>  
                                                                 </div>
-                                                                <div class="movie-links">
-                                                                    <% if(movie.homepage !== "" && movie.homepage !== null){%>
-                                                                    <a href="<%= movie.homepage %> " target="_blank" class="web"
-                                                                        role="button"><i class="fas fa-link"></i></a>
-                                                                    <% } %>
-                                                                    <a href="https://www.imdb.com/title/<%= movie.imdb_id %>/"
-                                                                        target="_blank" role="button"><i
-                                                                            class="fab fa-imdb"></i></a>
-                                                                </div>
+                                                                
                                                                 
                                                             </div>
                                                             
