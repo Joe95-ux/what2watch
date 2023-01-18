@@ -1823,8 +1823,8 @@ ins{
     font-size: 0.8rem;
     font-weight: 500;
     font-family: 'Roboto', sans-serif;
-    transition: all 0.3s linear;
-    -webkit-transition: all 0.3s linear;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
 }
 
 .swiper-btns a {
@@ -1927,7 +1927,7 @@ ins{
 .swiper-btn:hover {
     background-color: #001927;
     color: var(--mainWhite);
-    transform: translate(0, -4px);
+    transform: translate(0, -5px);
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
@@ -3012,8 +3012,8 @@ h1.genre-intro {
 .welcome-banner {
     font-family: 'Poppins', sans-serif;
     max-width: 798px;
-    max-height: 360px;
-    margin-top: 2rem;
+    max-height: 380px;
+    /* margin-top: 2rem; */
     background-color: #001927;
     color: var(--mainWhite);
 }
