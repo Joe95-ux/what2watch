@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title>where to watch <%= movie.title %> | what2watch.net</title>
+    <title>Discover where to watch <%= movie.title %> | what2watch.net</title>
     <meta name="description"
-        content="<%= movie.overview ? movie.overview : movie.title %> ">
+        content="Where to watch <%= movie.title %> . <%= movie.overview ? movie.overview : movie.title %> ">
     <meta name="keywords"
         content="<%= movie.title %>, <%= movie.title %> movie, <%= movie.title %> the movie, <%= movie.title %> trailer, <%= movie.title %> release-date, <%= movie.title %> Reviews, <%= movie.title %> Showtime, <%= movie.title %> Photos, <%= movie.title %> movie posters, <%= movie.title %> movie backdrops, <%= movie.title %> user ratings, <%= movie.title %> synopsis, <%= movie.title %> trailers, <%= movie.title %> credits">
     <meta property="og:url" content="https://what2watch.net/movie/<%= movie.id%>"/>
@@ -442,7 +442,7 @@
 
                                         <div class="similarmovies-container-fluid">
                                             <% if(similar?.length){%>
-                                            <h1 class="embla-small-title">similar movies</h1>
+                                            <h3 class="embla-small-title">similar movies</h3>
                                             <div class="embla ">
                                                 <div class="embla__viewport">
                                                     <div class="embla__container">
@@ -723,8 +723,8 @@
                                     <div class="wrapper-enclosure">
                                         <div class="movies-container">
                                             <% if(recommendedMovies?.length){%>
-                                            <h1 class="popular serif">Movies like <span
-                                                    class="related-films"><%= movie.title %> </span></h1>
+                                            <h3 class="popular serif">Movies like <span
+                                                    class="related-films"><%= movie.title %> </span></h3>
                                             <div class="line-container">
                                                 <!-- <div class="line"></div> -->
                                             </div>

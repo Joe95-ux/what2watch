@@ -972,9 +972,9 @@ ins{
 }
 
 .new-header-movie .movie-title {
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 1.3rem;
-    font-family: 'Noto serif', serif;
+    font-size: 28px;
     text-transform: capitalize;
 }
 
@@ -1266,6 +1266,7 @@ ins{
     max-width: 88px;
     height: auto;
     width: auto;
+    background-color: #00243d;
     margin-right: 1.2rem;
     border-radius: 5px;
 
@@ -2054,7 +2055,7 @@ a.learn-more {
     padding: 1.8rem 0 0;
 }
 
-.trending-headings h1 {
+.trending-headings h2 {
     text-transform: capitalize;
     font-size: 1.4rem;
     font-weight: 600;
@@ -2064,7 +2065,7 @@ a.learn-more {
     word-wrap: normal;
 }
 
-.trending-headings h1 i {
+.trending-headings h2 i {
     margin-right: 10px;
 }
 
@@ -2111,7 +2112,7 @@ a.learn-more {
     color: darkgray;
 }
 
-.timeline h2 {
+.timeline h3 {
     font-weight: 400;
     text-transform: capitalize;
     font-size: 1.1rem;
@@ -2146,7 +2147,7 @@ a.learn-more {
         margin-right: 0;
     }
 
-    .timeline h2 {
+    .timeline h3 {
         font-size: 1.1rem;
         white-space: nowrap;
     }

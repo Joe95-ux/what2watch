@@ -328,7 +328,7 @@ app.get("/privacy", async (req, res) => {
 
 //Get popular Movies
 app.get("/", async (req, res) => {
-  const title = "Movies to watch";
+  const title = "Where to watch Movies and Tv Shows";
 
   
 
