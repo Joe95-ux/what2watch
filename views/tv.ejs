@@ -223,7 +223,7 @@
                                         <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                             <% if(mov.backdrop_path !== null ){%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                    <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
+                                                    <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.name%>">
                                                 </a>
                                                 <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
@@ -315,7 +315,7 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.backdrop_path !== null ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.name%>">
                                             </a>
                                             <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
@@ -377,7 +377,7 @@
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
                                         <% if(mov.backdrop_path !== null ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
-                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.name%>">
                                             </a>
                                             <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
