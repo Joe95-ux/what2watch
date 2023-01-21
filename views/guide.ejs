@@ -1,56 +1,166 @@
-<%- include('partials/header') %>
-<div class="side-drawer" data-simplebar>
-    <i class="fas fa-times"></i>
-    <div class="side-drawer-inner">
-        <div class="main-category discover-movies">
-            <div class="category-title">
-                <h2 class="discover">Menu</h2>
-            </div>
-            <div class="category-types">
-                <ul class="categories">
-                    <li> <a class="active-cat" href="/">Movies</a></li>
-                    <li> <a class="active-cat" href="/tv/tv-shows">Tv Shows</a></li>
-                    <li> <a class="active-cat" href="/recommendations/watch-guide">Watch Guide</a></li>
-                    <li> <a class="active-cat" href="/recommendations/what-to-watch">what-to-watch</a></li>
-                    <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#001019">
+    <title>Discover <%= ref %> to watch on <%= currentProvider?.provider_name %> | what2watch.net</title>
+    <meta name="description" content="Find what to watch on <%= currentProvider?.provider_name %> including the latest releases. Filter
+    by Movies, TV shows, Watch monitization type and more.">
+    <meta name="keywords" content="">
+    <!--favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Roboto+Slab:wght@400;500&family=Roboto:wght@300;400;500;700;900&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+    <script src="https://kit.fontawesome.com/907d5275a6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@5.3.8/dist/simplebar.css" />
+    <link rel="stylesheet" href="/Css/embla.css">
+    <link rel="stylesheet" href="/Css/blog.css">
+    <link rel="stylesheet" href="/Css/styles.css">
+    <noscript>
+        <style>
+            /**
+          * Reinstate scrolling for non-JS clients
+          */
+            .simplebar-content-wrapper {
+                overflow: auto;
+            }
+        </style>
+    </noscript>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NN3S8E3V6Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NN3S8E3V6Q');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <nav class="navigation">
+        <div class="wrapper-enclosure nav-enclosure">
+            <div class="logo-and-links">
+                <div class="logo">
+                    <div class="burger">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </div>
+                    <a href="/">
+                        <div class="logo-wrapper">
+                            <img src="/logo.png" alt="what2watch">
+                        </div>
+
+                    </a>
+                </div>
+                <ul class="nav_links ld-nav_links">
+                    <li class="nav_link"> <a href="/">Movies</a></li>
+                    <li class="nav_link"> <a href="/tv/tv-shows">Tv Shows</a></li>
+                    <li class="nav_link"> <a href="/recommendations/watch-guide">Watch Guide</a></li>
+                    <li class="nav_link"> <a href="/recommendations/what-to-watch">what-to-watch</a></li>
+                    <li class="nav_link"> <a href="/blog/posts">Blog</a></li>
                     <% if(user){%>
                     <% if(user.privilege === "admin"){%>
-                    <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <li class="nav_link"> <a href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
                     <% }else{%>
-                    <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                    <li class="nav_link"> <a href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
                     <% } %>
                     <% } %>
                 </ul>
+
+                <!-- <div class="search-bar big-screen-search">
+                    <form action="/search" method="GET" class="search-form">
+                        <div class="search-field">
+                            <i class="fas fa-search"></i>
+                            <input type="text" class="search" placeholder="search for a movie..." name="query">
+                            <input type="submit" value="search" hidden>
+                        </div>
+                    </form>
+                </div> -->
+                <div class="search-trigger" title="find what to watch">
+                    <i class="fas fa-search"></i>
+                </div>
             </div>
 
         </div>
-        <div class="main-category discover-movies">
-            <div class="category-title">
-                <h2 class="discover">Discover</h2>
-            </div>
-            <div class="category-types">
-                <ul class="categories">
-                    <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
-                    <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a></li>
-                    <li><i class="fas fa-calendar-week"></i><a class="active-cat"
-                            href="/movie/upcoming"></i>Upcoming</a></li>
-                </ul>
-            </div>
+    </nav>
+    <div class="side-drawer" data-simplebar>
+        <i class="fas fa-times"></i>
+        <div class="side-drawer-inner">
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Menu</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li> <a class="active-cat" href="/">Movies</a></li>
+                        <li> <a class="active-cat" href="/tv/tv-shows">Tv Shows</a></li>
+                        <li> <a class="active-cat" href="/recommendations/watch-guide">Watch Guide</a></li>
+                        <li> <a class="active-cat" href="/recommendations/what-to-watch">what-to-watch</a></li>
+                        <li><a class="active-cat" href="/blog/posts">Blog</a></li>
+                        <% if(user){%>
+                        <% if(user.privilege === "admin"){%>
+                        <li><a class="active-cat" href="/blog/admin/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% }else{%>
+                        <li> <a class="active-cat" href="/blog/dashboard/<%= user._id %>">Dashboard</a> </li>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
 
-        </div>
-        <div class="main-category movie-genres">
-            <div class="category-title">
-                <h2>Genres</h2>
             </div>
-            <div class="category-types">
-                <ul class="categories">
-                    <% if(movieGenres){%>
-                    <% movieGenres.forEach(genre=>{ %>
-                    <li><i class="fas fa-dot-circle"></i><a class="active-cat"
-                            href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+            <div class="main-category discover-movies">
+                <div class="category-title">
+                    <h2 class="discover">Discover</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <li><i class="fas fa-heart"></i><a class="active-cat" href="/">Popular</a></li>
+                        <li><i class="fas fa-chart-bar"></i><a class="active-cat" href="/movie/top_rated">Top Rated</a>
+                        </li>
+                        <li><i class="fas fa-calendar-week"></i><a class="active-cat"
+                                href="/movie/upcoming"></i>Upcoming</a></li>
+                    </ul>
+                </div>
 
-                    <%})%>
-                    <%}%>
+            </div>
+            <div class="main-category movie-genres">
+                <div class="category-title">
+                    <h2>Genres</h2>
+                </div>
+                <div class="category-types">
+                    <ul class="categories">
+                        <% if(movieGenres){%>
+                        <% movieGenres.forEach(genre=>{ %>
+                        <li><i class="fas fa-dot-circle"></i><a class="active-cat"
+                                href="/movie/genres/<%= genre.name %>"><%= genre.name %></a></li>
+
+                        <%})%>
+                        <%}%>
   
             </ul>
         </div>
@@ -109,322 +219,326 @@
             
             <div class="page-intro">
                 <h1>Discover <%= ref %> to watch on <%= currentProvider?.provider_name %> </h1>
-                    <p>Find what to watch on <%= currentProvider?.provider_name %> including the latest releases. Filter
-                        by Movies, TV shows, Watch monitization type and more.</p>
-            </div>
-            <div class="cast-container ajax-embla" style="max-height: 60px;">
-                <div class=" ajax-embla-viewport">
-                    
-                    <div class="embla__container providers__embla__container">
-                        <!-- provider images here -->
+                        <p>Find what to watch on <%= currentProvider?.provider_name %> including the latest releases.
+                            Filter
+                            by Movies, TV shows, Watch monitization type and more.</p>
+                </div>
+                <div class="cast-container ajax-embla" style="max-height: 60px;">
+                    <div class=" ajax-embla-viewport">
+
+                        <div class="embla__container providers__embla__container">
+                            <!-- provider images here -->
+
+                        </div>
 
                     </div>
+                    <button class="embla__button embla__button--prev" type="button">
+                        <svg class="embla__button__svg" viewBox="137.718 -1.001 366.563 643.999">
+                            <path
+                                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button class="embla__button embla__button--next" type="button">
+                        <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
+                            <path
+                                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
+                            </path>
+                        </svg>
+                    </button>
 
                 </div>
-                <button class="embla__button embla__button--prev" type="button"
-                    >
-                    <svg class="embla__button__svg"
-                        viewBox="137.718 -1.001 366.563 643.999">
-                        <path
-                            d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z">
-                        </path>
-                    </svg>
-                </button>
-                <button class="embla__button embla__button--next" type="button"
-                    >
-                    <svg class="embla__button__svg" viewBox="0 0 238.003 238.003">
-                        <path
-                            d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z">
-                        </path>
-                    </svg>
-                </button>
 
-            </div>
-
-            <div class="media-filter-wrapper">
-                <form class="media-filter-form" action="/recommendations/watch-guide" method="GET">
-                    <div class="box-wrapper">
-                        <label for="Type">Media type</label>
-                        <div class="select-box">
-                            <div class="options-container">
-                                <div class="option">
-                                    <input type="radio" class="radio" id="tv" />
-                                    <label for="tv">Tv</label>
+                <div class="media-filter-wrapper">
+                    <form class="media-filter-form" action="/recommendations/watch-guide" method="GET">
+                        <div class="box-wrapper">
+                            <label for="Type">Media type</label>
+                            <div class="select-box">
+                                <div class="options-container">
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="tv" />
+                                        <label for="tv">Tv</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="movie" />
+                                        <label for="movie">Movie</label>
+                                    </div>
                                 </div>
-                                <div class="option">
-                                    <input type="radio" class="radio" id="movie" />
-                                    <label for="movie">Movie</label>
+                                <div class="selected">
+                                    <input type="text" name="media" id="media_cat"
+                                        value="<%= useMediatype?useMediatype:"Tv"%>" readonly />
                                 </div>
-                            </div>
-                            <div class="selected">
-                                <input type="text" name="media" id="media_cat"
-                                    value="<%= useMediatype?useMediatype:"Tv"%>" readonly />
                             </div>
                         </div>
-                    </div>
-                    <div class="box-wrapper">
-                        <label for="country">Country</label>
-                        <div class="select-box">
-                            <div class="options-container">
-                                <% if(regions?.length){%>
-                                <% regions.forEach(region=>{%>
-                                <div class="option region_wrapper">
-                                    <input type="radio" class="radio" id="<%=region.iso_3166_1%>" />
-                                    <img src="https://flagcdn.com/16x12/<%=region?.iso_3166_1?.toLowerCase()%>.png" srcset="https://flagcdn.com/32x24/<%=region?.iso_3166_1?.toLowerCase()%>.png 2x,
-                                    https://flagcdn.com/48x36/<%=region?.iso_3166_1?.toLowerCase()%>.png 3x"
-                                  width="16"
-                                  height="12" alt="" >
-                                    <label for="<%= region.english_name %>"><%= region.native_name %></label>
+                        <div class="box-wrapper">
+                            <label for="country">Country</label>
+                            <div class="select-box">
+                                <div class="options-container">
+                                    <% if(regions?.length){%>
+                                    <% regions.forEach(region=>{%>
+                                    <div class="option region_wrapper">
+                                        <input type="radio" class="radio" id="<%=region.iso_3166_1%>" />
+                                        <img src="https://flagcdn.com/16x12/<%=region?.iso_3166_1?.toLowerCase()%>.png"
+                                            srcset="https://flagcdn.com/32x24/<%=region?.iso_3166_1?.toLowerCase()%>.png 2x,
+                                    https://flagcdn.com/48x36/<%=region?.iso_3166_1?.toLowerCase()%>.png 3x" width="16"
+                                            height="12" alt="">
+                                        <label for="<%= region.english_name %>"><%= region.native_name %></label>
+                                    </div>
+
+                                    <%}) %>
+                                    <% } %>
+
+
                                 </div>
-
-                                <%}) %>
-                                <% } %>
-
-
+                                <div class="selected">
+                                    <input type="text" name="watch_region" id="watch_region" value="<%=region%>"
+                                        readonly />
+                                </div>
                             </div>
-                            <div class="selected">
-                                <input type="text" name="watch_region" id="watch_region" value="<%=region%>" readonly />
+
+                        </div>
+                        <div class="box-wrapper">
+                            <label for="Where to watch">Where to watch</label>
+                            <div class="select-box">
+                                <div class="options-container" id="providers_wrapper">
+                                    <!-- watch providers here -->
+                                </div>
+                                <div class="selected">
+                                    <input type="text" name="watch_provider" id="watch_provider"
+                                        value="<%= provider?provider:"Netflix"%>" readonly />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="box-wrapper">
+                            <label for="watch type">Watch type</label>
+                            <div class="select-box">
+                                <div class="options-container">
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="rent" />
+                                        <label for="rent">Rent</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="ads" />
+                                        <label for="ads">Ads</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="buy" />
+                                        <label for="buy">Buy</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="free" />
+                                        <label for="free">Free</label>
+                                    </div>
+                                    <div class="option">
+                                        <input type="radio" class="radio" id="flatrate" />
+                                        <label for="flatrate">Subscription</label>
+                                    </div>
+                                </div>
+                                <div class="selected">
+                                    <input type="text" name="watch_monetization_types" id="watch-type"
+                                        value="<%= type === "flatrate" ? "Subscription": type %>" readonly />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="action-btns">
+                            <button type="submit" class="publish-btn mn-w-btn">Explore now <i
+                                    class="fas fa-long-arrow-alt-right next-indicator explore-now-arrow"></i></button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <% if(media?.length){%>
+                <div class="movie-wrapper rec-media-wrapper">
+                    <% media.forEach(function(movie){%>
+                    <div class="movie-card-container">
+                        <% if(mediaType==="person"){%>
+                        <div class="movie-card viewed-card">
+                            <% if(movie.profile_path){%>
+                            <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
+                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.profile_path %>"
+                                    alt="<%= movie.name %>">
+                            </a>
+                            <% }else if(movie.profile_path === null){%>
+                            <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
+                                <img src="/default-profile.png" alt="<%= movie.name %>">
+                            </a>
+
+                            <% } %>
+
+                        </div>
+                        <div class="movie-details">
+                            <div>
+                                <a href="/person/<%= movie.id %>">
+                                    <%= movie.name %>
+                                </a>
                             </div>
                         </div>
 
-                    </div>
-                    <div class="box-wrapper">
-                        <label for="Where to watch">Where to watch</label>
-                        <div class="select-box">
-                            <div class="options-container" id="providers_wrapper">
-                                <!-- watch providers here -->
-                            </div>
-                            <div class="selected">
-                                <input type="text" name="watch_provider" id="watch_provider"
-                                    value="<%= provider?provider:"Netflix"%>" readonly />
-                            </div>
+                        <% }else if (mediaType === "movie"){%>
+                        <% if(movie.poster_path){%>
+                        <div class="movie-card viewed-card">
+                            <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
+                                    alt="<%= movie.title %>">
+                            </a>
+                            <a href="/movie/<%= movie.id %>">
+                                <div class="movie-card-overlay">
+                                    <div>
+                                        <%if(movie.title){%>
+                                        <h2 class="movie-rating"><i
+                                                class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
+                                        <%}%> 
+                                            <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
+                                        </h4>
+                                    </div>
+                                    <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
+                                    <button class="swiper-btn overlay-btn">View Details</button>
+
+                                </div>
+                            </a>
+
                         </div>
 
-                    </div>
-                    <div class="box-wrapper">
-                        <label for="watch type">Watch type</label>
-                        <div class="select-box">
-                            <div class="options-container">
-                                <div class="option">
-                                    <input type="radio" class="radio" id="rent" />
-                                    <label for="rent">Rent</label>
-                                </div>
-                                <div class="option">
-                                    <input type="radio" class="radio" id="ads" />
-                                    <label for="ads">Ads</label>
-                                </div>
-                                <div class="option">
-                                    <input type="radio" class="radio" id="buy" />
-                                    <label for="buy">Buy</label>
-                                </div>
-                                <div class="option">
-                                    <input type="radio" class="radio" id="free" />
-                                    <label for="free">Free</label>
-                                </div>
-                                <div class="option">
-                                    <input type="radio" class="radio" id="flatrate" />
-                                    <label for="flatrate">Subscription</label>
-                                </div>
-                            </div>
-                            <div class="selected">
-                                <input type="text" name="watch_monetization_types" id="watch-type" value="<%= type === "flatrate" ? "Subscription": type %>" readonly />
-                            </div>
+                        <%}else if(movie.poster_path === null){%>
+                        <div class="movie-card viewed-card">
+                            <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
+                                <img src="/noposter.svg" alt="">
+                            </a>
+
                         </div>
-
-                    </div>
-
-                    <div class="action-btns">
-                        <button type="submit" class="publish-btn mn-w-btn">Explore now <i class="fas fa-long-arrow-alt-right next-indicator explore-now-arrow"></i></button>
-                    </div>
-                </form>
-
-            </div>
-
-            <% if(media?.length){%>
-            <div class="movie-wrapper rec-media-wrapper">
-                <% media.forEach(function(movie){%>
-                <div class="movie-card-container">
-                    <% if(mediaType==="person"){%>
-                    <div class="movie-card viewed-card">
-                        <% if(movie.profile_path){%>
-                        <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
-                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.profile_path %>"
-                                alt="<%= movie.name %>">
-                        </a>
-                        <% }else if(movie.profile_path === null){%>
-                        <a class="image" href="/person/<%= movie.id %>" title="<%= movie.name%> ">
-                            <img src="/default-profile.png" alt="<%= movie.name %>">
-                        </a>
 
                         <% } %>
-
-                    </div>
-                    <div class="movie-details">
-                        <div>
-                            <a href="/person/<%= movie.id %>">
-                                <%= movie.name %>
-                            </a>
-                        </div>
-                    </div>
-
-                    <% }else if (mediaType === "movie"){%>
-                    <% if(movie.poster_path){%>
-                    <div class="movie-card viewed-card">
-                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
-                                alt="<%= movie.title %>">
-                        </a>
-                        <a href="/movie/<%= movie.id %>">
-                            <div class="movie-card-overlay">
-                                <div>
-                                    <%if(movie.title){%>
-                                    <h2 class="movie-rating"><i
-                                            class="fas fa-star"></i><span><%= movie.vote_average %></span></h2>
-                                    <%}%> 
-                                            <h4><%= movie.release_date?movie.release_date.split('').slice(0, 4).join(''):"n/a" %>
-                                    </h4>
-                                </div>
-                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...</p>
-                                <button class="swiper-btn overlay-btn">View Details</button>
-
+                        <div class="movie-details">
+                            <div>
+                                <a href="/movie/<%= movie.id %>">
+                                    <%= movie.title %>
+                                </a>
                             </div>
-                        </a>
-
-                    </div>
-
-                    <%}else if(movie.poster_path === null){%>
-                    <div class="movie-card viewed-card">
-                        <a class="image" href="/movie/<%= movie.id %>" title="<%= movie.title %> ">
-                            <img src="/noposter.svg" alt="">
-                        </a>
-
-                    </div>
-
-                    <% } %>
-                    <div class="movie-details">
-                        <div>
-                            <a href="/movie/<%= movie.id %>">
-                                <%= movie.title %>
-                            </a>
-                        </div>
-                        <div>
-                            <span><%= movie.release_date?movie.release_date.split('-').slice(0, 1).join(''):'n/a'%></span>
-                            <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
-                            <%for(let genre of movieGenres){%>
-                            <%if(genreId === genre.id){%>
-                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
-                            </span>
-                            <% } %>
-                            <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <% }else if (mediaType === "tv"){%>
-                    <div class="movie-card viewed-card">
-                        <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.name %> ">
-                            <% if(movie.poster_path){%>
-                            <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %>">
-                            <%}else if(movie.poster_path === null){%>
-                            <img src="/noposter.svg" alt="">
-                            <% } %>
-                        </a>
-                        <a href="/tv/tv-shows/<%= movie.id %>">
-                            <div class="movie-card-overlay">
-                                <div>
-                                    <%if(movie.name){%>
-                                    <h2 class="movie-rating"><i
-                                            class="fas fa-star"></i><span><%= movie.vote_average %></span>
-                                    </h2>
-                                    <%}%> 
-                                                <h4><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %>
-                                    </h4>
-                                </div>
-                                <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...
-                                </p>
-                                <button class="swiper-btn overlay-btn">View
-                                    Details</button>
-
+                            <div>
+                                <span><%= movie.release_date?movie.release_date.split('-').slice(0, 1).join(''):'n/a'%></span>
+                                <%for(let genreId of movie.genre_ids.slice(0, 2)){%>
+                                <%for(let genre of movieGenres){%>
+                                <%if(genreId === genre.id){%>
+                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                </span>
+                                <% } %>
+                                <% } %>
+                                <% } %>
                             </div>
-                        </a>
+                        </div>
 
-
-                    </div>
-                    <div class="movie-details">
-                        <div>
+                        <% }else if (mediaType === "tv"){%>
+                        <div class="movie-card viewed-card">
+                            <a class="image" href="/tv/tv-shows/<%= movie.id %>" title="<%= movie.name %> ">
+                                <% if(movie.poster_path){%>
+                                <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>"
+                                    alt="<%= movie.name %>">
+                                <%}else if(movie.poster_path === null){%>
+                                <img src="/noposter.svg" alt="">
+                                <% } %>
+                            </a>
                             <a href="/tv/tv-shows/<%= movie.id %>">
-                                <%= movie.name %>
+                                <div class="movie-card-overlay">
+                                    <div>
+                                        <%if(movie.name){%>
+                                        <h2 class="movie-rating"><i
+                                                class="fas fa-star"></i><span><%= movie.vote_average %></span>
+                                        </h2>
+                                        <%}%> 
+                                                <h4><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %>
+                                        </h4>
+                                    </div>
+                                    <p><%= movie.overview?movie.overview.substr(0, 100):"n/a"%>...
+                                    </p>
+                                    <button class="swiper-btn overlay-btn">View
+                                        Details</button>
+
+                                </div>
                             </a>
 
+
                         </div>
-                        <%if(tvGenres){%>
-                        <div>
-                            <span><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %></span>
-                            <%for(let genreId of movie.genre_ids.slice(0, 1)){%>
-                            <%for(let genre of tvGenres ){%>
-                            <%if(genreId === genre.id){%>
-                            <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
-                            </span>
-                            <% } %>
-                            <% } %>
-                            <% } %>
+                        <div class="movie-details">
+                            <div>
+                                <a href="/tv/tv-shows/<%= movie.id %>">
+                                    <%= movie.name %>
+                                </a>
+
+                            </div>
+                            <%if(tvGenres){%>
+                            <div>
+                                <span><%= movie.first_air_date?movie.first_air_date.split('').slice(0, 4).join(''):"n/a" %></span>
+                                <%for(let genreId of movie.genre_ids.slice(0, 1)){%>
+                                <%for(let genre of tvGenres ){%>
+                                <%if(genreId === genre.id){%>
+                                <span class="genre-span"><%= genre.name === "Science Fiction"?"Sci-fi":genre.name %>
+                                </span>
+                                <% } %>
+                                <% } %>
+                                <% } %>
+                            </div>
+
+                            <%} %>
+
+
                         </div>
 
-                        <%} %>
-
-
+                        <% } %>
                     </div>
-
-                    <% } %>
+                    <%})%>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
                 </div>
-                <%})%>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-            </div>
-            <% }else{%>
-            <div class="search-not-found">
-                <h1 class="movie-not-found">Oops! No results were found. Please change some filters to view more results.</h1>
-                <img src="../../noresults.svg" alt="search not found">
-                <div class="swiper-btns">
-                    <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
+                <% }else{%>
+                <div class="search-not-found">
+                    <h1 class="movie-not-found">Oops! No results were found. Please change some filters to view more
+                        results.</h1>
+                    <img src="../../noresults.svg" alt="search not found">
+                    <div class="swiper-btns">
+                        <a href="/" class="swiper-btn" role="button"><i class="fas fa-home"></i>Home</a>
+                    </div>
                 </div>
+                <% } %>
             </div>
+            <% if(totalPages>1) {%>
+            <div class="page-controls">
+                <% if(page_num > 1) {%>
+                <a href="/recommendations/watch-guide/?media=<%= useMediatype%>&watch_region=<%= region %>&watch_provider=<%= provider %>&watch_monetization_types=<%= type %>&page=<%= page_num - 1 %>"
+                    class="prev-page swiper-btn" role="button"><i
+                        class="fas fa-long-arrow-alt-left prev-indicator"></i>page
+                    <%= page_num - 1 %>
+                </a>
+
+                <% }%>
+                <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
+                <% if(page_num < totalPages && totalResults > 20) {%>
+                <a href="/recommendations/watch-guide/?media=<%= useMediatype%>&watch_region=<%= region %>&watch_provider=<%= provider %>&watch_monetization_types=<%= type %>&page=<%= page_num + 1 %>"
+                    class="next-page swiper-btn" role="button" value="next-page">page <%= page_num + 1 %><i
+                        class="fas fa-long-arrow-alt-right next-indicator"></i></a>
+
+
+                <% } %>
+
+            </div>
+
+
             <% } %>
-        </div>
-        <% if(totalPages>1) {%>
-        <div class="page-controls">
-            <% if(page_num > 1) {%>
-            <a href="/recommendations/watch-guide/?media=<%= useMediatype%>&watch_region=<%= region %>&watch_provider=<%= provider %>&watch_monetization_types=<%= type %>&page=<%= page_num - 1 %>"
-                class="prev-page swiper-btn" role="button"><i class="fas fa-long-arrow-alt-left prev-indicator"></i>page
-                <%= page_num - 1 %>
-            </a>
-
-            <% }%>
-            <button class="page-count swiper-btn"><%= page_num %> / <%= totalPages %></button>
-            <% if(page_num < totalPages && totalResults > 20) {%>
-            <a href="/recommendations/watch-guide/?media=<%= useMediatype%>&watch_region=<%= region %>&watch_provider=<%= provider %>&watch_monetization_types=<%= type %>&page=<%= page_num + 1 %>"
-                class="next-page swiper-btn" role="button" value="next-page">page <%= page_num + 1 %><i
-                    class="fas fa-long-arrow-alt-right next-indicator"></i></a>
 
 
-            <% } %>
 
         </div>
-
-
-        <% } %>
-
-
-
-    </div>
-    </section>
+        </section>
 
 
 
 
-    <%- include('partials/footer') %>
+        <%- include('partials/footer') %>

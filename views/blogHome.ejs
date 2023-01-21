@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title><%= title %> | what2watch</title>
+    <title>what2watch.net: movies, tv shows, movie news, DC news, Marvel news tv news, celebrity news</title>
     <meta name="description"
-        content="What2watch is the ultimate watch guide for movies. Get to know what movies or tv-shows to watch or stream in a hassle-free way. Find trailers, clips, watch providers and more. Movie posters, movie backdrops, user ratings, and more">
+        content="All the latest movie news, tv news, celebrity news, DC and marvel news and more!">
     <meta name="keywords"
-        content="what to watch, what2watch, Trending movies, tv-shows, upcoming movies, action, thriller, movie guide, actors, actresses, synopsis, trailers, reviews, release-date, Reviews, Photos, movie posters, movie backdrops, user ratings, synopsis, trailers, credits, movie clips, watch providers">
+        content="movies, tv shows, movie news, DC news, Marvel news tv news, celebrity news">
     <!--favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
@@ -303,7 +303,7 @@
                             <%latest.forEach(story=>{  %>
                             <div class="post">
                                 <a href="/blog/posts/<%= story.slug %>">
-                                    <img src="<%= story.photo %>" alt="post image">
+                                    <img src="<%= story.photo %>" alt="<%= story.title %>">
                                     <h5 class="cat-name"><%= story.category %> </h5>
                                     <h3><%= story.title %> </h3>
                                     <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
@@ -400,7 +400,7 @@
                                 <% currentPage.forEach(story=>{%>
                                 <div class="post">
                                     <a href="/blog/posts/<%= story.slug %>">
-                                        <img src="<%= story.photo %>" alt="post image">
+                                        <img src="<%= story.photo %>" alt="<%= story.title %>">
                                         <h5 class="cat-name"><%= story.category %> </h5>
                                         <h3><%= story.title %> </h3>
                                         <h5 class="date"> <span>by <strong><%= story.author %> </strong></span>
@@ -458,7 +458,7 @@
                                                 <div class="embla__slide__inner slider-inner-card featured-card">
                                                     <a href="/blog/posts/<%= story.slug%>">
                                                         <div class="post">
-                                                            <img src="<%= story.photo%>" alt="post image">
+                                                            <img src="<%= story.photo%>" alt="<%= story.title %>">
                                                             <h5 class="cat-name"><%= story.category%></h5>
                                                             <h3><%= story.title%></h3>
                                                             <h5 class="date"> <span>by

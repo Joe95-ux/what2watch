@@ -31,7 +31,9 @@ async function getgenre() {
 
 router.get("/genres/:genre", async (req, res) => {
   let genreName = req.params.genre;
-  let title = genreName;
+  let title = genreName + " movies";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let encodedGenre = encodeURIComponent(genreName);
 
   try {
@@ -55,6 +57,8 @@ router.get("/genres/:genre", async (req, res) => {
 
     res.render("genres", {
       title,
+      description,
+      keywords,
       movies: genreMovies,
       genres: genres,
       page_num: page_num,
@@ -72,7 +76,9 @@ router.get("/genres/:genre", async (req, res) => {
 
 router.get("/genres/:genre/:page", async (req, res) => {
   const genreName = req.params.genre;
-  let title = genreName;
+  let title = genreName + " movies";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   const encodedGenre = encodeURIComponent(genreName);
   page_num = parseInt(req.params.page);
 
@@ -100,6 +106,8 @@ router.get("/genres/:genre/:page", async (req, res) => {
 
     res.render("genrePage", {
       title,
+      keywords,
+      description,
       movies: genreMovies,
       genres: genres,
       page_num: page_num,
@@ -116,6 +124,8 @@ router.get("/genres/:genre/:page", async (req, res) => {
 router.get("/upcoming", async (req, res) => {
   page_num = 1;
   let title = "Upcoming Movies";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/upcoming?api_key=" +
@@ -131,6 +141,8 @@ router.get("/upcoming", async (req, res) => {
     const genres = await getgenre();
     res.render("upcoming", {
       title,
+      keywords,
+      description,
       movies: upcomingMovie,
       genres: genres,
       page_num: page_num,
@@ -146,7 +158,9 @@ router.get("/upcoming", async (req, res) => {
 
 router.get("/:category/:page", async (req, res) => {
   page_num = parseInt(req.params.page);
-  let title = req.params.category;
+  let title = req.params.category + " movies";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   const category = req.params.category;
   try {
     const response = await fetch(
@@ -165,6 +179,8 @@ router.get("/:category/:page", async (req, res) => {
     const genres = await getgenre();
     res.render("next_page", {
       title,
+      keywords,
+      description,
       movies: upcomingMovie,
       genres: genres,
       category: category,
@@ -181,6 +197,8 @@ router.get("/:category/:page", async (req, res) => {
 router.get("/top_rated", async (req, res) => {
   page_num = 1;
   let title = "Top rated Movies";
+  let keywords = `where to watch ${title} of all time`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/top_rated?api_key=" +
@@ -196,6 +214,8 @@ router.get("/top_rated", async (req, res) => {
     const genres = await getgenre();
     res.render("top_rated", {
       title,
+      keywords,
+      description,
       movies: topRatedMovie,
       genres: genres,
       page_num: page_num,

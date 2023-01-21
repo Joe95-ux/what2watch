@@ -404,7 +404,7 @@
                                 <% recent.forEach(story=>{%>
                                 <a href="/blog/posts/<%= story.slug %>">
                                     <div class="single-card post">
-                                        <img src="<%= story.photo%>" alt="">
+                                        <img src="<%= story.photo%>" alt="<%= story.title %>">
                                         <div>
                                             <h3><%= story.title %>
                                             </h3>

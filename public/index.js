@@ -440,8 +440,8 @@ function getRecentlyViewed(store) {
       let div = document.createElement("div");
       div.className = "cast-card recent-card";
       div.innerHTML = `
-      <a class="image" href=${link} title=${title}>
-        <img src=${image} alt="movie-poster">
+      <a class="image" href="${link}" title="${title}">
+        <img src="${image}" alt="${title}">
         <h3> ${title} </h3>
       </a>
     `;
@@ -631,7 +631,7 @@ function createProviders(providers) {
     <div class="option provider-options prov_wrapper">
       <input type="radio" class="radio" id="${providers[i].provider_name}" />
       <img src="https://image.tmdb.org/t/p/w500/${providers[i]
-      .logo_path}" alt="">
+      .logo_path}" alt="${providers[i].provider_name}">
       <label for="${providers[i].provider_name}">${providers[i].provider_name}</label>
     </div>
   

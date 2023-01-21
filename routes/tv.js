@@ -188,7 +188,9 @@ router.get("/tv-shows", async (req, res) => {
 
 router.get("/genres/:genre/", async (req, res) => {
     let genreName = req.params.genre;
-    let title = genreName;
+    let title = genreName + " tv shows";
+    let keywords = `where to watch ${title}`;
+    let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     let encodedGenre = encodeURIComponent(genreName);
     
     try {
@@ -218,7 +220,9 @@ router.get("/genres/:genre/", async (req, res) => {
         encodedGenre: encodedGenre,
         totalPages: totalPages,
         totalResults: totalResults,
-        title
+        title,
+        keywords,
+        description
       });
     } catch (e) {
       console.log(e);
@@ -229,7 +233,9 @@ router.get("/genres/:genre/", async (req, res) => {
 
 router.get("/genres/:genre/:page", async (req, res) => {
     let genreName = req.params.genre;
-    let title = genreName;
+    let title = genreName + " tv shows";
+    let keywords = `where to watch ${title}`;
+    let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     let encodedGenre = encodeURIComponent(genreName);
     pageNum = parseInt(req.params.page);
     
@@ -260,7 +266,9 @@ router.get("/genres/:genre/:page", async (req, res) => {
         encodedGenre: encodedGenre,
         totalPages: totalPages,
         totalResults: totalResults,
-        title
+        title,
+        keywords,
+        description
       });
     } catch (e) {
       console.log(e);
@@ -440,6 +448,8 @@ router.get("/tv-shows/:movie_id", async (req, res) => {
 // top rated tv shows
 router.get("/top-rated", async (req, res) => {
   const title = "Top Rated Tv Shows";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let cat = "top-rated";
   pageNum = 1;
   try {
@@ -456,6 +466,8 @@ router.get("/top-rated", async (req, res) => {
     res.render("top-rated-tv", {
       movies: topRatedMovie,
       title,
+      keywords,
+      description,
       cat,
       genres: genres,
       page_num: pageNum,
@@ -470,6 +482,8 @@ router.get("/top-rated", async (req, res) => {
 // shows on air 
 router.get("/on-the-air", async (req, res) => {
   const title = "Tv Shows on Air";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let cat = "on-the-air";
   pageNum = 1;
   try {
@@ -486,6 +500,8 @@ router.get("/on-the-air", async (req, res) => {
     res.render("top-rated-tv", {
       movies: topRatedMovie,
       title,
+      keywords,
+      description,
       cat,
       genres: genres,
       page_num: pageNum,
@@ -502,11 +518,17 @@ router.get("/on-the-air", async (req, res) => {
 router.get("/:cat/:page", async (req, res) => {
   let title;
   let param;
+  let keywords;
+  let description;
   if(req.params.cat === "on-the-air"){
     title = "Tv Shows on Air";
+    keywords = `where to watch ${title}`;
+    description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     param = "on_the_air";
   }else if(req.params.cat === "top-rated"){
     title = "Top rated Tv Shows";
+    keywords = `where to watch ${title}`;
+    description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     param = "top_rated";
   }
   let cat = req.params.cat;
@@ -525,6 +547,8 @@ router.get("/:cat/:page", async (req, res) => {
     res.render("top-rated-tv", {
       movies: topRatedMovie,
       title,
+      keywords,
+      description,
       cat,
       genres: genres,
       page_num: pageNum,

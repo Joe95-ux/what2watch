@@ -1988,7 +1988,7 @@ a.learn-more {
     margin-top: 0.5rem;
 }
 
-.featured-title h2 {
+.featured-title h2, .featured-title h1 {
     color: var(--mainWhite);
     font-size: 1.5rem;
     font-weight: 600;
@@ -2440,7 +2440,7 @@ h1.genre-intro {
 
 }
 @media screen and (max-width:420px){
-    .featured-title h2{
+    .featured-title h2, .featured-title h1{
         font-size: 1.3rem;
     }
     .featured-title a{

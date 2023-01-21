@@ -292,7 +292,7 @@
                                                 <div class="measuring-content">
                                                     <div class="single-movie-card">
                                                         <% if(movie.poster_path){%>
-                                                        <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.name %> ">
+                                                        <img src="https://image.tmdb.org/t/p/w500/<%= movie.poster_path %>" alt="<%= movie.title %>">
                                                         <%}else if(movie.poster_path === null){%>
                                                         <img src="/noposter.svg" alt="movie-poster">
                                                         <% } %>

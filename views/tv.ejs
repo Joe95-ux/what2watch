@@ -123,7 +123,7 @@
                                                 <% } %>
                                                     
                                                 <div class="new-header-movie">
-                                                    <h1 class="movie-title"><%= movie.name %></h1>
+                                                    <h3 class="movie-title"><%= movie.name %></h3>
                                                     <% if(movie.overview.length > 60){%> 
                                                         <p class="clamp-synopsis">
                                                             <%= movie.overview%> 
@@ -221,15 +221,19 @@
                                 <% item.content.forEach(mov=>{%>
                                     <div class="embla__slide" >
                                         <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                            <% if(mov.poster_path){%>
+                                            <% if(mov.backdrop_path !== null ){%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                     <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                                 </a>
-                                                <%}else if(mov.poster_path === null){%>
+                                                <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
+                                                <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                    <img src="https://image.tmdb.org/t/p/w1280/<%=mov.poster_path%>" alt="<%= mov.name %>">
+                                                </a>
+                                            <% }else{%>
                                                 <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                     <img src="/noposter.svg" alt="<%= mov.name %>">
                                                 </a>
-                                            <% } %>
+                                            <% } %> 
                                             <div class="image-drop">
                                                 <%if(mov.name){%>
                                                     <h3><%= mov.name%></h3>
@@ -301,7 +305,7 @@
         <% if(popularMovies){%>
             <div class="featured">
                 <div class="featured-title">
-                    <h2>Popular Tv Shows</h2>
+                    <h1>Popular Tv Shows</h1>
                 </div>
                 <div class="embla ">
                     <div class="embla__viewport">
@@ -309,15 +313,19 @@
                             <% popularMovies.forEach(mov=>{%>
                                 <div class="embla__slide" >
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
+                                        <% if(mov.backdrop_path !== null ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                 <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                             </a>
-                                            <%}else if(mov.poster_path === null){%>
+                                            <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
+                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.poster_path%>" alt="<%= mov.name %>">
+                                            </a>
+                                        <% }else{%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                 <img src="/noposter.svg" alt="<%= mov.name %>">
                                             </a>
-                                        <% } %>
+                                        <% } %> 
                                         <div class="image-drop">
                                             <%if(mov.name){%>
                                                 <h3><%= mov.name%></h3>
@@ -367,15 +375,19 @@
                             <% comedy.forEach(mov=>{%>
                                 <div class="embla__slide" >
                                     <div class="slider-inner-card featured-card embla__slide__inner viewed-card">
-                                        <% if(mov.poster_path){%>
+                                        <% if(mov.backdrop_path !== null ){%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                 <img src="https://image.tmdb.org/t/p/w1280/<%=mov.backdrop_path%>" alt="<%= mov.title %>">
                                             </a>
-                                            <%}else if(mov.poster_path === null){%>
+                                            <%}else if (mov.backdrop_path === null && mov.poster_path !== "" ){%>
+                                            <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
+                                                <img src="https://image.tmdb.org/t/p/w1280/<%=mov.poster_path%>" alt="<%= mov.name %>">
+                                            </a>
+                                        <% }else{%>
                                             <a class="image" href="/tv/tv-shows/<%= mov.id %>" title="<%= mov.name %> ">
                                                 <img src="/noposter.svg" alt="<%= mov.name %>">
                                             </a>
-                                        <% } %>
+                                        <% } %> 
                                         <div class="image-drop">
                                             <%if(mov.name){%>
                                                 <h3><%= mov.name%></h3>
