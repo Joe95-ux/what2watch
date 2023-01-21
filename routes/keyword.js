@@ -27,7 +27,9 @@ router.get("/:keyword", async (req, res)=>{
     const keyId = keys.slice(0, 1);
     const rawName = keys.slice(1).join("-")
     const keyName = keys.slice(1).join(" ");
-    const title = keyName + "movies";
+    const title = keyName + " movies";
+    let keywords = `where to watch ${title}`;
+    let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     let page_num = 1;
     if(req.query.page >=1){
       page_num = parseInt(req.query.page);
@@ -49,6 +51,8 @@ router.get("/:keyword", async (req, res)=>{
         title,
         keyword:keyName,
         rawName,
+        description,
+        keywords,
         keyId,
         movies,
         genres: genres,
@@ -71,7 +75,9 @@ router.get("/tv-shows/:keyword", async (req, res)=>{
   const keyId = keys.slice(0, 1);
   const rawName = keys.slice(1).join("-")
   const keyName = keys.slice(1).join(" ");
-  const title = keyName + "related tv shows";
+  const title = keyName + " related tv shows";
+  let keywords = `where to watch ${title}`;
+  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let page_num = 1;
   if(req.query.page >=1){
     page_num = parseInt(req.query.page);
@@ -92,6 +98,8 @@ router.get("/tv-shows/:keyword", async (req, res)=>{
     res.render("tvkeywords", {
       title,
       keyword:keyName,
+      keywords,
+      description,
       rawName,
       keyId,
       movies,
