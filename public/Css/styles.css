@@ -2953,7 +2953,7 @@ h1.genre-intro {
 .trailer-video {
     height: 480px;
     width: 853px;
-    background-color: var(--mainWhite);
+    background-color: #00243d;
 }
 
 .trailer-container,
