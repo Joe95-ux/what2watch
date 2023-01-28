@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#001019">
-    <title><%= details.name %> | what2watch.net</title>
+    <title><%=details.name%> | what2watch.net</title>
     <meta name="description"
-        content="<%= details.name %>">
+        content="<%= details.biography !== "" ? details.biography: details.name %>">
     <meta name="keywords"
         content="<%= details.name %>, <%= details.name %> age, <%= details.name %> biography, <%= details.name %> movies, <%= details.name %> place of birth, <%= details.name %> date of birth, release-date, Reviews, Showtime, DVDs, Photos, movie posters, movie backdrops, user ratings, synopsis, trailers, credits ">
     <meta property="og:url" content="/person/<%= details.id%>" />

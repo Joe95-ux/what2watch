@@ -328,7 +328,7 @@ app.get("/privacy", async (req, res) => {
 
 //Get popular Movies
 app.get("/", async (req, res) => {
-  const title = "Where to watch Movies and Tv Shows";
+  const title = "What2watch - the streaming guide for Movies and Tv Shows";
   try {
     const assets = await getPopularMovies();
     const popularMovies = await assets?.popMovies;
@@ -379,7 +379,7 @@ app.get("/", async (req, res) => {
 
 app.get("/:page", async (req, res) => {
   let page_num = parseInt(req.params.page);
-  const title = "Movies to watch";
+  const title = "What2watch - the streaming guide for Movies and Tv Shows";
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=" +
