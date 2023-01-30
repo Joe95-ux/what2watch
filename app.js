@@ -463,8 +463,6 @@ app.use(function (err, req, res, next) {
   res.status(500).send('Server Error!')
 })
 
-  
-
 app.use(function (req, res, next) {
   res.status(404).sendFile(__dirname + "/public/404.html");
 })
