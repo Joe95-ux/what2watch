@@ -2018,7 +2018,7 @@ h3.single-post-title {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 5px;
+    margin-bottom: 1rem;
 }
 
 .post-content figcaption {
@@ -2031,7 +2031,7 @@ h3.single-post-title {
     font-size: 18px;
     line-height: 1.6;
     font-weight: 300;
-    margin: 1.4rem 0;
+    margin: 0 0 1.4rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -2041,6 +2041,7 @@ h3.single-post-title {
     font-size: 1.5rem;
     color: lightgray;
     font-weight: 500;
+    margin-bottom: 1rem;
 }
 
 blockquote {
