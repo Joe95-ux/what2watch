@@ -14,6 +14,7 @@
     --mainGrey: #ececec;
     --lightGrey: rgb(212, 212, 212, 1);
     --darkGrey: rgb(163, 163, 163, 1);
+    --linkColorDark: #C4DDFF;
     --smallText: 1rem;
     --mainSpacing: 0.1rem;
     --sectionPadding: 3% 10%;
@@ -5136,7 +5137,6 @@ div.providers__embla__container .loader-wrapper{
     .full-review-inner p,
     .review-content p {
         font-size: 1rem;
-        line-height: 1.2;
     }
 
 }

@@ -368,7 +368,7 @@ function toggleReviews() {
         ].parentElement.parentElement.previousElementSibling.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.textContent;
       reviewContent.textContent =
         expandReviews[i].parentElement.nextElementSibling.innerText;
-      reviewer.style.color = "red";
+      reviewer.style.color = "#C4DDFF";
     });
   }
 
