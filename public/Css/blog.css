@@ -2053,6 +2053,7 @@ blockquote {
     padding: 1rem 1.4rem;
     background-color: #001927;
     border-left: 3px solid var(--yellow);
+    margin-bottom: 1.4rem;
 }
 
 blockquote p {
