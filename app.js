@@ -111,7 +111,13 @@ async function getMovieTrailer(id){
   }
 }
 
-async function getPopularMovies() {
+async function getPopularMovies(page) {
+  const url =
+  "https://api.themoviedb.org/3/movie/popular?api_key=" +
+  apiKey +
+  "&language=en-US&page=" +
+  page +
+  "&region=US";
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -329,8 +335,12 @@ app.get("/privacy", async (req, res) => {
 //Get popular Movies
 app.get("/", async (req, res) => {
   const title = "What2watch - the streaming guide for Movies and Tv Shows";
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   try {
-    const assets = await getPopularMovies();
+    const assets = await getPopularMovies(page_num);
     const popularMovies = await assets?.popMovies;
     const headerMovies = await popularMovies?.slice(0, 6);
     const headerVideos = await assets?.videos;
@@ -374,66 +384,6 @@ app.get("/", async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-  }
-});
-
-app.get("/:page", async (req, res) => {
-  let page_num = parseInt(req.params.page);
-  const title = "What2watch - the streaming guide for Movies and Tv Shows";
-  try {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=" +
-        apiKey +
-        "&language=en-US&page=" +
-        page_num +
-        "&region=US"
-    );
-    const data = await response.json();
-    const popularMovies = await data.results;
-    const assets = await getPopularMovies();
-    const allHeaderMovies = await assets?.popMovies;
-    const headerMovies = await allHeaderMovies?.slice(0, 6);
-    const headerVideos = await assets?.videos;
-    const topRatedAssets = await getTopRated();
-    const topRated = await topRatedAssets?.topRated;
-    const topRatedVideos = await topRatedAssets?.videos;
-    const upcomingMovies = await getUpcoming();
-    const trending = await getTrending();
-    const trendingToday = await getTrendingToday();
-    const header = await trendingToday[0];
-    const genres = await getgenre();
-    const pages = await getAllPages();
-    let stories = await Story.find({ status: "Public" })
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean()
-      .exec();
-    if (stories) {
-      stories = stories.map(story => {
-        story.createdAt = formatDate(story.createdAt);
-        return story;
-      });
-      stories = stories.slice(0, 12);
-    }
-    res.render("home", {
-      title,
-      headerMovies,
-      headerVideos,
-      topRated,
-      topRatedVideos,
-      popularMovies: popularMovies,
-      upcomingMovies: upcomingMovies,
-      featured:upcomingMovies,
-      header:header,
-      trending:trending,
-      trendingToday:trendingToday,
-      genres: genres,
-      page_num: page_num,
-      pages:pages,
-      stories
-    });
-  } catch (e) {
-    console.log(e) ;
   }
 });
 

@@ -897,4 +897,42 @@ function rebuild() {
   }
 }
 
+
+document.addEventListener("DOMContentLoaded", function () {
+  const paginationContainer = document.querySelector(".pagination-controls");
+  const totalPages = paginationContainer.dataset.pages; // Total number of pages from backend
+  let currentPage = paginationContainer.dataset.current; // Current page from backend
+
+  const renderPaginationButtons = () => {
+    paginationContainer.innerHTML = `
+      <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" href="/?page=${currentPage - 1}">Previous</a>
+    `;
+
+    const numButtons = 10;
+    const startPage = Math.max(1, currentPage - Math.floor(numButtons / 2));
+    const endPage = Math.min(totalPages, startPage + numButtons - 1);
+
+    for (let i = startPage; i <= endPage; i++) {
+      paginationContainer.innerHTML += `
+        <a class="pagination-btn ${currentPage === i ? 'active' : ''}" href="/?page=${i}">${i}</a>
+      `;
+    }
+
+    paginationContainer.innerHTML += `
+      <a class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" href="/?page=${currentPage + 1}">Next</a>
+    `;
+  };
+
+  paginationContainer.addEventListener("click", (event) => {
+    const targetButton = event.target.closest(".pagination-btn");
+    if (targetButton && !targetButton.classList.contains("disabled")) {
+      currentPage = parseInt(targetButton.getAttribute("href").split("=")[1]);
+      renderPaginationButtons();
+    }
+  });
+
+  // Initial rendering of pagination buttons
+  renderPaginationButtons();
+});
+
 new SimpleBar(simpleBarContainer, { autoHide: true });

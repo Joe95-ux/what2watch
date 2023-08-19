@@ -6206,5 +6206,53 @@ div.seperation-rule {
 .scroll-black *::-webkit-scrollbar-thumb {
     background-color: rgb(70, 70, 70);
 }
-
 /* End scrollbar styling*/
+
+/* New pagination styles */
+/* Style your pagination container */
+.pagination {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  /* Style your pagination buttons */
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 3px;
+    text-decoration: none;
+    color: var(--mainGrey);
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  
+  .pagination-btn.active {
+    background-color: var(--primaryColor);
+    color: #fff;
+    border-color: var(--primaryColor);
+    font-weight: bold;
+  }
+  
+  .pagination-btn.disabled {
+    cursor: not-allowed;
+    color: #ccc;
+    border-color: #ccc;
+  }
+  
+  .pagination-btn:hover {
+    background-color: var(--primaryColor);
+  }
+  
+  .ellipsis {
+    margin: 0 5px;
+    color: #999;
+  }
