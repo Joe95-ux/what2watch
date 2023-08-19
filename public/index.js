@@ -900,21 +900,35 @@ function rebuild() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const paginationContainer = document.querySelector(".pagination-controls");
-  const totalPages = paginationContainer.dataset.pages; // Total number of pages from backend
-  let currentPage = paginationContainer.dataset.current; // Current page from backend
+  const totalPages = parseInt(paginationContainer.dataset.pages); // Total number of pages from backend
+  let currentPage = parseInt(paginationContainer.dataset.current); // Current page from backend
 
   const renderPaginationButtons = () => {
     paginationContainer.innerHTML = `
       <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" href="/?page=${currentPage - 1}">Previous</a>
+      <a class="pagination-btn ${currentPage === 1 ? 'active' : ''}" href="/?page=1">1</a>
+      <a class="pagination-btn ${currentPage === 2 ? 'active' : ''}" href="/?page=2">2</a>
     `;
 
     const numButtons = 10;
-    const startPage = Math.max(1, currentPage - Math.floor(numButtons / 2));
+    const startPage = Math.max(3, currentPage - Math.floor(numButtons / 2));
     const endPage = Math.min(totalPages, startPage + numButtons - 1);
+
+    if (startPage > 3) {
+      paginationContainer.innerHTML += `
+        <span class="ellipsis">...</span>
+      `;
+    }
 
     for (let i = startPage; i <= endPage; i++) {
       paginationContainer.innerHTML += `
         <a class="pagination-btn ${currentPage === i ? 'active' : ''}" href="/?page=${i}">${i}</a>
+      `;
+    }
+
+    if (endPage < totalPages) {
+      paginationContainer.innerHTML += `
+        <span class="ellipsis">...</span>
       `;
     }
 

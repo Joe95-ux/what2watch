@@ -6220,25 +6220,26 @@ div.seperation-rule {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
   
   .pagination-btn {
     display: inline-block;
     padding: 8px 12px;
-    margin: 0 3px;
+    margin: 3px;
     text-decoration: none;
     color: var(--mainGrey);
     background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   }
   
   .pagination-btn.active {
-    background-color: var(--primaryColor);
+    background-color: var(--secondaryColor);
     color: #fff;
-    border-color: var(--primaryColor);
+    border-color: var(--secondaryColor);
     font-weight: bold;
   }
   
@@ -6249,10 +6250,23 @@ div.seperation-rule {
   }
   
   .pagination-btn:hover {
-    background-color: var(--primaryColor);
+    background-color: var(--secondaryColor);
   }
   
   .ellipsis {
     margin: 0 5px;
     color: #999;
+  }
+  @media (max-width: 767px) {
+    .pagination-btn {
+      padding: 6px 10px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .pagination-btn {
+      padding: 6px 12px;
+      font-size: 16px;
+    }
   }
