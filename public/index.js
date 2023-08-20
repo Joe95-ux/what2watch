@@ -905,7 +905,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const renderPaginationButtons = () => {
     paginationContainer.innerHTML = `
-      <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" href="/?page=${currentPage - 1}">Previous</a>
+      <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" href="${currentPage === 1 ? '/' : '/?page=' + (currentPage - 1)}">Previous</a>
       <a class="pagination-btn ${currentPage === 1 ? 'active' : ''}" href="/?page=1">1</a>
       <a class="pagination-btn ${currentPage === 2 ? 'active' : ''}" href="/?page=2">2</a>
     `;
