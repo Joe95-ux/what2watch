@@ -6237,20 +6237,19 @@ div.seperation-rule {
   }
   
   .pagination-btn.active {
-    background-color: var(--secondaryColor);
+    background-color: #0069FF;
     color: #fff;
-    border-color: var(--secondaryColor);
     font-weight: bold;
   }
   
   .pagination-btn.disabled {
     cursor: not-allowed;
     color: #ccc;
-    border-color: #ccc;
+    opacity: 0.6;
   }
   
   .pagination-btn:hover {
-    background-color: var(--secondaryColor);
+    background-color: #0069FF;
   }
   
   .ellipsis {

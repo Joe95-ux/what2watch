@@ -191,11 +191,14 @@ app.get( "/search", async (req, res) => {
 });
 
 //search pages
-app.get("/search/:movie/:page", async (req, res) => {
+app.get("/search/:movie/", async (req, res) => {
   const search = req.params.movie;
   let title = search !== ""? search: "search movies, tv shows and cast";
   const query = encodeURIComponent(search);
-  let page_num = parseInt(req.params.page);
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/search/multi?api_key=" +
@@ -210,7 +213,7 @@ app.get("/search/:movie/:page", async (req, res) => {
     const totalPages = await data.total_pages;
     const totalResults = await data.total_results;
     const genres = await getgenre();
-    res.render("search-page", {
+    res.render("search", {
       title,
       movies: searchedMovie,
       genres: genres,
@@ -224,6 +227,7 @@ app.get("/search/:movie/:page", async (req, res) => {
     console.log(e);
   }
 });
+
 
 
 // Get upcoming movies

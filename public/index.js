@@ -902,15 +902,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const paginationContainer = document.querySelector(".pagination-controls");
   const totalPages = parseInt(paginationContainer.dataset.pages); // Total number of pages from backend
   let currentPage = parseInt(paginationContainer.dataset.current); // Current page from backend
+  const path = paginationContainer.dataset.path; 
 
   const renderPaginationButtons = () => {
     paginationContainer.innerHTML = `
-      <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" href="${currentPage === 1 ? '/' : '/?page=' + (currentPage - 1)}">Previous</a>
-      <a class="pagination-btn ${currentPage === 1 ? 'active' : ''}" href="/?page=1">1</a>
-      <a class="pagination-btn ${currentPage === 2 ? 'active' : ''}" href="/?page=2">2</a>
+      <a class="pagination-btn ${currentPage === 1 ? 'disabled' : ''}" ${currentPage === 1 ? 'style="display: none;"' : ''} href="${currentPage === 1 ? '#' : path + 'page=' + (currentPage - 1)}">Previous</a>
+      <a class="pagination-btn ${currentPage === 1 ? 'active' : ''}" href="${path}page=1">1</a>
+      <a class="pagination-btn ${currentPage === 2 ? 'active' : ''}" href="${path}page=2">2</a>
     `;
 
-    const numButtons = 10;
+    const numButtons = 8;
     const startPage = Math.max(3, currentPage - Math.floor(numButtons / 2));
     const endPage = Math.min(totalPages, startPage + numButtons - 1);
 
@@ -922,7 +923,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = startPage; i <= endPage; i++) {
       paginationContainer.innerHTML += `
-        <a class="pagination-btn ${currentPage === i ? 'active' : ''}" href="/?page=${i}">${i}</a>
+        <a class="pagination-btn ${currentPage === i ? 'active' : ''}" href="${path}page=${i}">${i}</a>
       `;
     }
 
@@ -933,14 +934,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     paginationContainer.innerHTML += `
-      <a class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" href="/?page=${currentPage + 1}">Next</a>
+      <a class="pagination-btn ${currentPage === totalPages ? 'disabled' : ''}" ${currentPage === totalPages ? 'style="display:none;"' : ''} href="${currentPage === totalPages ? '#' : path + 'page=' + (currentPage + 1)}">Next</a>
     `;
   };
 
   paginationContainer.addEventListener("click", (event) => {
     const targetButton = event.target.closest(".pagination-btn");
     if (targetButton && !targetButton.classList.contains("disabled")) {
-      currentPage = parseInt(targetButton.getAttribute("href").split("=")[1]);
+      const hrefValue = targetButton.getAttribute("href");
+      const url = new URL(hrefValue, window.location);
+      const params = new URLSearchParams(url.search);
+      const pageValue = params.get("page");
+      currentPage = parseInt(pageValue);
       renderPaginationButtons();
     }
   });
