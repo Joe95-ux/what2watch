@@ -101,27 +101,16 @@
                         <div></div>
 
                     </div>
-                    <div class="page-controls blog-page-controls">
-                        <% if(pages>1){%>
-                        <% if(pageNum === 2){%>
-                        <a href="/blog/category/<%=category%>" class="prev-page swiper-btn blog-control-btn"
-                            role="button"><i class="fas fa-arrow-left prev-indicator"></i> </a>
-                        <% }%>
-                        <% if(pageNum > 2){%>
-                        <a href="/blog/category/<%=category%>/<%= pageNum - 1 %>"
-                            class="prev-page swiper-btn blog-control-btn" role="button"><i
-                                class="fas fa-arrow-left prev-indicator"></i> </a>
-
-                        <% } %>
-                        <% if(pageNum < pages){%>
-                        <a href="/blog/category/<%=category%>/<%= pageNum + 1 %> "
-                            class="next-page swiper-btn blog-control-btn" role="button" value="next-page"><i
-                                class="fas fa-arrow-right next-indicator"></i></a>
-                        <% } %>
-
-                        <% } %>
-
-                    </div>
+                    <% if(pages > 1){%>
+                        <div class="pagination">
+                            <div class="pagination-controls" data-current="<%=pageNum%>" data-pages="<%=pages%>" data-path="/blog/category/<%=category%>/?">
+                              <a class="pagination-btn" data-page="1">Previous</a>
+                              <!-- Pagination buttons will be dynamically generated here -->
+                              <a class="pagination-btn" data-page="2">Next</a>
+                            </div>
+                        </div>
+                    <% } %>
+                    
                     <div class="ads-banner">
                         <script async
                             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9179075773135399"

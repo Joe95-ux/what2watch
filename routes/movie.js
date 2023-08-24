@@ -35,6 +35,10 @@ router.get("/genres/:genre", async (req, res) => {
   let keywords = `where to watch ${title}`;
   let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let encodedGenre = encodeURIComponent(genreName);
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
 
   try {
     const genres = await getgenre();
@@ -45,7 +49,9 @@ router.get("/genres/:genre", async (req, res) => {
     const response = await fetch(
       "https://api.themoviedb.org/3/discover/movie?api_key=" +
         apiKey +
-        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=" +
+        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&" +
+        page_num +
+        "&with_genres=" +
         id +
         "&with_watch_monetization_types=free"
     );
@@ -53,7 +59,6 @@ router.get("/genres/:genre", async (req, res) => {
     const genreMovies = await data.results;
     const totalPages = await data.total_pages;
     const totalResults = await data.total_results;
-    const page_num = await data.page;
 
     res.render("genres", {
       title,
@@ -72,57 +77,12 @@ router.get("/genres/:genre", async (req, res) => {
   }
 });
 
-//movies by genre pagination
-
-router.get("/genres/:genre/:page", async (req, res) => {
-  const genreName = req.params.genre;
-  let title = genreName + " movies";
-  let keywords = `where to watch ${title}`;
-  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
-  const encodedGenre = encodeURIComponent(genreName);
-  page_num = parseInt(req.params.page);
-
-  try {
-    const genres = await getgenre();
-    const genreId = await genres.filter(genre => {
-      if (genre.name === genreName) {
-        return genre;
-      }
-    });
-    const id = await genreId[0].id;
-    const response = await fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=" +
-        apiKey +
-        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
-        page_num +
-        "&with_genres=" +
-        id +
-        "&with_watch_monetization_types=free"
-    );
-    const data = await response.json();
-    const genreMovies = await data.results;
-    const totalPages = await data.total_pages;
-    const totalResults = await data.total_results;
-
-    res.render("genrePage", {
-      title,
-      keywords,
-      description,
-      movies: genreMovies,
-      genres: genres,
-      page_num: page_num,
-      genre: genreName,
-      encodedGenre: encodedGenre,
-      totalPages: totalPages,
-      totalResults: totalResults
-    });
-  } catch (e) {
-    throw e;
-  }
-});
 
 router.get("/upcoming", async (req, res) => {
-  page_num = 1;
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   let title = "Upcoming Movies";
   let keywords = `where to watch ${title}`;
   let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
@@ -154,48 +114,13 @@ router.get("/upcoming", async (req, res) => {
   }
 });
 
-//pages for upcoming and top rated movies.
-
-router.get("/:category/:page", async (req, res) => {
-  page_num = parseInt(req.params.page);
-  let title = req.params.category + " movies";
-  let keywords = `where to watch ${title}`;
-  let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
-  const category = req.params.category;
-  try {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        category +
-        "?api_key=" +
-        apiKey +
-        "&language=en-US&page=" +
-        page_num +
-        "&region=US"
-    );
-    const data = await response.json();
-    const upcomingMovie = await data.results;
-    const totalPages = await data.total_pages;
-    const totalResults = await data.total_results;
-    const genres = await getgenre();
-    res.render("next_page", {
-      title,
-      keywords,
-      description,
-      movies: upcomingMovie,
-      genres: genres,
-      category: category,
-      page_num: page_num,
-      totalPages: totalPages,
-      totalResults: totalResults
-    });
-  } catch (e) {
-    console.log(e);
-  }
-});
 
 //top rated
 router.get("/top_rated", async (req, res) => {
-  page_num = 1;
+  let page_num = 1;
+  if(req.query.page >=1){
+    page_num = parseInt(req.query.page);
+  }
   let title = "Top rated Movies";
   let keywords = `where to watch ${title} of all time`;
   let description = `Discover ${title} and see where to watch them in a hassle-free way.`;

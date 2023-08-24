@@ -108,6 +108,9 @@ router.get("/category/:catName", async (req, res) => {
   let sortedCats;
   let pages;
   let pageNum = 1;
+  if(req.query.page >=1){
+    pageNum = parseInt(req.query.page);
+  }
   let latest;
   try {
     let allStories = await Story.find({ status: "Public" }).lean()
@@ -153,59 +156,6 @@ router.get("/category/:catName", async (req, res) => {
   }
 });
 
-// category next page
-
-router.get("/category/:catName/:num", async (req, res) => {
-  const title = req.params.catName;
-  const cat = req.params.catName;
-  const category = encodeURI(cat);
-  let sortedCats;
-  let pages;
-  let pageNum = parseInt(req.params.num);
-  let latest;
-  try {
-    let allStories = await Story.find({ status: "Public" }).lean()
-    .exec();
-    const allTrending = await trendingMovies();
-    const trending = await allTrending.slice(0, 6);
-    let stories = await Story.find({ category: cat, status: "Public" })
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean()
-      .exec();
-    if (stories) {
-      stories = stories.map(story => {
-        story.createdAt = formatDate(story.createdAt);
-        return story;
-      });
-      allStories = allStories.map(story => {
-        story.createdAt = formatDate(story.createdAt);
-        return story;
-      });
-      latest = otherCats(allStories, cat);
-      const paginated = paginate(stories, 8);
-      currentPage = paginated[pageNum - 1];
-      pages = paginated.length;
-      let categories = getCats(allStories);
-      if (categories.length) {
-        sortedCats = sortCats(categories);
-      }
-    }
-    res.render("blogCategory", {
-      title,
-      stories:currentPage,
-      pages,
-      pageNum,
-      sortedCats,
-      cat,
-      category,
-      trending,
-      latest
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 router.get("/compose", ensureAuth, async (req, res) => {
   const title = "compose";
@@ -242,6 +192,9 @@ router.get("/posts", async (req, res) => {
   let allStories;
   let pages;
   let pageNum = 1;
+  if(req.query.page >=1){
+    pageNum = parseInt(req.query.page);
+  }
   let currentPage;
   let topCelebs;
   let celebNews;
@@ -296,68 +249,6 @@ router.get("/posts", async (req, res) => {
   }
 });
 
-// next page: bloghome
-router.get("/posts/page=:num", async (req, res) => {
-  const title = "blog posts";
-  let sortedCats;
-  let picks;
-  let latest;
-  let allStories;
-  let pages;
-  let pageNum = parseInt(req.params.num);
-  let currentPage;
-  let topCelebs;
-  let celebNews;
-  let popCulture;
-  try {
-    const allTrending = await trendingMovies();
-    const trending = await allTrending.slice(0, 6);
-    let stories = await Story.find({ status: "Public" })
-      .populate("user")
-      .sort({ createdAt: "desc" })
-      .lean()
-      .exec();
-    if (stories) {
-      stories = stories.map(story => {
-        story.createdAt = formatDate(story.createdAt);
-        return story;
-      });
-      allStories = paginate(stories, 6);
-      currentPage = allStories[pageNum - 1];
-      pages = allStories.length;
-      celebNews = celebs(stories, "Celebrities");
-      topCelebs = celebNews.slice(1, 4);
-      let pop = celebs(stories, "Pop Culture");
-      popCulture = pop.slice(0, 10);
-
-      let categories = getCats(stories);
-      if (categories.length) {
-        sortedCats = sortCats(categories);
-      }
-      picks = editorsPicks(stories);
-      if(picks.length){
-         picks = picks.slice(0, 6);
-      }
-      latest = latestPosts(stories);
-    }
-    res.render("blogHome", {
-      title,
-      stories,
-      sortedCats,
-      trending,
-      picks,
-      latest,
-      currentPage,
-      pages,
-      pageNum,
-      celebNews,
-      topCelebs,
-      popCulture
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
 
 
 router.get("/edit/:id", ensureAuth, async (req, res) => {
