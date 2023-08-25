@@ -192,6 +192,10 @@ router.get("/genres/:genre/", async (req, res) => {
     let keywords = `where to watch ${title}`;
     let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
     let encodedGenre = encodeURIComponent(genreName);
+    let page_num = 1;
+    if(req.query.page >=1){
+      page_num = parseInt(req.query.page);
+    }
     
     try {
       const genres = await getgenre();
@@ -202,7 +206,7 @@ router.get("/genres/:genre/", async (req, res) => {
       const response = await fetch(
         "https://api.themoviedb.org/3/discover/tv?api_key=" +
           apiKey +
-          "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+ pageNum + "&with_genres=" +
+          "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+ page_num + "&with_genres=" +
           id +
           "&with_watch_monetization_types=free"
       );
@@ -210,7 +214,6 @@ router.get("/genres/:genre/", async (req, res) => {
       const genreMovies = await data.results;
       const totalPages = await data.total_pages;
       const totalResults = await data.total_results;
-      const page_num = await data.page;
   
       res.render("tvgenre", {
         movies: genreMovies,
@@ -229,51 +232,7 @@ router.get("/genres/:genre/", async (req, res) => {
     }
 });
 
-// get next genre page for tv
 
-router.get("/genres/:genre/:page", async (req, res) => {
-    let genreName = req.params.genre;
-    let title = genreName + " tv shows";
-    let keywords = `where to watch ${title}`;
-    let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
-    let encodedGenre = encodeURIComponent(genreName);
-    pageNum = parseInt(req.params.page);
-    
-    try {
-      const genres = await getgenre();
-      const genreId = await genres.filter(genre => {
-        return genre.name === genreName;
-      });
-      const id = await genreId[0].id;
-      const response = await fetch(
-        "https://api.themoviedb.org/3/discover/tv?api_key=" +
-          apiKey +
-          "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page="+ pageNum + "&with_genres=" +
-          id +
-          "&with_watch_monetization_types=free"
-      );
-      const data = await response.json();
-      const genreMovies = await data.results;
-      const totalPages = await data.total_pages;
-      const totalResults = await data.total_results;
-      const page_num = await data.page;
-  
-      res.render("tvgenre", {
-        movies: genreMovies,
-        genres: genres,
-        page_num: page_num,
-        genre: genreName,
-        encodedGenre: encodedGenre,
-        totalPages: totalPages,
-        totalResults: totalResults,
-        title,
-        keywords,
-        description
-      });
-    } catch (e) {
-      console.log(e);
-    }
-});
 
 // get show watch providers
 //get watch providers
@@ -451,12 +410,15 @@ router.get("/top-rated", async (req, res) => {
   let keywords = `where to watch ${title}`;
   let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let cat = "top-rated";
-  pageNum = 1;
+  let pageNum = 1;
+  if(req.query.page >=1){
+    pageNum = parseInt(req.query.page);
+  }
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/tv/top_rated?api_key=" +
         apiKey +
-        "&language=en-US&page=1"
+        "&language=en-US&page=" + pageNum
     );
     const data = await response.json();
     const topRatedMovie = await data.results;
@@ -485,57 +447,13 @@ router.get("/on-the-air", async (req, res) => {
   let keywords = `where to watch ${title}`;
   let description = `Discover ${title} and see where to watch them in a hassle-free way.`;
   let cat = "on-the-air";
-  pageNum = 1;
+  let pageNum = 1;
+  if(req.query.page >=1){
+    pageNum = parseInt(req.query.page);
+  }
   try {
     const response = await fetch(
       "https://api.themoviedb.org/3/tv/on_the_air?api_key=" +
-        apiKey +
-        "&language=en-US&page=1"
-    );
-    const data = await response.json();
-    const topRatedMovie = await data.results;
-    const totalPages = await data.total_pages;
-    const totalResults = await data.total_results;
-    const genres = await getgenre();
-    res.render("top-rated-tv", {
-      movies: topRatedMovie,
-      title,
-      keywords,
-      description,
-      cat,
-      genres: genres,
-      page_num: pageNum,
-      totalPages: totalPages,
-      totalResults: totalResults
-    });
-  } catch (e) {
-    console.log(e);
-  }
-});
-
-//next page for on air and top rated
-
-router.get("/:cat/:page", async (req, res) => {
-  let title;
-  let param;
-  let keywords;
-  let description;
-  if(req.params.cat === "on-the-air"){
-    title = "Tv Shows on Air";
-    keywords = `where to watch ${title}`;
-    description = `Discover ${title} and see where to watch them in a hassle-free way.`;
-    param = "on_the_air";
-  }else if(req.params.cat === "top-rated"){
-    title = "Top rated Tv Shows";
-    keywords = `where to watch ${title}`;
-    description = `Discover ${title} and see where to watch them in a hassle-free way.`;
-    param = "top_rated";
-  }
-  let cat = req.params.cat;
-  pageNum = parseInt(req.params.page);
-  try {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/tv/"+ param + "?api_key=" +
         apiKey +
         "&language=en-US&page=" + pageNum
     );
@@ -559,15 +477,6 @@ router.get("/:cat/:page", async (req, res) => {
     console.log(e);
   }
 });
-
-
-  
-
-
-
-
-
-
 
 
 module.exports = router;
