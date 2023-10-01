@@ -49,7 +49,7 @@ router.get("/genres/:genre", async (req, res) => {
     const response = await fetch(
       "https://api.themoviedb.org/3/discover/movie?api_key=" +
         apiKey +
-        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&" +
+        "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=" +
         page_num +
         "&with_genres=" +
         id +
