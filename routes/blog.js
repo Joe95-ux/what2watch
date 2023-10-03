@@ -809,7 +809,7 @@ router.post("/reset-password", function(req, res, next) {
         });
         let mailOptions = {
           to: user.username,
-          from: "what2watch@what2watch.net",
+          from: "info@what2watch.net",
           subject: "what2watch.net Password Reset",
           text:
             "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
@@ -916,7 +916,7 @@ router.post("/reset/:token", function(req, res, next) {
         });
         var mailOptions = {
           to: user.username,
-          from: "what2watch@what2watch.net",
+          from: "info@what2watch.net",
           subject: "Your password has been changed",
           text:
             "Hello,\n\n" +
